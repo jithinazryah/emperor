@@ -160,7 +160,13 @@ AppAsset::register($this);
                     </ul>
 
                 </nav>
-
+                    <div class="row">
+                        
+                        
+                         <?= $content; ?>
+                        
+                        
+                </div>
                 <footer class="main-footer sticky footer-type-1">
 
                     <div class="footer-inner">
@@ -191,7 +197,7 @@ AppAsset::register($this);
 
 
         </div>
-        <?php echo $content; ?>
+     
         <div class="footer-sticked-chat"><!-- Start: Footer Sticked Chat -->
 
             <script type="text/javascript">

@@ -14,6 +14,9 @@ return [
         'gii' => [
             'class' => 'yii\gii\Module',
         ],
+        'admin' => [
+            'class' => 'backend\modules\admin',
+        ],
     // ...
     ],
     'modules' => [],
