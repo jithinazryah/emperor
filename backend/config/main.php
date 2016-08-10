@@ -19,7 +19,6 @@ return [
         ],
     // ...
     ],
-    'modules' => [],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
