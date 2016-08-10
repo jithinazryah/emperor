@@ -73,18 +73,14 @@ AppAsset::register($this);
                         <li class="opened active">
                             <a href="">
                                 <i class="linecons-cog"></i>
-                                <span class="title">Dashboard</span>
+                                <span class="title">Admin</span>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="">
-                                        <span class="title">Admin Users</span>
-                                    </a>
+                                    <?= Html::a('Admin Users', ['/employee/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
-                                    <a href="">
-                                        <span class="title">Admin Post</span>
-                                    </a>
+                                    <?= Html::a('Admin Post', ['/admin-posts/index'], ['class' => 'title']) ?>
                                 </li>
                             </ul>
                         </li>
@@ -160,12 +156,12 @@ AppAsset::register($this);
                     </ul>
 
                 </nav>
-                    <div class="row">
-                        
-                        
-                         <?= $content; ?>
-                        
-                        
+                <div class="row">
+
+
+                    <?= $content; ?>
+
+
                 </div>
                 <footer class="main-footer sticky footer-type-1">
 
@@ -197,7 +193,7 @@ AppAsset::register($this);
 
 
         </div>
-     
+
         <div class="footer-sticked-chat"><!-- Start: Footer Sticked Chat -->
 
             <script type="text/javascript">

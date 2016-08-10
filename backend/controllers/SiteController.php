@@ -63,11 +63,24 @@ class SiteController extends Controller {
                         return $this->goHome();
                 }
 
-                $model = new \common\models\AdminUsers();
+                $model = new \common\models\Employee();
                 $model->scenario = 'login';
                 if ($model->load(Yii::$app->request->post())) {
-                        $data = \common\models\AdminUsers::find()->where("user_name = $model->user_name and password=$model->password")->all();
-                        return $this->goBack();
+                        $data = \common\models\Employee::find()->where('user_name = :uname and password = :password', ['uname' => $model->user_name, 'password' => $model->password])->one();
+
+                        if ($data == '') {
+                                $model->validatedata($data);
+                                return $this->render('login', [
+                                            'model' => $model,
+                                ]);
+                        } else {
+                                $id = $data->post_id;
+                                $post = \common\models\AdminPosts::find()->where(['id' => $id])->one();
+                                Yii::$app->session['post'] = $post;
+
+                                Yii::$app->session['admin'] = $data->attributes;
+                                return $this->redirect(array('site/home'));
+                        }
                 } else {
                         return $this->render('login', [
                                     'model' => $model,
