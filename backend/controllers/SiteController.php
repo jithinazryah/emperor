@@ -65,9 +65,8 @@ class SiteController extends Controller {
 
                 $model = new \common\models\AdminUsers();
                 $model->scenario = 'login';
-                $check = \Yii::$app->getRequest();
-                if ($check->isPost && $model->load($request->post())) {
-
+                if ($model->load(Yii::$app->request->post())) {
+                        $data = \common\models\AdminUsers::find()->where("user_name = $model->user_name and password=$model->password")->all();
                         return $this->goBack();
                 } else {
                         return $this->render('login', [
