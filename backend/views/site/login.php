@@ -111,8 +111,8 @@ $this->title = 'Login';
             <form method="post" role="form" id="login" class="login-form fade-in-effect">
 
                 <div class="login-header">
-                    <a href="dashboard-1.html" class="logo">
-                        <?php echo Html::img('@web/images/logo@2x.png') ?>
+                    <a href="" class="logo">
+                        <?php echo Html::img('@web/images/logoo.png') ?>
                         <span>Emperor Admin log in</span>
                     </a>
 

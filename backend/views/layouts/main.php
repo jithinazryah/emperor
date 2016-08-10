@@ -35,19 +35,15 @@ AppAsset::register($this);
         <?php $this->beginBody() ?>
 
 
-        <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
-
-            <!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
-            <!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
-            <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
-            <div class="sidebar-menu toggle-others fixed">
+        <div class="page-container">
+            <div class="sidebar-menu toggle-others fixed collapsed">
 
                 <div class="sidebar-menu-inner">
                     <header class="logo-env">
                         <!-- logo -->
                         <div class="logo">
                             <a href="" class="logo-expanded">
-                                <img src="<?= Yii::$app->homeUrl; ?>/images/logo@2x.png" width="80" alt="" />
+                                <img src="<?= Yii::$app->homeUrl; ?>/images/logoO.png" width="170px" height="75px" alt="" />
                             </a>
 
                             <a href="dashboard-1.html" class="logo-collapsed">
@@ -165,22 +161,15 @@ AppAsset::register($this);
 
                 </nav>
 
-                <div class="row">
-
-                </div>
-                <!-- Main Footer -->
-                <!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
-                <!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
-                <!-- Or class "fixed" to  always fix the footer to the end of page -->
                 <footer class="main-footer sticky footer-type-1">
 
                     <div class="footer-inner">
 
                         <!-- Add your copyright text here -->
                         <div class="footer-text">
-                            &copy; 2014 
-                            <strong>Xenon</strong> 
-                            theme by <a href="http://laborator.co" target="_blank">Laborator</a> - <a href="http://themeforest.net/item/xenon-bootstrap-admin-theme/9059661?ref=Laborator" target="_blank">Purchase for only <strong>23$</strong></a>
+                            &copy; <?= Html::encode(date('Y')) ?>
+                            <strong>Azryah</strong> 
+                            All rights reserved.
                         </div>
 
 
