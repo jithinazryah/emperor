@@ -10,7 +10,7 @@ body {
 a {
 }
 .form-inline .form-group{
-      width: 25%;
+        width: 25%;
         margin-left: 30px;
         margin-bottom: 22px;
 }
@@ -35,4 +35,11 @@ a {
 
 table{
         font-size: 14px;
+        text-align: center;
+}
+.linker{
+        color: #979898;
+        padding-left: 0px;
+        padding-top: 0px;
+        margin-bottom: -7px;
 }

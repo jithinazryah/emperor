@@ -1,10 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\AdminPosts */
-
+Pjax::begin();
 $this->title = 'Create Admin Posts';
 $this->params['breadcrumbs'][] = ['label' => 'Admin Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -69,3 +70,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 </div>
 
+<?php Pjax::end(); ?>

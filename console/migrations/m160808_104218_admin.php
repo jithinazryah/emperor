@@ -27,7 +27,7 @@ class m160808_104218_admin extends Migration {
                     'id' => $this->primaryKey(),
                     'post_id' => $this->integer()->notNull(),
                     'user_name' => $this->string(30)->notNull(),
-                    'password' => $this->string(30)->notNull(),
+                    'password' => $this->string(300)->notNull(),
                     'name' => $this->string(100),
                     'email' => $this->string(100),
                     'phone' => $this->string(15),

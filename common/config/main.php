@@ -5,5 +5,8 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'SetValues' => [
+                              'class' => 'common\components\SetValues'
+                    ],
     ],
 ];

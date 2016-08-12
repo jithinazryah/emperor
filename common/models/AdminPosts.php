@@ -9,13 +9,19 @@ use Yii;
  *
  * @property integer $id
  * @property string $post_name
+ * @property integer $admin
+ * @property integer $masters
+ * @property integer $appointments
+ * @property integer $estimated_proforma
+ * @property integer $port_call_data
+ * @property integer $close_estimate
  * @property integer $status
  * @property integer $CB
  * @property integer $UB
  * @property string $DOC
  * @property string $DOU
  *
- * @property AdminUsers[] $adminUsers
+ * @property Employee[] $employees
  */
 class AdminPosts extends \yii\db\ActiveRecord
 {
@@ -33,8 +39,8 @@ class AdminPosts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['post_name','status'], 'required'],
-            [['status', 'CB', 'UB'], 'integer'],
+            [['post_name', 'CB', 'UB'], 'required'],
+            [['admin', 'masters', 'appointments', 'estimated_proforma', 'port_call_data', 'close_estimate', 'status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['post_name'], 'string', 'max' => 100],
         ];
@@ -48,6 +54,12 @@ class AdminPosts extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'post_name' => 'Post Name',
+            'admin' => 'Admin',
+            'masters' => 'Masters',
+            'appointments' => 'Appointments',
+            'estimated_proforma' => 'Estimated Proforma',
+            'port_call_data' => 'Port Call Data',
+            'close_estimate' => 'Close Estimate',
             'status' => 'Status',
             'CB' => 'Cb',
             'UB' => 'Ub',
@@ -59,8 +71,8 @@ class AdminPosts extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAdminUsers()
+    public function getEmployees()
     {
-        return $this->hasMany(AdminUsers::className(), ['post_id' => 'id']);
+        return $this->hasMany(Employee::className(), ['post_id' => 'id']);
     }
 }

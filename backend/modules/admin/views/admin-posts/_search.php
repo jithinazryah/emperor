@@ -19,11 +19,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'post_name') ?>
 
-    <?= $form->field($model, 'status') ?>
+    <?= $form->field($model, 'admin') ?>
 
-    <?= $form->field($model, 'CB') ?>
+    <?= $form->field($model, 'masters') ?>
 
-    <?= $form->field($model, 'UB') ?>
+    <?= $form->field($model, 'appointments') ?>
+
+    <?php // echo $form->field($model, 'estimated_proforma') ?>
+
+    <?php // echo $form->field($model, 'port_call_data') ?>
+
+    <?php // echo $form->field($model, 'close_estimate') ?>
+
+    <?php // echo $form->field($model, 'status') ?>
+
+    <?php // echo $form->field($model, 'CB') ?>
+
+    <?php // echo $form->field($model, 'UB') ?>
 
     <?php // echo $form->field($model, 'DOC') ?>
 

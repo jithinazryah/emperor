@@ -6,7 +6,8 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use common\models\Employee;
+use common\models\AdminPosts;
 
 /**
  * Site controller
@@ -58,35 +59,27 @@ class SiteController extends Controller {
          * @return string
          */
         public function actionIndex() {
-                $this->layout = 'login';
+                
                 if (!Yii::$app->user->isGuest) {
-                        return $this->goHome();
+                        return $this->redirect(array('site/home'));
                 }
-
-                $model = new \common\models\Employee();
+                $this->layout = 'login';
+                $model = new Employee();
                 $model->scenario = 'login';
-                if ($model->load(Yii::$app->request->post())) {
-                        $data = \common\models\Employee::find()->where('user_name = :uname and password = :password', ['uname' => $model->user_name, 'password' => $model->password])->one();
-
-                        if ($data == '') {
-                                $model->validatedata($data);
-                                return $this->render('login', [
-                                            'model' => $model,
-                                ]);
-                        } else {
-                                $id = $data->post_id;
-                                $post = \common\models\AdminPosts::find()->where(['id' => $id])->one();
-                                Yii::$app->session['post'] = $post;
-
-                                Yii::$app->session['admin'] = $data->attributes;
-                                return $this->redirect(array('site/home'));
-                        }
+                if ($model->load(Yii::$app->request->post()) && $model->login() && $this->setSession()) {
+                        return $this->redirect(array('site/home'));
                 } else {
                         return $this->render('login', [
                                     'model' => $model,
                         ]);
                 }
-                //return $this->render('index');
+        }
+
+        public function setSession() {
+                $post = AdminPosts::findOne(Yii::$app->user->identity->post_id);
+                Yii::$app->session['post'] = $post->attributes;
+                
+                return true;
         }
 
         public function actionHome() {
@@ -121,7 +114,7 @@ class SiteController extends Controller {
          */
         public function actionLogout() {
                 Yii::$app->user->logout();
-
+                unset(Yii::$app->session['post']);
                 return $this->goHome();
         }
 

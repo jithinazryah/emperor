@@ -18,7 +18,7 @@ class AdminPostsSearch extends AdminPosts
     public function rules()
     {
         return [
-            [['id', 'status', 'CB', 'UB'], 'integer'],
+            [['id', 'admin', 'masters', 'appointments', 'estimated_proforma', 'port_call_data', 'close_estimate', 'status', 'CB', 'UB'], 'integer'],
             [['post_name', 'DOC', 'DOU'], 'safe'],
         ];
     }
@@ -60,6 +60,12 @@ class AdminPostsSearch extends AdminPosts
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'admin' => $this->admin,
+            'masters' => $this->masters,
+            'appointments' => $this->appointments,
+            'estimated_proforma' => $this->estimated_proforma,
+            'port_call_data' => $this->port_call_data,
+            'close_estimate' => $this->close_estimate,
             'status' => $this->status,
             'CB' => $this->CB,
             'UB' => $this->UB,
