@@ -33,26 +33,6 @@ a {
         border: 1px solid rgb(209, 113, 72);
 }
 
-
-#yw0 .form-inline{
-        margin-bottom: 20px;
-}
-
-#yw0 .form-group{
-        width: 25%;
-        margin-left: 30px;
-}
-#yw0 .form-group label{
-        margin-left: 7px;
-        color: #6C6B6B;
-}
-#yw0 .form-control{
-        width: 100% !important;
-}
-a {
-        color: #4C5356;
-        text-decoration: none;
-}
-.btns{
-        margin-right: 192px;
+table{
+        font-size: 14px;
 }
