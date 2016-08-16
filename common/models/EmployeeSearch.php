@@ -18,8 +18,8 @@ class EmployeeSearch extends Employee
     public function rules()
     {
         return [
-            [['id', 'post_id', 'status', 'CB', 'UB', 'gender', 'maritual_status', 'salary_package'], 'integer'],
-            [['user_name', 'password', 'name', 'email', 'phone', 'address', 'DOC', 'DOU', 'branch_id', 'employee_code', 'date_of_join', 'photo'], 'safe'],
+            [['id', 'post_id', 'gender', 'maritual_status', 'salary_package', 'status', 'CB', 'UB'], 'integer'],
+            [['branch_id', 'user_name', 'employee_code', 'password', 'name', 'email', 'phone', 'address', 'date_of_join', 'photo', 'DOC', 'DOU'], 'safe'],
         ];
     }
 
@@ -61,25 +61,25 @@ class EmployeeSearch extends Employee
         $query->andFilterWhere([
             'id' => $this->id,
             'post_id' => $this->post_id,
+            'gender' => $this->gender,
+            'maritual_status' => $this->maritual_status,
+            'date_of_join' => $this->date_of_join,
+            'salary_package' => $this->salary_package,
             'status' => $this->status,
             'CB' => $this->CB,
             'UB' => $this->UB,
             'DOC' => $this->DOC,
             'DOU' => $this->DOU,
-            'gender' => $this->gender,
-            'date_of_join' => $this->date_of_join,
-            'maritual_status' => $this->maritual_status,
-            'salary_package' => $this->salary_package,
         ]);
 
-        $query->andFilterWhere(['like', 'user_name', $this->user_name])
+        $query->andFilterWhere(['like', 'branch_id', $this->branch_id])
+            ->andFilterWhere(['like', 'user_name', $this->user_name])
+            ->andFilterWhere(['like', 'employee_code', $this->employee_code])
             ->andFilterWhere(['like', 'password', $this->password])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'branch_id', $this->branch_id])
-            ->andFilterWhere(['like', 'employee_code', $this->employee_code])
             ->andFilterWhere(['like', 'photo', $this->photo]);
 
         return $dataProvider;

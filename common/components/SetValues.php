@@ -19,8 +19,20 @@ use yii\base\Component;
 
 class SetValues extends Component {
 
-        public function SetCreate() {
-                return 'hii';
+        public function Attributes($model) {
+                if (isset($model) && !Yii::$app->user->isGuest) {
+
+                        if ($model->isNewRecord) {
+                                $model->CB = Yii::$app->user->identity->id;
+                                $model->DOC = date('Y-m-d');
+                        }
+                        $model->UB = Yii::$app->user->identity->id;
+
+
+                        return TRUE;
+                } else {
+                        return FALSE;
+                }
         }
 
 }

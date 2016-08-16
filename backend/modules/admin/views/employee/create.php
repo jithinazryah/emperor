@@ -1,13 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\Pjax;
+
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AdminPosts */
-Pjax::begin();
-$this->title = 'Create Admin Posts';
-$this->params['breadcrumbs'][] = ['label' => 'Admin Posts', 'url' => ['index']];
+/* @var $model common\models\Employee */
+
+$this->title = 'Create Employee';
+$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -28,20 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </a>
                                 </div>
                         </div>
-
                         <div class="panel-body">
-                                <?= Html::a('<i class="fa-th-list"></i><span>Manage Admin Posts</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                                <div class="panel-body"><div class="admin-posts-create">
-                                                <?=
-                                                $this->render('_form', [
-                                                    'model' => $model,
-                                                ])
-                                                ?>
+                                <?=  Html::a('<i class="fa-th-list"></i><span> Manage Employee</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                                <div class="panel-body"><div class="employee-create">
+                                                <?= $this->render('_form', [
+                                                'model' => $model,
+                                                ]) ?>
                                         </div>
                                 </div>
                         </div>
                 </div>
         </div>
 </div>
-
-<?php Pjax::end(); ?>
+                

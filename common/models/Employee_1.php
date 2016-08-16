@@ -11,24 +11,24 @@ use yii\db\ActiveRecord;
  *
  * @property integer $id
  * @property integer $post_id
- * @property string $branch_id
  * @property string $user_name
- * @property string $employee_code
  * @property string $password
  * @property string $name
  * @property string $email
  * @property string $phone
- * @property integer $gender
- * @property integer $maritual_status
  * @property string $address
- * @property string $date_of_join
- * @property integer $salary_package
- * @property string $photo
  * @property integer $status
  * @property integer $CB
  * @property integer $UB
  * @property string $DOC
  * @property string $DOU
+ * @property string $branch_id
+ * @property string $employee_code
+ * @property integer $gender
+ * @property string $date_of_join
+ * @property integer $maritual_status
+ * @property integer $salary_package
+ * @property string $photo
  *
  * @property AdminPosts $post
  */
@@ -50,12 +50,11 @@ class Employee extends ActiveRecord implements IdentityInterface {
         public function rules() {
                 return [
                     // [['post_id', 'user_name', 'password', 'CB', 'UB'], 'required'],
-                    [['post_id', 'gender', 'maritual_status', 'salary_package', 'status', 'CB', 'UB'], 'integer'],
+                    [['post_id', 'status', 'CB', 'UB', 'gender', 'maritual_status', 'salary_package'], 'integer'],
                     [['address'], 'string'],
-                    [['date_of_join', 'DOC', 'DOU'], 'safe'],
-                    [['branch_id', 'employee_code', 'name', 'email', 'photo'], 'string', 'max' => 100],
-                    [['user_name'], 'string', 'max' => 30],
-                    [['password'], 'string', 'max' => 300],
+                    [['DOC', 'DOU', 'date_of_join'], 'safe'],
+                    [['user_name', 'password'], 'string', 'max' => 30],
+                    [['name', 'email', 'branch_id', 'employee_code', 'photo'], 'string', 'max' => 100],
                     [['phone'], 'string', 'max' => 15],
                     [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminPosts::className(), 'targetAttribute' => ['post_id' => 'id']],
                     [['user_name', 'password'], 'required', 'on' => 'login'],
@@ -79,26 +78,30 @@ class Employee extends ActiveRecord implements IdentityInterface {
                 return [
                     'id' => 'ID',
                     'post_id' => 'Post ID',
-                    'branch_id' => 'Branch ID',
                     'user_name' => 'User Name',
-                    'employee_code' => 'Employee Code',
                     'password' => 'Password',
                     'name' => 'Name',
                     'email' => 'Email',
                     'phone' => 'Phone',
-                    'gender' => 'Gender',
-                    'maritual_status' => 'Maritual Status',
                     'address' => 'Address',
-                    'date_of_join' => 'Date Of Join',
-                    'salary_package' => 'Salary Package',
-                    'photo' => 'Photo',
                     'status' => 'Status',
                     'CB' => 'Cb',
                     'UB' => 'Ub',
                     'DOC' => 'Doc',
                     'DOU' => 'Dou',
+                    'branch_id' => 'Branch ID',
+                    'employee_code' => 'Employee Code',
+                    'gender' => 'Gender',
+                    'date_of_join' => 'Date Of Join',
+                    'maritual_status' => 'Maritual Status',
+                    'salary_package' => 'Salary Package',
+                    'photo' => 'Photo',
                 ];
         }
+
+        /*
+         * 
+         */
 
         public function login() {
                 if ($this->validate()) {
@@ -107,6 +110,8 @@ class Employee extends ActiveRecord implements IdentityInterface {
                         return false;
                 }
         }
+        
+        
 
         protected function getUser() {
                 if ($this->_user === null) {

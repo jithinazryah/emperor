@@ -39,7 +39,7 @@ class AdminPosts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['post_name', 'CB', 'UB'], 'required'],
+            [['post_name'], 'required'],
             [['admin', 'masters', 'appointments', 'estimated_proforma', 'port_call_data', 'close_estimate', 'status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['post_name'], 'string', 'max' => 100],

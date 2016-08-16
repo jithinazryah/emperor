@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 <div class="panel-body">
                                         <?= Html::a('<i class="fa-th-list"></i><span>Manage Admin Posts</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                                        <div class="panel-body"><div class="admin-posts-create">
+                                        <div class="panel-body"><div class="admin-posts-view">
                                                         <p>
                                                                 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                                                                 <?=
