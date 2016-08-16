@@ -37,10 +37,6 @@ class Employee extends ActiveRecord implements IdentityInterface {
         private $_user;
         public $rememberMe = true;
 
-        public function __construct() {
-                parent::__construct();
-        }
-
         /**
          * @inheritdoc
          */
