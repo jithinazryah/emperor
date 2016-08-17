@@ -40,15 +40,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'CB')->textInput() ?>
-
-    <?= $form->field($model, 'UB')->textInput() ?>
-
-    <?= $form->field($model, 'DOC')->textInput() ?>
-
-    <?= $form->field($model, 'DOU')->textInput() ?>
+<?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
 
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>

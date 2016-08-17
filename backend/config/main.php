@@ -26,8 +26,8 @@ return [
         'admin' => [
             'class' => 'backend\modules\admin\Admin',
         ],
-        'employee' => [
-            'class' => 'backend\modules\admin\Employee',
+        'masters' => [
+            'class' => 'backend\modules\masters\Masters',
         ],
        
     ],

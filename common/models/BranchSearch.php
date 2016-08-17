@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Employee;
+use common\models\Branch;
 
 /**
- * EmployeeSearch represents the model behind the search form about `common\models\Employee`.
+ * BranchSearch represents the model behind the search form about `common\models\Branch`.
  */
-class EmployeeSearch extends Employee
+class BranchSearch extends Branch
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class EmployeeSearch extends Employee
     public function rules()
     {
         return [
-            [['id', 'post_id', 'status', 'CB', 'UB', 'gender', 'maritual_status', 'salary_package'], 'integer'],
-            [['user_name', 'password', 'name', 'email', 'phone', 'address', 'DOC', 'DOU', 'branch_id', 'employee_code', 'date_of_join', 'photo'], 'safe'],
+            [['id', 'status', 'CB', 'UB'], 'integer'],
+            [['branch_name', 'branch_code', 'responisible_peerson', 'phone1', 'phone2', 'email', 'address', 'DOC', 'DOU'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class EmployeeSearch extends Employee
      */
     public function search($params)
     {
-        $query = Employee::find();
+        $query = Branch::find();
 
         // add conditions that should always apply here
 
@@ -60,27 +60,20 @@ class EmployeeSearch extends Employee
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'post_id' => $this->post_id,
             'status' => $this->status,
             'CB' => $this->CB,
             'UB' => $this->UB,
             'DOC' => $this->DOC,
             'DOU' => $this->DOU,
-            'gender' => $this->gender,
-            'date_of_join' => $this->date_of_join,
-            'maritual_status' => $this->maritual_status,
-            'salary_package' => $this->salary_package,
         ]);
 
-        $query->andFilterWhere(['like', 'user_name', $this->user_name])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'branch_name', $this->branch_name])
+            ->andFilterWhere(['like', 'branch_code', $this->branch_code])
+            ->andFilterWhere(['like', 'responisible_peerson', $this->responisible_peerson])
+            ->andFilterWhere(['like', 'phone1', $this->phone1])
+            ->andFilterWhere(['like', 'phone2', $this->phone2])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'branch_id', $this->branch_id])
-            ->andFilterWhere(['like', 'employee_code', $this->employee_code])
-            ->andFilterWhere(['like', 'photo', $this->photo]);
+            ->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;
     }
