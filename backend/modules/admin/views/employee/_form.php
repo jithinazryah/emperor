@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'post_id')->textInput() ?>
+    <?= Html::dropDownList('s_id', null, ArrayHelper::map(Standard::find()->all(), 's_id', 'name')) ?>
 
     <?= $form->field($model, 'branch_id')->textInput(['maxlength' => true]) ?>
 
@@ -40,7 +41,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
+    <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
 
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>
