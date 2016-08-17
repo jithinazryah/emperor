@@ -49,10 +49,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'branch_id',
                                 'value' => function ($data) {
-                                        return $data->getBranchName($data->branch_id);
+                                $branch = explode(',', $data->branch_id);
+                                $result = '';
+                                foreach($branch as $brnch) {
+                                        $result .= $data->getBranchName($brnch) . ', ';
+                                }
+                                return rtrim($result, ",");
+                        
                                 },
                             ],
-                            'branch_id',
+                           // 'branch_id',
                             'user_name',
                             'employee_code',
                             // 'password',

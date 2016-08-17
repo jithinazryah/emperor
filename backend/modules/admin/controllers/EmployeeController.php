@@ -65,7 +65,7 @@ class EmployeeController extends Controller
     {
         $model = new Employee();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) &&  $this->branch($model,$branch) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -84,7 +84,7 @@ class EmployeeController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $this->branch($model,$_POST['Employee']['branch_id']) &&  $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -121,4 +121,14 @@ class EmployeeController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+     public function branch($model, $branch){
+                 if ($model != null) {
+                      $model->branch_id = implode(",",$_POST['Employee']['branch_id']);
+                      Yii::$app->SetValues->Attributes($model);
+                      return true;
+                 }else{
+                     return false;
+                 }
+        }
 }

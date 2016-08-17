@@ -54,7 +54,7 @@ class Employee extends ActiveRecord implements IdentityInterface {
                     [ ['post_id', 'gender', 'maritual_status', 'salary_package', 'status', 'CB', 'UB'], 'integer'],
                     [ ['address'], 'string'],
                     [ ['date_of_join', 'DOC', 'DOU'], 'safe'],
-                    [ ['branch_id', 'employee_code', 'name', 'email', 'photo'], 'string', 'max' => 100],
+                    [ ['employee_code', 'name', 'email', 'photo'], 'string', 'max' => 100],
                     [ ['user_name'], 'string', 'max' => 30],
                     [ ['password'], 'string', 'max' => 300],
                     [ ['phone'], 'string', 'max' => 15],
@@ -167,5 +167,7 @@ class Employee extends ActiveRecord implements IdentityInterface {
                 $data = Branch::findOne(['id' => $branch_id]);
                 return $data->branch_name;
         }
+        
+       
 
 }

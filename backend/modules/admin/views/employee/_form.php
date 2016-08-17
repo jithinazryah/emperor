@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\Branch;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Employee */
@@ -13,9 +15,12 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'post_id')->textInput() ?>
-    <?= Html::dropDownList('s_id', null, ArrayHelper::map(Standard::find()->all(), 's_id', 'name')) ?>
-
-    <?= $form->field($model, 'branch_id')->textInput(['maxlength' => true]) ?>
+    <?php
+    $dataList=ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'branch_name');
+    ?>
+    <?= $form->field($model, 'branch_id')->dropDownList($dataList, 
+         ['prompt'=>'-Choose a Branch-','multiple' => true]) ?>
+    
 
     <?= $form->field($model, 'user_name')->textInput(['maxlength' => true]) ?>
 

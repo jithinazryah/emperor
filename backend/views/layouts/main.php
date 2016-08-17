@@ -66,11 +66,8 @@ AppAsset::register($this);
 
 
                     </header>
-
-
-
                     <ul id="main-menu" class="main-menu">
-                        <li class="opened active">
+                        <li class="active">
                             <a href="">
                                 <i class="linecons-cog"></i>
                                 <span class="title">Administration</span>
@@ -87,10 +84,40 @@ AppAsset::register($this);
                                 </li>
                             </ul>
                         </li>
-
-
-
-
+                    </ul>
+                    <ul id="main-menu" class="main-menu">
+                        <li class="active">
+                            <a href="">
+                                <i class="fa fa-database"></i>
+                                <span class="title">Masters</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?= Html::a('Contacts', ['/masters/contacts/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Debtor', ['/masters/debtor/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Ports', ['/masters/ports/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Purpose', ['/masters/purpose/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Services', ['/masters/services/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Service Categories', ['/masters/service-categorys/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Stages', ['/masters/stages/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Stage Categories', ['/masters/stage-categorys/index'], ['class' => 'title']) ?>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
 
                 </div>
