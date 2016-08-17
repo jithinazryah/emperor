@@ -60,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'value' => function ($model) {
                                                             return $model->admin == 1 ? 'Yes' : 'No';
                                                     },
+                                                            'filter' => true,
                                                 ],
                                                 [
                                                     'attribute' => 'masters',

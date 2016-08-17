@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use common\models\StageCategorys;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\StagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -39,11 +41,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
                                                 ['class' => 'yii\grid\SerialColumn'],
 
-                                                            'id',
-            'category_id',
+                                                          //  'id',
+             [
+                'attribute' => 'category_id',
+                'value' => $data->category_id,
+                 'filter'=>ArrayHelper::map(StageCategorys::find()->asArray()->all(), 'id', 'category_name'),
+                  ],
             'stage',
             'status',
-            'CB',
+          //  'CB',
             // 'UB',
             // 'DOC',
             // 'DOU',

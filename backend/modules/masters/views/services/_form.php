@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use common\models\ServiceCategorys;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model common\models\Services */
 /* @var $form yii\widgets\ActiveForm */
@@ -11,9 +12,12 @@ use yii\widgets\ActiveForm;
 <div class="services-form form-inline">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'category_id')->textInput() ?>
-
+<?php
+    $dataList=ArrayHelper::map(ServiceCategorys::find()->asArray()->all(), 'id', 'category_name');
+    ?>
+    <?= $form->field($model, 'category_id')->dropDownList($dataList, 
+         ['prompt'=>'-Choose a Category-']) ?>
+    
     <?= $form->field($model, 'service')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'invocie_type')->textInput() ?>

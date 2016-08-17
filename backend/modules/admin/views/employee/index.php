@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use common\models\Branch;
+use common\models\AdminPosts;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\EmployeeSearch */
@@ -44,7 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'id',
                             [
                                 'attribute' => 'post_id',
-                                'value' => 'post.post_name'
+                                'value' => 'post.post_name',
+                                'filter'=>ArrayHelper::map(AdminPosts::find()->asArray()->all(), 'id', 'post_name'),
                             ],
                             [
                                 'attribute' => 'branch_id',
