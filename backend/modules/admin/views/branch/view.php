@@ -28,42 +28,46 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                         </div>
                         <div class="panel-body">
-                                <?=  Html::a('<i class="fa-th-list"></i><span> Manage Branch</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                                <?= Html::a('<i class="fa-th-list"></i><span> Manage Branch</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                                 <div class="panel-body"><div class="branch-view">
                                                 <p>
                                                         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                                                        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-                                                        'class' => 'btn btn-danger',
-                                                        'data' => [
-                                                        'confirm' => 'Are you sure you want to delete this item?',
-                                                        'method' => 'post',
-                                                        ],
-                                                        ]) ?>
+                                                        <?=
+                                                        Html::a('Delete', ['delete', 'id' => $model->id], [
+                                                            'class' => 'btn btn-danger',
+                                                            'data' => [
+                                                                'confirm' => 'Are you sure you want to delete this item?',
+                                                                'method' => 'post',
+                                                            ],
+                                                        ])
+                                                        ?>
                                                 </p>
 
-                                                <?= DetailView::widget([
-                                                'model' => $model,
-                                                'attributes' => [
-                                                            'id',
-            'branch_name',
-            'branch_code',
-            'responisible_peerson',
-            'phone1',
-            'phone2',
-            'email:email',
-            'address:ntext',
-            'status',
-            'CB',
-            'UB',
-            'DOC',
-            'DOU',
-                                                ],
-                                                ]) ?>
-</div>
+                                                <?=
+                                                DetailView::widget([
+                                                    'model' => $model,
+                                                    'attributes' => [
+                                                        'id',
+                                                        'branch_name',
+                                                        'branch_code',
+                                                        'responisible_peerson',
+                                                        'phone1',
+                                                        'phone2',
+                                                        'email:email',
+                                                        'address:ntext',
+                                                        [
+                                                            'label' => 'Status',
+                                                            'format' => 'raw',
+                                                            'value' => $model->status == 1 ? 'Enabled' : 'disabled',
+                                                        ],
+                                                    ],
+                                                ])
+                                                ?>
                                         </div>
                                 </div>
                         </div>
                 </div>
         </div>
+</div>
 
 

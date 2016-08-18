@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Branch;
+use common\models\AdminPosts;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -14,21 +15,22 @@ use yii\helpers\ArrayHelper;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'post_id')->textInput() ?>
-        <?php
-        $dataList = ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'branch_name');
-        ?>
-        <?= $form->field($model, 'branch_id')->dropDownList($dataList, ['options' => Yii::$app->SetValues->Selected($model->branch_id), 'prompt' => '-Choose a Branch-', 'multiple' => true])
-        ?>
+        <?php $posts = ArrayHelper::map(AdminPosts::findAll(['status' => 1]), 'id', 'post_name'); ?>
+        <?= $form->field($model, 'post_id')->dropDownList($posts, ['prompt' => '-Choose a Post-']) ?>
+
+        <?php $branch = ArrayHelper::map(Branch::findAll(['status' => 1]), 'id', 'branch_name'); ?>
+        <?= $form->field($model, 'branch_id')->dropDownList($branch, ['options' => Yii::$app->SetValues->Selected($model->branch_id), 'prompt' => '-Choose a Branch-', 'multiple' => true]) ?>
 
 
+        <?php if ($model->isNewRecord) { ?>
 
-
-        <?= $form->field($model, 'user_name')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'user_name')->textInput(['maxlength' => true]) ?>
+        <?php } ?>
 
         <?= $form->field($model, 'employee_code')->textInput(['maxlength' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        <?php if ($model->isNewRecord) { ?>
+                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+        <?php } ?>
 
         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -36,24 +38,30 @@ use yii\helpers\ArrayHelper;
 
         <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'gender')->textInput() ?>
+        <?= $form->field($model, 'gender')->dropDownList(['1' => 'Male', '0' => 'Female']) ?>
 
-        <?= $form->field($model, 'maritual_status')->textInput() ?>
+        <?= $form->field($model, 'maritual_status')->dropDownList(['1' => 'Married', '0' => 'Unmarried']) ?>
 
         <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
 
-        <?= $form->field($model, 'date_of_join')->textInput() ?>
+        <?=
+        $form->field($model, 'date_of_join')->widget(\yii\jui\DatePicker::classname(), [
+            //'language' => 'ru',
+            'dateFormat' => 'dd-MM-yyyy',
+            'options' => ['class' => 'form-control']
+        ])
+        ?>
 
         <?= $form->field($model, 'salary_package')->textInput() ?>
 
-        <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'photo')->fileInput() ?>
 
-        <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
+                <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
 
         <div class="form-group" style="float: right;">
-                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>
         </div>
 
-        <?php ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 
 </div>

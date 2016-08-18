@@ -56,53 +56,59 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'post_name',
                                                 [
                                                     'attribute' => 'admin',
-                                                    'format' => 'raw',
+                                                    'filter' => [1=>'Yes',0=>'No'],
                                                     'value' => function ($model) {
                                                             return $model->admin == 1 ? 'Yes' : 'No';
                                                     },
-                                                            'filter' => true,
+                                                            'filter' => [1=>'Yes',0=>'No'],
                                                 ],
                                                 [
                                                     'attribute' => 'masters',
                                                     'format' => 'raw',
+                                                     'filter' => [1=>'Yes',0=>'No'],
                                                     'value' => function ($model) {
-                                                            return $model->admin == 1 ? 'Yes' : 'No';
+                                                            return $model->masters == 1 ? 'Yes' : 'No';
                                                     },
                                                 ],
                                                 [
                                                     'attribute' => 'appointments',
                                                     'format' => 'raw',
+                                                     'filter' => [1=>'Yes',0=>'No'],
                                                     'value' => function ($model) {
-                                                            return $model->admin == 1 ? 'Yes' : 'No';
+                                                            return $model->appointments == 1 ? 'Yes' : 'No';
                                                     },
                                                 ],
                                                 [
                                                     'attribute' => 'estimated_proforma',
                                                     'format' => 'raw',
+                                                     'filter' => [1=>'Yes',0=>'No'],
                                                     'value' => function ($model) {
-                                                            return $model->admin == 1 ? 'Yes' : 'No';
+                                                            return $model->estimated_proforma == 1 ? 'Yes' : 'No';
                                                     },
                                                 ],
                                                 [
                                                     'attribute' => 'port_call_data',
                                                     'format' => 'raw',
+                                                     'filter' => [1=>'Yes',0=>'No'],
                                                     'value' => function ($model) {
-                                                            return $model->admin == 1 ? 'Yes' : 'No';
+                                                            return $model->port_call_data == 1 ? 'Yes' : 'No';
                                                     },
                                                 ],
                                                 [
                                                     'attribute' => 'close_estimate',
                                                     'format' => 'raw',
+                                                     'filter' => [1=>'Yes',0=>'No'],
                                                     'value' => function ($model) {
-                                                            return $model->admin == 1 ? 'Yes' : 'No';
+                                                            return $model->close_estimate == 1 ? 'Yes' : 'No';
                                                     },
-                                                ],
+                                                        ],
                                                 [
                                                     'attribute' => 'status',
                                                     'format' => 'raw',
+                                                    'filter' => [1 => 'Enabled', 0 => 'disabled'],
                                                     'value' => function ($model) {
-                                                            return $model->admin == 1 ? 'Enabled' : 'disabled';
-                                                    },
+                                                                        return $model->status == 1 ? 'Enabled' : 'disabled';
+                                                                },
                                                 ],
                                                 ['class' => 'yii\grid\ActionColumn'],
                                             ],

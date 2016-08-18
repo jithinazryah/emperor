@@ -29,6 +29,13 @@ class AppAsset extends AssetBundle {
             'js/joinable.js',
             'js/xenon-api.js',
             'js/xenon-toggles.js',
+            /*
+             * for chart
+             */
+            'js/xenon-widgets.js',
+            'js/devexpress-web-14.1/js/globalize.min.js',
+            'js/devexpress-web-14.1/js/dx.chartjs.js',
+            'js/toastr/toastr.min.js',
         ];
         public $depends = [
             'yii\web\YiiAsset',

@@ -41,7 +41,7 @@ class Services extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'service', 'invocie_type', 'supplier', 'CB', 'UB'], 'required'],
+            [['category_id', 'service', 'invocie_type', 'supplier'], 'required'],
             [['category_id', 'invocie_type', 'supplier', 'unit_rate', 'unit', 'currency', 'epda_value', 'cost_allocation', 'status', 'CB', 'UB'], 'integer'],
             [['comments'], 'string'],
             [['DOC', 'DOU'], 'safe'],

@@ -5,7 +5,7 @@ use yii\db\Migration;
 class m160810_101530_principals extends Migration {
 
         public function up() {
-
+                $this->execute("ALTER TABLE `employee` ADD UNIQUE(`user_name`);");
                 $tableOptions = null;
                 if ($this->db->driverName === 'mysql') {
                         // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci

@@ -32,7 +32,7 @@ class Purpose extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['purpose', 'CB', 'UB'], 'required'],
+            [['purpose'], 'required'],
             [['time_required', 'status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['purpose'], 'string', 'max' => 100],

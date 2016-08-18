@@ -28,55 +28,77 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                         </div>
                         <div class="panel-body">
-                                <?=  Html::a('<i class="fa-th-list"></i><span> Manage Employee</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                                <?= Html::a('<i class="fa-th-list"></i><span> Manage Employee</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                                 <div class="panel-body"><div class="employee-view">
                                                 <p>
                                                         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                                                        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-                                                        'class' => 'btn btn-danger',
-                                                        'data' => [
-                                                        'confirm' => 'Are you sure you want to delete this item?',
-                                                        'method' => 'post',
-                                                        ],
-                                                        ]) ?>
+                                                        <?=
+                                                        Html::a('Delete', ['delete', 'id' => $model->id], [
+                                                            'class' => 'btn btn-danger',
+                                                            'data' => [
+                                                                'confirm' => 'Are you sure you want to delete this item?',
+                                                                'method' => 'post',
+                                                            ],
+                                                        ])
+                                                        ?>
                                                 </p>
 
-                                                <?= DetailView::widget([
-                                                'model' => $model,
-                                                'attributes' => [
-                                                           // 'id',
-            [              
-              'attribute' => 'post_id',
-              'value' => $model->post->post_name,
-           ],
-            [              
-              'attribute' => 'branch_id',
-              'value' => $model->branch_id,             
-           ],
-            'user_name',
-            'employee_code',
-            'password',
-            'name',
-            'email:email',
-            'phone',
-            'gender',
-            'maritual_status',
-            'address:ntext',
-            'date_of_join',
-            'salary_package',
-            'photo',
-            'status',
-            'CB',
-            'UB',
-            'DOC',
-            'DOU',
-                                                ],
-                                                ]) ?>
-</div>
+                                                <?=
+                                                DetailView::widget([
+                                                    'model' => $model,
+                                                    'attributes' => [
+                                                        // 'id',
+                                                        [
+                                                            'attribute' => 'photo',
+                                                            'format' => 'raw',
+                                                            'value' => call_user_func(function($model) {
+                                                                            return '<img width="130px" src="' . Yii::$app->homeUrl . 'uploads/' . $model->photo . '" />';
+                                                                    }, $model),
+                                                        ],
+                                                        [
+                                                            'attribute' => 'post_id',
+                                                            'value' => $model->post->post_name,
+                                                        ],
+                                                        [
+                                                            'attribute' => 'branch_id',
+                                                            'value' => call_user_func(function ($data) {
+                                                                            $branch = explode(',', $data->branch_id);
+                                                                            $result = '';
+                                                                            foreach ($branch as $brnch) {
+                                                                                    $result .= $data->getBranchName($brnch) . ', ';
+                                                                            }
+                                                                            return rtrim($result, ",");
+                                                                    },$model),
+                                                        ],
+                                                        'user_name',
+                                                        'employee_code',
+                                                        //'password',
+                                                        'name',
+                                                        'email:email',
+                                                        'phone',
+                                                        [
+                                                            'attribute' => 'gender',
+                                                            'value' => $model->gender == 1 ? 'Male' : 'Female',
+                                                        ],
+                                                        [
+                                                            'attribute' => 'maritual_status',
+                                                            'value' => $model->status == 1 ? 'Married' : 'Unmarried',
+                                                        ],
+                                                        'address:ntext',
+                                                        'date_of_join',
+                                                        'salary_package',
+                                                        [
+                                                            'attribute' => 'status',
+                                                            'value' => $model->status == 1 ? 'Enabled' : 'Disabled',
+                                                        ],
+                                                    ],
+                                                ])
+                                                ?>
                                         </div>
                                 </div>
                         </div>
                 </div>
         </div>
+</div>
 
 

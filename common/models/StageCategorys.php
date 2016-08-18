@@ -31,7 +31,7 @@ class StageCategorys extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_name', 'CB', 'UB'], 'required'],
+            [['category_name'], 'required'],
             [['status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['category_name'], 'string', 'max' => 200],

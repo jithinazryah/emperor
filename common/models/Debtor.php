@@ -38,7 +38,7 @@ class Debtor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['principal_name', 'address', 'mobile', 'CB', 'UB'], 'required'],
+            [['principal_name', 'address', 'mobile'], 'required'],
             [['address', 'invoicing_address', 'da_dispatch_addresss_1', 'da_dispatch_addresss_2'], 'string'],
             [['status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],

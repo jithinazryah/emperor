@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\VesselSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -30,42 +31,45 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </div>
                                 </div>
                                 <div class="panel-body">
-                                                                                            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-                                        
-                                        <?=  Html::a('<i class="fa-th-list"></i><span> Create Vessel</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                                                <?php Pjax::begin(); ?>                                                                                                        <?= GridView::widget([
-                                                'dataProvider' => $dataProvider,
-                                                'filterModel' => $searchModel,
-        'columns' => [
+                                        <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
+
+                                        <?= Html::a('<i class="fa-th-list"></i><span> Create Vessel</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                                        <?php Pjax::begin(); ?>                                                                                                        <?=
+                                        GridView::widget([
+                                            'dataProvider' => $dataProvider,
+                                            'filterModel' => $searchModel,
+                                            'columns' => [
                                                 ['class' => 'yii\grid\SerialColumn'],
-
-                                                            'id',
-            'vessel_type',
-            'vessel_name',
-            'imo_no',
-            'official',
-            // 'mmsi_no',
-            // 'owners_info:ntext',
-            // 'mobile',
-            // 'land_line',
-            // 'direct_line',
-            // 'fax',
-            // 'picture',
-            // 'dwt',
-            // 'grt',
-            // 'nrt',
-            // 'loa',
-            // 'beam',
-            // 'status',
-            // 'CB',
-            // 'UB',
-            // 'DOC',
-            // 'DOU',
-
-                                                ['class' => 'yii\grid\ActionColumn'],
+                                                'id',
+                                                'vessel_type',
+                                                'vessel_name',
+                                                'imo_no',
+                                                'official',
+                                                'mmsi_no',
+                                                'owners_info:ntext',
+                                                'mobile',
+                                                // 'land_line',
+                                                // 'direct_line',
+                                                // 'fax',
+                                                // 'picture',
+                                                // 'dwt',
+                                                // 'grt',
+                                                // 'nrt',
+                                                // 'loa',
+                                                // 'beam',
+                                                [
+                                                    'attribute' => 'status',
+                                                    'format' => 'raw',
+                                                    'filter' => [1 => 'Enabled', 0 => 'disabled'],
+                                                    'value' => function ($model) {
+                                                    return $model->status == 1 ? 'Enabled' : 'disabled';
+                                            },
                                                 ],
-                                                ]); ?>
-                                                                                <?php Pjax::end(); ?>                                </div>
+                                                ['class' => 'yii\grid\ActionColumn'],
+                                            ],
+                                        ]);
+                                        ?>
+<?php Pjax::end(); ?>                                </div>
                         </div>
                 </div>
         </div>

@@ -46,7 +46,7 @@ AppAsset::register($this);
                                 <img src="<?= Yii::$app->homeUrl; ?>/images/logoO.png" width="170px" height="75px" alt="" />
                             </a>
 
-                            <a href="dashboard-1.html" class="logo-collapsed">
+                                <a href="<?= Yii::$app->homeUrl; ?>" class="logo-collapsed">
                                 <img src="<?= Yii::$app->homeUrl; ?>/images/logo-collapsed@2x.png" width="40" alt="" />
                             </a>
                         </div>
@@ -67,7 +67,7 @@ AppAsset::register($this);
 
                     </header>
                     <ul id="main-menu" class="main-menu">
-                        <li class="active">
+                        <li >
                             <a href="">
                                 <i class="linecons-cog"></i>
                                 <span class="title">Administration</span>
@@ -84,9 +84,8 @@ AppAsset::register($this);
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                    <ul id="main-menu" class="main-menu">
-                        <li class="active">
+                  
+                        <li>
                             <a href="">
                                 <i class="fa fa-database"></i>
                                 <span class="title">Masters</span>
@@ -144,7 +143,7 @@ AppAsset::register($this);
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?= Yii::$app->homeUrl; ?>/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
                                 <span>
-                                    John Smith
+                                    <?= Yii::$app->user->identity->name ?>
                                     <i class="fa-angle-down"></i>
                                 </span>
                             </a>

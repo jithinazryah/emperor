@@ -32,7 +32,7 @@ class ServiceCategorys extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_name', 'invoice_type', 'CB', 'UB'], 'required'],
+            [['category_name', 'invoice_type'], 'required'],
             [['status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['category_name'], 'string', 'max' => 200],

@@ -38,8 +38,9 @@ class Contacts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'person', 'email', 'phone_1', 'phone_2', 'address', 'comment', 'contact_type', 'CB', 'UB'], 'required'],
+            [['name', 'person', 'email', 'phone_1', 'contact_type'], 'required'],
             [['address', 'comment'], 'string'],
+            [['email'], 'email'],
             [['status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['name'], 'string', 'max' => 200],
@@ -58,8 +59,8 @@ class Contacts extends \yii\db\ActiveRecord
             'name' => 'Name',
             'person' => 'Person',
             'email' => 'Email',
-            'phone_1' => 'Phone 1',
-            'phone_2' => 'Phone 2',
+            'phone_1' => 'Phone Primary',
+            'phone_2' => 'Phone Secondary',
             'address' => 'Address',
             'comment' => 'Comment',
             'contact_type' => 'Contact Type',

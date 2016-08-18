@@ -52,11 +52,14 @@ class Employee extends ActiveRecord implements IdentityInterface {
          */
         public function rules() {
                 return [
-                    // [['post_id', 'user_name', 'password', 'CB', 'UB'], 'required'],
+                    [['post_id', 'user_name', 'branch_id', 'employee_code', 'password', 'name', 'email', 'phone', 'gender', 'maritual_status'], 'required'],
+                    [['user_name'], 'unique', 'message' => 'Username must be unique.', 'on' => 'create'],
+                    [['email'], 'email'],
+                    [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
                     [ ['post_id', 'gender', 'maritual_status', 'salary_package', 'status', 'CB', 'UB'], 'integer'],
                     [ ['address'], 'string'],
                     [ ['date_of_join', 'DOC', 'DOU'], 'safe'],
-                    [ ['employee_code', 'name', 'email', 'photo'], 'string', 'max' => 100],
+                    [ ['employee_code', 'name', 'email'], 'string', 'max' => 100],
                     [ ['user_name'], 'string', 'max' => 30],
                     [ ['password'], 'string', 'max' => 300],
                     [ ['phone'], 'string', 'max' => 15],

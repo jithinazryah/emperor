@@ -46,7 +46,7 @@ class Vessel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['vessel_type', 'vessel_name', 'CB', 'UB'], 'required'],
+            [['vessel_type', 'vessel_name'], 'required'],
             [['vessel_type', 'status', 'CB', 'UB'], 'integer'],
             [['owners_info'], 'string'],
             [['DOC', 'DOU'], 'safe'],

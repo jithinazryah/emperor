@@ -32,7 +32,7 @@ class Ports extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['port_name', 'code', 'CB', 'UB'], 'required'],
+            [['port_name', 'code'], 'required'],
             [['status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['port_name', 'code'], 'string', 'max' => 200],
