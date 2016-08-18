@@ -126,6 +126,9 @@ class EmployeeController extends Controller
                  if ($model != null) {
                       $model->branch_id = implode(",",$_POST['Employee']['branch_id']);
                       Yii::$app->SetValues->Attributes($model);
+                      if($model->isNewRecord):
+                              $model->password = Yii::$app->security->generatePasswordHash($model->password);
+                      endif;
                       return true;
                  }else{
                      return false;

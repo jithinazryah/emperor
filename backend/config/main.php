@@ -36,7 +36,7 @@ return [
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\Employee',
             'enableAutoLogin' => true,
             'loginUrl' => [ 'site/index'],
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],

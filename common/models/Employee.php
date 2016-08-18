@@ -37,6 +37,8 @@ class Employee extends ActiveRecord implements IdentityInterface {
 
         private $_user;
         public $rememberMe = true;
+        public $created_at;
+        public $updated_at;
 
         /**
          * @inheritdoc
@@ -125,6 +127,16 @@ class Employee extends ActiveRecord implements IdentityInterface {
         }
 
         /**
+         * Finds user by username
+         *
+         * @param string $username
+         * @return static|null
+         */
+        public static function findByUsername($username) {
+                return static::findOne(['user_name' => $username, 'status' => 1]);
+        }
+
+        /**
          * @inheritdoc
          */
         public static function findIdentity($id) {
@@ -167,7 +179,5 @@ class Employee extends ActiveRecord implements IdentityInterface {
                 $data = Branch::findOne(['id' => $branch_id]);
                 return $data->branch_name;
         }
-        
-       
 
 }

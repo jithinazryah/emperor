@@ -35,4 +35,13 @@ class SetValues extends Component {
                 }
         }
 
+        public function Selected($value) {
+                $options = array();
+                $array = explode(',', $value);
+                foreach ($array as $valuee):
+                        $options[$valuee] = ['selected' => true];
+                endforeach;
+                return $options;
+        }
+
 }

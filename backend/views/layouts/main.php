@@ -178,7 +178,7 @@ AppAsset::register($this);
                                 echo '<li class="last">'
                                 . Html::beginForm(['/site/logout'], 'post') . '<a>'
                                 . Html::submitButton(
-                                        '<i class="fa-lock"></i> Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link linker']
+                                        '<i class="fa-lock"></i> Logout (' . Yii::$app->user->identity->user_name . ')', ['class' => 'btn btn-link linker']
                                 ) . '</a>'
                                 . Html::endForm()
                                 . '</li>';
