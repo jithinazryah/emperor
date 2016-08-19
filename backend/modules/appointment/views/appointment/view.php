@@ -2,6 +2,14 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\VesselType;
+use common\models\Vessel;
+use common\models\Ports;
+use common\models\Terminal;
+use common\models\Debtor;
+use common\models\Contacts;
+use common\models\Purpose;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Appointment */
@@ -48,18 +56,72 @@ $this->params['breadcrumbs'][] = $this->title;
                             'model' => $model,
                             'attributes' => [
                                 'id',
-                                'vessel_type',
-                                'vessel',
-                                'port_of_call',
-                                'terminal',
+                                [
+                                    'attribute' => 'vessel_type',
+                                    'value' => call_user_func(function($model) {
+
+                                                return VesselType::findOne($model->vessel_type)->vessel_type;
+                                            }, $model),
+                                ],
+                                [
+                                    'attribute' => 'vessel',
+                                    'value' => call_user_func(function($model) {
+
+                                                return Vessel::findOne($model->vessel)->vessel_name;
+                                            }, $model),
+                                ],
+                                [
+                                    'attribute' => 'port_of_call',
+                                    'value' => call_user_func(function($model) {
+
+                                                return Ports::findOne($model->port_of_call)->port_name;
+                                            }, $model),
+                                ],
+                                [
+                                    'attribute' => 'terminal',
+                                    'value' => call_user_func(function($model) {
+
+                                                return Terminal::findOne($model->terminal)->terminal;
+                                            }, $model),
+                                ],
                                 'birth_no',
                                 'appointment_no',
                                 'no_of_principal',
-                                'principal',
-                                'nominator',
-                                'charterer',
-                                'shipper',
-                                'purpose',
+                                [
+                                    'attribute' => 'principal',
+                                    'value' => call_user_func(function($model) {
+
+                                                return Debtor::findOne($model->principal)->principal_name;
+                                            }, $model),
+                                ],
+                                [
+                                    'attribute' => 'nominator',
+                                    'value' => call_user_func(function($model) {
+
+                                                return Contacts::findOne($model->nominator)->name;
+                                            }, $model),
+                                ],
+                                [
+                                    'attribute' => 'charterer',
+                                    'value' => call_user_func(function($model) {
+
+                                                return Contacts::findOne($model->charterer)->name;
+                                            }, $model),
+                                ],
+                                [
+                                    'attribute' => 'shipper',
+                                    'value' => call_user_func(function($model) {
+
+                                                return Contacts::findOne($model->shipper)->name;
+                                            }, $model),
+                                ],
+                                [
+                                    'attribute' => 'purpose',
+                                    'value' => call_user_func(function($model) {
+
+                                                return Purpose::findOne($model->purpose)->purpose;
+                                            }, $model),
+                                ],
                                 'cargo',
                                 'quantity',
                                 'last_port',

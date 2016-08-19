@@ -4,22 +4,34 @@ namespace backend\modules\appointment\controllers;
 
 use Yii;
 use common\models\Appointment;
+use common\models\Ports;
 use common\models\AppointmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * AppointmentController implements the CRUD actions for Appointment model.
  */
-class AppointmentController extends Controller
-{
+class AppointmentController extends Controller {
+
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['addBasic'],
+                'rules' => [
+                    [
+                        'actions' => ['appointmentNo'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -33,14 +45,13 @@ class AppointmentController extends Controller
      * Lists all Appointment models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new AppointmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -49,10 +60,9 @@ class AppointmentController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
@@ -61,15 +71,15 @@ class AppointmentController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Appointment();
 
         if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        }
+        else {
             return $this->render('create', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -80,15 +90,15 @@ class AppointmentController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        }
+        else {
             return $this->render('update', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -99,8 +109,7 @@ class AppointmentController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -113,12 +122,29 @@ class AppointmentController extends Controller
      * @return Appointment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Appointment::findOne($id)) !== null) {
             return $model;
-        } else {
+        }
+        else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionAppointmentNo() {
+        if (Yii::$app->request->isAjax) {
+            $port_id = $_POST['port_id'];
+            $port_data = Ports::find()->where(['id' => $port_id])->one();
+            $last_appointment = Appointment::find()->orderBy(['id' => SORT_DESC])->where(['port_of_call' => $port_id])->one();
+            if (empty($last_appointment))
+                return $port_data->code . '0001';
+            else {
+                return $port_data->code . (sprintf('%04d', ++$last_appointment->id));
+            }
+        }
+        else {
+            return '';
+        }
+    }
+
 }

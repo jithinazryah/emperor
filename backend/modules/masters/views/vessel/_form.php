@@ -49,8 +49,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'beam')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
+   <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
 
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>

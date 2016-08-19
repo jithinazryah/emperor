@@ -2,6 +2,11 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\VesselType;
+use common\models\Vessel;
+use common\models\Ports;
+use common\models\Terminal;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\AppointmentSearch */
@@ -40,12 +45,36 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
                             //  'id',
-                            'vessel_type',
-                            'vessel',
-                            'port_of_call',
-                            'terminal',
+                            [
+                                'attribute' => 'vessel_type',
+                                'value' => function($data) {
+                                    return VesselType::findOne($data->vessel_type)->vessel_type;
+                                },
+                                'filter' => ArrayHelper::map(VesselType::find()->asArray()->all(), 'id', 'vessel_type'),
+                            ],
+                            [
+                                'attribute' => 'vessel',
+                                'value' => function($data) {
+                                    return Vessel::findOne($data->vessel)->vessel_name;
+                                },
+                                'filter' => ArrayHelper::map(Vessel::find()->asArray()->all(), 'id', 'vessel_name'),
+                            ],
+                            [
+                                'attribute' => 'port_of_call',
+                                'value' => function($data) {
+                                    return Ports::findOne($data->port_of_call)->port_name;
+                                },
+                                'filter' => ArrayHelper::map(Ports::find()->asArray()->all(), 'id', 'port_name'),
+                            ],
+                            [
+                                'attribute' => 'terminal',
+                                'value' => function($data) {
+                                    return Terminal::findOne($data->terminal)->terminal;
+                                },
+                                'filter' => ArrayHelper::map(Terminal::find()->asArray()->all(), 'id', 'terminal'),
+                            ],
                             // 'birth_no',
-                            // 'appointment_no',
+                             'appointment_no',
                             // 'no_of_principal',
                             // 'principal',
                             // 'nominator',
