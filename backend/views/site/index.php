@@ -33,7 +33,7 @@
 							"hideMethod": "fadeOut"
 						};
 				
-						toastr.info("Enjoy the varieties of layouts, UI features and flexibility of clean coding.", "Welcome to Xenon Admin Theme", opts);
+						toastr.info("Enjoy the easiness, UI features and flexibility.", "Welcome to Emperor Admin Area", opts);
 					}, 3800);
 					
 					if( ! $.isFunction($.fn.dxChart))

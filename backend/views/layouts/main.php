@@ -84,6 +84,27 @@ AppAsset::register($this);
                                 </li>
                             </ul>
                         </li>
+                        
+                        <li>
+                            <a href="">
+                               <i class="fa fa-file"></i>
+                                <span class="title">Appointments</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?= Html::a('Appointmets', ['/appointment/appointment/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Estemated Proforma', ['/appointment/estimated-proforma/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Port Call Data', ['/appointment/port-call-data/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Close estimate', ['/appointment/close-estimate/index'], ['class' => 'title']) ?>
+                                </li>
+                            </ul>
+                        </li>
                   
                         <li>
                             <a href="">
