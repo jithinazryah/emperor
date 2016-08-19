@@ -37,6 +37,7 @@ class Terminal extends \yii\db\ActiveRecord
             [['DOC', 'DOU'], 'safe'],
             [['terminal'], 'string', 'max' => 100],
             [['comment'], 'string', 'max' => 200],
+            [['terminal','status'], 'required','on'=>'create'],
         ];
     }
 

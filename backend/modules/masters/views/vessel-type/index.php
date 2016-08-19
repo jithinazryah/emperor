@@ -42,8 +42,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                                           //  'id',
             'vessel_type',
             'comment',
-            'status',
-            'CB',
+             [
+                                                    'attribute' => 'status',
+                                                    'format' => 'raw',
+                                                    'filter' => [1 => 'Enabled', 0 => 'disabled'],
+                                                    'value' => function ($model) {
+                                                    return $model->status == 1 ? 'Enabled' : 'disabled';
+                                            },
+                                                ],
+            //'CB',
             // 'UB',
             // 'DOC',
             // 'DOU',

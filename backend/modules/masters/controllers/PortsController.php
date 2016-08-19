@@ -68,7 +68,7 @@ class PortsController extends Controller {
          */
         public function actionCreate() {
                 $model = new Ports();
-
+                $model->scenario = 'create';
                 if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
                         return $this->redirect(['view', 'id' => $model->id]);
                 } else {

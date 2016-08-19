@@ -42,7 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             //'id',
             'terminal',
             'comment',
-            'status',
+             [
+                                                    'attribute' => 'status',
+                                                    'format' => 'raw',
+                                                    'filter' => [1 => 'Enabled', 0 => 'disabled'],
+                                                    'value' => function ($model) {
+                                                    return $model->status == 1 ? 'Enabled' : 'disabled';
+                                            },
+                                                ],
           //  'CB',
             // 'UB',
             // 'DOC',

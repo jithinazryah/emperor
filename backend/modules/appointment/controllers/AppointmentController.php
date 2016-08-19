@@ -1,18 +1,18 @@
 <?php
 
-namespace backend\modules\masters\controllers;
+namespace backend\modules\appointment\controllers;
 
 use Yii;
-use common\models\Terminal;
-use common\models\TerminalSearch;
+use common\models\Appointment;
+use common\models\AppointmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TerminalController implements the CRUD actions for Terminal model.
+ * AppointmentController implements the CRUD actions for Appointment model.
  */
-class TerminalController extends Controller
+class AppointmentController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class TerminalController extends Controller
     }
 
     /**
-     * Lists all Terminal models.
+     * Lists all Appointment models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TerminalSearch();
+        $searchModel = new AppointmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class TerminalController extends Controller
     }
 
     /**
-     * Displays a single Terminal model.
+     * Displays a single Appointment model.
      * @param integer $id
      * @return mixed
      */
@@ -57,14 +57,13 @@ class TerminalController extends Controller
     }
 
     /**
-     * Creates a new Terminal model.
+     * Creates a new Appointment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Terminal();
-        $model->scenario = 'create';
+        $model = new Appointment();
 
         if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +75,7 @@ class TerminalController extends Controller
     }
 
     /**
-     * Updates an existing Terminal model.
+     * Updates an existing Appointment model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,7 +94,7 @@ class TerminalController extends Controller
     }
 
     /**
-     * Deletes an existing Terminal model.
+     * Deletes an existing Appointment model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -108,15 +107,15 @@ class TerminalController extends Controller
     }
 
     /**
-     * Finds the Terminal model based on its primary key value.
+     * Finds the Appointment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Terminal the loaded model
+     * @return Appointment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Terminal::findOne($id)) !== null) {
+        if (($model = Appointment::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

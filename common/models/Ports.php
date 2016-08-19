@@ -36,6 +36,7 @@ class Ports extends \yii\db\ActiveRecord
             [['status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['port_name', 'code'], 'string', 'max' => 200],
+            [['port_name', 'code'], 'required', 'on' => 'create'],
         ];
     }
 

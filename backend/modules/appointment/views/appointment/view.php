@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\VesselType */
+/* @var $model common\models\Appointment */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Vessel Types', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Appointments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="panel-body">
-                <?= Html::a('<i class="fa-th-list"></i><span> Manage Vessel Type</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                <div class="panel-body"><div class="vessel-type-view">
+                <?= Html::a('<i class="fa-th-list"></i><span> Manage Appointment</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                <div class="panel-body"><div class="appointment-view">
                         <p>
                             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                             <?=
@@ -49,10 +49,27 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attributes' => [
                                 'id',
                                 'vessel_type',
-                                'comment',
+                                'vessel',
+                                'port_of_call',
+                                'terminal',
+                                'birth_no',
+                                'appointment_no',
+                                'no_of_principal',
+                                'principal',
+                                'nominator',
+                                'charterer',
+                                'shipper',
+                                'purpose',
+                                'cargo',
+                                'quantity',
+                                'last_port',
+                                'next_port',
+                                'eta',
+                                'stage',
                                 [
-                                    'attribute' => 'status',
-                                    'value' => $model->status == 1 ? 'Enabled' : 'Disabled',
+                                    'label' => 'Status',
+                                    'format' => 'raw',
+                                    'value' => $model->status == 1 ? 'Enabled' : 'disabled',
                                 ],
                             ],
                         ])
