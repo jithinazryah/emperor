@@ -115,6 +115,15 @@ AppAsset::register($this);
                                 <li>
                                     <?= Html::a('Stage Categories', ['/masters/stage-categorys/index'], ['class' => 'title']) ?>
                                 </li>
+                                <li>
+                                    <?= Html::a('Vessel', ['/masters/vessel/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Vessel Types', ['/masters/vessel-type/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Terminals', ['/masters/terminal/index'], ['class' => 'title']) ?>
+                                </li>
                             </ul>
                         </li>
                     </ul>

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\VesselType;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Vessel */
@@ -11,8 +13,11 @@ use yii\widgets\ActiveForm;
 <div class="vessel-form form-inline">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'vessel_type')->textInput() ?>
+<?php
+    $dataList=ArrayHelper::map(VesselType::find()->asArray()->all(), 'id', 'vessel_type');
+    ?>
+    <?= $form->field($model, 'vessel_type')->dropDownList($dataList, 
+         ['prompt'=>'--Choose a Vessel type--']) ?>
 
     <?= $form->field($model, 'vessel_name')->textInput(['maxlength' => true]) ?>
 
@@ -46,13 +51,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'CB')->textInput() ?>
-
-    <?= $form->field($model, 'UB')->textInput() ?>
-
-    <?= $form->field($model, 'DOC')->textInput() ?>
-
-    <?= $form->field($model, 'DOU')->textInput() ?>
 
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>
