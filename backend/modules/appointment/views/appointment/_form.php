@@ -6,6 +6,7 @@ use common\models\VesselType;
 use common\models\Vessel;
 use common\models\Ports;
 use common\models\Terminal;
+use common\models\Debtor;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -31,7 +32,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'no_of_principal')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'principal')->textInput() ?>
+    <?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Terminal::findAll(['status' => 1]), 'id', 'terminal'), ['prompt' => '-Choose a Terminal-']) ?>
 
     <?= $form->field($model, 'nominator')->textInput() ?>
 
@@ -55,10 +56,10 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
     $this->registerJs('
- $(".gender").change(function(){
-    
- }
-});
+    $(".gender").change(function(){
+
+    }
+    });
 
 
     <div class="form-group" style="float: right;">
