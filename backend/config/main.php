@@ -29,6 +29,9 @@ return [
         'masters' => [
             'class' => 'backend\modules\masters\Masters',
         ],
+        'appointment' => [
+            'class' => 'backend\modules\appointment\Appointment',
+        ],
        
     ],
     'components' => [
