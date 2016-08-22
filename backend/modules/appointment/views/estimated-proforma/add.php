@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 use common\models\Services;
+use common\models\Currency;
 use common\models\Contacts;
 use common\models\Debtor;
 use yii\helpers\ArrayHelper;
@@ -33,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </a>
                                 </div>
                         </div>
-                        <?php Pjax::begin(); ?> 
+                        <?php //Pjax::begin(); ?> 
                         <div class="panel-body">
                                 <div class="row appoint">
                                         <div class="col-sm-3" style="text-align: right">
@@ -111,14 +112,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <td><?= $i; ?></td>
                                                                 <th><span class="co-name"><?= $estimate->service->service ?></span></th>
                                                                 <td><?= $estimate->supplier0->name ?></td>
-                                                                <td>AED</td>
+                                                                <td><?= $estimate->currency0->currency_symbol ?></td>
                                                                 <td><?= $estimate->unit_rate; ?></td>
                                                                 <td><?= $estimate->unit; ?></td>
                                                                 <td><?= $estimate->roe; ?></td>
                                                                 <td><?= $estimate->epda; ?></td>
                                                                 <td><?= $estimate->principal0->principal_name; ?></td>
                                                                 <td><?= $estimate->comments; ?></td>
-                                                                <td><?= $estimate->unit_rate; ?></td>
+                                                                <td>
+                                                                    <?= Html::a('Edit', ['/appointment/estimated-proforma/add','id'=>1,'prfrma_id'=>$estimate->id], ['class'=>'btn btn-primary']) ?>
+                                                                </td>
                                                         </tr>	
 
                                                                 <?php
@@ -130,14 +133,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <td></td>
                                                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
                                                                 <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-                                                                <td><?= $form->field($model, 'currency')->textInput(['placeholder' => 'Currency'])->label(false) ?></td>
+                                                                <td><?= $form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false); ?></td>
                                                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
-                                                                <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Unit'])->label(false) ?></td>
+                                                                <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
                                                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
-                                                                <td><?= Html::submitButton('Add', ['class' => 'btn btn-success']) ?></td>
+                                                                <td><?= Html::submitButton($model->isNewRecord ? 'Add' : 'Update', ['class' => 'btn btn-success']) ?>
+                                                                </td>
                                                                 <?php ActiveForm::end(); ?>
                                                         </tr>		
 
@@ -159,6 +163,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         // Adding Custom Scrollbar
                                                         $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                                                 });
+                                                
+                                                
 
                                                 $("#estimatedproforma-supplier").select2({
                                                         //placeholder: 'Select your country...',
@@ -168,6 +174,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         // Adding Custom Scrollbar
                                                         $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                                                 });
+                                                
+                                                $("#estimatedproforma-currency").select2({
+                                                        //placeholder: 'Select your country...',
+                                                        allowClear: true
+                                                }).on('select2-open', function ()
+                                                {
+                                                        // Adding Custom Scrollbar
+                                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                                });
+                                                
+                                                
                                                  $("#estimatedproforma-principal").select2({
                                                         //placeholder: 'Select your country...',
                                                         allowClear: true
@@ -189,7 +206,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                         </div>
-                          <?php Pjax::end(); ?> 
+                          <?php //Pjax::end(); ?> 
                 </div>
         </div>
 </div>

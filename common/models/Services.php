@@ -25,21 +25,19 @@ use Yii;
  * @property string $DOC
  * @property string $DOU
  */
-class Services extends \yii\db\ActiveRecord
-{
+class Services extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'services';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['category_id', 'service', 'invocie_type', 'supplier'], 'required'],
             [['category_id', 'invocie_type', 'supplier', 'unit_rate', 'unit', 'currency', 'epda_value', 'cost_allocation', 'status', 'CB', 'UB'], 'integer'],
@@ -53,8 +51,7 @@ class Services extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'category_id' => 'Category ID',
@@ -75,4 +72,25 @@ class Services extends \yii\db\ActiveRecord
             'DOU' => 'Dou',
         ];
     }
+
+    public function getInvoicetype0() {
+        return $this->hasOne(InvoiceType::className(), ['id' => 'invocie_type']);
+    }
+
+    public function getCategory() {
+        return $this->hasOne(ServiceCategorys::className(), ['id' => 'category_id']);
+    }
+
+    public function getSupplier0() {
+        return $this->hasOne(Contacts::className(), ['id' => 'supplier']);
+    }
+
+    public function getUnit0() {
+        return $this->hasOne(Units::className(), ['id' => 'unit']);
+    }
+
+    public function getCurrency0() {
+        return $this->hasOne(Currency::className(), ['id' => 'currency']);
+    }
+
 }

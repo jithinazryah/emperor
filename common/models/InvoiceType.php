@@ -5,25 +5,25 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "service_categorys".
+ * This is the model class for table "invoice_type".
  *
  * @property integer $id
- * @property string $category_name
  * @property string $invoice_type
+ * @property string $comment
  * @property integer $status
  * @property integer $CB
  * @property integer $UB
  * @property string $DOC
  * @property string $DOU
  */
-class ServiceCategorys extends \yii\db\ActiveRecord
+class InvoiceType extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'service_categorys';
+        return 'invoice_type';
     }
 
     /**
@@ -32,11 +32,11 @@ class ServiceCategorys extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_name', 'invoice_type'], 'required'],
+            [['comment'], 'string'],
             [['status', 'CB', 'UB'], 'integer'],
+            [['invoice_type'], 'required'],
             [['DOC', 'DOU'], 'safe'],
-            [['category_name'], 'string', 'max' => 200],
-           // [['invoice_type'], 'string', 'max' => 100],
+            [['invoice_type'], 'string', 'max' => 100],
         ];
     }
 
@@ -47,8 +47,8 @@ class ServiceCategorys extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_name' => 'Category Name',
             'invoice_type' => 'Invoice Type',
+            'comment' => 'Comment',
             'status' => 'Status',
             'CB' => 'Cb',
             'UB' => 'Ub',
@@ -56,8 +56,4 @@ class ServiceCategorys extends \yii\db\ActiveRecord
             'DOU' => 'Dou',
         ];
     }
-    
-     public function getInvoiceType0() {
-                return $this->hasOne(InvoiceType::className(), ['id' => 'invoice_type']);
-        }
 }

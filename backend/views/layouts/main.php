@@ -46,7 +46,7 @@ AppAsset::register($this);
                                 <img src="<?= Yii::$app->homeUrl; ?>/images/logoO.png" width="170px" height="75px" alt="" />
                             </a>
 
-                                <a href="<?= Yii::$app->homeUrl; ?>" class="logo-collapsed">
+                            <a href="<?= Yii::$app->homeUrl; ?>" class="logo-collapsed">
                                 <img src="<?= Yii::$app->homeUrl; ?>/images/logo-collapsed@2x.png" width="40" alt="" />
                             </a>
                         </div>
@@ -84,10 +84,10 @@ AppAsset::register($this);
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li>
                             <a href="">
-                               <i class="fa fa-file"></i>
+                                <i class="fa fa-file"></i>
                                 <span class="title">Appointments</span>
                             </a>
                             <ul>
@@ -105,7 +105,7 @@ AppAsset::register($this);
                                 </li>
                             </ul>
                         </li>
-                  
+
                         <li>
                             <a href="">
                                 <i class="fa fa-database"></i>
@@ -123,6 +123,10 @@ AppAsset::register($this);
                                 </li>
                                 <li>
                                     <?= Html::a('Purpose', ['/masters/purpose/index'], ['class' => 'title']) ?>
+                                </li>
+
+                                <li>
+                                    <?= Html::a('Invoice Type', ['/masters/invoice-type/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
                                     <?= Html::a('Services', ['/masters/services/index'], ['class' => 'title']) ?>
@@ -145,6 +149,13 @@ AppAsset::register($this);
                                 <li>
                                     <?= Html::a('Terminals', ['/masters/terminal/index'], ['class' => 'title']) ?>
                                 </li>
+                                <li>
+                                    <?= Html::a('Units', ['/masters/units/index'], ['class' => 'title']) ?>
+                                </li>
+                                <li>
+                                    <?= Html::a('Currency', ['/masters/currency/index'], ['class' => 'title']) ?>
+                                </li>
+
                             </ul>
                         </li>
                     </ul>
@@ -260,48 +271,48 @@ AppAsset::register($this);
         <div class="footer-sticked-chat"><!-- Start: Footer Sticked Chat -->
 
             <script type="text/javascript">
-                    function toggleSampleChatWindow()
+                function toggleSampleChatWindow()
+                {
+                    var $chat_win = jQuery("#sample-chat-window");
+
+                    $chat_win.toggleClass('open');
+
+                    if ($chat_win.hasClass('open'))
                     {
-                        var $chat_win = jQuery("#sample-chat-window");
+                        var $messages = $chat_win.find('.ps-scrollbar');
 
-                        $chat_win.toggleClass('open');
-
-                        if ($chat_win.hasClass('open'))
+                        if ($.isFunction($.fn.perfectScrollbar))
                         {
-                            var $messages = $chat_win.find('.ps-scrollbar');
+                            $messages.perfectScrollbar('destroy');
 
-                            if ($.isFunction($.fn.perfectScrollbar))
-                            {
-                                $messages.perfectScrollbar('destroy');
-
-                                setTimeout(function () {
-                                    $messages.perfectScrollbar();
-                                    $chat_win.find('.form-control').focus();
-                                }, 300);
-                            }
+                            setTimeout(function () {
+                                $messages.perfectScrollbar();
+                                $chat_win.find('.form-control').focus();
+                            }, 300);
                         }
-
-                        jQuery("#sample-chat-window form").on('submit', function (ev)
-                        {
-                            ev.preventDefault();
-                        });
                     }
 
-                    jQuery(document).ready(function ($)
+                    jQuery("#sample-chat-window form").on('submit', function (ev)
                     {
-                        $(".footer-sticked-chat .chat-user, .other-conversations-list a").on('click', function (ev)
-                        {
-                            ev.preventDefault();
-                            toggleSampleChatWindow();
-                        });
-
-                        $(".mobile-chat-toggle").on('click', function (ev)
-                        {
-                            ev.preventDefault();
-
-                            $(".footer-sticked-chat").toggleClass('mobile-is-visible');
-                        });
+                        ev.preventDefault();
                     });
+                }
+
+                jQuery(document).ready(function ($)
+                {
+                    $(".footer-sticked-chat .chat-user, .other-conversations-list a").on('click', function (ev)
+                    {
+                        ev.preventDefault();
+                        toggleSampleChatWindow();
+                    });
+
+                    $(".mobile-chat-toggle").on('click', function (ev)
+                    {
+                        ev.preventDefault();
+
+                        $(".footer-sticked-chat").toggleClass('mobile-is-visible');
+                    });
+                });
             </script>
 
 

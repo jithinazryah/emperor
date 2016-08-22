@@ -3,17 +3,15 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use common\models\InvoiceType;
-use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\ServiceCategorysSearch */
+/* @var $searchModel common\models\UnitsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Service Categorys';
+$this->title = 'Units';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="service-categorys-index">
+<div class="units-index">
 
     <div class="row">
         <div class="col-md-12">
@@ -35,19 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="panel-body">
                     <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
-                    <?= Html::a('<i class="fa-th-list"></i><span> Create Service Categorys</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                    <?= Html::a('<i class="fa-th-list"></i><span> Create Units</span>', ['create'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                     <?php Pjax::begin(); ?>                                                                                                        <?=
                     GridView::widget([
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
-                            'category_name',
-                            [
-                                'attribute' => 'invoice_type',
-                                'value' => 'invoiceType0.invoice_type',
-                                'filter' => ArrayHelper::map(InvoiceType::find()->asArray()->all(), 'id', 'invoice_type'),
-                            ],
+                            //   'id',
+                            'unit_name',
+                            'unit_symbol',
+                            'base_unit',
+                            'unit_relation',
+                            // 'comment:ntext',
                             [
                                 'attribute' => 'status',
                                 'format' => 'raw',
@@ -56,11 +54,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->status == 1 ? 'Enabled' : 'disabled';
                         },
                             ],
+                            // 'CB',
+                            // 'UB',
+                            // 'DOC',
+                            // 'DOU',
                             ['class' => 'yii\grid\ActionColumn'],
                         ],
                     ]);
                     ?>
-                    <?php Pjax::end(); ?>                                </div>
+<?php Pjax::end(); ?>                                </div>
             </div>
         </div>
     </div>

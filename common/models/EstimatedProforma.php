@@ -96,6 +96,10 @@ class EstimatedProforma extends \yii\db\ActiveRecord
                 return $this->hasOne(Debtor::className(), ['id' => 'principal']);
         }
         
+        public function getCurrency0() {
+                return $this->hasOne(Currency::className(), ['id' => 'currency']);
+        }
+        
        
 
 }

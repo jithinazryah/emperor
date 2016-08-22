@@ -4,6 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use common\models\ServiceCategorys;
+use common\models\InvoiceType;
+use common\models\Contacts;
+use common\models\Units;
+use common\models\Currency;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -45,14 +49,30 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 // 'id',
                                                 [
                                                     'attribute' => 'category_id',
-                                                    'value' => $data->category_id,
-                                                    'filter' => ArrayHelper::map(ServiceCategorys::find()->asArray()->all(), 'id', '	category_name'),
+                                                    'value' => 'category.category_name',
+                                                    'filter' => ArrayHelper::map(ServiceCategorys::find()->asArray()->all(), 'id','category_name'),
                                                 ],
                                                 'service',
-                                                'invocie_type',
-                                                'supplier',
-                                                'unit',
-                                                'currency',
+                                                [
+                                                    'attribute' => 'invocie_type',
+                                                    'value' => 'invoicetype0.invoice_type',
+                                                    'filter' => ArrayHelper::map(InvoiceType::find()->asArray()->all(), 'id','invoice_type'),
+                                                ],
+                                                [
+                                                    'attribute' => 'supplier',
+                                                    'value' => 'supplier0.name',
+                                                    'filter' => ArrayHelper::map(Contacts::find()->asArray()->all(), 'id','name'),
+                                                ],
+                                                [
+                                                    'attribute' => 'unit',
+                                                    'value' => 'unit0.unit_name',
+                                                    'filter' => ArrayHelper::map(Units::find()->asArray()->all(), 'id','unit_name'),
+                                                ],
+                                                [
+                                                    'attribute' => 'currency',
+                                                    'value' => 'currency0.currency_name',
+                                                    'filter' => ArrayHelper::map(Currency::find()->asArray()->all(), 'id','currency_name'),
+                                                ],
                                                 'roe',
                                                 'epda_value',
                                                 // 'comments:ntext',

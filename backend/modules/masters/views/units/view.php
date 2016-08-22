@@ -2,14 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use common\models\ServiceCategorys;
-use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Services */
+/* @var $model common\models\Units */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Services', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Units', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -30,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="panel-body">
-                <?= Html::a('<i class="fa-th-list"></i><span> Manage Services</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                <div class="panel-body"><div class="services-view">
+                <?= Html::a('<i class="fa-th-list"></i><span> Manage Units</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                <div class="panel-body"><div class="units-view">
                         <p>
                             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                             <?=
@@ -49,36 +47,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         DetailView::widget([
                             'model' => $model,
                             'attributes' => [
-                                [
-                                    'attribute' => 'category_id',
-                                    'value' => $model->category->category_name,
-                                ],
-                                'service',
-                                [
-                                    'attribute' => 'invocie_type',
-                                    'value' => $model->invoicetype0->invoice_type,
-                                ],
-                                [
-                                    'attribute' => 'supplier',
-                                    'value' => $model->supplier0->name,
-                                ],
-                                'unit_rate',
-                                [
-                                    'attribute' => 'unit',
-                                    'value' => $model->unit0->unit_name,
-                                ],
-                                [
-                                    'attribute' => 'currency',
-                                    'value' => $model->currency0->currency_name,
-                                ],
-                                'roe',
-                                'epda_value',
-                                'cost_allocation',
-                                'comments:ntext',
+                                'id',
+                                'unit_name',
+                                'unit_symbol',
+                                'base_unit',
+                                'unit_relation',
+                                'comment:ntext',
                                 [
                                     'attribute' => 'status',
                                     'value' => $model->status == 1 ? 'Enabled' : 'Disabled',
-                                ],],
+                                ],
+                            ],
                         ])
                         ?>
                     </div>
