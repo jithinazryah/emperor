@@ -6,6 +6,7 @@ use Yii;
 use common\models\EstimatedProforma;
 use common\models\Appointment;
 use common\models\EstimatedProformaSearch;
+use common\models\AppointmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,7 +35,7 @@ class EstimatedProformaController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
-        $searchModel = new EstimatedProformaSearch();
+        $searchModel = new AppointmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -94,7 +95,12 @@ class EstimatedProformaController extends Controller {
         }
     }
 
-    
+    public function actionDeletePerforma($id){
+        $this->findModel($id)->delete();
+
+        //return $this->redirect(['index']); 
+        return $this->redirect(Yii::$app->request->referrer);
+    }
 
     /**
      * Updates an existing EstimatedProforma model.

@@ -121,6 +121,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <td><?= $estimate->comments; ?></td>
                                                                 <td>
                                                                     <?= Html::a('Edit', ['/appointment/estimated-proforma/add','id'=>1,'prfrma_id'=>$estimate->id], ['class'=>'btn btn-primary']) ?>
+                                                                    <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa','id'=>$estimate->id], ['class'=>'btn btn-red']) ?>
                                                                 </td>
                                                         </tr>	
 

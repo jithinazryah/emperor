@@ -65,16 +65,18 @@ use yii\helpers\ArrayHelper;
     <?php ActiveForm::end(); ?>
 
 </div>
-
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
+<script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
 <script>
     $("document").ready(function () {
         $('.ports').change(function () {
-            var port_id =  $(this).val();
+            var port_id = $(this).val();
             $.ajax({
                 type: 'POST',
                 cache: false,
-                data: { port_id: port_id },
-                url: '<?= Yii::$app->homeUrl ;?>/appointment/appointment/appointment-no',
+                data: {port_id: port_id},
+                url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/appointment-no',
                 success: function (data) {
                     $('#appointment-appointment_no').val(data);
                 }

@@ -5,6 +5,7 @@ namespace backend\modules\appointment\controllers;
 use Yii;
 use common\models\Appointment;
 use common\models\Ports;
+use common\models\EstimatedProforma;
 use common\models\AppointmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,8 +62,15 @@ class AppointmentController extends Controller {
      * @return mixed
      */
     public function actionView($id) {
+        $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
+        $appointment = Appointment::find($id)->one();
+        $model_new = new EstimatedProforma;
+
         return $this->render('view', [
                     'model' => $this->findModel($id),
+                    'estimates' => $estimates,
+                    'model_new' => $model_new,
+                    'appointment' => $appointment,
         ]);
     }
 
