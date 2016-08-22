@@ -18,7 +18,7 @@ class EstimatedProformaSearch extends EstimatedProforma
     public function rules()
     {
         return [
-            [['id', 'apponitment_id', 'service_id', 'supplier', 'currency', 'epda', 'invoice_type', 'status', 'CB', 'UB'], 'integer'],
+            [['id', 'apponitment_id', 'service_id', 'supplier', 'currency', 'epda', 'principal', 'invoice_type', 'status', ], 'integer'],
             [['unit_rate', 'unit', 'roe', 'comments', 'DOC', 'DOU'], 'safe'],
         ];
     }
@@ -41,7 +41,7 @@ class EstimatedProformaSearch extends EstimatedProforma
      */
     public function search($params)
     {
-        $query = EstimatedProforma::find();
+        $query = EstimatedProforma::find()->groupBy(['apponitment_id']);
 
         // add conditions that should always apply here
 
@@ -65,6 +65,7 @@ class EstimatedProformaSearch extends EstimatedProforma
             'supplier' => $this->supplier,
             'currency' => $this->currency,
             'epda' => $this->epda,
+            'principal' => $this->principal,
             'invoice_type' => $this->invoice_type,
             'status' => $this->status,
             'CB' => $this->CB,

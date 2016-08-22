@@ -16,6 +16,7 @@ use Yii;
  * @property string $unit
  * @property string $roe
  * @property integer $epda
+ * @property integer $principal
  * @property integer $invoice_type
  * @property string $comments
  * @property integer $status
@@ -40,8 +41,8 @@ class EstimatedProforma extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['apponitment_id', 'service_id', 'CB', 'UB'], 'required'],
-            [['apponitment_id', 'service_id', 'supplier', 'currency', 'epda', 'invoice_type', 'status', 'CB', 'UB'], 'integer'],
+            [['apponitment_id', 'service_id'], 'required'],
+            [['apponitment_id', 'service_id', 'supplier', 'currency', 'epda', 'principal', 'invoice_type', 'status', 'CB', 'UB'], 'integer'],
             [['comments'], 'string'],
             [['DOC', 'DOU'], 'safe'],
             [['unit_rate', 'unit'], 'string', 'max' => 50],
@@ -64,6 +65,7 @@ class EstimatedProforma extends \yii\db\ActiveRecord
             'unit' => 'Unit',
             'roe' => 'Roe',
             'epda' => 'Epda',
+            'principal' => 'Principal',
             'invoice_type' => 'Invoice Type',
             'comments' => 'Comments',
             'status' => 'Status',

@@ -13,7 +13,7 @@ class m160819_044305_vessel_type extends Migration {
         $this->createTable('{{%vessel_type}}', [
             'id' => $this->primaryKey(),
             'vessel_type' => $this->string(100),
-            'comment' => $this->string(200),
+            'comment' => $this->text(),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
             'CB' => $this->integer()->notNull(),
             'UB' => $this->integer()->notNull(),
@@ -25,7 +25,7 @@ class m160819_044305_vessel_type extends Migration {
         $this->createTable('{{%terminal}}', [
             'id' => $this->primaryKey(),
             'terminal' => $this->string(100),
-            'comment' => $this->string(200),
+            'comment' => $this->text(),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
             'CB' => $this->integer()->notNull(),
             'UB' => $this->integer()->notNull(),

@@ -43,3 +43,17 @@ table{
         padding-top: 0px;
         margin-bottom: -7px;
 }
+.appoint{
+        margin-bottom: 17px;
+}
+.row.appoint div {
+        padding-left: 0px;
+}
+.appoint-title{
+        width: 95%;
+        text-align: center;
+}
+
+.has-error .help-block{
+        color: #da0000;
+}

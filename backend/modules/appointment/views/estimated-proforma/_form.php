@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="estimated-proforma-form form-inline">
 
     <?php $form = ActiveForm::begin(); ?>
-
+<?= $form->errorSummary($model); ?>
     <?= $form->field($model, 'apponitment_id')->textInput() ?>
 
     <?= $form->field($model, 'service_id')->textInput() ?>
@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'roe')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'epda')->textInput() ?>
+        
+    <?= $form->field($model, 'principal')->textInput() ?>
 
     <?= $form->field($model, 'invoice_type')->textInput() ?>
 

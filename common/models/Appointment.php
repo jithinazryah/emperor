@@ -32,62 +32,89 @@ use Yii;
  * @property string $DOC
  * @property string $DOU
  */
-class Appointment extends \yii\db\ActiveRecord
-{
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'appointment';
-    }
+class Appointment extends \yii\db\ActiveRecord {
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['vessel_type', 'vessel', 'port_of_call'], 'required'],
-            [['vessel_type', 'vessel', 'port_of_call', 'terminal', 'principal', 'nominator', 'charterer', 'shipper', 'stage', 'status', 'CB', 'UB'], 'integer'],
-            [['eta', 'DOC', 'DOU'], 'safe'],
-            [['birth_no', 'appointment_no'], 'string', 'max' => 50],
-            [['no_of_principal', 'quantity'], 'string', 'max' => 15],
-            [['purpose', 'last_port', 'next_port'], 'string', 'max' => 200],
-            [['cargo'], 'string', 'max' => 100],
-        ];
-    }
+        /**
+         * @inheritdoc
+         */
+        public static function tableName() {
+                return 'appointment';
+        }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'vessel_type' => 'Vessel Type',
-            'vessel' => 'Vessel',
-            'port_of_call' => 'Port Of Call',
-            'terminal' => 'Terminal',
-            'birth_no' => 'Birth No',
-            'appointment_no' => 'Appointment No',
-            'no_of_principal' => 'No Of Principal',
-            'principal' => 'Principal',
-            'nominator' => 'Nominator',
-            'charterer' => 'Charterer',
-            'shipper' => 'Shipper',
-            'purpose' => 'Purpose',
-            'cargo' => 'Cargo',
-            'quantity' => 'Quantity',
-            'last_port' => 'Last Port',
-            'next_port' => 'Next Port',
-            'eta' => 'Eta',
-            'stage' => 'Stage',
-            'status' => 'Status',
-            'CB' => 'Cb',
-            'UB' => 'Ub',
-            'DOC' => 'Doc',
-            'DOU' => 'Dou',
-        ];
-    }
+        /**
+         * @inheritdoc
+         */
+        public function rules() {
+                return [
+                    [['vessel_type', 'vessel', 'port_of_call'], 'required'],
+                    [['vessel_type', 'vessel', 'port_of_call', 'terminal', 'principal', 'nominator', 'charterer', 'shipper', 'stage', 'status', 'CB', 'UB'], 'integer'],
+                    [['eta', 'DOC', 'DOU'], 'safe'],
+                    [['birth_no', 'appointment_no'], 'string', 'max' => 50],
+                    [['no_of_principal', 'quantity'], 'string', 'max' => 15],
+                    [['purpose', 'last_port', 'next_port'], 'string', 'max' => 200],
+                    [['cargo'], 'string', 'max' => 100],
+                ];
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function attributeLabels() {
+                return [
+                    'id' => 'ID',
+                    'vessel_type' => 'Vessel Type',
+                    'vessel' => 'Vessel',
+                    'port_of_call' => 'Port Of Call',
+                    'terminal' => 'Terminal',
+                    'birth_no' => 'Birth No',
+                    'appointment_no' => 'Appointment No',
+                    'no_of_principal' => 'No Of Principal',
+                    'principal' => 'Principal',
+                    'nominator' => 'Nominator',
+                    'charterer' => 'Charterer',
+                    'shipper' => 'Shipper',
+                    'purpose' => 'Purpose',
+                    'cargo' => 'Cargo',
+                    'quantity' => 'Quantity',
+                    'last_port' => 'Last Port',
+                    'next_port' => 'Next Port',
+                    'eta' => 'Eta',
+                    'stage' => 'Stage',
+                    'status' => 'Status',
+                    'CB' => 'Cb',
+                    'UB' => 'Ub',
+                    'DOC' => 'Doc',
+                    'DOU' => 'Dou',
+                ];
+        }
+
+        public function getVessel0() {
+                return $this->hasOne(Vessel::className(), ['id' => 'vessel']);
+        }
+
+        /**
+         * @return \yii\db\ActiveQuery 
+         */
+        public function getVesselType() {
+                return $this->hasOne(VesselType::className(), ['id' => 'vessel_type']);
+        }
+        /**
+         * @return \yii\db\ActiveQuery 
+         */
+        public function getPortOfCall() {
+                return $this->hasOne(Ports::className(), ['id' => 'port_of_call']);
+        }
+        /**
+         * @return \yii\db\ActiveQuery 
+         */
+        public function getPurpose0() {
+                return $this->hasOne(Purpose::className(), ['id' => 'purpose']);
+        }
+        /**
+         * @return \yii\db\ActiveQuery 
+         */
+        public function getTerminal0() {
+                return $this->hasOne(Terminal::className(), ['id' => 'terminal']);
+        }
+
 }
