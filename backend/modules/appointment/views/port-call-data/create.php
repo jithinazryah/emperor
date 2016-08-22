@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="panel-body"><div class="port-call-data-create">
                                                 <?= $this->render('_form', [
                                                 'model' => $model,
+                                                    'appointment' => $appointment,
                                                 ]) ?>
                                         </div>
                                 </div>

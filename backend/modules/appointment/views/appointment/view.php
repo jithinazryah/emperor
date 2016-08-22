@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model common\models\Appointment */
 
-$this->title = $model->id;
+$this->title = $model->appointment_no;
 $this->params['breadcrumbs'][] = ['label' => 'Appointments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         DetailView::widget([
                             'model' => $model,
                             'attributes' => [
-                                'id',
+                                //'id',
                                 [
                                     'attribute' => 'vessel_type',
                                     'value' => call_user_func(function($model) {

@@ -24,15 +24,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+   <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
 
-    <?= $form->field($model, 'CB')->textInput() ?>
-
-    <?= $form->field($model, 'UB')->textInput() ?>
-
-    <?= $form->field($model, 'DOC')->textInput() ?>
-
-    <?= $form->field($model, 'DOU')->textInput() ?>
 
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>

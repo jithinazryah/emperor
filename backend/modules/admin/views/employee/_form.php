@@ -44,12 +44,12 @@ use yii\helpers\ArrayHelper;
 
         <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
 
-        <?php
-        //$form->field($model, 'date_of_join')->widget(\yii\jui\DatePicker::classname(), [
+        <?=
+        $form->field($model, 'date_of_join')->widget(\yii\jui\DatePicker::classname(), [
             //'language' => 'ru',
-           // 'dateFormat' => 'dd-MM-yyyy',
-            //'options' => ['class' => 'form-control']
-       //])
+            'dateFormat' => 'dd-MM-yyyy',
+            'options' => ['class' => 'form-control']
+       ])
         ?>
 
         <?= $form->field($model, 'salary_package')->textInput() ?>

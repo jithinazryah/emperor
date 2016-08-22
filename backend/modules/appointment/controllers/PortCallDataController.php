@@ -4,6 +4,8 @@ namespace backend\modules\appointment\controllers;
 
 use Yii;
 use common\models\PortCallData;
+use common\models\Appointment;
+use common\models\AppointmentSearch;
 use common\models\PortCallDataSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -35,12 +37,12 @@ class PortCallDataController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PortCallDataSearch();
+        $searchModel = new AppointmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -61,8 +63,9 @@ class PortCallDataController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
+         $appointment = Appointment::find($id)->one();
         $model = new PortCallData();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -70,6 +73,7 @@ class PortCallDataController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'appointment' => $appointment,
             ]);
         }
     }

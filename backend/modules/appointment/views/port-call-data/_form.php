@@ -7,12 +7,11 @@ use yii\widgets\ActiveForm;
 /* @var $model common\models\PortCallData */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
 <div class="port-call-data-form form-inline">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'appointment_id')->textInput() ?>
+    <?= $form->field($model, 'appointment_id')->textInput(['readonly' => true, 'value' => $appointment->appointment_no]) ?>
 
     <?= $form->field($model, 'eta')->textInput() ?>
 
@@ -64,15 +63,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'comments')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
 
-    <?= $form->field($model, 'CB')->textInput() ?>
-
-    <?= $form->field($model, 'UB')->textInput() ?>
-
-    <?= $form->field($model, 'DOC')->textInput() ?>
-
-    <?= $form->field($model, 'DOU')->textInput() ?>
 
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>
