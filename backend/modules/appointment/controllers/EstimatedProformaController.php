@@ -72,16 +72,16 @@ class EstimatedProformaController extends Controller {
         }
 
         public function actionAdd($id) {
-                $estimate = EstimatedProforma::findAll(['apponitment_id'=>$id]);
+                $estimates = EstimatedProforma::findAll(['apponitment_id'=>$id]);
                 $appointment = Appointment::find($id)->one();
                 $model = new EstimatedProforma();
 
-                if ($model->load(Yii::$app->request->post()) && $this->SetValues($model) && $model->save()) {
-                        return $this->redirect(['view', 'id' => $model->id]);
+                if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id) && $model->save()) {
+                        return $this->refresh();
                 } else {
                         return $this->render('add', [
                                     'model' => $model,
-                                    'estimate' => $estimate,
+                                    'estimates' => $estimates,
                                     'appointment' => $appointment,
                         ]);
                 }

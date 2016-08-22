@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
+use common\models\Services;
+use common\models\Contacts;
+use common\models\Debtor;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\EstimatedProforma */
@@ -17,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="panel panel-default">
                         <div class="panel-heading">
-                                <h2  class="appoint-title panel-title"><?= Html::encode($this->title) . ' # <b style="color: #008cbd;">' . $appointment->appointment_no.'</b>' ?></h2>
+                                <h2  class="appoint-title panel-title"><?= Html::encode($this->title) . ' # <b style="color: #008cbd;">' . $appointment->appointment_no . '</b>' ?></h2>
 
                                 <div class="panel-options">
                                         <a href="#" data-toggle="panel">
@@ -29,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </a>
                                 </div>
                         </div>
+                        <?php Pjax::begin(); ?> 
                         <div class="panel-body">
                                 <div class="row appoint">
                                         <div class="col-sm-3" style="text-align: right">
@@ -74,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <b>: <?= $appointment->birth_no; ?></b>
                                         </div>
                                 </div>
-                                
+
                                 <hr class="appoint_history" />
 
                                 <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
@@ -85,9 +90,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <th data-priority="1">#</th>
                                                                 <th data-priority="1">SERVICES</th>
                                                                 <th data-priority="3">SUPPLIER</th>
+                                                                <th data-priority="3">CURRENCY</th>
                                                                 <th data-priority="1">RATE /QTY</th>
                                                                 <th data-priority="3">QTY</th>
-                                                                <th data-priority="3">CURRENCY</th>
                                                                 <th data-priority="6">ROE</th>
                                                                 <th data-priority="6">EPDA VALUE</th>
                                                                 <th data-priority="6">PRINCIPAL</th>
@@ -95,58 +100,42 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <th data-priority="1">ACTIONS</th>
                                                         </tr>
                                                 </thead>
-                                                 <?php Pjax::begin(); ?> 
+                                                
                                                 <tbody>
+                                                        <?php
+                                                        $i = 0;
+                                                        foreach ($estimates as $estimate):
+                                                                $i++;
+                                                                ?>
                                                         <tr>
-                                                                <td>1</td>
-                                                                <th>GOOG <span class="co-name">Google Inc.</span></th>
-                                                                <td>597.74</td>
-                                                                <td>12:12PM</td>
-                                                                <td>14.81 (2.54%)</td>
-                                                                <td>582.93</td>
-                                                                <td>597.95</td>
-                                                                <td>597.73 x 100</td>
-                                                                <td>597.95</td>
-                                                                <td>597.73 x 100</td>
-                                                                <td>597.73 x 100</td>
-                                                        </tr>		
-                                                        <tr>
-                                                                <td>2</td>
-                                                                <th>AAPL <span class="co-name">Apple Inc.</span></th>
-                                                                <td>378.94</td>
-                                                                <td>12:22PM</td>
-                                                                <td>5.74 (1.54%)</td>
-                                                                <td>373.20</td>
-                                                                <td>381.02</td>
-                                                                <td>378.92 x 300</td>
-                                                                <td>30.67</td>
-                                                                <td>31.14 x 6500</td>
-                                                                <td>31.14 x 6500</td>
-                                                        </tr>		
-                                                        <tr>
-                                                                <td>3</td>
-                                                                <th>AMZN <span class="co-name">Amazon.com Inc.</span></th>
-                                                                <td>191.55</td>
-                                                                <td>12:23PM</td>
-                                                                <td>3.16 (1.68%)</td>
-                                                                <td>188.39</td>
-                                                                <td>194.99</td>
-                                                                <td>191.52 x 300</td>
-                                                                <td>30.67</td>
-                                                                <td>31.14 x 6500</td>
-                                                                <td>31.14 x 6500</td>
-                                                        </tr>		 
+                                                                <td><?= $i; ?></td>
+                                                                <th><span class="co-name"><?= $estimate->service->service ?></span></th>
+                                                                <td><?= $estimate->supplier0->name ?></td>
+                                                                <td>AED</td>
+                                                                <td><?= $estimate->unit_rate; ?></td>
+                                                                <td><?= $estimate->unit; ?></td>
+                                                                <td><?= $estimate->roe; ?></td>
+                                                                <td><?= $estimate->epda; ?></td>
+                                                                <td><?= $estimate->principal0->principal_name; ?></td>
+                                                                <td><?= $estimate->comments; ?></td>
+                                                                <td><?= $estimate->unit_rate; ?></td>
+                                                        </tr>	
+
+                                                                <?php
+                                                        endforeach;
+                                                        ?>
+                                                       		 
                                                         <tr>
                                                                 <?php $form = ActiveForm::begin(); ?>
-                                                                <td><?= $form->errorSummary($model); ?></td>
-                                                                <td><?= $form->field($model, 'service_id')->textInput(['placeholder' => 'Service'])->label(false) ?></td>
-                                                                <td><?= $form->field($model, 'supplier')->textInput(['placeholder' => 'Supplier'])->label(false) ?></td>
+                                                                <td></td>
+                                                                <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
+                                                                <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
                                                                 <td><?= $form->field($model, 'currency')->textInput(['placeholder' => 'Currency'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Unit'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
-                                                                <td><?= $form->field($model, 'principal')->textInput(['placeholder' => 'Principal'])->label(false) ?></td>
+                                                                <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
                                                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
                                                                 <td><?= Html::submitButton('Add', ['class' => 'btn btn-success']) ?></td>
                                                                 <?php ActiveForm::end(); ?>
@@ -155,36 +144,52 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         <!-- Repeat -->
 
                                                 </tbody>
-                                                 <?php Pjax::end(); ?> 
+                                              
                                         </table>
 
                                 </div>
-
                                 <script type="text/javascript">
-                                        // This JavaScript Will Replace Checkboxes in dropdown toggles
-                                        /*jQuery(document).ready(function($)
-                                         {
-                                         setTimeout(function()
-                                         {
-                                         $(".checkbox-row input").addClass('cbr');
-                                         cbr_replace();
-                                         }, 0);
-                                         });*/
+                                        jQuery(document).ready(function ($)
+                                        {
+                                                $("#estimatedproforma-service_id").select2({
+                                                        //placeholder: 'Select your country...',
+                                                        allowClear: true
+                                                }).on('select2-open', function ()
+                                                {
+                                                        // Adding Custom Scrollbar
+                                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                                });
+
+                                                $("#estimatedproforma-supplier").select2({
+                                                        //placeholder: 'Select your country...',
+                                                        allowClear: true
+                                                }).on('select2-open', function ()
+                                                {
+                                                        // Adding Custom Scrollbar
+                                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                                });
+                                                 $("#estimatedproforma-principal").select2({
+                                                        //placeholder: 'Select your country...',
+                                                        allowClear: true
+                                                }).on('select2-open', function ()
+                                                {
+                                                        // Adding Custom Scrollbar
+                                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                                });
+
+
+
+                                        });
                                 </script>
 
 
+                                <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
+                                <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
+                                <script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
+
+
                         </div>
-                        <!--                        <div class="panel-body">
-                        <?= Html::a('<i class="fa-th-list"></i><span> Manage Estimated Proforma</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                                                        <div class="panel-body"><div class="estimated-proforma-create">
-                        <?=
-                        $this->render('_form', [
-                            'model' => $model,
-                        ])
-                        ?>
-                                                                </div>
-                                                        </div>
-                                                </div>-->
+                          <?php Pjax::end(); ?> 
                 </div>
         </div>
 </div>

@@ -6,7 +6,7 @@ class m160820_101658_altr extends Migration
 {
     public function up()
     {
-            $this->execute("ALTER TABLE `estimated_proforma` ADD `principal` INT NOT NULL AFTER `epda`;");
+            $this->execute("ALTER TABLE `estimated_proforma` ADD `principal` INT NULL AFTER `epda`;");
     }
 
     public function down()

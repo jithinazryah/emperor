@@ -75,4 +75,27 @@ class EstimatedProforma extends \yii\db\ActiveRecord
             'DOU' => 'Dou',
         ];
     }
+    
+        /**
+         * @return \yii\db\ActiveQuery 
+         */
+        public function getService() {
+                return $this->hasOne(Services::className(), ['id' => 'service_id']);
+        }
+        
+        /**
+         * @return \yii\db\ActiveQuery 
+         */
+        public function getSupplier0() {
+                return $this->hasOne(Contacts::className(), ['id' => 'supplier']);
+        }
+        /**
+         * @return \yii\db\ActiveQuery 
+         */
+        public function getPrincipal0() {
+                return $this->hasOne(Debtor::className(), ['id' => 'principal']);
+        }
+        
+       
+
 }
