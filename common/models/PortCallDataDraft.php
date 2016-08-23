@@ -34,23 +34,21 @@ use Yii;
  * @property string $DOC
  * @property string $DOU
  */
-class PortCallDataDraft extends \yii\db\ActiveRecord
-{
+class PortCallDataDraft extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'port_call_data_draft';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['appointment_id', 'CB', 'UB'], 'required'],
+            [['appointment_id'], 'required'],
             [['appointment_id', 'data_id', 'fwd_arrival_unit', 'fwd_arrival_quantity', 'aft_arrival_unit', 'aft_arrival_quantity', 'mean_arrival_unit', 'mean_arrival_quantity', 'fwd_sailing_unit', 'fwd_sailing_quantity', 'aft_sailing_unit', 'aft_sailing_quantity', 'mean_sailing_unit', 'mean_sailing_quantity', 'additional_info', 'status', 'CB', 'UB'], 'integer'],
             [['intial_survey_commenced', 'intial_survey_completed', 'finial_survey_commenced', 'finial_survey_completed', 'DOC', 'DOU'], 'safe'],
             [['comments'], 'string'],
@@ -60,8 +58,7 @@ class PortCallDataDraft extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'appointment_id' => 'Appointment ID',
@@ -91,4 +88,9 @@ class PortCallDataDraft extends \yii\db\ActiveRecord
             'DOU' => 'Dou',
         ];
     }
+
+    public function getAppointment() {
+        return $this->hasOne(Appointment::className(), ['id' => 'appointment_id']);
+    }
+
 }

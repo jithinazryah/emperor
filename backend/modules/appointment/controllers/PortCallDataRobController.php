@@ -84,8 +84,8 @@ class PortCallDataRobController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
+            return Yii::$app->response->redirect(Yii::$app->urlManager->createAbsoluteUrl('/appointment/port-call-data/update?id='.$model->id.'&&stat=3'));
         } else {
             return $this->render('update', [
                 'model' => $model,

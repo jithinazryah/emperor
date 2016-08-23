@@ -95,7 +95,7 @@ AppAsset::register($this);
                                     <?= Html::a('Appointmets', ['/appointment/appointment/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
-                                    <?= Html::a('Estemated Proforma', ['/appointment/estimated-proforma/index'], ['class' => 'title']) ?>
+                                    <?= Html::a('Estimated Proforma', ['/appointment/estimated-proforma/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
                                     <?= Html::a('Port Call Data', ['/appointment/port-call-data/index'], ['class' => 'title']) ?>

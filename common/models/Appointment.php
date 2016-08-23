@@ -47,7 +47,7 @@ class Appointment extends \yii\db\ActiveRecord {
         public function rules() {
                 return [
                     [['vessel_type', 'vessel', 'port_of_call'], 'required'],
-                    [['vessel_type', 'vessel', 'port_of_call', 'terminal', 'principal', 'nominator', 'charterer', 'shipper', 'stage', 'status', 'CB', 'UB'], 'integer'],
+                    [['vessel_type', 'vessel', 'port_of_call', 'terminal', 'nominator', 'charterer', 'shipper', 'stage', 'status', 'CB', 'UB'], 'integer'],
                     [['eta', 'DOC', 'DOU'], 'safe'],
                     [['birth_no', 'appointment_no'], 'string', 'max' => 50],
                     [['no_of_principal', 'quantity'], 'string', 'max' => 15],
@@ -66,7 +66,7 @@ class Appointment extends \yii\db\ActiveRecord {
                     'vessel' => 'Vessel',
                     'port_of_call' => 'Port Of Call',
                     'terminal' => 'Terminal',
-                    'birth_no' => 'Birth No',
+                    'birth_no' => 'Berth No',
                     'appointment_no' => 'Appointment No',
                     'no_of_principal' => 'No Of Principal',
                     'principal' => 'Principal',
@@ -115,6 +115,11 @@ class Appointment extends \yii\db\ActiveRecord {
          */
         public function getTerminal0() {
                 return $this->hasOne(Terminal::className(), ['id' => 'terminal']);
+        }
+        
+         public function getDebtorName($debtor_id) {
+                $data = Debtor::findOne(['id' => $debtor_id]);
+                return $data->principal_name;
         }
 
 }

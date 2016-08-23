@@ -44,8 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
                             //  'id',
-                       
-                             'appointment_no',
+                            'appointment_no',
                             // 'no_of_principal',
                             // 'principal',
                             // 'nominator',
@@ -70,10 +69,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'UB',
                             // 'DOC',
                             // 'DOU',
-                            ['class' => 'yii\grid\ActionColumn'],
-                        ],
-                    ]);
-                    ?>
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                'template' => '{update}',
+                                'buttons' => [
+                                    'update' => function ($url) {
+                                        return Html::a(
+                                                        '<span class="glyphicon glyphicon-pencil"></span>', $url, [ 'title' => Yii::t('app', 'update')]);
+                                    },
+                                        ],
+                                        'urlCreator' => function ($action, $model, $key, $index) {
+                                    if ($action === 'update') {
+                                        $url = \yii\helpers\Url::toRoute(['/appointment/port-call-data/update', 'id' => $key]);
+                                        return $url;
+                                    }
+                                }
+                                    ],
+                                ],
+                            ]);
+                            ?>
                 </div>
             </div>
         </div>

@@ -56,7 +56,7 @@ class PortCallData extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['appointment_id', 'CB', 'UB'], 'required'],
+            //[['appointment_id'], 'required'],
             [['appointment_id', 'additional_info', 'status', 'CB', 'UB'], 'integer'],
             [['eta', 'ets', 'eosp', 'arrived_anchorage', 'nor_tendered', 'dropped_anchor', 'anchor_aweigh', 'arrived_pilot_station', 'pob_inbound', 'first_line_ashore', 'all_fast', 'gangway_down', 'agent_on_board', 'immigration_commenced', 'immigartion_completed', 'cargo_commenced', 'cargo_completed', 'pob_outbound', 'lastline_away', 'cleared_channel', 'cosp', 'fasop', 'eta_next_port', 'DOC', 'DOU'], 'safe'],
             [['comments'], 'string'],
@@ -103,4 +103,8 @@ class PortCallData extends \yii\db\ActiveRecord
             'DOU' => 'Dou',
         ];
     }
+    
+     public function getAppointment() {
+                return $this->hasOne(Appointment::className(), ['id' => 'appointment_id']);
+        }
 }

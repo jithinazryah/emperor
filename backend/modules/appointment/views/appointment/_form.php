@@ -26,15 +26,19 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'port_of_call')->dropDownList(ArrayHelper::map(Ports::findAll(['status' => 1]), 'id', 'port_name'), ['prompt' => '-Choose a Port-', 'class' => 'form-control ports']) ?>
 
-    <?= $form->field($model, 'terminal')->dropDownList(ArrayHelper::map(Terminal::findAll(['status' => 1]), 'id', 'terminal'), ['prompt' => '-Choose a Terminal-']) ?>
+    <?php //$form->field($model, 'terminal')->dropDownList(ArrayHelper::map(Terminal::findAll(['status' => 1]), 'id', 'terminal'), ['prompt' => '-Choose a Terminal-']) ?>
+
+    <?= $form->field($model, 'terminal')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'birth_no')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'appointment_no')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
-    <?= $form->field($model, 'no_of_principal')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'no_of_principal')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'no_of_principal')->dropDownList(range(1, 5),['prompt'=>'-choose no of principal-'] ) ?>
 
-    <?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['prompt' => '-Choose a Principal-']) ?>
+    <?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal),'prompt' => '-Choose a Principal-','multiple' => true]) ?>
 
     <?= $form->field($model, 'nominator')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Choose a Nominator-']) ?>
 

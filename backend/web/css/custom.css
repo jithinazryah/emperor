@@ -57,3 +57,16 @@ table{
 .has-error .help-block{
         color: #da0000;
 }
+.nav.nav-tabs>li>a {
+    border: none;
+    background-color: #979898;
+    margin-right: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.nav.nav-tabs>li>a:hover {
+    border: none;
+    background-color: #e4e4e4;
+}

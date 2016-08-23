@@ -91,10 +91,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <th data-priority="1">#</th>
                                                                 <th data-priority="1">SERVICES</th>
                                                                 <th data-priority="3">SUPPLIER</th>
-                                                                <th data-priority="3">CURRENCY</th>
+<!--                                                                <th data-priority="3">CURRENCY</th>-->
                                                                 <th data-priority="1">RATE /QTY</th>
                                                                 <th data-priority="3">QTY</th>
-                                                                <th data-priority="6">ROE</th>
+<!--                                                                <th data-priority="6">ROE</th>-->
                                                                 <th data-priority="6">EPDA VALUE</th>
                                                                 <th data-priority="6">PRINCIPAL</th>
                                                                 <th data-priority="6">COMMENTS</th>
@@ -112,10 +112,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <td><?= $i; ?></td>
                                                                 <th><span class="co-name"><?= $estimate->service->service ?></span></th>
                                                                 <td><?= $estimate->supplier0->name ?></td>
-                                                                <td><?= $estimate->currency0->currency_symbol ?></td>
+<!--                                                                <td><? $estimate->currency0->currency_symbol ?></td>-->
                                                                 <td><?= $estimate->unit_rate; ?></td>
                                                                 <td><?= $estimate->unit; ?></td>
-                                                                <td><?= $estimate->roe; ?></td>
+<!--                                                                <td><? $estimate->roe; ?></td>-->
                                                                 <td><?= $estimate->epda; ?></td>
                                                                 <td><?= $estimate->principal0->principal_name; ?></td>
                                                                 <td><?= $estimate->comments; ?></td>

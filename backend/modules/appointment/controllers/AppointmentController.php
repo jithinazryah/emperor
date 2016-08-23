@@ -5,6 +5,9 @@ namespace backend\modules\appointment\controllers;
 use Yii;
 use common\models\Appointment;
 use common\models\Ports;
+use common\models\PortCallData;
+use common\models\PortCallDataDraft;
+use common\models\PortCallDataRob;
 use common\models\EstimatedProforma;
 use common\models\AppointmentSearch;
 use yii\web\Controller;
@@ -82,7 +85,7 @@ class AppointmentController extends Controller {
     public function actionCreate() {
         $model = new Appointment();
 
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $model->save() && $this->PortCall($model->id)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         else {
@@ -101,13 +104,40 @@ class AppointmentController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         else {
             return $this->render('update', [
                         'model' => $model,
             ]);
+        }
+    }
+
+    public function PortCall($id) {
+        $port_data = new PortCallData();
+        $port_draft = new PortCallDataDraft();
+        $port_rob = new PortCallDataRob();
+        $port_data->appointment_id = $id;
+        $port_draft->appointment_id = $id;
+        $port_rob->appointment_id = $id;
+
+        if ($port_data->save() && $port_draft->save() && $port_rob->save()) {
+            return TRUE;
+        }
+        else {
+            return FALSE;
+        }
+    }
+
+    public function Principal($model,$principle) {
+        if ($model != null && $principle != '') {
+            $model->principal = implode(",", $principle);
+             Yii::$app->SetValues->Attributes($model);
+             return TRUE;
+        }
+        else {
+            return FALSE;
         }
     }
 

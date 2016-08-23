@@ -45,6 +45,21 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['class' => 'yii\grid\SerialColumn'],
                             //  'id',
                             'appointment_no',
+                            [
+                                'attribute' => 'vessel_type',
+                                'value' => 'vesselType.vessel_type',
+                                 'filter' => ArrayHelper::map(VesselType::find()->asArray()->all(), 'id', 'vessel_type'),
+                            ],
+                            [
+                                'attribute' => 'vessel',
+                                'value' => 'vessel0.vessel_name',
+                                 'filter' => ArrayHelper::map(Vessel::find()->asArray()->all(), 'id', 'vessel_name'),
+                            ],
+                            [
+                                'attribute' => 'port_of_call',
+                                'value' => 'portOfCall.port_name',
+                                 'filter' => ArrayHelper::map(Ports::find()->asArray()->all(), 'id', 'port_name'),
+                            ],
                             // 'no_of_principal',
                             // 'principal',
                             // 'nominator',
@@ -78,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                     //view button
                                     'update' => function ($url) {
-                                        return Html::a('<span></span>Update', $url, [ 'title' => Yii::t('app', 'View'), 'class' => 'btn btn-success btn-xs',]);
+                                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [ 'title' => Yii::t('app', 'Update')]);
                                     },
                                         ],
                                         'urlCreator' => function ($action, $model, $key, $index) {
