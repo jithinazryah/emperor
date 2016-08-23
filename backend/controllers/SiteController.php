@@ -8,6 +8,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\Employee;
 use common\models\AdminPosts;
+use kartik\mpdf\Pdf;
 
 /**
  * Site controller
@@ -23,7 +24,7 @@ class SiteController extends Controller {
                         'class' => AccessControl::className(),
                         'rules' => [
                             [
-                                'actions' => ['login', 'error', 'index', 'home'],
+                                'actions' => ['login', 'error', 'index', 'home','report'],
                                 'allow' => true,
                             ],
                             [
@@ -59,7 +60,7 @@ class SiteController extends Controller {
          * @return string
          */
         public function actionIndex() {
-                
+
                 if (!Yii::$app->user->isGuest) {
                         return $this->redirect(array('site/home'));
                 }
@@ -78,7 +79,7 @@ class SiteController extends Controller {
         public function setSession() {
                 $post = AdminPosts::findOne(Yii::$app->user->identity->post_id);
                 Yii::$app->session['post'] = $post->attributes;
-                
+
                 return true;
         }
 
@@ -119,6 +120,40 @@ class SiteController extends Controller {
                 Yii::$app->user->logout();
                 unset(Yii::$app->session['post']);
                 return $this->goHome();
+        }
+
+        public function actionReport() {
+                // get your HTML raw content without any layouts or scripts
+                $content = $this->renderPartial('pdf');
+
+                // setup kartik\mpdf\Pdf component
+                $pdf = new Pdf([
+                    // set to use core fonts only
+                    //'mode' => Pdf::MODE_CORE,
+                    // A4 paper format
+                    'format' => Pdf::FORMAT_A4,
+                    // portrait orientation
+                    'orientation' => Pdf::ORIENT_PORTRAIT,
+                    // stream to browser inline
+                    'destination' => Pdf::DEST_BROWSER,
+                    // your html content input
+                    'content' => $content,
+                    // format content from your own css file if needed or use the
+                    // enhanced bootstrap css built by Krajee for mPDF formatting 
+                    'cssFile' => '@backend/web/css/pdf.css',
+                    // any css to be embedded if required
+                    //'cssInline' => '.kv-heading-1{font-size:18px}',
+                    // set mPDF properties on the fly
+                    //'options' => ['title' => 'Krajee Report Title'],
+                    // call mPDF methods on the fly
+                    'methods' => [
+                        'SetHeader' => ['Krajee Report Header'],
+                        'SetFooter' => ['|page {PAGENO}'],
+                    ]
+                ]);
+
+                // return the pdf output as per the destination setting
+                return $pdf->render();
         }
 
 }
