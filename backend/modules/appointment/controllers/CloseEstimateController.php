@@ -91,6 +91,7 @@ class CloseEstimateController extends Controller {
                                     'model' => $model,
                                     'estimates' => $estimates,
                                     'appointment' => $appointment,
+                                    'id' => $id,
                         ]);
                 }
         }

@@ -89,7 +89,6 @@ class PortCallDataController extends Controller {
         $model_draft = PortCallDataDraft::findOne(['appointment_id' => $model->appointment_id]);
         $model_rob = PortCallDataRob::findOne(['appointment_id' => $model->appointment_id]);
         $model_add = new PortCallDataAdditional();
-
         if ($model->load(Yii::$app->request->post()) &&  Yii::$app->SetValues->Attributes($model) && $this->dateformat($model,$_POST['PortCallData']) && $model->save()) {
             return $this->redirect(['update',
                         'id' => $model->id,
@@ -155,8 +154,9 @@ class PortCallDataController extends Controller {
         $day = substr($data, 0, 2);
         $month = substr($data, 2, 2);
         $year = substr($data, 4, 4);
-        $hour = substr($data, 9, 2);
-        $min = substr($data, 12, 2);
+        $hour = substr($data, 8, 2);
+        $min = substr($data, 10, 2);
+        
 //        echo $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min.':00 </br>';
 //        echo '2016-08-17 00:00:00';
 //        exit;
