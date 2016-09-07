@@ -12,8 +12,8 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model common\models\EstimatedProforma */
 
-$this->title = 'Create Estimated Proforma';
-$this->params['breadcrumbs'][] = ['label' => 'Estimated Proformas', 'url' => ['index']];
+$this->title = 'Create Close Estimte';
+$this->params['breadcrumbs'][] = ['label' => 'Close Estimte', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -96,6 +96,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <th data-priority="3">QTY</th>
 <!--                                                                <th data-priority="6">ROE</th>-->
                                                                 <th data-priority="6">EPDA VALUE</th>
+                                                                <th data-priority="6">FDA VALUE</th>
+                                                                <th data-priority="6">PAYMENT TYPE</th>
+                                                                <th data-priority="6">TOTAL</th>
                                                                 <th data-priority="6">PRINCIPAL</th>
                                                                 <th data-priority="6">COMMENTS</th>
                                                                 <th data-priority="1">ACTIONS</th>
@@ -117,11 +120,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <td><?= $estimate->unit; ?></td>
 <!--                                                                <td><? $estimate->roe; ?></td>-->
                                                                 <td><?= $estimate->epda; ?></td>
+                                                                <td><?= $estimate->fda; ?></td>
+                                                                <td><?= $estimate->payment_type; ?></td>
+                                                                <td><?= $estimate->total; ?></td>
                                                                 <td><?= $estimate->principal0->principal_name; ?></td>
                                                                 <td><?= $estimate->comments; ?></td>
                                                                 <td>
-                                                                    <?= Html::a('Edit', ['/appointment/estimated-proforma/add','id'=>1,'prfrma_id'=>$estimate->id], ['class'=>'btn btn-primary']) ?>
-                                                                    <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa','id'=>$estimate->id], ['class'=>'btn btn-red']) ?>
+                                                                    <?= Html::a('Edit', ['/appointment/close-estimate/add','id'=>1,'prfrma_id'=>$estimate->id], ['class'=>'btn btn-primary']) ?>
+                                                                    <?= Html::a('Delete', ['/appointment/close-estimate/delete-close-estimate','id'=>$estimate->id], ['class'=>'btn btn-red']) ?>
                                                                 </td>
                                                         </tr>	
 
@@ -134,11 +140,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <td></td>
                                                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
                                                                 <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-                                                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false); ?></td>-->
+<!--                                                                <td><?php // $form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false); ?></td>-->
                                                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false) ?></td>-->
+<!--                                                                <td><?php // $form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false) ?></td>-->
                                                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
+                                                                <td><?= $form->field($model, 'fda')->textInput(['placeholder' => 'FDA'])->label(false) ?></td>
+                                                                <td><?= $form->field($model, 'payment_type')->textInput(['placeholder' => 'Payment Type'])->label(false) ?></td>
+                                                                <td><?= $form->field($model, 'total')->textInput(['placeholder' => 'TOTAL'])->label(false) ?></td>
                                                                 <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
                                                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
                                                                 <td><?= Html::submitButton($model->isNewRecord ? 'Add' : 'Update', ['class' => 'btn btn-success']) ?>
