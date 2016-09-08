@@ -54,13 +54,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         </a>
                     </li>
                     <li>
-                        <a href="#profile-3" data-toggle="tab">
+                        <a href="#profile-4" data-toggle="tab">
                             <span class="visible-xs"><i class="fa-user"></i></span>
                             <span class="hidden-xs">Port call Data</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#profile-3" data-toggle="tab">
+                        <a href="#profile-5" data-toggle="tab">
                             <span class="visible-xs"><i class="fa-user"></i></span>
                             <span class="hidden-xs">Close Estimate</span>
                         </a>
@@ -95,28 +95,28 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'attribute' => 'vessel_type',
                                             'value' => call_user_func(function($model) {
 
-                                                        return VesselType::findOne($model->vessel_type)->vessel_type;
+                                                            return VesselType::findOne($model->vessel_type)->vessel_type;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'vessel',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Vessel::findOne($model->vessel)->vessel_name;
+                                                            return Vessel::findOne($model->vessel)->vessel_name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'port_of_call',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Ports::findOne($model->port_of_call)->port_name;
+                                                            return Ports::findOne($model->port_of_call)->port_name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'terminal',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Terminal::findOne($model->terminal)->terminal;
+                                                            return Terminal::findOne($model->terminal)->terminal;
                                                     }, $model),
                                         ],
                                         'birth_no',
@@ -125,41 +125,40 @@ $this->params['breadcrumbs'][] = $this->title;
                                         [
                                             'attribute' => 'principal',
                                             'value' => call_user_func(function ($data) {
-                                                        $principle = explode(',', $data->principal);
-                                                        $result = '';
-                                                        foreach ($principle as $prncple) {
-                                                            $result .= $data->getDebtorName($prncple) . ', ';
-                                                        }
-                                                        return rtrim($result, ",");
+                                                            $principle = explode(',', $data->principal);
+                                                            $result = '';
+                                                            foreach ($principle as $prncple) {
+                                                                    $result .= $data->getDebtorName($prncple) . ', ';
+                                                            }
+                                                            return rtrim($result, ",");
                                                     }, $model),
                                         ],
-                                      
                                         [
                                             'attribute' => 'nominator',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Contacts::findOne($model->nominator)->name;
+                                                            return Contacts::findOne($model->nominator)->name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'charterer',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Contacts::findOne($model->charterer)->name;
+                                                            return Contacts::findOne($model->charterer)->name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'shipper',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Contacts::findOne($model->shipper)->name;
+                                                            return Contacts::findOne($model->shipper)->name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'purpose',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Purpose::findOne($model->purpose)->purpose;
+                                                            return Purpose::findOne($model->purpose)->purpose;
                                                     }, $model),
                                         ],
                                         'cargo',
@@ -186,7 +185,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                            <hr class="appoint_history" />
+<!--                            <hr class="appoint_history" />-->
 
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
 
@@ -196,14 +195,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <th data-priority="1">#</th>
                                             <th data-priority="1">SERVICES</th>
                                             <th data-priority="3">SUPPLIER</th>
-                                            <th data-priority="3">CURRENCY</th>
+<!--                                            <th data-priority="3">CURRENCY</th>-->
                                             <th data-priority="1">RATE /QTY</th>
                                             <th data-priority="3">QTY</th>
                                             <th data-priority="6">ROE</th>
                                             <th data-priority="6">EPDA VALUE</th>
                                             <th data-priority="6">PRINCIPAL</th>
                                             <th data-priority="6">COMMENTS</th>
-                                            <th data-priority="1">ACTIONS</th>
                                         </tr>
                                     </thead>
 
@@ -211,46 +209,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php
                                         $i = 0;
                                         foreach ($estimates as $estimate):
-                                            $i++;
-                                            ?>
-                                            <tr>
-                                                <td><?= $i; ?></td>
-                                                <th><span class="co-name"><?= $estimate->service->service ?></span></th>
-                                                <td><?= $estimate->supplier0->name ?></td>
-                                                <td><?= $estimate->currency0->currency_symbol ?></td>
-                                                <td><?= $estimate->unit_rate; ?></td>
-                                                <td><?= $estimate->unit; ?></td>
-                                                <td><?= $estimate->roe; ?></td>
-                                                <td><?= $estimate->epda; ?></td>
-                                                <td><?= $estimate->principal0->principal_name; ?></td>
-                                                <td><?= $estimate->comments; ?></td>
-                                                <td>
-                                                    <?= Html::a('Edit', ['/appointment/estimated-proforma/add', 'id' => 1, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
-                                                    <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
-                                                </td>
-                                            </tr>	
+                                                $i++;
+                                                ?>
+                                                <tr>
+                                                    <td><?= $i; ?></td>
+                                                    <th><span class="co-name"><?= $estimate->service->service ?></span></th>
+                                                    <td><?= $estimate->supplier0->name ?></td>
+        <!--                                                <td><?php // $estimate->currency0->currency_symbol       ?></td>-->
+                                                    <td><?= $estimate->unit_rate; ?></td>
+                                                    <td><?= $estimate->unit; ?></td>
+                                                    <td><?= $estimate->roe; ?></td>
+                                                    <td><?= $estimate->epda; ?></td>
+                                                    <td><?= $estimate->principal0->principal_name; ?></td>
+                                                    <td><?= $estimate->comments; ?></td>
+                                                </tr>	
 
-                                            <?php
+                                                <?php
                                         endforeach;
                                         ?>
-
-                                        <tr>
-                                            <?php $form = ActiveForm::begin(); ?>
-                                            <td></td>
-                                            <td><?= $form->field($model_new, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
-                                            <td><?= $form->field($model_new, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-                                            <td><?= $form->field($model_new, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false); ?></td>
-                                            <td><?= $form->field($model_new, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
-                                            <td><?= $form->field($model_new, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                            <td><?= $form->field($model_new, 'roe')->textInput(['placeholder' => 'ROE'])->label(false) ?></td>
-                                            <td><?= $form->field($model_new, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
-                                            <td><?= $form->field($model_new, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
-                                            <td><?= $form->field($model_new, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
-                                            <td><?= Html::submitButton($model_new->isNewRecord ? 'Add' : 'Update', ['class' => 'btn btn-success']) ?>
-                                            </td>
-                                            <?php ActiveForm::end(); ?>
-                                        </tr>		
-
                                         <!-- Repeat -->
 
                                     </tbody>
@@ -259,50 +235,50 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             </div>
                             <script type="text/javascript">
-                                jQuery(document).ready(function ($)
-                                {
-                                    $("#estimatedproforma-service_id").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
+                                    jQuery(document).ready(function ($)
                                     {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        $("#estimatedproforma-service_id").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+
+                                        $("#estimatedproforma-supplier").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+                                        $("#estimatedproforma-currency").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+                                        $("#estimatedproforma-principal").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+
                                     });
-
-
-
-                                    $("#estimatedproforma-supplier").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-                                    $("#estimatedproforma-currency").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-
-                                    $("#estimatedproforma-principal").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-
-
-                                });
                             </script>
 
 
@@ -313,35 +289,290 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         </div>
                     </div>
-                    <div class="tab-pane" id="messages-3">
 
-                        <p>When be draw drew ye. Defective in do recommend suffering. House it seven in spoil tiled court. Sister others marked fat missed did out use. Alteration possession dispatched collecting instrument travelling he or on. Snug give made at spot or late that mr. </p>
+                    <div class="tab-pane" id="profile-4">
 
-                        <p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted. </p>
+                        <div class="panel-body">
+                            <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
+
+                                <div class="port-call-data-form form-inline">
+
+                                    <div class="form-group field-portcalldata-eta">
+                                        <label class="control-label" for="portcalldata-eta">ETA  :</label>
+                                        <?= $ports->eta; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-ets">
+                                        <label class="control-label" for="portcalldata-ets">ETS  :</label>
+                                        <?= $ports->ets; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">EOSP  :</label>
+                                        <?= $ports->eosp; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">ARRIVED ANCHORAGE  :</label>
+                                        <?= $ports->arrived_anchorage; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">NOR TENDERED  :</label>
+                                        <?= $ports->nor_tendered; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">DROPPED ANCHOR  :</label>
+                                        <?= $ports->dropped_anchor; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">ANCHOR AWEIGH  :</label>
+                                        <?= $ports->anchor_aweigh; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">ARRIVED PILOT STATION  :</label>
+                                        <?= $ports->arrived_pilot_station; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">POB INBOUND  :</label>
+                                        <?= $ports->pob_inbound; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">FIRST LINE ASHORE  :</label>
+                                        <?= $ports->first_line_ashore; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">ALL FAST  :</label>
+                                        <?= $ports->all_fast; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">GANGWAY DOWN  :</label>
+                                        <?= $ports->gangway_down; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">AGENT ON BOARD  :</label>
+                                        <?= $ports->agent_on_board; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">IMMIGRATION COMMENCED  :</label>
+                                        <?= $ports->immigration_commenced; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">IMMIGRATION COMPLETED  :</label>
+                                        <?= $ports->immigartion_completed; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">CARGO COMMENCED  :</label>
+                                        <?= $ports->cargo_commenced; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">CARGO COMPLETED  :</label>
+                                        <?= $ports->cargo_completed; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">POB OUTBOUND  :</label>
+                                        <?= $ports->pob_outbound; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">LAST LINE AWAY  :</label>
+                                        <?= $ports->lastline_away; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">CLEARED CHANNEL  :</label>
+                                        <?= $ports->cleared_channel; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">COSP  :</label>
+                                        <?= $ports->cosp; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">FASOP  :</label>
+                                        <?= $ports->fasop; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">ETA NEXT PORT  :</label>
+                                        <?= $ports->eta_next_port; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-group field-portcalldata-eosp">
+                                        <label class="control-label" for="portcalldata-eosp">COMMENTS  :</label>
+                                        <?= $ports->comments; ?>
+
+                                        <div class="help-block"></div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
+                                <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
+                                <script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
+
+
+                            </div>
+                        </div>
 
                     </div>
 
-                    <div class="tab-pane" id="settings-3">
+                    <div class="tab-pane" id="profile-5">
 
-                        <p>Luckily friends do ashamed to do suppose. Tried meant mr smile so. Exquisite behaviour as to middleton perfectly. Chicken no wishing waiting am. Say concerns dwelling graceful six humoured. Whether mr up savings talking an. Active mutual nor father mother exeter change six did all. </p>
+                        <div class="panel-body">
 
-                        <p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted. </p>
 
+
+
+                            <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
+
+                                <table cellspacing="0" class="table table-small-font table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th data-priority="1">#</th>
+                                            <th data-priority="1">SERVICES</th>
+                                            <th data-priority="3">SUPPLIER</th>
+                                            <th data-priority="1">RATE /QTY</th>
+                                            <th data-priority="3">QTY</th>
+                                            <th data-priority="6">ROE</th>
+                                            <th data-priority="6">EPDA VALUE</th>
+                                            <th data-priority="6">FDA VALUE</th>
+                                            <th data-priority="6">PAYMENT TYPE</th>
+                                            <th data-priority="6">TOTAL</th>
+                                            <th data-priority="6">PRINCIPAL</th>
+                                            <th data-priority="6">COMMENTS</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php
+                                        $i = 0;
+                                        foreach ($closeestimates as $closeestimate):
+                                                $i++;
+                                                ?>
+                                                <tr>
+                                                    <td><?= $i; ?></td>
+                                                    <th><span class="co-name"><?= $closeestimate->service->service ?></span></th>
+                                                    <td><?= $closeestimate->supplier0->name ?></td>
+                                                    <td><?= $closeestimate->unit_rate; ?></td>
+                                                    <td><?= $closeestimate->unit; ?></td>
+                                                    <td><?= $closeestimate->roe; ?></td>
+                                                    <td><?= $closeestimate->epda; ?></td>
+                                                    <td><?= $closeestimate->fda; ?></td>
+                                                    <td><?= $closeestimate->payment_type; ?></td>
+                                                    <td><?= $closeestimate->total; ?></td>
+                                                    <td><?= $closeestimate->principal0->principal_name; ?></td>
+                                                    <td><?= $closeestimate->comments; ?></td>
+                                                </tr>	
+
+                                                <?php
+                                        endforeach;
+                                        ?>
+                                        <!-- Repeat -->
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                            <script type="text/javascript">
+                                    jQuery(document).ready(function ($)
+                                    {
+                                        $("#estimatedproforma-service_id").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+
+                                        $("#estimatedproforma-supplier").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+                                        $("#estimatedproforma-currency").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+                                        $("#estimatedproforma-principal").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+
+                                    });
+                            </script>
+
+
+                            <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
+                            <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
+                            <script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
+
+
+                        </div>
                     </div>
 
-                    <div class="tab-pane" id="inbox-3">
-
-                        <p>Carriage quitting securing be appetite it declared. High eyes kept so busy feel call in. Would day nor ask walls known. But preserved advantage are but and certainty earnestly enjoyment. Passage weather as up am exposed. And natural related man subject. Eagerness get situation his was delighted. </p>
-
-                        <p>Luckily friends do ashamed to do suppose. Tried meant mr smile so. Exquisite behaviour as to middleton perfectly. Chicken no wishing waiting am. Say concerns dwelling graceful six humoured. Whether mr up savings talking an. Active mutual nor father mother exeter change six did all. </p>
-
-                    </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-</div>
 
 

@@ -43,7 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
-                            //  'id',
                             'appointment_no',
                             // 'no_of_principal',
                             // 'principal',
@@ -62,27 +61,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'raw',
                                 'filter' => [1 => 'Enabled', 0 => 'disabled'],
                                 'value' => function ($model) {
-                            return $model->status == 1 ? 'Enabled' : 'disabled';
+                                return $model->status == 1 ? 'Enabled' : 'disabled';
                         },
                             ],
-                            // 'CB',
-                            // 'UB',
-                            // 'DOC',
-                            // 'DOU',
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'template' => '{update}',
                                 'buttons' => [
                                     'update' => function ($url) {
-                                        return Html::a(
-                                                        '<span class="glyphicon glyphicon-pencil"></span>', $url, [ 'title' => Yii::t('app', 'update')]);
+                                            return Html::a(
+                                                            '<span class="glyphicon glyphicon-pencil"></span>', $url, [ 'title' => Yii::t('app', 'update')]);
                                     },
                                         ],
                                         'urlCreator' => function ($action, $model, $key, $index) {
-                                    if ($action === 'update') {
-                                        $url = \yii\helpers\Url::toRoute(['/appointment/port-call-data/update', 'id' => $key]);
-                                        return $url;
-                                    }
+                                        if ($action === 'update') {
+                                                $url = \yii\helpers\Url::toRoute(['/appointment/port-call-data/update', 'id' => $model->id]);
+                                                return $url;
+                                        }
                                 }
                                     ],
                                 ],

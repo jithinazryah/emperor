@@ -9,6 +9,7 @@ use common\models\PortCallData;
 use common\models\PortCallDataDraft;
 use common\models\PortCallDataRob;
 use common\models\EstimatedProforma;
+use common\models\CloseEstimate;
 use common\models\AppointmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -66,14 +67,16 @@ class AppointmentController extends Controller {
      */
     public function actionView($id) {
         $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
+        $ports = PortCallData::findOne(['appointment_id' => $id]);
+        $closeestimates = CloseEstimate::findAll(['apponitment_id' => $id]);
+        //var_dump($closeestimates);exit;
         $appointment = Appointment::find($id)->one();
-        $model_new = new EstimatedProforma;
-
         return $this->render('view', [
                     'model' => $this->findModel($id),
                     'estimates' => $estimates,
-                    'model_new' => $model_new,
                     'appointment' => $appointment,
+                    'ports' => $ports,
+                    'closeestimates' => $closeestimates,
         ]);
     }
 

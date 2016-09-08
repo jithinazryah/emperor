@@ -74,8 +74,9 @@ class CloseEstimateController extends Controller {
 
         public function actionAdd($id, $prfrma_id = NULL) {
                 $estimates = CloseEstimate::findAll(['apponitment_id' => $id]);
-                if(empty($estimates)){
+                if (empty($estimates)) {
                         $this->InsertCloseEstimate($id);
+                        $estimates = CloseEstimate::findAll(['apponitment_id' => $id]);
                 }
                 $appointment = Appointment::find($id)->one();
                 if (!isset($prfrma_id)) {
@@ -95,28 +96,27 @@ class CloseEstimateController extends Controller {
                         ]);
                 }
         }
-        
+
         /*
          * 
          */
-        public function InsertCloseEstimate($id){
+
+        public function InsertCloseEstimate($id) {
                 $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
                 foreach ($estimates as $estimate) {
-                       $closeestimate = new CloseEstimate;
-                       $closeestimate->attributes = $estimate->attributes;
-                       $closeestimate->DOC  = date('y-m-d');
-                       $closeestimate->save();
-                }     
-                return true;          
+                        $closeestimate = new CloseEstimate;
+                        $closeestimate->attributes = $estimate->attributes;
+                        $closeestimate->DOC = date('y-m-d');
+                        $closeestimate->save();
+                }
+                return true;
         }
 
-                public function actionDeleteCloseEstimate($id){
-                
-        $this->findModel($id)->delete();
+        public function actionDeleteCloseEstimate($id) {
 
-        //return $this->redirect(['index']); 
-        return $this->redirect(Yii::$app->request->referrer);
-    }
+                $this->findModel($id)->delete();
+                return $this->redirect(Yii::$app->request->referrer);
+        }
 
         /**
          * Updates an existing CloseEstimate model.
@@ -125,9 +125,11 @@ class CloseEstimateController extends Controller {
          * @return mixed
          */
         public function actionUpdate($id) {
-                echo 'update';exit;
+                echo 'update';
+                exit;
                 $model = $this->findModel($id);
-                var_dump($model);exit;
+                var_dump($model);
+                exit;
                 if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model, $id) && $model->save()) {
                         return $this->redirect(['view', 'id' => $model->id]);
                 } else {
