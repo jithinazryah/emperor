@@ -47,7 +47,10 @@ class SetValues extends Component {
                         $options[$valuee] = ['selected' => true];
                 endforeach;
                 return $options;
+        }
 
+        public function ChangeFormate($date) {
+                return date("d-M-Y h:i:s", strtotime($date));
         }
 
 }

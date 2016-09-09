@@ -173,8 +173,6 @@ class PortCallDataController extends Controller {
         }
 
         public function ChangeFormat($data) {
-//        echo $data;
-//        exit;
                 $day = substr($data, 0, 2);
                 $month = substr($data, 2, 2);
                 $year = substr($data, 4, 4);

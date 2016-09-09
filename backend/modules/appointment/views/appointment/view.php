@@ -185,7 +185,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-<!--                            <hr class="appoint_history" />-->
+                            <!--                            <hr class="appoint_history" />-->
 
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
 
@@ -215,7 +215,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <td><?= $i; ?></td>
                                                     <th><span class="co-name"><?= $estimate->service->service ?></span></th>
                                                     <td><?= $estimate->supplier0->name ?></td>
-        <!--                                                <td><?php // $estimate->currency0->currency_symbol       ?></td>-->
+        <!--                                                <td><?php // $estimate->currency0->currency_symbol        ?></td>-->
                                                     <td><?= $estimate->unit_rate; ?></td>
                                                     <td><?= $estimate->unit; ?></td>
                                                     <td><?= $estimate->roe; ?></td>
@@ -296,142 +296,163 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
 
                                 <div class="port-call-data-form form-inline">
-
                                     <div class="form-group field-portcalldata-eta">
                                         <label class="control-label" for="portcalldata-eta">ETA  :</label>
-                                        <?= $ports->eta; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->eta) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">ETS  :</label>
-                                        <?= $ports->ets; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->ets) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">EOSP  :</label>
-                                        <?= $ports->eosp; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->eosp) ?>
+                                        <?= $$newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">ARRIVED ANCHORAGE  :</label>
-                                        <?= $ports->arrived_anchorage; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->arrived_anchorage) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">NOR TENDERED  :</label>
-                                        <?= $ports->nor_tendered; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->nor_tendered) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">DROPPED ANCHOR  :</label>
-                                        <?= $ports->dropped_anchor; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->dropped_anchor) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">ANCHOR AWEIGH  :</label>
-                                        <?= $ports->anchor_aweigh; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->anchor_aweigh) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">ARRIVED PILOT STATION  :</label>
-                                        <?= $ports->arrived_pilot_station; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->arrived_pilot_station) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">POB INBOUND  :</label>
-                                        <?= $ports->pob_inbound; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->pob_inbound) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">FIRST LINE ASHORE  :</label>
-                                        <?= $ports->first_line_ashore; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->first_line_ashore) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">ALL FAST  :</label>
-                                        <?= $ports->all_fast; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->all_fast) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">GANGWAY DOWN  :</label>
-                                        <?= $ports->gangway_down; ?>
-
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->gangway_down) ?>
+                                        <?= $newDate; ?>
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">AGENT ON BOARD  :</label>
-                                        <?= $ports->agent_on_board; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->agent_on_board) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">IMMIGRATION COMMENCED  :</label>
-                                        <?= $ports->immigration_commenced; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->immigration_commenced) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">IMMIGRATION COMPLETED  :</label>
-                                        <?= $ports->immigartion_completed; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->immigartion_completed) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">CARGO COMMENCED  :</label>
-                                        <?= $ports->cargo_commenced; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->cargo_commenced) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">CARGO COMPLETED  :</label>
-                                        <?= $ports->cargo_completed; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->cargo_completed) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">POB OUTBOUND  :</label>
-                                        <?= $ports->pob_outbound; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->pob_outbound) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">LAST LINE AWAY  :</label>
-                                        <?= $ports->lastline_away; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->lastline_away) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">CLEARED CHANNEL  :</label>
-                                        <?= $ports->cleared_channel; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->cleared_channel) ?>
+                                        <?= $$newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">COSP  :</label>
-                                        <?= $ports->cosp; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->cosp) ?>
+                                        <?= $$newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">FASOP  :</label>
-                                        <?= $ports->fasop; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->fasop) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eosp">
                                         <label class="control-label" for="portcalldata-eosp">ETA NEXT PORT  :</label>
-                                        <?= $ports->eta_next_port; ?>
+                                        <?= Yii::$app->SetValues->ChangeFormate($ports->eta_next_port) ?>
+                                        <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
