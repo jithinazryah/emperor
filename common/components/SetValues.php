@@ -50,7 +50,11 @@ class SetValues extends Component {
         }
 
         public function ChangeFormate($date) {
-                return date("d-M-Y h:i:s", strtotime($date));
+                if ($date == Null || $date == '0000-00-00 00:00:00') {
+                        return '(Not Set)';
+                } else {
+                        return date("d-M-Y h:i:s", strtotime($date));
+                }
         }
 
 }

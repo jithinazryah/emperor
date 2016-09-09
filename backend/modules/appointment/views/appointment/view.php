@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col-md-12">
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="background : #e6e6e6">
             <div class="panel-heading">
                 <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
 
@@ -183,10 +183,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <div class="panel-body">
                             <?php
-                            if (empty($estimates)) {
-                                    echo Html::a('<span> Add EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                             if (empty($estimates)) {
+                                    echo Html::a('<i class="fa fa-plus"></i><span> Add EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             } else {
-                                    echo Html::a('<span> Update EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             }
                             ?>
 
@@ -300,9 +300,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="panel-body">
                             <?php
                              if (empty($ports)) {
-                                    echo Html::a('<span> Add PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                                    echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             } else {
-                                    echo Html::a('<span> Update PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             }
                             ?>
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
@@ -495,9 +495,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             <?php
                             if (empty($closeestimates)) {
-                                    echo Html::a('<span> Add CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                                    echo Html::a('<i class="fa fa-plus"></i><span> Add CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             } else {
-                                    echo Html::a('<span> Update CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             }
                             ?>
 
