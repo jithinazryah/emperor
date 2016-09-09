@@ -182,8 +182,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="tab-pane" id="profile-3">
 
                         <div class="panel-body">
-
-
+                            <?php
+                            if (empty($estimates)) {
+                                    echo Html::a('<span> Add EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                            } else {
+                                    echo Html::a('<span> Update EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                            }
+                            ?>
 
                             <!--                            <hr class="appoint_history" />-->
 
@@ -215,7 +220,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <td><?= $i; ?></td>
                                                     <th><span class="co-name"><?= $estimate->service->service ?></span></th>
                                                     <td><?= $estimate->supplier0->name ?></td>
-        <!--                                                <td><?php // $estimate->currency0->currency_symbol        ?></td>-->
+        <!--                                                <td><?php // $estimate->currency0->currency_symbol            ?></td>-->
                                                     <td><?= $estimate->unit_rate; ?></td>
                                                     <td><?= $estimate->unit; ?></td>
                                                     <td><?= $estimate->roe; ?></td>
@@ -293,6 +298,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="tab-pane" id="profile-4">
 
                         <div class="panel-body">
+                            <?php
+                             if (empty($ports)) {
+                                    echo Html::a('<span> Add PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                            } else {
+                                    echo Html::a('<span> Update PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                            }
+                            ?>
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
 
                                 <div class="port-call-data-form form-inline">
@@ -481,7 +493,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <div class="panel-body">
 
-
+                            <?php
+                            if (empty($closeestimates)) {
+                                    echo Html::a('<span> Add CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                            } else {
+                                    echo Html::a('<span> Update CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-info btn-icon']);
+                            }
+                            ?>
 
 
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">

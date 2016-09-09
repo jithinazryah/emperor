@@ -125,11 +125,7 @@ class CloseEstimateController extends Controller {
          * @return mixed
          */
         public function actionUpdate($id) {
-                echo 'update';
-                exit;
                 $model = $this->findModel($id);
-                var_dump($model);
-                exit;
                 if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model, $id) && $model->save()) {
                         return $this->redirect(['view', 'id' => $model->id]);
                 } else {
