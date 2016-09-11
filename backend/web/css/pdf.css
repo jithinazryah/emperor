@@ -7,7 +7,40 @@ and open the template in the editor.
     Created on : Aug 22, 2016, 4:55:21 PM
     Author     : user
 */
- p{
-                color: red;
-                font-size: 10px;
-        }
+.ptittle{
+    color: red;
+    font-size: 15px;
+}
+.pcontent{
+    font-size: 10px;
+}
+.dt1
+{
+    width:300px;
+    height:100px;
+    float:left;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+}
+.dt2
+{
+    width:250px;
+    height:100px;
+    float:right !important;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+}
+.container
+{width:1000px;
+ height:100px;
+}
+.hei{
+    height: 100px;
+}
+.footer
+{width:1000px;
+ height:100px;
+}
+.footer p{
+    text-align: center;
+}
