@@ -188,7 +188,7 @@ class EstimatedProformaController extends Controller {
                     //'options' => ['title' => 'Krajee Report Title'],
                     // call mPDF methods on the fly
                     'methods' => [
-                        'SetHeader' => ['Estimated proforma'],
+                        'SetHeader' => ['Estimated proforma'.date("r")],
                         'SetFooter' => ['|page {PAGENO}'],
                     ]
                 ]);

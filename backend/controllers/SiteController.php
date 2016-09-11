@@ -147,7 +147,7 @@ class SiteController extends Controller {
                     //'options' => ['title' => 'Krajee Report Title'],
                     // call mPDF methods on the fly
                     'methods' => [
-                        'SetHeader' => ['Krajee Report Header'],
+                        'SetHeader' => ['Krajee Report Header'.date("y-m-d h:m:s")],
                         'SetFooter' => ['|page {PAGENO}'],
                     ]
                 ]);
