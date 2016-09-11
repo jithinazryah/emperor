@@ -82,11 +82,11 @@ class PortCallDataDraftController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel(['appointment_id' => $id]);
 
         if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
            //return $this->redirect('/port-call-data/update');
-          return Yii::$app->response->redirect(Yii::$app->urlManager->createAbsoluteUrl('/appointment/port-call-data/update?id='.$model->id.'&&stat=2'));
+          return Yii::$app->response->redirect(Yii::$app->urlManager->createAbsoluteUrl('/appointment/port-call-data-draft/update?id='.$model->appointment_id));
         } else {
             return $this->render('update', [
                 'model' => $model,

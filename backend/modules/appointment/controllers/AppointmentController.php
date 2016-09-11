@@ -69,13 +69,16 @@ class AppointmentController extends Controller {
         $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
         $ports = PortCallData::findOne(['appointment_id' => $id]);
         $closeestimates = CloseEstimate::findAll(['apponitment_id' => $id]);
-        //var_dump($closeestimates);exit;
+        $drafts = PortCallDataDraft::findOne(['appointment_id' => $id]);
+        $rob = PortCallDataRob::findOne(['appointment_id' => $id]);
         $appointment = Appointment::find($id)->one();
         return $this->render('view', [
                     'model' => $this->findModel($id),
                     'estimates' => $estimates,
                     'appointment' => $appointment,
                     'ports' => $ports,
+                    'drafts' => $drafts,
+                    'rob' => $rob,
                     'closeestimates' => $closeestimates,
         ]);
     }
