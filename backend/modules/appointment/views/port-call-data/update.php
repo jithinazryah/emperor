@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
             <div class="panel-body">
                 <?php //Html::a('<i class="fa-th-list"></i><span> Manage Port Call Data</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                <ul class="nav nav-tabs nav-tabs-justified">
+                <ul class="nav nav-tabs nav-tabs-justified" style="background-color:#CCCCCC;">
                     <li class="<?= $stat == 1 || $stat == NULL ? 'active': ''?>">
                         <a href="#port-data" data-toggle="tab">
                             <span class="visible-xs"><i class="fa-home"></i></span>

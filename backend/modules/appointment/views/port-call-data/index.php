@@ -44,6 +44,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
                             'appointment_no',
+                            [
+                                'attribute' => 'vessel_type',
+                                'value' => 'vesselType.vessel_type',
+                                 'filter' => ArrayHelper::map(VesselType::find()->asArray()->all(), 'id', 'vessel_type'),
+                            ],
+                            [
+                                'attribute' => 'vessel',
+                                'value' => 'vessel0.vessel_name',
+                                 'filter' => ArrayHelper::map(Vessel::find()->asArray()->all(), 'id', 'vessel_name'),
+                            ],
+                            [
+                                'attribute' => 'port_of_call',
+                                'value' => 'portOfCall.port_name',
+                                 'filter' => ArrayHelper::map(Ports::find()->asArray()->all(), 'id', 'port_name'),
+                            ],
                             // 'no_of_principal',
                             // 'principal',
                             // 'nominator',
