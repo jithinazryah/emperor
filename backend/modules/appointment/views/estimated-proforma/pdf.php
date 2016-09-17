@@ -11,8 +11,15 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <div style="margin-left: 75px;margin-right: 10px;margin-top: 25px;">
-            <img src="images/baner.png"/>
+        <div style="margin-left: 75px;margin-right: 10px;margin-top: 25px;margin-bottom: 15px;">
+            <div class="header">
+                <div class="left">
+                    <img src="images/logoleft.jpg"/>
+                </div>
+                <div class="right">
+                    <img src="images/logoright.jpg"/>
+                </div>
+            </div>
         </div>
         <div style="margin-left: 75px;margin-right: 25px">
             <table>
