@@ -48,17 +48,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'vessel_type',
                                 'value' => 'vesselType.vessel_type',
-                                 'filter' => ArrayHelper::map(VesselType::find()->asArray()->all(), 'id', 'vessel_type'),
+                                'filter' => ArrayHelper::map(VesselType::find()->asArray()->all(), 'id', 'vessel_type'),
                             ],
                             [
                                 'attribute' => 'vessel',
                                 'value' => 'vessel0.vessel_name',
-                                 'filter' => ArrayHelper::map(Vessel::find()->asArray()->all(), 'id', 'vessel_name'),
+                                'filter' => ArrayHelper::map(Vessel::find()->asArray()->all(), 'id', 'vessel_name'),
                             ],
                             [
                                 'attribute' => 'port_of_call',
                                 'value' => 'portOfCall.port_name',
-                                 'filter' => ArrayHelper::map(Ports::find()->asArray()->all(), 'id', 'port_name'),
+                                'filter' => ArrayHelper::map(Ports::find()->asArray()->all(), 'id', 'port_name'),
                             ],
                             // 'no_of_principal',
                             // 'principal',
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 'contentOptions' => ['style' => 'width:260px;'],
-                                'header' => 'Actions',
+                                'header' => 'Edit',
                                 'template' => '{update}',
                                 'buttons' => [
 
@@ -103,9 +103,28 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 }
                                     ],
-                                 ],
-                            ]);
-                            ?>
+                                    [
+                                        'class' => 'yii\grid\ActionColumn',
+                                        'contentOptions' => ['style' => 'width:260px;'],
+                                        'header' => 'Print Report',
+                                        'template' => '{report}',
+                                        'buttons' => [
+
+                                            //print button
+                                            'report' => function ($url) {
+                                                return Html::a('<span class="fa-print"></span>', $url, [ 'title' => Yii::t('app', 'Report')]);
+                                            },
+                                                ],
+                                                'urlCreator' => function ($action, $model, $key, $index) {
+                                            if ($action === 'report') {
+                                                $url = \yii\helpers\Url::toRoute(['/appointment/estimated-proforma/report', 'id' => $key]);
+                                                return $url;
+                                            }
+                                        }
+                                            ],
+                                        ],
+                                    ]);
+                                    ?>
                 </div>
             </div>
         </div>

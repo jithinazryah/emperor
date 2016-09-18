@@ -215,7 +215,7 @@ and open the template in the editor.
                 <div class="dt2">
                     <form>
                         <table width="300" border="1">
-                            <caption style="text-align: left;">Sign & Stamp</caption>
+                            <caption style="text-align: left; font-size: 12px;">Sign & Stamp</caption>
                             <tr class="hei">
                                 <td>&nbsp;</td>
                             </tr>
