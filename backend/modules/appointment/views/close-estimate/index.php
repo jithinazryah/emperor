@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 ],
                                                 'urlCreator' => function ($action, $model, $key, $index) {
                                             if ($action === 'report') {
-                                                $url = \yii\helpers\Url::toRoute(['/appointment/estimated-proforma/report', 'id' => $key]);
+                                                $url = \yii\helpers\Url::toRoute(['/appointment/close-estimate/report', 'id' => $key]);
                                                 return $url;
                                             }
                                         }
