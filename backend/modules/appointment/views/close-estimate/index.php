@@ -86,8 +86,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'DOU',
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'contentOptions' => ['style' => 'width:260px;'],
-                                'header' => 'Edit',
+                                'contentOptions' => ['style' => 'width:100px;'],
+                                'header' => '',
                                 'template' => '{update}',
                                 'buttons' => [
 
@@ -105,8 +105,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ],
                                     [
                                         'class' => 'yii\grid\ActionColumn',
-                                        'contentOptions' => ['style' => 'width:260px;'],
-                                        'header' => 'Print Report',
+                                        'contentOptions' => ['style' => 'width:100px;'],
+                                        'header' => '',
                                         'template' => '{report}',
                                         'buttons' => [
 
