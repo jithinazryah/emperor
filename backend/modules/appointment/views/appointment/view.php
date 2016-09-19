@@ -503,59 +503,59 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <p style="margin-left: 35px;margin-bottom: 10px;font-size: 23px;color: black;"><b>PortCallDataDraft</b></p>
                                     <hr class="appoint_history" />
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Data ID  :</label>
+                                        <label class="control-label" for="portcalldata-ets">DATA ID  :</label>
                                         <?= $drafts->data_id; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eta">
-                                        <label class="control-label" for="portcalldata-eta">Initial Survey Commenced  :</label>
+                                        <label class="control-label" for="portcalldata-eta">INITIAL SURVEY COMMENCED  :</label>
                                         <?= Yii::$app->SetValues->ChangeFormate($drafts->intial_survey_commenced) ?>
                                         <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eta">
-                                        <label class="control-label" for="portcalldata-eta">Initial Survey Completed  :</label>
+                                        <label class="control-label" for="portcalldata-eta">INITIAL SURVEY COMPLETED  :</label>
                                         <?= Yii::$app->SetValues->ChangeFormate($drafts->intial_survey_commenced) ?>
                                         <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eta">
-                                        <label class="control-label" for="portcalldata-eta">finial_survey_commenced  :</label>
+                                        <label class="control-label" for="portcalldata-eta">FINAL SURVEY COMMENCED  :</label>
                                         <?= Yii::$app->SetValues->ChangeFormate($drafts->finial_survey_commenced) ?>
                                         <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-eta">
-                                        <label class="control-label" for="portcalldata-eta">finial_survey_commenced  :</label>
-                                        <?= Yii::$app->SetValues->ChangeFormate($drafts->finial_survey_commenced) ?>
+                                        <label class="control-label" for="portcalldata-eta">FINAL SURVEY COMPLETED  :</label>
+                                        <?= Yii::$app->SetValues->ChangeFormate($drafts->finial_survey_completed) ?>
                                         <?= $newDate; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">fwd_arrival_unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FORWARD ARRIVAL UNIT  :</label>
                                         <?= $drafts->fwd_arrival_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">fwd_arrival_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FORWARD ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->fwd_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">aft_arrival_unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">AFTER ARRIVAL UNIT  :</label>
                                         <?= $drafts->aft_arrival_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">aft_arrival_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">AFTER ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->aft_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
