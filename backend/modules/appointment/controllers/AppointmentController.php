@@ -190,5 +190,17 @@ class AppointmentController extends Controller {
             return '';
         }
     }
+     public function actionVesselType() {
+        if (Yii::$app->request->isAjax) {
+            $vessel_type = $_POST['vessel_type'];
+            $vessel_datas = \common\models\Vessel::findAll(['vessel_type' => $vessel_type,'status' => 1]);
+            $options = '';
+            foreach($vessel_datas as $vessel_data){
+                    $options .= "<option value='".$vessel_data->id."'>".$vessel_data->vessel_name."</option>";
+            }
+                    
+            echo $options;
+    }
+     }
 
 }

@@ -78,7 +78,7 @@ class Appointment extends \yii\db\ActiveRecord {
                     'quantity' => 'Quantity',
                     'last_port' => 'Last Port',
                     'next_port' => 'Next Port',
-                    'eta' => 'Eta',
+                    'eta' => 'ETA',
                     'stage' => 'Stage',
                     'status' => 'Status',
                     'CB' => 'Cb',

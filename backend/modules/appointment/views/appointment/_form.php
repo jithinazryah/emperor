@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'vessel_type')->dropDownList(ArrayHelper::map(VesselType::findAll(['status' => 1]), 'id', 'vessel_type'), ['prompt' => '-Choose a Vessel Type-']) ?>
+    <?= $form->field($model, 'vessel_type')->dropDownList(ArrayHelper::map(VesselType::findAll(['status' => 1]), 'id', 'vessel_type'), ['prompt' => '-Choose a Vessel Type-', 'class' => 'form-control vessels']) ?>
 
     <?= $form->field($model, 'vessel')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1]), 'id', 'vessel_name'), ['prompt' => '-Choose a Vessel-']) ?>
 
@@ -83,6 +83,23 @@ use yii\helpers\ArrayHelper;
                 url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/appointment-no',
                 success: function (data) {
                     $('#appointment-appointment_no').val(data);
+                }
+            });
+        });
+
+    });
+</script>
+<script>
+    $("document").ready(function () {
+        $('#appointment-vessel_type').change(function () {
+            var vessel_type = $(this).val();
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                data: {vessel_type: vessel_type},
+                url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/vessel-type',
+                success: function (data) {
+                    $('#appointment-vessel').html(data);
                 }
             });
         });
