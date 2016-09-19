@@ -82,6 +82,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <hr class="appoint_history" />
+                <div style="float: left;">
+                    <?php
+                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                    ?>
+                </div>
 
                 <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
 
@@ -106,30 +111,29 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php
                             $i = 0;
                             foreach ($estimates as $estimate):
-                                $estid = $estimate->apponitment_id;
-                                $i++;
-                                ?>
-                                <tr>
-                                    <td><?= $i; ?></td>
-                                    <th><span class="co-name"><?= $estimate->service->service ?></span></th>
-                                    <td><?= $estimate->supplier0->name ?></td>
-    <!--                                                                <td><? $estimate->currency0->currency_symbol ?></td>-->
-                                    <td><?= $estimate->unit_rate; ?></td>
-                                    <td><?= $estimate->unit; ?></td>
-    <!--                                                                <td><? $estimate->roe; ?></td>-->
-                                    <td><?= $estimate->epda; ?></td>
-                                    <td><?= $estimate->principal0->principal_name; ?></td>
-                                    <td><?= $estimate->comments; ?></td>
-                                    <td>
-                                        <?= Html::a('Edit', ['/appointment/estimated-proforma/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
-                                        <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
-                                    </td>
-                                    <?php
-                                    $epdatotal += $estimate->epda;
+                                    $i++;
                                     ?>
-                                </tr>	
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <th><span class="co-name"><?= $estimate->service->service ?></span></th>
+                                        <td><?= $estimate->supplier0->name ?></td>
+        <!--                                                                <td><? $estimate->currency0->currency_symbol ?></td>-->
+                                        <td><?= $estimate->unit_rate; ?></td>
+                                        <td><?= $estimate->unit; ?></td>
+        <!--                                                                <td><? $estimate->roe; ?></td>-->
+                                        <td><?= $estimate->epda; ?></td>
+                                        <td><?= $estimate->principal0->principal_name; ?></td>
+                                        <td><?= $estimate->comments; ?></td>
+                                        <td>
+                                            <?= Html::a('Edit', ['/appointment/estimated-proforma/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
+                                        </td>
+                                        <?php
+                                        $epdatotal += $estimate->epda;
+                                        ?>
+                                    </tr>	
 
-                                <?php
+                                    <?php
                             endforeach;
                             ?>
                             <tr>
@@ -143,10 +147,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td></td>
                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);     ?></td>-->
+                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);      ?></td>-->
                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)     ?></td>-->
+                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)      ?></td>-->
                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
@@ -161,57 +165,52 @@ $this->params['breadcrumbs'][] = $this->title;
                         </tbody>
 
                     </table>
-                    <div style="float: right;">
-                        <?php
-                        echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $estid], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
-                        ?>
-                    </div>
                 </div>
                 <script type="text/javascript">
-                    jQuery(document).ready(function ($)
-                    {
-                        $("#estimatedproforma-service_id").select2({
-                            //placeholder: 'Select your country...',
-                            allowClear: true
-                        }).on('select2-open', function ()
+                        jQuery(document).ready(function ($)
                         {
-                            // Adding Custom Scrollbar
-                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                            $("#estimatedproforma-service_id").select2({
+                                //placeholder: 'Select your country...',
+                                allowClear: true
+                            }).on('select2-open', function ()
+                            {
+                                // Adding Custom Scrollbar
+                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                            });
+
+
+
+                            $("#estimatedproforma-supplier").select2({
+                                //placeholder: 'Select your country...',
+                                allowClear: true
+                            }).on('select2-open', function ()
+                            {
+                                // Adding Custom Scrollbar
+                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                            });
+
+                            $("#estimatedproforma-currency").select2({
+                                //placeholder: 'Select your country...',
+                                allowClear: true
+                            }).on('select2-open', function ()
+                            {
+                                // Adding Custom Scrollbar
+                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                            });
+
+
+                            $("#estimatedproforma-principal").select2({
+                                //placeholder: 'Select your country...',
+                                allowClear: true
+                            }).on('select2-open', function ()
+                            {
+                                // Adding Custom Scrollbar
+                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                            });
+
+
+
                         });
-
-
-
-                        $("#estimatedproforma-supplier").select2({
-                            //placeholder: 'Select your country...',
-                            allowClear: true
-                        }).on('select2-open', function ()
-                        {
-                            // Adding Custom Scrollbar
-                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                        });
-
-                        $("#estimatedproforma-currency").select2({
-                            //placeholder: 'Select your country...',
-                            allowClear: true
-                        }).on('select2-open', function ()
-                        {
-                            // Adding Custom Scrollbar
-                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                        });
-
-
-                        $("#estimatedproforma-principal").select2({
-                            //placeholder: 'Select your country...',
-                            allowClear: true
-                        }).on('select2-open', function ()
-                        {
-                            // Adding Custom Scrollbar
-                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                        });
-
-
-
-                    });
                 </script>
 
 
