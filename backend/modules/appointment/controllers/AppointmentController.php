@@ -91,7 +91,7 @@ class AppointmentController extends Controller {
     public function actionCreate() {
         $model = new Appointment();
 
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $model->save() && $this->PortCall($model->id)) {
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $this->ChangeFormat($model)&& $model->save() && $this->PortCall($model->id)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         else {
@@ -110,7 +110,7 @@ class AppointmentController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal'])&& $this->ChangeFormat($model) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         else {
@@ -202,5 +202,19 @@ class AppointmentController extends Controller {
             echo $options;
     }
      }
+        public function ChangeFormat($model) {
+                $data=$model->eta;
+                $day = substr($data, 0, 2);
+                $month = substr($data, 2, 2);
+                $year = substr($data, 4, 4);
+                $hour = substr($data, 8, 2);
+                $min = substr($data, 10, 2);
+
+//        echo $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min.':00 </br>';
+//        echo '2016-08-17 00:00:00';
+//        exit;
+                $model->eta = $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min . ':00';
+                return $model;
+        }
 
 }

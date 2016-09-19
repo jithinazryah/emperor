@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'comment')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'contact_type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'contact_type')->dropDownList(['1' => 'Nominator', '2' => 'Charterer', '3' => 'Shipper'],['multiple'=>'multiple']) ?>
 
     <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
 

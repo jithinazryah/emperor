@@ -44,7 +44,7 @@ class Contacts extends \yii\db\ActiveRecord
             [['status', 'CB', 'UB'], 'integer'],
             [['DOC', 'DOU'], 'safe'],
             [['name'], 'string', 'max' => 200],
-            [['person', 'email', 'contact_type'], 'string', 'max' => 100],
+            [['person', 'email'], 'string', 'max' => 100],
             [['phone_1', 'phone_2'], 'string', 'max' => 20],
         ];
     }
@@ -71,4 +71,16 @@ class Contacts extends \yii\db\ActiveRecord
             'DOU' => 'Dou',
         ];
     }
+    public function getContactName($contacts_id) {
+                if($contacts_id == 1){
+                        return 'Nominator';
+                }
+                elseif($contacts_id == 2){
+                        return 'Charterer';
+                }
+                elseif($contacts_id == 3){
+                        return 'Shipper';
+                }
+                
+        }
 }

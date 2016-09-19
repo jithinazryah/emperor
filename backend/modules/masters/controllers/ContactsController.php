@@ -69,7 +69,7 @@ class ContactsController extends Controller {
         public function actionCreate() {
                 $model = new Contacts();
 
-                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
+                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Contacts']['contact_type']) && $model->save()) {
                         return $this->redirect(['view', 'id' => $model->id]);
                 } else {
                         return $this->render('create', [
@@ -106,6 +106,16 @@ class ContactsController extends Controller {
                 $this->findModel($id)->delete();
 
                 return $this->redirect(['index']);
+        }
+
+        public function Principal($model, $contacts) {
+                if ($model != null && $contacts != '') {
+                        $model->contact_type = implode(",", $contacts);
+                        Yii::$app->SetValues->Attributes($model);
+                        return TRUE;
+                } else {
+                        return FALSE;
+                }
         }
 
         /**

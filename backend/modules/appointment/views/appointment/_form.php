@@ -10,6 +10,7 @@ use common\models\Debtor;
 use common\models\Contacts;
 use common\models\Purpose;
 use yii\helpers\ArrayHelper;
+use yii\db\Expression;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Appointment */
@@ -35,16 +36,16 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'appointment_no')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
     <?php // $form->field($model, 'no_of_principal')->textInput(['maxlength' => true]) ?>
-    
-    <?= $form->field($model, 'no_of_principal')->dropDownList(range(1, 5),['prompt'=>'-choose no of principal-'] ) ?>
 
-    <?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal),'prompt' => '-Choose a Principal-','multiple' => true]) ?>
+    <?= $form->field($model, 'no_of_principal')->dropDownList(range(1, 5), ['prompt' => '-choose no of principal-']) ?>
 
-    <?= $form->field($model, 'nominator')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Choose a Nominator-']) ?>
+    <?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal), 'prompt' => '-Choose a Principal-', 'multiple' => true]) ?>
 
-    <?= $form->field($model, 'charterer')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Choose a Charterer-']) ?>
+    <?= $form->field($model, 'nominator')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 1])->all(), 'id', 'name'), ['prompt' => '-Choose a Charterer-']) ?>
 
-    <?= $form->field($model, 'shipper')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Choose a Shipper-']) ?>
+    <?= $form->field($model, 'charterer')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 2])->all(), 'id', 'name'), ['prompt' => '-Choose a Nominator-']) ?>
+
+    <?= $form->field($model, 'shipper')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 3])->all(), 'id', 'name'), ['prompt' => '-Choose a Shipper-']) ?>
 
     <?= $form->field($model, 'purpose')->dropDownList(ArrayHelper::map(Purpose::findAll(['status' => 1]), 'id', 'purpose'), ['prompt' => '-Choose a Purpose-']) ?>
 
@@ -73,37 +74,37 @@ use yii\helpers\ArrayHelper;
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
 <script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
 <script>
-    $("document").ready(function () {
-        $('.ports').change(function () {
-            var port_id = $(this).val();
-            $.ajax({
-                type: 'POST',
-                cache: false,
-                data: {port_id: port_id},
-                url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/appointment-no',
-                success: function (data) {
-                    $('#appointment-appointment_no').val(data);
-                }
+        $("document").ready(function () {
+            $('.ports').change(function () {
+                var port_id = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    data: {port_id: port_id},
+                    url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/appointment-no',
+                    success: function (data) {
+                        $('#appointment-appointment_no').val(data);
+                    }
+                });
             });
-        });
 
-    });
+        });
 </script>
 <script>
-    $("document").ready(function () {
-        $('#appointment-vessel_type').change(function () {
-            var vessel_type = $(this).val();
-            $.ajax({
-                type: 'POST',
-                cache: false,
-                data: {vessel_type: vessel_type},
-                url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/vessel-type',
-                success: function (data) {
-                    $('#appointment-vessel').html(data);
-                }
+        $("document").ready(function () {
+            $('#appointment-vessel_type').change(function () {
+                var vessel_type = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    data: {vessel_type: vessel_type},
+                    url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/vessel-type',
+                    success: function (data) {
+                        $('#appointment-vessel').html(data);
+                    }
+                });
             });
-        });
 
-    });
+        });
 </script>
 
