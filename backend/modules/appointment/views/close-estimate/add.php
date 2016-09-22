@@ -187,7 +187,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <script type="text/javascript">
                         jQuery(document).ready(function ($)
                         {
-                            $("#estimatedproforma-service_id").select2({
+                            $("#closeestimate-service_id").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true
                             }).on('select2-open', function ()
@@ -198,7 +198,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-                            $("#estimatedproforma-supplier").select2({
+                            $("#closeestimate-supplier").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true
                             }).on('select2-open', function ()
@@ -217,7 +217,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             });
 
 
-                            $("#estimatedproforma-principal").select2({
+                            $("#closeestimate-principal").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true
                             }).on('select2-open', function ()
