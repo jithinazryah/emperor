@@ -118,6 +118,13 @@ class AppointmentController extends Controller {
                 }
         }
 
+        public function actionDisable($id) {
+                $model = $this->findModel($id);
+                $model->status = 0;
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+        }
+
         public function PortCall($id) {
                 $port_data = new PortCallData();
                 $port_draft = new PortCallDataDraft();

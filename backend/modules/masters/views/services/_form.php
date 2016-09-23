@@ -26,6 +26,8 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'invocie_type')->dropDownList(ArrayHelper::map(InvoiceType::findAll(['status' => 1]), 'id', 'invoice_type'), ['prompt' => '-Choose a Invoice Type-']) ?>
 
+    <?= $form->field($model, 'supplier_options')->dropDownList(['1' => 'Yes', '0' => 'No']) ?>
+
     <?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Choose a Supplier-']) ?>
 
     <?= $form->field($model, 'unit_rate')->textInput() ?>
@@ -50,3 +52,19 @@ use yii\helpers\ArrayHelper;
     <?php ActiveForm::end(); ?>
 
 </div>
+<script>
+        $("document").ready(function () {
+
+            $('#services-supplier_options').change(function (e) {
+                var supplier_options = $(this).val();
+                if(supplier_options == 1){
+                        $("#services-supplier").prop('disabled', false);
+                }
+                else{
+                       $("#services-supplier").prop('disabled', true); 
+                }
+              
+            });
+
+        });
+</script>

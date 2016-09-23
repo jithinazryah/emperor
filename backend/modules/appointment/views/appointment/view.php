@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="panel-body">
                 <?= Html::a('<i class="fa-th-list"></i><span> Manage Appointment</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
+                <?= Html::a('<i class="fa-th-list"></i><span> Disable</span>', ['appointment/disable', 'id' => $model->id], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone'])?>
                 <ul class="nav nav-tabs nav-tabs-justified">
                     <li class="active">
                         <a href="#home-3" data-toggle="tab">
@@ -68,15 +69,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 </ul>
 
                 <div class="tab-content">
+                    
                     <div class="tab-pane active" id="home-3">
 
                         <div class="panel-body"><div class="appointment-view">
 
                                 <?php
+//                                if($model->status == 1){
                                 echo Html::a('<i class="fa fa-pencil"></i><span> Update</span>', ['appointment/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                                 ?>
                                 </p>
-
                                 <?=
                                 DetailView::widget([
                                     'model' => $model,
@@ -165,7 +167,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                     ],
                                 ])
+                                                            
                                 ?>
+                                
                             </div>
                         </div>
 
@@ -902,7 +906,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         </div>
                     </div>
-
+                    <?php
+//                                 }
+                                ?>
                 </div>
             </div>
         </div>

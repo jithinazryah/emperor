@@ -148,13 +148,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td></td>
                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);      ?></td>-->
+                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);             ?></td>-->
                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)      ?></td>-->
+                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)             ?></td>-->
                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
-                                
-                                <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1,'id'=> explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
+
+                                <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1, 'id' => explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
                                 <td><?= Html::submitButton($model->isNewRecord ? 'Add' : 'Update', ['class' => 'btn btn-success']) ?>
                                 </td>
@@ -168,6 +168,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     </table>
                 </div>
+                <script>
+                        $("document").ready(function () {
+                            $('#estimatedproforma-service_id').change(function () {
+                                var service_id = $(this).val();
+                                $.ajax({
+                                    type: 'POST',
+                                    cache: false,
+                                    data: {service_id: service_id},
+                                    url: '<?= Yii::$app->homeUrl; ?>/appointment/estimated-proforma/supplier',
+                                    success: function (data) {
+                                            if(data == 1){
+                                                     $("#estimatedproforma-supplier").prop('disabled', false);
+                                            }else{
+                                                 $("#estimatedproforma-supplier").prop('disabled', true);    
+                                            }
+                                    }
+                                });
+                            });
+
+                        });
+                </script>
                 <script type="text/javascript">
                         jQuery(document).ready(function ($)
                         {
@@ -179,9 +200,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // Adding Custom Scrollbar
                                 $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                             });
-
-
-
                             $("#estimatedproforma-supplier").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true
@@ -190,7 +208,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // Adding Custom Scrollbar
                                 $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                             });
-
                             $("#estimatedproforma-currency").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true
@@ -199,8 +216,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // Adding Custom Scrollbar
                                 $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                             });
-
-
                             $("#estimatedproforma-principal").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true
@@ -209,11 +224,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // Adding Custom Scrollbar
                                 $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                             });
-
-
-
-                        });
-                </script>
+                        });</script>
 
 
                 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
