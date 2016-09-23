@@ -496,9 +496,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="panel-body">
                             <?php
                             if (empty($drafts)) {
-                                    echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallDataDraft</span>', ['port-call-data-draft/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallDataDraft</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             } else {
-                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallDataDraft</span>', ['port-call-data-draft/update', 'id' => $drafts->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallDataDraft</span>', ['port-call-data/update', 'id' => $drafts->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             }
                             ?>
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
@@ -540,72 +540,72 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                         <div class="help-block"></div>
                                     </div>
-                                    <div class="form-group field-portcalldata-ets">
+<!--                                    <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">FORWARD ARRIVAL UNIT  :</label>
                                         <?= $drafts->fwd_arrival_unit; ?>
 
                                         <div class="help-block"></div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">FORWARD ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->fwd_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-                                    <div class="form-group field-portcalldata-ets">
+<!--                                    <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">AFTER ARRIVAL UNIT  :</label>
                                         <?= $drafts->aft_arrival_unit; ?>
 
                                         <div class="help-block"></div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">AFTER ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->aft_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-                                    <div class="form-group field-portcalldata-ets">
+<!--                                    <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">mean_arrival_unit  :</label>
                                         <?= $drafts->mean_arrival_unit; ?>
 
                                         <div class="help-block"></div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">mean_arrival_quantity  :</label>
                                         <?= $drafts->mean_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-                                    <div class="form-group field-portcalldata-ets">
+<!--                                    <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">fwd_sailing_unit  :</label>
                                         <?= $drafts->fwd_sailing_unit; ?>
 
                                         <div class="help-block"></div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">fwd_sailing_quantity  :</label>
                                         <?= $drafts->fwd_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-                                    <div class="form-group field-portcalldata-ets">
+<!--                                    <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">aft_sailing_unit  :</label>
                                         <?= $drafts->aft_sailing_unit; ?>
 
                                         <div class="help-block"></div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">aft_sailing_quantity  :</label>
                                         <?= $drafts->aft_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-                                    <div class="form-group field-portcalldata-ets">
+<!--                                    <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">mean_sailing_unit  :</label>
                                         <?= $drafts->mean_sailing_unit; ?>
 
                                         <div class="help-block"></div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">mean_sailing_quantity  :</label>
                                         <?= $drafts->mean_sailing_quantity; ?>
@@ -632,9 +632,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="panel-body">
                             <?php
                             if (empty($rob)) {
-                                    echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallDataRob</span>', ['port-call-data-rob/update', 'id' => $model->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallDataRob</span>', ['port-call-data/update', 'id' => $model->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             } else {
-                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallDataRob</span>', ['port-call-data-rob/update', 'id' => $rob->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallDataRob</span>', ['port-call-data/update', 'id' => $rob->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             }
                             ?>
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">

@@ -83,8 +83,11 @@ class EstimatedProformaController extends Controller {
                         $model = $this->findModel($prfrma_id);
                 }
 
-                if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id) && $model->save()) {
-                        return $this->refresh();
+                if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id)) {
+                        $model->epda = $model->unit_rate * $model->unit;
+                        $model->save();
+                         return $this->redirect(['add', 'id' => $id]);
+//                        return $this->refresh();
                 } else {
                         return $this->render('add', [
                                     'model' => $model,

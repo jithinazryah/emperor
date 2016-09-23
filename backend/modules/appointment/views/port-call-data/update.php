@@ -90,4 +90,9 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
         </div>
     </div>
+    <style>
+        .draftstyle {
+           
+        }
+    </style>
 </div>

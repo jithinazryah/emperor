@@ -43,7 +43,7 @@ AppAsset::register($this);
                         <!-- logo -->
                         <div class="logo">
                             <a href="" class="logo-expanded">
-                                <img src="<?= Yii::$app->homeUrl; ?>/images/logoO.png" width="170px" height="75px" alt="" />
+                                <img src="<?= Yii::$app->homeUrl; ?>/images/logoo.png" width="170px" height="75px" alt="" />
                             </a>
 
                             <a href="<?= Yii::$app->homeUrl; ?>" class="logo-collapsed">

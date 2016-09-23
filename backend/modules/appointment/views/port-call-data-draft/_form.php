@@ -24,27 +24,27 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'finial_survey_completed')->textInput() ?>
 
-    <?= $form->field($model, 'fwd_arrival_unit')->textInput() ?>
+<!--    <?echo  $form->field($model, 'fwd_arrival_unit')->textInput() ?>-->
 
     <?= $form->field($model, 'fwd_arrival_quantity')->textInput() ?>
 
-    <?= $form->field($model, 'aft_arrival_unit')->textInput() ?>
+<!--    <?echo $form->field($model, 'aft_arrival_unit')->textInput() ?>-->
 
     <?= $form->field($model, 'aft_arrival_quantity')->textInput() ?>
 
-    <?= $form->field($model, 'mean_arrival_unit')->textInput() ?>
+<!--    <?echo $form->field($model, 'mean_arrival_unit')->textInput() ?>-->
 
     <?= $form->field($model, 'mean_arrival_quantity')->textInput() ?>
 
-    <?= $form->field($model, 'fwd_sailing_unit')->textInput() ?>
+    <!--<?echo $form->field($model, 'fwd_sailing_unit')->textInput() ?>-->
 
     <?= $form->field($model, 'fwd_sailing_quantity')->textInput() ?>
 
-    <?= $form->field($model, 'aft_sailing_unit')->textInput() ?>
+    <!--<?echo $form->field($model, 'aft_sailing_unit')->textInput() ?>-->
 
     <?= $form->field($model, 'aft_sailing_quantity')->textInput() ?>
 
-    <?= $form->field($model, 'mean_sailing_unit')->textInput() ?>
+    <!--<?echo $form->field($model, 'mean_sailing_unit')->textInput() ?>-->
 
     <?= $form->field($model, 'mean_sailing_quantity')->textInput() ?>
 

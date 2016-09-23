@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <th data-priority="1">RATE /QTY</th>
                                 <th data-priority="3">QTY</th>
 <!--                                                                <th data-priority="6">ROE</th>-->
-                                <th data-priority="6">EPDA VALUE</th>
+                                <th data-priority="6" >EPDA VALUE</th>
                                 <th data-priority="6">PRINCIPAL</th>
                                 <th data-priority="6">COMMENTS</th>
                                 <th data-priority="1">ACTIONS</th>
@@ -148,10 +148,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td></td>
                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);             ?></td>-->
+                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);              ?></td>-->
                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)             ?></td>-->
+                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)              ?></td>-->
                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
 
                                 <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1, 'id' => explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
@@ -178,11 +178,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     data: {service_id: service_id},
                                     url: '<?= Yii::$app->homeUrl; ?>/appointment/estimated-proforma/supplier',
                                     success: function (data) {
-                                            if(data == 1){
-                                                     $("#estimatedproforma-supplier").prop('disabled', false);
-                                            }else{
-                                                 $("#estimatedproforma-supplier").prop('disabled', true);    
-                                            }
+                                        if (data == 1) {
+                                            $("#estimatedproforma-supplier").prop('disabled', false);
+                                        } else {
+                                            $("#estimatedproforma-supplier").prop('disabled', true);
+                                        }
                                     }
                                 });
                             });
@@ -231,7 +231,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
                 <script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
 
-
+                <script>
+                        $(document).ready(function(){
+                            $( "#estimatedproforma-unit_rate" ).keyup(function(){
+                               multiply(); 
+                            });   
+                            $( "#estimatedproforma-unit" ).keyup(function(){
+                               multiply(); 
+                            });   
+                        });
+                        function multiply(){
+                           var rate = $( "#estimatedproforma-unit_rate" ).val();
+                           var unit = $( "#estimatedproforma-unit" ).val();
+                           if(rate != '' && unit != ''){
+                                   $( "#estimatedproforma-epda" ).val(rate * unit);
+                           }
+                           
+                        }
+                                      //$( "#estimatedproforma-epda" ).prop( "disabled", true );  
+                </script>
             </div>
             <?php //Pjax::end(); ?> 
         </div>
