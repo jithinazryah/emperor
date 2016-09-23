@@ -20,6 +20,7 @@ use yii\db\Expression;
 <div class="appointment-form form-inline">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?= $form->errorSummary($model) ?>
 
     <?= $form->field($model, 'vessel_type')->dropDownList(ArrayHelper::map(VesselType::findAll(['status' => 1]), 'id', 'vessel_type'), ['prompt' => '-Choose a Vessel Type-', 'class' => 'form-control vessels']) ?>
 
@@ -36,8 +37,8 @@ use yii\db\Expression;
     <?= $form->field($model, 'appointment_no')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
     <?php // $form->field($model, 'no_of_principal')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'no_of_principal')->dropDownList(range(1, 5), ['prompt' => '-choose no of principal-']) ?>
+    <?php $arr = array('1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5'); ?>
+    <?= $form->field($model, 'no_of_principal')->dropDownList($arr, ['prompt' => '-choose no of principal-']) ?>
 
     <?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal), 'prompt' => '-Choose a Principal-', 'multiple' => true]) ?>
 
@@ -107,44 +108,78 @@ use yii\db\Expression;
 
         });
 </script>
+<script>
+        $("document").ready(function () {
+            /* $('#appointment-no_of_principal').change(function () {
+             var no_of_principal = $(this).val();
+             $.ajax({
+             type: 'POST',
+             cache: false,
+             data: {no_of_principal: no_of_principal},
+             url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/principal',
+             success: function (data) {
+             $('#appointment-principal').html(data);
+             }
+             });
+             });*/
+
+            $('#appointment-principal').change(function (e) {
+                    
+                    
+                   
+                var principal = $(this).val();
+                var No_principal = $('#appointment-no_of_principal').val();
+                if(principal.length <= No_principal){
+                        return true;
+                }else{
+                        var last = principal[principal.length-1];
+                        $("#appointment-principal option[value='"+last+"']").prop("selected", false);
+                        alert("Choose Principal same as Number of principal");
+                        return false;
+                }
+              
+            });
+
+        });
+</script>
 <script type="text/javascript">
-                        jQuery(document).ready(function ($)
-                        {
-                            $("#appointment-nominator").select2({
-                                //placeholder: 'Select your country...',
-                                allowClear: true
-                            }).on('select2-open', function ()
-                            {
-                                // Adding Custom Scrollbar
-                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                            });
+        jQuery(document).ready(function ($)
+        {
+            $("#appointment-nominator").select2({
+                //placeholder: 'Select your country...',
+                allowClear: true
+            }).on('select2-open', function ()
+            {
+                // Adding Custom Scrollbar
+                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+            });
 
 
 
-                            $("#appointment-charterer").select2({
-                                //placeholder: 'Select your country...',
-                                allowClear: true
-                            }).on('select2-open', function ()
-                            {
-                                // Adding Custom Scrollbar
-                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                            });
+            $("#appointment-charterer").select2({
+                //placeholder: 'Select your country...',
+                allowClear: true
+            }).on('select2-open', function ()
+            {
+                // Adding Custom Scrollbar
+                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+            });
 
-                            $("#appointment-shipper").select2({
-                                //placeholder: 'Select your country...',
-                                allowClear: true
-                            }).on('select2-open', function ()
-                            {
-                                // Adding Custom Scrollbar
-                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                            });
-
-
-                        });
-                </script>
+            $("#appointment-shipper").select2({
+                //placeholder: 'Select your country...',
+                allowClear: true
+            }).on('select2-open', function ()
+            {
+                // Adding Custom Scrollbar
+                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+            });
 
 
-                <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
-                <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
-                <script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
+        });
+</script>
+
+
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
+<script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
 

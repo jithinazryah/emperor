@@ -7,6 +7,7 @@ use common\models\Services;
 use common\models\Currency;
 use common\models\Contacts;
 use common\models\Debtor;
+use common\models\Appointment;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -38,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="panel-body">
                 <div class="row appoint">
                     <div class="col-sm-3" style="text-align: right">
-                        <label>VESSEL-TYPE</label>      
+                        <label>VESSEL-TYPE</label>
                         <b>: <?= $appointment->vesselType->vessel_type; ?></b>
                     </div>
                     <div class="col-sm-2" style="text-align: right">
@@ -152,7 +153,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
                                 <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)      ?></td>-->
                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
-                                <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
+                                
+                                <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1,'id'=> explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
                                 <td><?= Html::submitButton($model->isNewRecord ? 'Add' : 'Update', ['class' => 'btn btn-success']) ?>
                                 </td>

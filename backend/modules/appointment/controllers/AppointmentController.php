@@ -21,194 +21,190 @@ use yii\filters\AccessControl;
  */
 class AppointmentController extends Controller {
 
-    /**
-     * @inheritdoc
-     */
-    public function behaviors() {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['addBasic'],
-                'rules' => [
-                    [
-                        'actions' => ['appointmentNo'],
-                        'allow' => true,
-                        'roles' => ['?'],
+        /**
+         * @inheritdoc
+         */
+        public function behaviors() {
+                return [
+                    'access' => [
+                        'class' => AccessControl::className(),
+                        'only' => ['addBasic'],
+                        'rules' => [
+                            [
+                                'actions' => ['appointmentNo'],
+                                'allow' => true,
+                                'roles' => ['?'],
+                            ],
+                        ],
                     ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * Lists all Appointment models.
-     * @return mixed
-     */
-    public function actionIndex() {
-        $searchModel = new AppointmentSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Appointment model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id) {
-        $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
-        $ports = PortCallData::findOne(['appointment_id' => $id]);
-        $closeestimates = CloseEstimate::findAll(['apponitment_id' => $id]);
-        $drafts = PortCallDataDraft::findOne(['appointment_id' => $id]);
-        $rob = PortCallDataRob::findOne(['appointment_id' => $id]);
-        $appointment = Appointment::find($id)->one();
-        return $this->render('view', [
-                    'model' => $this->findModel($id),
-                    'estimates' => $estimates,
-                    'appointment' => $appointment,
-                    'ports' => $ports,
-                    'drafts' => $drafts,
-                    'rob' => $rob,
-                    'closeestimates' => $closeestimates,
-        ]);
-    }
-
-    /**
-     * Creates a new Appointment model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate() {
-        $model = new Appointment();
-
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $this->ChangeFormat($model)&& $model->save() && $this->PortCall($model->id)) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                    'verbs' => [
+                        'class' => VerbFilter::className(),
+                        'actions' => [
+                            'delete' => ['POST'],
+                        ],
+                    ],
+                ];
         }
-        else {
-            return $this->render('create', [
-                        'model' => $model,
-            ]);
-        }
-    }
 
-    /**
-     * Updates an existing Appointment model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id) {
-        $model = $this->findModel($id);
+        /**
+         * Lists all Appointment models.
+         * @return mixed
+         */
+        public function actionIndex() {
+                $searchModel = new AppointmentSearch();
+                $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal'])&& $this->ChangeFormat($model) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->render('index', [
+                            'searchModel' => $searchModel,
+                            'dataProvider' => $dataProvider,
+                ]);
         }
-        else {
-            return $this->render('update', [
-                        'model' => $model,
-            ]);
-        }
-    }
 
-    public function PortCall($id) {
-        $port_data = new PortCallData();
-        $port_draft = new PortCallDataDraft();
-        $port_rob = new PortCallDataRob();
-        $port_data->appointment_id = $id;
-        $port_draft->appointment_id = $id;
-        $port_rob->appointment_id = $id;
+        /**
+         * Displays a single Appointment model.
+         * @param integer $id
+         * @return mixed
+         */
+        public function actionView($id) {
+                $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
+                $ports = PortCallData::findOne(['appointment_id' => $id]);
+                $closeestimates = CloseEstimate::findAll(['apponitment_id' => $id]);
+                $drafts = PortCallDataDraft::findOne(['appointment_id' => $id]);
+                $rob = PortCallDataRob::findOne(['appointment_id' => $id]);
+                $appointment = Appointment::find($id)->one();
+                return $this->render('view', [
+                            'model' => $this->findModel($id),
+                            'estimates' => $estimates,
+                            'appointment' => $appointment,
+                            'ports' => $ports,
+                            'drafts' => $drafts,
+                            'rob' => $rob,
+                            'closeestimates' => $closeestimates,
+                ]);
+        }
 
-        if ($port_data->save() && $port_draft->save() && $port_rob->save()) {
-            return TRUE;
-        }
-        else {
-            return FALSE;
-        }
-    }
+        /**
+         * Creates a new Appointment model.
+         * If creation is successful, the browser will be redirected to the 'view' page.
+         * @return mixed
+         */
+        public function actionCreate() {
+                $model = new Appointment();
 
-    public function Principal($model,$principle) {
-        if ($model != null && $principle != '') {
-            $model->principal = implode(",", $principle);
-             Yii::$app->SetValues->Attributes($model);
-             return TRUE;
+                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $this->ChangeFormat($model) && $model->save() && $this->PortCall($model->id)) {
+                        return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                        return $this->render('create', [
+                                    'model' => $model,
+                        ]);
+                }
         }
-        else {
-            return FALSE;
-        }
-    }
 
-    /**
-     * Deletes an existing Appointment model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id) {
-        $this->findModel($id)->delete();
+        /**
+         * Updates an existing Appointment model.
+         * If update is successful, the browser will be redirected to the 'view' page.
+         * @param integer $id
+         * @return mixed
+         */
+        public function actionUpdate($id) {
+                $model = $this->findModel($id);
 
-        return $this->redirect(['index']);
-    }
+                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $this->ChangeFormat($model) && $model->save()) {
+                        return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                        return $this->render('update', [
+                                    'model' => $model,
+                        ]);
+                }
+        }
 
-    /**
-     * Finds the Appointment model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Appointment the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id) {
-        if (($model = Appointment::findOne($id)) !== null) {
-            return $model;
-        }
-        else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
+        public function PortCall($id) {
+                $port_data = new PortCallData();
+                $port_draft = new PortCallDataDraft();
+                $port_rob = new PortCallDataRob();
+                $port_data->appointment_id = $id;
+                $port_draft->appointment_id = $id;
+                $port_rob->appointment_id = $id;
 
-    public function actionAppointmentNo() {
-        if (Yii::$app->request->isAjax) {
-            $port_id = $_POST['port_id'];
-            $port_data = Ports::find()->where(['id' => $port_id])->one();
-            $last_appointment = Appointment::find()->orderBy(['id' => SORT_DESC])->where(['port_of_call' => $port_id])->one();
-            if (empty($last_appointment))
-                return $port_data->code . '0001';
-            else {
-                return $port_data->code . (sprintf('%04d', ++$last_appointment->id));
-            }
+                if ($port_data->save() && $port_draft->save() && $port_rob->save()) {
+                        return TRUE;
+                } else {
+                        return FALSE;
+                }
         }
-        else {
-            return '';
+
+        public function Principal($model, $principle) {
+                if ($model != null && $principle != '') {
+                        $model->principal = implode(",", $principle);
+                        Yii::$app->SetValues->Attributes($model);
+                        return TRUE;
+                } else {
+                        return FALSE;
+                }
         }
-    }
-     public function actionVesselType() {
-        if (Yii::$app->request->isAjax) {
-            $vessel_type = $_POST['vessel_type'];
-            $vessel_datas = \common\models\Vessel::findAll(['vessel_type' => $vessel_type,'status' => 1]);
-            $options = '';
-            foreach($vessel_datas as $vessel_data){
-                    $options .= "<option value='".$vessel_data->id."'>".$vessel_data->vessel_name."</option>";
-            }
-                    
-            echo $options;
-    }
-     }
+
+        /**
+         * Deletes an existing Appointment model.
+         * If deletion is successful, the browser will be redirected to the 'index' page.
+         * @param integer $id
+         * @return mixed
+         */
+        public function actionDelete($id) {
+                $this->findModel($id)->delete();
+
+                return $this->redirect(['index']);
+        }
+
+        /**
+         * Finds the Appointment model based on its primary key value.
+         * If the model is not found, a 404 HTTP exception will be thrown.
+         * @param integer $id
+         * @return Appointment the loaded model
+         * @throws NotFoundHttpException if the model cannot be found
+         */
+        protected function findModel($id) {
+                if (($model = Appointment::findOne($id)) !== null) {
+                        return $model;
+                } else {
+                        throw new NotFoundHttpException('The requested page does not exist.');
+                }
+        }
+
+        public function actionAppointmentNo() {
+                if (Yii::$app->request->isAjax) {
+                        $port_id = $_POST['port_id'];
+                        $port_data = Ports::find()->where(['id' => $port_id])->one();
+                        $last_appointment = Appointment::find()->orderBy(['id' => SORT_DESC])->where(['port_of_call' => $port_id])->one();
+                        if (empty($last_appointment))
+                                return $port_data->code . '0001';
+                        else {
+                                return $port_data->code . (sprintf('%04d', ++$last_appointment->id));
+                        }
+                } else {
+                        return '';
+                }
+        }
+
+        public function actionVesselType() {
+                if (Yii::$app->request->isAjax) {
+                        $vessel_type = $_POST['vessel_type'];
+                        $vessel_datas = \common\models\Vessel::findAll(['vessel_type' => $vessel_type, 'status' => 1]);
+                        $options = '';
+                        foreach ($vessel_datas as $vessel_data) {
+                                $options .= "<option value='" . $vessel_data->id . "'>" . $vessel_data->vessel_name . "</option>";
+                        }
+
+                        echo $options;
+                }
+        }
+
         public function ChangeFormat($model) {
-                $data=$model->eta;
+                $data = $model->eta;
                 $day = substr($data, 0, 2);
                 $month = substr($data, 2, 2);
                 $year = substr($data, 4, 4);
-                $hour = substr($data, 8, 2);
-                $min = substr($data, 10, 2);
+                $hour = substr($data, 9, 2);
+                $min = substr($data, 11, 2);
 
 //        echo $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min.':00 </br>';
 //        echo '2016-08-17 00:00:00';

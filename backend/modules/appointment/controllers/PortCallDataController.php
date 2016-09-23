@@ -176,8 +176,8 @@ class PortCallDataController extends Controller {
                 $day = substr($data, 0, 2);
                 $month = substr($data, 2, 2);
                 $year = substr($data, 4, 4);
-                $hour = substr($data, 8, 2);
-                $min = substr($data, 10, 2);
+                $hour = substr($data, 9, 2);
+                $min = substr($data, 11, 2);
 
 //        echo $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min.':00 </br>';
 //        echo '2016-08-17 00:00:00';

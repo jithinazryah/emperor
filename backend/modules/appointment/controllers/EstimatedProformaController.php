@@ -74,8 +74,9 @@ class EstimatedProformaController extends Controller {
     }
 
     public function actionAdd($id, $prfrma_id = NULL) {
+//            var_dump($id);exit;
         $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
-        $appointment = Appointment::find($id)->one();
+        $appointment = Appointment::findOne($id);
         if (!isset($prfrma_id)) {
             $model = new EstimatedProforma;
         } else {
