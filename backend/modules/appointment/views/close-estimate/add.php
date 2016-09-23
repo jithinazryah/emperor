@@ -184,6 +184,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     </table>
                 </div>
+                <script>
+                        $("document").ready(function () {
+                            $('#closeestimate-service_id').change(function () {
+                                var service_id = $(this).val();
+                                $.ajax({
+                                    type: 'POST',
+                                    cache: false,
+                                    data: {service_id: service_id},
+                                    url: '<?= Yii::$app->homeUrl; ?>/appointment/close-estimate/supplier',
+                                    success: function (data) {
+                                        if (data == 1) {
+                                            $("#closeestimate-supplier").prop('disabled', false);
+                                        } else {
+                                            $("#closeestimate-supplier").prop('disabled', true);
+                                        }
+                                    }
+                                });
+                            });
+
+                        });
+                </script>
                 <script type="text/javascript">
                         jQuery(document).ready(function ($)
                         {

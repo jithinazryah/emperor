@@ -172,6 +172,15 @@ class CloseEstimateController extends Controller {
                         return false;
                 }
         }
+        
+        public function actionSupplier() {
+                if (Yii::$app->request->isAjax) {
+                        $service_id = $_POST['service_id'];
+                        $services_data = \common\models\Services::find()->where(['id' => $service_id])->one();
+                        echo $services_data->supplier_options;
+                }
+        }
+        
         public function actionReport($id) {
                 // get your HTML raw content without any layouts or scripts
                 $content = $this->renderPartial('pdf');
