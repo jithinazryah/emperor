@@ -67,7 +67,7 @@ class Vessel extends \yii\db\ActiveRecord
             'vessel_name' => 'Vessel Name',
             'imo_no' => 'Imo No',
             'official' => 'Official',
-            'mmsi_no' => 'Mmsi No',
+            'mmsi_no' => 'Flag',
             'owners_info' => 'Owners Info',
             'mobile' => 'Mobile',
             'land_line' => 'Land Line',

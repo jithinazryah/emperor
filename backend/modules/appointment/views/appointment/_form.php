@@ -25,19 +25,24 @@ use yii\db\Expression;
     <?= $form->field($model, 'vessel_type')->dropDownList(ArrayHelper::map(VesselType::findAll(['status' => 1]), 'id', 'vessel_type'), ['prompt' => '-Choose a Vessel Type-', 'class' => 'form-control vessels']) ?>
 
     <?= $form->field($model, 'vessel')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1]), 'id', 'vessel_name'), ['prompt' => '-Choose a Vessel-']) ?>
+    
+    
+    <?= $form->field($model, 'tug')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' =>2]), 'id', 'vessel_name'), ['prompt' => '-Choose a Tung-']) ?>
+
+    <?= $form->field($model, 'barge')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' =>3]), 'id', 'vessel_name'), ['prompt' => '-Choose a Barge-']) ?>
 
     <?= $form->field($model, 'port_of_call')->dropDownList(ArrayHelper::map(Ports::findAll(['status' => 1]), 'id', 'port_name'), ['prompt' => '-Choose a Port-', 'class' => 'form-control ports']) ?>
 
-    <?php //$form->field($model, 'terminal')->dropDownList(ArrayHelper::map(Terminal::findAll(['status' => 1]), 'id', 'terminal'), ['prompt' => '-Choose a Terminal-']) ?>
+    <?= $form->field($model, 'terminal')->dropDownList(ArrayHelper::map(Terminal::findAll(['status' => 1]), 'id', 'terminal'), ['prompt' => '-Choose a Terminal-']) ?>
 
-    <?= $form->field($model, 'terminal')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'terminal')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'birth_no')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'appointment_no')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
     <?php // $form->field($model, 'no_of_principal')->textInput(['maxlength' => true]) ?>
-    <?php $arr = array('1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5'); ?>
+    <?php $arr = array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'); ?>
     <?= $form->field($model, 'no_of_principal')->dropDownList($arr, ['prompt' => '-choose no of principal-']) ?>
 
     <?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal), 'prompt' => '-Choose a Principal-', 'multiple' => true]) ?>
@@ -95,15 +100,27 @@ use yii\db\Expression;
         $("document").ready(function () {
             $('#appointment-vessel_type').change(function () {
                 var vessel_type = $(this).val();
-                $.ajax({
-                    type: 'POST',
-                    cache: false,
-                    data: {vessel_type: vessel_type},
-                    url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/vessel-type',
-                    success: function (data) {
-                        $('#appointment-vessel').html(data);
-                    }
-                });
+                if (vessel_type == 1) {
+                    $("#appointment-vessel").prop('disabled', true);
+                    $("#appointment-tug").prop('disabled', false);
+                    $("#appointment-barge").prop('disabled', false);
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        cache: false,
+                        data: {vessel_type: vessel_type},
+                        url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/vessel-type',
+                        success: function (data) {
+                            if (data != 'Tug &Barge') {
+                                $("#appointment-tug").prop('disabled', true);
+                                $("#appointment-barge").prop('disabled', true);
+                                $("#appointment-vessel").prop('disabled', false);
+                                $('#appointment-vessel').html(data);
+                            }
+
+                        }
+                    });
+                }
             });
 
         });
@@ -124,20 +141,20 @@ use yii\db\Expression;
              });*/
 
             $('#appointment-principal').change(function (e) {
-                    
-                    
-                   
+
+
+
                 var principal = $(this).val();
                 var No_principal = $('#appointment-no_of_principal').val();
-                if(principal.length <= No_principal){
-                        return true;
-                }else{
-                        var last = principal[principal.length-1];
-                        $("#appointment-principal option[value='"+last+"']").prop("selected", false);
-                        alert("Choose Principal same as Number of principal");
-                        return false;
+                if (principal.length <= No_principal) {
+                    return true;
+                } else {
+                    var last = principal[principal.length - 1];
+                    $("#appointment-principal option[value='" + last + "']").prop("selected", false);
+                    alert("Choose Principal same as Number of principal");
+                    return false;
                 }
-              
+
             });
 
         });
