@@ -80,7 +80,8 @@ class Contacts extends \yii\db\ActiveRecord
                 }
                 elseif($contacts_id == 3){
                         return 'Shipper';
+                }elseif($contacts_id == 4){
+                        return 'Supplier';
                 }
-                
         }
 }

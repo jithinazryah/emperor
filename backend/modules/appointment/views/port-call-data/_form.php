@@ -49,7 +49,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'immigration_commenced')->textInput() ?>
 
-<div class="form-group "></div>
+    <div class="form-group "></div>
     <?= $form->field($model, 'eta_next_port')->textInput() ?>
 
     <?= $form->field($model, 'nor_tendered')->textInput() ?>
@@ -59,12 +59,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'immigartion_completed')->textInput() ?>
 
     <?= $form->field($model, 'lastline_away')->textInput() ?>
-
-    <?= $form->field($model, 'comments')->textarea(['rows' => 6]) ?>
+    
+    <div class="form-group "></div>
 
     <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
-
-    <?php // $form->field($model, 'additional_info')->textInput() ?>
+    
+    <?= $form->field($model, 'comments')->textarea(['rows' => 6]) ?>
+    
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>
     </div>
