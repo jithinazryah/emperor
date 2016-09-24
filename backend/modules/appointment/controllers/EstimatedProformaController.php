@@ -84,18 +84,19 @@ class EstimatedProformaController extends Controller {
                 }
 
                 if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id)) {
+
                         $model->epda = $model->unit_rate * $model->unit;
-                        $model->save();
-                         return $this->redirect(['add', 'id' => $id]);
+                        if ($model->save()) {
+                                return $this->redirect(['add', 'id' => $id]);
+                        }
 //                        return $this->refresh();
-                } else {
-                        return $this->render('add', [
-                                    'model' => $model,
-                                    'estimates' => $estimates,
-                                    'appointment' => $appointment,
-                                    'id' => $id,
-                        ]);
                 }
+                return $this->render('add', [
+                            'model' => $model,
+                            'estimates' => $estimates,
+                            'appointment' => $appointment,
+                            'id' => $id,
+                ]);
         }
 
         public function actionDeletePerforma($id) {
@@ -114,8 +115,9 @@ class EstimatedProformaController extends Controller {
         public function actionUpdate($id) {
                 $model = $this->findModel($id);
 
-                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model, $id) && $model->save()) {
-
+                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model, $id)) {
+                        $model->epda = $model->unit_rate * $model->unit;
+                        $model->save();
                         return $this->redirect(['view', 'id' => $model->id]);
                 } else {
                         return $this->render('update', [

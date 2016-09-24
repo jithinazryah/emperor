@@ -101,4 +101,8 @@ class CloseEstimate extends \yii\db\ActiveRecord
         public function getCurrency0() {
                 return $this->hasOne(Currency::className(), ['id' => 'currency']);
         }
+        
+        public function getInvoice() {
+                return $this->hasOne(InvoiceType::className(), ['id' => 'invoice_type']);
+        }
 }

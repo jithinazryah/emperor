@@ -7,8 +7,10 @@ use common\models\Services;
 use common\models\Currency;
 use common\models\Contacts;
 use common\models\Debtor;
+use common\models\InvoiceType;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\EstimatedProforma */
 
@@ -34,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </a>
                 </div>
             </div>
-            <?php //Pjax::begin(); ?> 
+<?php //Pjax::begin();  ?> 
             <div class="panel-body">
                 <div class="row appoint">
                     <div class="col-sm-3" style="text-align: right">
@@ -105,6 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <th data-priority="6">FDA VALUE</th>
                                 <th data-priority="6">PAYMENT TYPE</th>
                                 <th data-priority="6">TOTAL</th>
+                                <th data-priority="6">INVOICE TYPE</th>
                                 <th data-priority="6">PRINCIPAL</th>
                                 <th data-priority="6">COMMENTS</th>
                                 <th data-priority="1">ACTIONS</th>
@@ -132,11 +135,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <td><?= $estimate->fda; ?></td>
                                         <td><?= $estimate->payment_type; ?></td>
                                         <td><?= $estimate->total; ?></td>
+                                        <td><?= $estimate->invoice->invoice_type ?></td>
                                         <td><?= $estimate->principal0->principal_name; ?></td>
                                         <td><?= $estimate->comments; ?></td>
                                         <td>
                                             <?= Html::a('Edit', ['/appointment/close-estimate/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
-                                            <?= Html::a('Delete', ['/appointment/close-estimate/delete-close-estimate', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
+                                        <?= Html::a('Delete', ['/appointment/close-estimate/delete-close-estimate', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
                                         </td>
                                         <?php
                                         $epdatotal += $estimate->epda;
@@ -158,24 +162,25 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td colspan="3"></td>
                             </tr>
                             <tr>
-                                <?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
                                 <td></td>
                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 4])->all(), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>-->
-<!--                                                                <td><?php // $form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);      ?></td>-->
+<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false);  ?></td>-->
+<!--                                                                <td><?php // $form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);       ?></td>-->
                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-<!--                                                                <td><?php // $form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)      ?></td>-->
+<!--                                                                <td><?php // $form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)       ?></td>-->
                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'fda')->textInput(['placeholder' => 'FDA'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'payment_type')->textInput(['placeholder' => 'Payment Type'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'total')->textInput(['placeholder' => 'TOTAL'])->label(false) ?></td>
+                                <td><?= $form->field($model, 'invoice_type')->dropDownList(ArrayHelper::map(InvoiceType::findAll(['status' => 1]), 'id', 'invoice_type'), ['prompt' => '-Invoice Type-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
                                 <td><?= Html::submitButton($model->isNewRecord ? 'Add' : 'Update', ['class' => 'btn btn-success']) ?>
                                 </td>
-                                <?php ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
                             </tr>
                             <tr></tr>
 
@@ -253,6 +258,26 @@ $this->params['breadcrumbs'][] = $this->title;
                         });
                 </script>
 
+                <script>
+                        $(document).ready(function () {
+                            $("#closeestimate-unit_rate").keyup(function () {
+                                multiply();
+                            });
+                            $("#closeestimate-unit").keyup(function () {
+                                multiply();
+                            });
+                        });
+                        function multiply() {
+                            var rate = $("#closeestimate-unit_rate").val();
+                            var unit = $("#closeestimate-unit").val();
+                            if (rate != '' && unit != '') {
+                                $("#closeestimate-epda").val(rate * unit);
+                            }
+
+                        }
+                        $("#closeestimate-epda").prop("disabled", true);
+                </script>
+
 
                 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
                 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
@@ -260,7 +285,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             </div>
-            <?php //Pjax::end();   ?> 
+<?php //Pjax::end();    ?> 
         </div>
     </div>
 </div>

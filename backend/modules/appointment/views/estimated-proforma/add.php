@@ -153,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
                                 <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)              ?></td>-->
-                                <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA'])->label(false) ?></td>
+                                <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA', 'disabled' => true])->label(false) ?></td>
 
                                 <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1, 'id' => explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
@@ -249,7 +249,7 @@ $this->params['breadcrumbs'][] = $this->title;
                            }
                            
                         }
-                                      //$( "#estimatedproforma-epda" ).prop( "disabled", true );  
+                                      $( "#estimatedproforma-epda" ).prop( "disabled", true );  
                 </script>
             </div>
             <?php //Pjax::end(); ?> 

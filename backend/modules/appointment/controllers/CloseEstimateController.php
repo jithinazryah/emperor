@@ -86,16 +86,19 @@ class CloseEstimateController extends Controller {
                         $model = $this->findModel($prfrma_id);
                 }
 
-                if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id) && $model->save()) {
-                        return $this->refresh();
-                } else {
+                if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id)) {
+                        $model->epda = $model->unit_rate * $model->unit;
+                        if($model->save()){
+                                 return $this->redirect(['add', 'id' => $id]);
+                        }
+                       // return $this->refresh();
+                } 
                         return $this->render('add', [
                                     'model' => $model,
                                     'estimates' => $estimates,
                                     'appointment' => $appointment,
                                     'id' => $id,
                         ]);
-                }
         }
 
         /*
