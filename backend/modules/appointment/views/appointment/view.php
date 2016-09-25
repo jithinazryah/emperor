@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="panel-body">
                 <?= Html::a('<i class="fa-th-list"></i><span> Manage Appointment</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
-                <?= Html::a('<i class="fa-th-list"></i><span> Disable</span>', ['appointment/disable', 'id' => $model->id], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone'])?>
+                <?= Html::a('<i class="fa-th-list"></i><span> Disable</span>', ['appointment/disable', 'id' => $model->id], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone']) ?>
                 <ul class="nav nav-tabs nav-tabs-justified">
                     <li class="active">
                         <a href="#home-3" data-toggle="tab">
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </ul>
 
                 <div class="tab-content">
-                    
+
                     <div class="tab-pane active" id="home-3">
 
                         <div class="panel-body"><div class="appointment-view">
@@ -94,8 +94,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                         [
                                             'attribute' => 'vessel',
                                             'value' => call_user_func(function($model) {
-
-                                                            return Vessel::findOne($model->vessel)->vessel_name;
+                                                            if ($model->vessel_type == 1) {
+                                                                    return Vessel::findOne($model->tug)->vessel_name . ',' . Vessel::findOne($model->barge)->vessel_name;
+                                                            } else {
+                                                                    return Vessel::findOne($model->vessel)->vessel_name;
+                                                            }
                                                     }, $model),
                                         ],
                                         [
@@ -167,9 +170,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                     ],
                                 ])
-                                                            
                                 ?>
-                                
+
                             </div>
                         </div>
 
@@ -178,20 +180,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <div class="panel-body">
                             <div class="row">
-                           <div style="float: left;margin-left: 10px;">
-                            <?php
-                            if (empty($estimates)) {
-                                    echo Html::a('<i class="fa fa-plus"></i><span> Add EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
-                            } else {
-                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
-                            }
-                            ?>
-                           </div>
-                            <div style="float: left;margin-left: 10px;">
-                                <?php
-                                echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
-                                ?>
-                            </div>
+                                <div style="float: left;margin-left: 10px;">
+                                    <?php
+                                    if (empty($estimates)) {
+                                            echo Html::a('<i class="fa fa-plus"></i><span> Add EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    } else {
+                                            echo Html::a('<i class="fa fa-pencil"></i><span> Update EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    }
+                                    ?>
+                                </div>
+                                <div style="float: left;margin-left: 10px;">
+                                    <?php
+                                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                                    ?>
+                                </div>
                             </div>
 
                             <!--                            <hr class="appoint_history" />-->
@@ -224,7 +226,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <td><?= $i; ?></td>
                                                     <th><span class="co-name"><?= $estimate->service->service ?></span></th>
                                                     <td><?= $estimate->supplier0->name ?></td>
-        <!--                                                <td><?php // $estimate->currency0->currency_symbol                          ?></td>-->
+        <!--                                                <td><?php // $estimate->currency0->currency_symbol                           ?></td>-->
                                                     <td><?= $estimate->unit_rate; ?></td>
                                                     <td><?= $estimate->unit; ?></td>
                                                     <td><?= $estimate->roe; ?></td>
@@ -540,72 +542,72 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                         <div class="help-block"></div>
                                     </div>
-<!--                                    <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">FORWARD ARRIVAL UNIT  :</label>
-                                        <?= $drafts->fwd_arrival_unit; ?>
-
-                                        <div class="help-block"></div>
-                                    </div>-->
+                                    <!--                                    <div class="form-group field-portcalldata-ets">
+                                                                            <label class="control-label" for="portcalldata-ets">FORWARD ARRIVAL UNIT  :</label>
+                                    <?= $drafts->fwd_arrival_unit; ?>
+                                    
+                                                                            <div class="help-block"></div>
+                                                                        </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">FORWARD ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->fwd_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-<!--                                    <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">AFTER ARRIVAL UNIT  :</label>
-                                        <?= $drafts->aft_arrival_unit; ?>
-
-                                        <div class="help-block"></div>
-                                    </div>-->
+                                    <!--                                    <div class="form-group field-portcalldata-ets">
+                                                                            <label class="control-label" for="portcalldata-ets">AFTER ARRIVAL UNIT  :</label>
+                                    <?= $drafts->aft_arrival_unit; ?>
+                                    
+                                                                            <div class="help-block"></div>
+                                                                        </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">AFTER ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->aft_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-<!--                                    <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">mean_arrival_unit  :</label>
-                                        <?= $drafts->mean_arrival_unit; ?>
-
-                                        <div class="help-block"></div>
-                                    </div>-->
+                                    <!--                                    <div class="form-group field-portcalldata-ets">
+                                                                            <label class="control-label" for="portcalldata-ets">mean_arrival_unit  :</label>
+                                    <?= $drafts->mean_arrival_unit; ?>
+                                    
+                                                                            <div class="help-block"></div>
+                                                                        </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">mean_arrival_quantity  :</label>
                                         <?= $drafts->mean_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-<!--                                    <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">fwd_sailing_unit  :</label>
-                                        <?= $drafts->fwd_sailing_unit; ?>
-
-                                        <div class="help-block"></div>
-                                    </div>-->
+                                    <!--                                    <div class="form-group field-portcalldata-ets">
+                                                                            <label class="control-label" for="portcalldata-ets">fwd_sailing_unit  :</label>
+                                    <?= $drafts->fwd_sailing_unit; ?>
+                                    
+                                                                            <div class="help-block"></div>
+                                                                        </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">fwd_sailing_quantity  :</label>
                                         <?= $drafts->fwd_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-<!--                                    <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">aft_sailing_unit  :</label>
-                                        <?= $drafts->aft_sailing_unit; ?>
-
-                                        <div class="help-block"></div>
-                                    </div>-->
+                                    <!--                                    <div class="form-group field-portcalldata-ets">
+                                                                            <label class="control-label" for="portcalldata-ets">aft_sailing_unit  :</label>
+                                    <?= $drafts->aft_sailing_unit; ?>
+                                    
+                                                                            <div class="help-block"></div>
+                                                                        </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">aft_sailing_quantity  :</label>
                                         <?= $drafts->aft_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-<!--                                    <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">mean_sailing_unit  :</label>
-                                        <?= $drafts->mean_sailing_unit; ?>
-
-                                        <div class="help-block"></div>
-                                    </div>-->
+                                    <!--                                    <div class="form-group field-portcalldata-ets">
+                                                                            <label class="control-label" for="portcalldata-ets">mean_sailing_unit  :</label>
+                                    <?= $drafts->mean_sailing_unit; ?>
+                                    
+                                                                            <div class="help-block"></div>
+                                                                        </div>-->
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">mean_sailing_quantity  :</label>
                                         <?= $drafts->mean_sailing_quantity; ?>
@@ -785,20 +787,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <div class="panel-body">
                             <div class="row">
-                           <div style="float: left;margin-left: 10px;">
-                            <?php
-                            if (empty($closeestimates)) {
-                                    echo Html::a('<i class="fa fa-plus"></i><span> Add CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
-                            } else {
-                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
-                            }
-                            ?>
-                           </div>
-                            <div style="float: left;margin-left: 10px;">
-                                <?php
-                                echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['close-estimate/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
-                                ?>
-                            </div>
+                                <div style="float: left;margin-left: 10px;">
+                                    <?php
+                                    if (empty($closeestimates)) {
+                                            echo Html::a('<i class="fa fa-plus"></i><span> Add CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    } else {
+                                            echo Html::a('<i class="fa fa-pencil"></i><span> Update CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    }
+                                    ?>
+                                </div>
+                                <div style="float: left;margin-left: 10px;">
+                                    <?php
+                                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['close-estimate/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                                    ?>
+                                </div>
                             </div>
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
 
@@ -908,7 +910,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <?php
 //                                 }
-                                ?>
+                    ?>
                 </div>
             </div>
         </div>

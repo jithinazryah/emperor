@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'model' => $model,
                                                     'attributes' => [
                                                         'principal_name',
+                                                        'principal_id',
                                                         'address:ntext',
                                                         'mobile',
                                                         'tele_phone',

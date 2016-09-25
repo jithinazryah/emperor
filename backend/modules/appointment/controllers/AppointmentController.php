@@ -90,7 +90,6 @@ class AppointmentController extends Controller {
          */
         public function actionCreate() {
                 $model = new Appointment();
-
                 if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $this->ChangeFormat($model) && $model->save() && $this->PortCall($model->id)) {
                         return $this->redirect(['/appointment/estimated-proforma/add', 'id' => $model->id]);
                 } else {
