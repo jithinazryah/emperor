@@ -21,55 +21,55 @@ use yii\widgets\ActiveForm;
 
     <?php $arr = array('1' => 'Metric Ton', '2' => 'Litter'); ?>
 
-    <?= $form->field($model, 'fo_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-']) ?>
+    <?= $form->field($model, 'fo_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-', 'tabindex' => 1]) ?>
 
-    <?= $form->field($model, 'fo_arrival_quantity')->textInput() ?>
-
-    <div class="form-group "></div>
-
-    <?= $form->field($model, 'fo_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-']) ?>
-
-    <?= $form->field($model, 'fo_sailing_quantity')->textInput() ?>
-
-
-    <?= $form->field($model, 'do_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-']) ?>
-
-    <?= $form->field($model, 'do_arrival_quantity')->textInput() ?>
+    <?= $form->field($model, 'fo_arrival_quantity')->textInput(['tabindex' => 6]) ?>
 
     <div class="form-group "></div>
 
-    <?= $form->field($model, 'do_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-']) ?>
+    <?= $form->field($model, 'fo_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-','tabindex' => 11]) ?>
 
-    <?= $form->field($model, 'do_sailing_quantity')->textInput() ?>
+    <?= $form->field($model, 'fo_sailing_quantity')->textInput(['tabindex' => 16]) ?>
 
-    <?= $form->field($model, 'go_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-']) ?>
 
-    <?= $form->field($model, 'go_arrival_quantity')->textInput() ?>
+    <?= $form->field($model, 'do_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-','tabindex' => 2]) ?>
+
+    <?= $form->field($model, 'do_arrival_quantity')->textInput(['tabindex' => 7]) ?>
+
+    <div class="form-group "></div>
+
+    <?= $form->field($model, 'do_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-','tabindex' => 12]) ?>
+
+    <?= $form->field($model, 'do_sailing_quantity')->textInput(['tabindex' => 17]) ?>
+
+    <?= $form->field($model, 'go_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-','tabindex' => 3]) ?>
+
+    <?= $form->field($model, 'go_arrival_quantity')->textInput(['tabindex' => 8]) ?>
     
     <div class="form-group "></div>
     
-    <?= $form->field($model, 'go_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-']) ?>
+    <?= $form->field($model, 'go_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-', 'tabindex' => 13]) ?>
 
-    <?= $form->field($model, 'go_sailing_quantity')->textInput() ?>
+    <?= $form->field($model, 'go_sailing_quantity')->textInput(['tabindex' => 18]) ?>
 
-    <?= $form->field($model, 'lo_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-']) ?>
+    <?= $form->field($model, 'lo_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-','tabindex' => 4]) ?>
 
-    <?= $form->field($model, 'lo_arrival_quantity')->textInput() ?>
+    <?= $form->field($model, 'lo_arrival_quantity')->textInput(['tabindex' => 9]) ?>
     
     <div class="form-group "></div>
     
-    <?= $form->field($model, 'lo_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-']) ?>
+    <?= $form->field($model, 'lo_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-','tabindex' => 14]) ?>
 
-    <?= $form->field($model, 'lo_sailing_quantity')->textInput() ?>
+    <?= $form->field($model, 'lo_sailing_quantity')->textInput(['tabindex' => 19]) ?>
 
-    <?= $form->field($model, 'fresh_water_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-']) ?>
+    <?= $form->field($model, 'fresh_water_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-','tabindex' => 5]) ?>
 
-    <?= $form->field($model, 'fresh_water_arrival_quantity')->textInput() ?>
+    <?= $form->field($model, 'fresh_water_arrival_quantity')->textInput(['tabindex' => 10]) ?>
 
     <div class="form-group "></div>
-    <?= $form->field($model, 'fresh_water_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-']) ?>
+    <?= $form->field($model, 'fresh_water_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-','tabindex' => 15]) ?>
 
-    <?= $form->field($model, 'fresh_water_sailing_quantity')->textInput() ?>
+    <?= $form->field($model, 'fresh_water_sailing_quantity')->textInput(['tabindex' => 20]) ?>
     
 <!--    <?echo $form->field($model, 'additional_info')->textInput() ?>
 

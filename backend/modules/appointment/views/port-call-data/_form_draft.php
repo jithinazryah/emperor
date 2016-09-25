@@ -20,30 +20,30 @@ use yii\widgets\ActiveForm;
     <div class="form-group "></div>
     <div class="form-group "><h4 class="portcall"><b><u>DRAFT- ARRIVAL</u></b></h4></div>
     <div class="form-group "><h4 class="portcall"><b><u>DRAFT- SAILING</u></b></h4></div>
-    <?= $form->field($model, 'intial_survey_commenced')->textInput() ?>
+    <?= $form->field($model, 'intial_survey_commenced')->textInput(['tabindex' => 1]) ?>
 
-    <?= $form->field($model, 'finial_survey_commenced')->textInput() ?>
+    <?= $form->field($model, 'finial_survey_commenced')->textInput(['tabindex' => 3]) ?>
     <div class="form-group "></div>
 
-    <?= $form->field($model, 'fwd_arrival_quantity')->textInput() ?>
+    <?= $form->field($model, 'fwd_arrival_quantity')->textInput(['tabindex' => 5]) ?>
 
-    <?= $form->field($model, 'fwd_sailing_quantity')->textInput() ?>
+    <?= $form->field($model, 'fwd_sailing_quantity')->textInput(['tabindex' => 8]) ?>
 
-    <?= $form->field($model, 'intial_survey_completed')->textInput() ?>
+    <?= $form->field($model, 'intial_survey_completed')->textInput(['tabindex' => 2]) ?>
 
-    <?= $form->field($model, 'finial_survey_completed')->textInput() ?>
+    <?= $form->field($model, 'finial_survey_completed')->textInput(['tabindex' => 4]) ?>
     <div class="form-group "></div>
 
-    <?= $form->field($model, 'aft_arrival_quantity')->textInput() ?>
+    <?= $form->field($model, 'aft_arrival_quantity')->textInput(['tabindex' => 6]) ?>
 
-    <?= $form->field($model, 'aft_sailing_quantity')->textInput() ?>
+    <?= $form->field($model, 'aft_sailing_quantity')->textInput(['tabindex' => 9]) ?>
     <div class="form-group "></div>
     <div class="form-group "></div>
     <div class="form-group "></div>
 
-    <?= $form->field($model, 'mean_arrival_quantity')->textInput() ?>
+    <?= $form->field($model, 'mean_arrival_quantity')->textInput(['tabindex' => 7]) ?>
 
-    <?= $form->field($model, 'mean_sailing_quantity')->textInput() ?>
+    <?= $form->field($model, 'mean_sailing_quantity')->textInput(['tabindex' => 10]) ?>
 
 
 

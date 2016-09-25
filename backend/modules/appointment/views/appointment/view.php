@@ -549,7 +549,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                             <div class="help-block"></div>
                                                                         </div>-->
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">FORWARD ARRIVAL QUANTITY  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FWD ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->fwd_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
@@ -561,7 +561,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                             <div class="help-block"></div>
                                                                         </div>-->
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">AFTER ARRIVAL QUANTITY  :</label>
+                                        <label class="control-label" for="portcalldata-ets">AFT ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->aft_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
@@ -573,7 +573,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                             <div class="help-block"></div>
                                                                         </div>-->
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">mean_arrival_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">MEAN ARRIVAL QUANTITY  :</label>
                                         <?= $drafts->mean_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
@@ -585,7 +585,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                             <div class="help-block"></div>
                                                                         </div>-->
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">fwd_sailing_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FWD SAILING QUANTITY  :</label>
                                         <?= $drafts->fwd_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
@@ -597,7 +597,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                             <div class="help-block"></div>
                                                                         </div>-->
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">aft_sailing_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">AFT SAILING QUANTITY  :</label>
                                         <?= $drafts->aft_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
@@ -609,13 +609,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                             <div class="help-block"></div>
                                                                         </div>-->
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">mean_sailing_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">MEAN SAILING QUANTITY  :</label>
                                         <?= $drafts->mean_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">comments  :</label>
+                                        <label class="control-label" for="portcalldata-ets">COMMENTS  :</label>
                                         <?= $drafts->comments; ?>
 
                                         <div class="help-block"></div>
@@ -645,127 +645,127 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <p style="margin-left: 35px;margin-bottom: 10px;font-size: 23px;color: black;"><b>PortCallDataRob</b></p>
                                     <hr class="appoint_history" />
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">fo_arrival_unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FO ARRIVAL UNIT  :</label>
                                         <?= $rob->fo_arrival_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">fo_arrival_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FO ARRIVAL QUANTITY  :</label>
                                         <?= $rob->fo_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">do_arrival_unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">DO ARRIVAL UNIT  :</label>
                                         <?= $rob->do_arrival_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">do_arrival_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">DO ARRIVAL QUANTITY  :</label>
                                         <?= $rob->do_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Go_arrival_unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">GO ARRIVAL UNIT  :</label>
                                         <?= $rob->go_arrival_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Go_arrival_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">GO ARRIVAL QUANTITY  :</label>
                                         <?= $rob->go_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">lo_arrival_unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">LO ARRIVAL UNIT  :</label>
                                         <?= $rob->lo_arrival_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">lo_arrival_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">LO ARRIVAL QUANTITY  :</label>
                                         <?= $rob->lo_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">fresh_water_arrival_unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FRESH WATER ARRIVAL UNIT  :</label>
                                         <?= $rob->fresh_water_arrival_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">fresh_water_arrival_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FRESH WATER ARRIVAL QUANTITY  :</label>
                                         <?= $rob->fresh_water_arrival_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Fo Sailing Unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FO SAILING UNIT  :</label>
                                         <?= $rob->do_sailing_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Fo_sailing_quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FO SAILING QUANTITY  :</label>
                                         <?= $rob->do_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Do Sailing Unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">DO SAILING UNIT  :</label>
                                         <?= $rob->do_sailing_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Do Sailing Quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">DO SAILING QUANTITY  :</label>
                                         <?= $rob->do_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Go Sailing Unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">GO SAIING UNIT  :</label>
                                         <?= $rob->go_sailing_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Go Sailing Quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">GO SAILING QUANTITY  :</label>
                                         <?= $rob->go_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Lo Sailing Unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">LO SAILING UNIT  :</label>
                                         <?= $rob->lo_sailing_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Lo Sailing Quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">LO SAILING QUANTITY  :</label>
                                         <?= $rob->lo_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Fresh Water Sailing Unit  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FRESH WATER SAILING UNIT  :</label>
                                         <?= $rob->fresh_water_sailing_unit; ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Fresh Water Sailing Quantity  :</label>
+                                        <label class="control-label" for="portcalldata-ets">FRESH WATER SAILING QUANTITY  :</label>
                                         <?= $rob->fresh_water_sailing_quantity; ?>
 
                                         <div class="help-block"></div>
                                     </div>
-                                    <div class="form-group field-portcalldata-ets">
-                                        <label class="control-label" for="portcalldata-ets">Comments  :</label>
+                                    <div class="form-group field-portcalldata-ets" style="padding-right: 50px !important;">
+                                        <label class="control-label" for="portcalldata-ets">COMMENTS  :</label>
                                         <?= $rob->comments; ?>
 
                                         <div class="help-block"></div>
