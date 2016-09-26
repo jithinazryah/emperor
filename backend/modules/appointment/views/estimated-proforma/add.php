@@ -10,6 +10,7 @@ use common\models\Debtor;
 use common\models\Appointment;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\EstimatedProforma */
 
@@ -35,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </a>
                 </div>
             </div>
-            <?php //Pjax::begin(); ?> 
+            <?php //Pjax::begin();  ?> 
             <div class="panel-body">
                 <div class="row appoint">
                     <div class="col-sm-3" style="text-align: right">
@@ -128,6 +129,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <td>
                                             <?= Html::a('Edit', ['/appointment/estimated-proforma/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
                                             <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
+                                            <a href="javascript:;" onclick="showAjaxModal(<?= $estimate->id ?>);" class="btn btn-success">Sub</a>
+                                            <?php //Html::a('Sub', [''], ['class' => 'btn btn-success', "onclick" => "showAjaxModal(".$estimate->id.");"]) ?>
                                         </td>
                                         <?php
                                         $epdatotal += $estimate->epda;
@@ -147,12 +150,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?php $form = ActiveForm::begin(); ?>
                                 <td></td>
                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
-                                 <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 4])->all(), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>-->
-                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);              ?></td>-->
+                                <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 4])->all(), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
+<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false);    ?></td>-->
+                               <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                 ?></td>-->
                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)              ?></td>-->
+                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                 ?></td>-->
                                 <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA', 'disabled' => true])->label(false) ?></td>
 
                                 <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1, 'id' => explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
@@ -233,27 +236,68 @@ $this->params['breadcrumbs'][] = $this->title;
                 <script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
 
                 <script>
-                        $(document).ready(function(){
-                            $( "#estimatedproforma-unit_rate" ).keyup(function(){
-                               multiply(); 
-                            });   
-                            $( "#estimatedproforma-unit" ).keyup(function(){
-                               multiply(); 
-                            });   
+                        $(document).ready(function () {
+                            $("#estimatedproforma-unit_rate").keyup(function () {
+                                multiply();
+                            });
+                            $("#estimatedproforma-unit").keyup(function () {
+                                multiply();
+                            });
                         });
-                        function multiply(){
-                           var rate = $( "#estimatedproforma-unit_rate" ).val();
-                           var unit = $( "#estimatedproforma-unit" ).val();
-                           if(rate != '' && unit != ''){
-                                   $( "#estimatedproforma-epda" ).val(rate * unit);
-                           }
-                           
+                        function multiply() {
+                            var rate = $("#estimatedproforma-unit_rate").val();
+                            var unit = $("#estimatedproforma-unit").val();
+                            if (rate != '' && unit != '') {
+                                $("#estimatedproforma-epda").val(rate * unit);
+                            }
+
                         }
-                                      $( "#estimatedproforma-epda" ).prop( "disabled", true );  
+                        $("#estimatedproforma-epda").prop("disabled", true);
                 </script>
             </div>
-            <?php //Pjax::end(); ?> 
+            <?php //Pjax::end();  ?> 
         </div>
     </div>
 </div>
+<a href="javascript:;" onclick="showAjaxModal();" class="btn btn-primary btn-single btn-sm">Show Me</a>
+<!-- Modal code -->
+<script type="text/javascript">
+        function showAjaxModal(id)
+        {
+            jQuery('#add-sub').modal('show', {backdrop: 'static'});
+            jQuery('#add-sub .modal-body').html(id);
+            /*setTimeout(function ()
+             {
+             jQuery.ajax({
+             url: "data/ajax-content.txt",
+             success: function (response)
+             {
+             jQuery('#modal-7 .modal-body').html(response);
+             }
+             });
+             }, 800); // just an example
+             */
+        }
+</script>
+<div class="modal fade" id="add-sub">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Dynamic Content</h4>
+            </div>
+
+            <div class="modal-body">
+
+                Content is loading...
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

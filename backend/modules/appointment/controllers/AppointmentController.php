@@ -195,7 +195,7 @@ class AppointmentController extends Controller {
                 if (Yii::$app->request->isAjax) {
                         $vessel_type = $_POST['vessel_type'];
                         $vessel_datas = \common\models\Vessel::findAll(['vessel_type' => $vessel_type, 'status' => 1]);
-                        $options = '';
+                        $options = '<option value="">-Choose a Vessel-</option>';
                         foreach ($vessel_datas as $vessel_data) {
                                 $options .= "<option value='" . $vessel_data->id . "'>" . $vessel_data->vessel_name . "</option>";
                         }

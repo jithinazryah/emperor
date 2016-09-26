@@ -24,12 +24,26 @@ use yii\db\Expression;
 
     <?= $form->field($model, 'vessel_type')->dropDownList(ArrayHelper::map(VesselType::findAll(['status' => 1]), 'id', 'vessel_type'), ['prompt' => '-Choose a Vessel Type-', 'class' => 'form-control vessels']) ?>
 
-    <?= $form->field($model, 'vessel')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1]), 'id', 'vessel_name'), ['prompt' => '-Choose a Vessel-']) ?>
-    
-    
-    <?= $form->field($model, 'tug')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' =>2]), 'id', 'vessel_name'), ['prompt' => '-Choose a Tung-']) ?>
+    <?php
+    $flag_vessel = true;
+    $flag_tug = true;
+    $flag_barge = true;
+    if (!$model->isNewRecord) {
+            if ($model->vessel_type != '') {
+                    if ($model->vessel_type == 1) {
+                            $flag_vessel = true;
+                            $flag_tug = false;
+                            $flag_barge = false;
+                    }
+            }
+    }
+    ?>
+    <?= $form->field($model, 'vessel')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1]), 'id', 'vessel_name'), ['prompt' => '-Choose a Vessel-', 'disabled' => $flag_vessel]) ?>
 
-    <?= $form->field($model, 'barge')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' =>3]), 'id', 'vessel_name'), ['prompt' => '-Choose a Barge-']) ?>
+
+    <?= $form->field($model, 'tug')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' => 2]), 'id', 'vessel_name'), ['prompt' => '-Choose a Tung-', 'disabled' => $flag_tug]) ?>
+
+    <?= $form->field($model, 'barge')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' => 3]), 'id', 'vessel_name'), ['prompt' => '-Choose a Barge-', 'disabled' => $flag_barge]) ?>
 
     <?= $form->field($model, 'port_of_call')->dropDownList(ArrayHelper::map(Ports::findAll(['status' => 1]), 'id', 'port_name'), ['prompt' => '-Choose a Port-', 'class' => 'form-control ports']) ?>
 
@@ -42,10 +56,18 @@ use yii\db\Expression;
     <?= $form->field($model, 'appointment_no')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
     <?php // $form->field($model, 'no_of_principal')->textInput(['maxlength' => true]) ?>
+    <?php
+    if ($model->isNewRecord) {
+            $model->no_of_principal = 1;
+    }
+    ?>
     <?php $arr = array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'); ?>
     <?= $form->field($model, 'no_of_principal')->dropDownList($arr, ['prompt' => '-choose no of principal-']) ?>
 
-    <?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal), 'prompt' => '-Choose a Principal-', 'multiple' => true]) ?>
+    <?=
+    $form->field($model, 'principal', ['template' => "<div class='overly'></div>\n{label}\n{input}\n{hint}\n{error}"]
+    )->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal), 'prompt' => '-Choose a Principal-', 'multiple' => true])
+    ?>
 
     <?= $form->field($model, 'nominator')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 1])->all(), 'id', 'name'), ['prompt' => '-Choose a Nominator-']) ?>
 
@@ -65,7 +87,7 @@ use yii\db\Expression;
 
     <?= $form->field($model, 'eta')->textInput() ?>
 
-    <?php //$form->field($model, 'stage')->textInput() ?>
+    <?php //$form->field($model, 'stage')->textInput()   ?>
 
     <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
 
@@ -104,6 +126,7 @@ use yii\db\Expression;
                     $("#appointment-vessel").prop('disabled', true);
                     $("#appointment-tug").prop('disabled', false);
                     $("#appointment-barge").prop('disabled', false);
+
                 } else {
                     $.ajax({
                         type: 'POST',
@@ -112,9 +135,16 @@ use yii\db\Expression;
                         url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/vessel-type',
                         success: function (data) {
                             if (data != 'Tug &Barge') {
+                                    
                                 $("#appointment-tug").prop('disabled', true);
                                 $("#appointment-barge").prop('disabled', true);
                                 $("#appointment-vessel").prop('disabled', false);
+                                
+                                var index = $('#appointment-tug').get(0).selectedIndex;
+                                $('#appointment-tug option:eq(' + index + ')').prop("selected", false);
+
+                                var indexs = $('#appointment-barge').get(0).selectedIndex;
+                                $('#appointment-barge option:eq(' + indexs + ')').prop("selected", false);
                                 $('#appointment-vessel').html(data);
                             }
 
@@ -140,21 +170,54 @@ use yii\db\Expression;
              });
              });*/
 
+            /*$('#appointment-principal').change(function (e) {
+             var principal = $(this).val();
+             var No_principal = $('#appointment-no_of_principal').val();
+             if (principal.length <= No_principal) {
+             return true;
+             } else {
+             var last = principal[principal.length - 1];
+             $("#appointment-principal option[value='" + last + "']").prop("selected", false);
+             // $('#s2id_autogen4').prop('disabled', true);
+             alert("Choose Principal same as Number of principal");
+             return false;
+             }
+             
+             });*/
+
             $('#appointment-principal').change(function (e) {
-
-
-
                 var principal = $(this).val();
                 var No_principal = $('#appointment-no_of_principal').val();
-                if (principal.length <= No_principal) {
-                    return true;
-                } else {
+                if (principal.length == No_principal) {
+                    //alert("Principal same as Number of principal");
+                    $('#s2id_autogen4').prop('disabled', true);
+                    $('.overly').addClass('over-active');
+                } else if (principal.length < No_principal) {
+                    $('#s2id_autogen4').prop('disabled', false);
+                    $('.overly').removeClass('over-active');
+                } else if (principal.length > No_principal) {
                     var last = principal[principal.length - 1];
                     $("#appointment-principal option[value='" + last + "']").prop("selected", false);
                     alert("Choose Principal same as Number of principal");
-                    return false;
+                    $('#s2id_autogen4').prop('disabled', true);
+                    $('.overly').addClass('over-active');
                 }
 
+            });
+
+            $('#appointment-no_of_principal').change(function (e) {
+                var principal = $('#appointment-no_of_principal').val();
+                var No_principal = $(this).val();
+                if (principal.length == No_principal) {
+                    $('#s2id_autogen4').prop('disabled', true);
+                    $('.overly').addClass('over-active');
+                } else if (principal.length < No_principal) {
+                    $('#s2id_autogen4').prop('disabled', false);
+                    $('.overly').removeClass('over-active');
+                } else if (principal.length > No_principal) {
+                    $('#s2id_autogen4').prop('disabled', true);
+                    $('.overly').addClass('over-active');
+                }
             });
 
         });
@@ -191,12 +254,32 @@ use yii\db\Expression;
                 $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
             });
 
+            $("#appointment-principal").select2({
+                placeholder: 'Choose Principals',
+                allowClear: true
+            }).on('select2-open', function ()
+            {
+                // Adding Custom Scrollbar
+                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+            });
+
 
         });
 </script>
+<style>
+    .over-active{
+        background-color: rgba(255, 0, 0, 0.03);
+        width: 24%;
+        height: 9%;
+        position: absolute;
+        z-index: 100;
+    }
+</style>
 
 
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/multiselect/css/multi-select.css">
 <script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
+<script src="<?= Yii::$app->homeUrl; ?>/js/multiselect/js/jquery.multi-select.js"></script>
 

@@ -93,6 +93,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         [
                                             'attribute' => 'vessel',
+                                            'label' => call_user_func(function($model) {
+                                                           return VesselType::findOne($model->vessel_type)->vessel_type;
+                                                    }, $model),
                                             'value' => call_user_func(function($model) {
                                                             if ($model->vessel_type == 1) {
                                                                     return Vessel::findOne($model->tug)->vessel_name . ',' . Vessel::findOne($model->barge)->vessel_name;
