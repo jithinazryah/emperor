@@ -183,5 +183,28 @@ class PortCallDataController extends Controller {
 //        exit;
                 return $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min . ':00';
         }
+        public function actionUpdateRob($id) {
+        $model = PortCallDataRob::findOne(['appointment_id' => $id]);
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
+            return Yii::$app->response->redirect(Yii::$app->urlManager->createAbsoluteUrl('/appointment/port-call-data/update?id=' . $model->appointment_id));
+        } else {
+            return $this->render('update', [
+                        'model' => $model,
+            ]);
+        }
+    }
+     public function actionUpdateDraft($id)
+    {
+        $model = PortCallDataDraft::findOne(['appointment_id' => $id]);
+
+        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
+           //return $this->redirect('/port-call-data/update');
+          return Yii::$app->response->redirect(Yii::$app->urlManager->createAbsoluteUrl('/appointment/port-call-data/update?id='.$model->appointment_id));
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
 
 }

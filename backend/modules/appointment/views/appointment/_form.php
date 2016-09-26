@@ -135,11 +135,11 @@ use yii\db\Expression;
                         url: '<?= Yii::$app->homeUrl; ?>/appointment/appointment/vessel-type',
                         success: function (data) {
                             if (data != 'Tug &Barge') {
-                                    
+
                                 $("#appointment-tug").prop('disabled', true);
                                 $("#appointment-barge").prop('disabled', true);
                                 $("#appointment-vessel").prop('disabled', false);
-                                
+
                                 var index = $('#appointment-tug').get(0).selectedIndex;
                                 $('#appointment-tug option:eq(' + index + ')').prop("selected", false);
 
@@ -268,12 +268,13 @@ use yii\db\Expression;
 </script>
 <style>
     .over-active{
-        background-color: rgba(255, 0, 0, 0.03);
+        background-color: rgba(23, 20, 20, 0.11);
         width: 24%;
         height: 9%;
         position: absolute;
         z-index: 100;
     }
+
 </style>
 
 

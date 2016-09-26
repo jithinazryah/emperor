@@ -60,6 +60,7 @@ class PortCallDataRobController extends Controller {
      */
     public function actionCreate() {
         $model = new PortCallDataRob();
+        var_dump($model);exit;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

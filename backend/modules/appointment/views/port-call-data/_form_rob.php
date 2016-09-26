@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="port-call-data-rob-form form-inline">
 
-    <?php $form = ActiveForm::begin(['action' => '/emperor/backend/web/appointment/port-call-data-rob/update/?id=' . $model->id]); ?>
+    <?php $form = ActiveForm::begin(['action' => '/emperor/backend/web/appointment/port-call-data/update-rob/?id=' . $model->appointment_id]); ?>
 
     <?php //$form->field($model, 'appointment_id')->textInput(['readonly' => true, 'value' => $model->appointment->appointment_no]) ?>
     <div class="form-group "><h4 class="portcall"><b><u>ROB- ARRIVAL</u></b></h4></div>

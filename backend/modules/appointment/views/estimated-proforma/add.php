@@ -146,7 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td><?php echo $epdatotal; ?></td>
                                 <td colspan="3"></td>
                             </tr>
-                            <tr>
+                            <tr class="filter">
                                 <?php $form = ActiveForm::begin(); ?>
                                 <td></td>
                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
@@ -300,4 +300,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
+    <style>
+        .filter{
+                background-color: #cccaca;
+        }
+    </style>
 </div>

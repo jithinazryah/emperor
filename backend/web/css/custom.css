@@ -70,3 +70,6 @@ table{
     border: none;
     background-color: #e4e4e4;
 }
+table.table tr.filters{
+    background-color: #cccaca;
+}

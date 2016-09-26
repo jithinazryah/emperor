@@ -59,13 +59,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'immigartion_completed')->textInput(['tabindex' => 15]) ?>
 
     <?= $form->field($model, 'lastline_away')->textInput(['tabindex' => 19]) ?>
-    
+
     <div class="form-group "></div>
 
     <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled', 'tabindex' => 24]) ?>
-    
+
     <?= $form->field($model, 'comments')->textarea(['rows' => 6, 'tabindex' => 25]) ?>
-    
+
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>
     </div>
@@ -79,6 +79,18 @@ use yii\widgets\ActiveForm;
         }
         .portcall{
             color:#0f68a6;
+        }
+        .nav.nav-tabs+.tab-content {
+            background-color: #cccaca !important;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .form-control {
+            width: 100% !important;
+            font-weight: bold !important;
+        }
+        .nav.nav-tabs>li.active>a {
+            background-color: #cccaca;
         }
     </style>
 </div>
