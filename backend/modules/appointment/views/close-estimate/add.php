@@ -290,7 +290,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
      <style>
         .filter{
-                background-color: #cccaca;
+                background-color: #b9c7a7;
         }
     </style>
 </div>

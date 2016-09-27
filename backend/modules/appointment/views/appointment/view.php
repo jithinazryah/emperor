@@ -649,70 +649,70 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <hr class="appoint_history" />
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">FO ARRIVAL  :</label>
-                                        <?= $rob->fo_arrival_quantity; ?> <?= $rob->fo_arrival_unit == 1 ? 'Metric Ton' : 'Litter'; ?>
+                                        <?= $rob->fo_arrival_quantity; ?> <?php if($rob->fo_arrival_unit == 1){echo 'Metric Ton';}elseif($rob->fo_arrival_unit == 2){echo 'Litter';} ?>
                                                                         
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">DO ARRIVAL  :</label>
-                                        <?= $rob->do_arrival_quantity; ?> <?= $rob->do_arrival_unit; ?>
+                                        <?= $rob->do_arrival_quantity; ?> <?php if($rob->do_arrival_unit == 1){echo 'Metric Ton';}elseif($rob->do_arrival_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">GO ARRIVAL :</label>
-                                        <?= $rob->go_arrival_quantity; ?> <?= $rob->go_arrival_unit; ?>
+                                        <?= $rob->go_arrival_quantity; ?> <?php if($rob->go_arrival_unit == 1){echo 'Metric Ton';}elseif($rob->go_arrival_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">LO ARRIVAL :</label>
-                                        <?= $rob->lo_arrival_quantity; ?> <?= $rob->lo_arrival_unit; ?>
+                                        <?= $rob->lo_arrival_quantity; ?> <?php if($rob->lo_arrival_unit == 1){echo 'Metric Ton';}elseif($rob->lo_arrival_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">FRESH WATER ARRIVAL :</label>
-                                        <?= $rob->fresh_water_arrival_quantity; ?> <?= $rob->fresh_water_arrival_unit; ?>
+                                        <?= $rob->fresh_water_arrival_quantity; ?> <?php if($rob->fresh_water_arrival_unit == 1){echo 'Metric Ton';}elseif($rob->fresh_water_arrival_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">FO SAILING :</label>
-                                         <?= $rob->do_sailing_quantity; ?> <?= $rob->do_sailing_unit; ?>
+                                         <?= $rob->do_sailing_quantity; ?> <?php if($rob->fo_sailing_unit == 1){echo 'Metric Ton';}elseif($rob->fo_sailing_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">DO SAILING :</label>
-                                        <?= $rob->do_sailing_quantity; ?> <?= $rob->do_sailing_unit; ?>
+                                        <?= $rob->do_sailing_quantity; ?> <?php if($rob->do_sailing_unit == 1){echo 'Metric Ton';}elseif($rob->do_sailing_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">GO SAILING :</label>
-                                        <?= $rob->go_sailing_quantity; ?> <?= $rob->go_sailing_unit; ?>
+                                        <?= $rob->go_sailing_quantity; ?> <?php if($rob->go_sailing_unit == 1){echo 'Metric Ton';}elseif($rob->go_sailing_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">LO SAILING :</label>
-                                        <?= $rob->lo_sailing_quantity; ?> <?= $rob->lo_sailing_unit; ?>
+                                        <?= $rob->lo_sailing_quantity; ?> <?php if($rob->lo_sailing_unit == 1){echo 'Metric Ton';}elseif($rob->lo_sailing_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>
                                     
                                     <div class="form-group field-portcalldata-ets">
                                         <label class="control-label" for="portcalldata-ets">FRESH WATER SAILING  :</label>
-                                        <?= $rob->fresh_water_sailing_quantity; ?> <?= $rob->fresh_water_sailing_unit; ?>
+                                        <?= $rob->fresh_water_sailing_quantity; ?> <?php if($rob->fresh_water_sailing_unit == 1){echo 'Metric Ton';}elseif($rob->fresh_water_sailing_unit == 2){echo 'Litter';} ?>
 
                                         <div class="help-block"></div>
                                     </div>

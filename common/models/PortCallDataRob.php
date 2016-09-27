@@ -52,7 +52,7 @@ class PortCallDataRob extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['appointment_id'], 'required'],
-            [['appointment_id', 'fo_arrival_unit', 'fo_arrival_quantity', 'do_arrival_unit', 'do_arrival_quantity', 'go_arrival_unit', 'go_arrival_quantity', 'lo_arrival_unit', 'lo_arrival_quantity', 'fresh_water_arrival_unit', 'fresh_water_arrival_quantity', 'fo_sailing_unit', 'fo_sailing_quantity', 'do_sailing_unit', 'do_sailing_quantity', 'go_sailing_unit', 'go_sailing_quantity', 'lo_sailing_unit', 'lo_sailing_quantity', 'fresh_water_sailing_unit', 'fresh_water_sailing_quantity', 'additional_info', 'status', 'CB', 'UB'], 'integer'],
+            [['appointment_id', 'fo_arrival_unit',  'do_arrival_unit', 'go_arrival_unit',  'lo_arrival_unit', 'fresh_water_arrival_unit', 'fo_sailing_unit', 'do_sailing_unit', 'go_sailing_unit', 'lo_sailing_unit', 'fresh_water_sailing_unit', 'additional_info', 'status', 'CB', 'UB'], 'integer'],
             [['comments'], 'string'],
             [['DOC', 'DOU'], 'safe'],
         ];

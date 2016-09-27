@@ -61,11 +61,48 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'lastline_away')->textInput(['tabindex' => 19]) ?>
 
     <div class="form-group "></div>
+    <hr class="appoint_history" />
+
+    <div id="p_scents">
+        <span>
+            <div class="form-group">
+                <label class="control-label">Label</label>
+                <input type="text" class="form-control" name="1[label][]">
+            </div>
+            <div class="form-group ">
+                <label class="control-label" for="">Value</label>
+                <input type="text" class="form-control" name="1[valuee][]">
+            </div>
+            <div class="form-group">
+                <label class="control-label" >Comment</label>
+                <input type="text" class="form-control" name="1[comment][]">
+            </div>
+        </span>
+        <br/>
+    </div>
+
+
+
+    <div class="form-group field-portcalldatarob-fresh_water_arrival_quantity">
+    </div>
+    <div class="form-group field-portcalldatarob-fresh_water_arrival_quantity">
+    </div>
+    <div class="form-group field-portcalldatarob-fresh_water_arrival_quantity">
+    </div>
+    <div class="form-group field-portcalldatarob-fresh_water_arrival_quantity">
+        <a id="addScnt" class="btn btn-icon btn-blue addScnt" ><i class="fa-plus"></i></a>
+<!--        <button id="addScnt" class="btn btn-icon btn-blue"  ><i class="fa-plus"></i></button>-->
+    </div><br/>
+    <hr class="appoint_history" />
 
     <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled', 'tabindex' => 24]) ?>
-
-    <?= $form->field($model, 'comments')->textarea(['rows' => 6, 'tabindex' => 25]) ?>
-
+    <div class="form-group "></div>
+    <div class="form-group "></div>
+    <div class="form-group "></div>
+    <br/>
+    <?= Html::activeTextarea($model, 'comments', ['class' => 'newsletter-cta-mail txtarea']); ?>
+    <?php // $form->field($model, 'comments', ['template' => "<div class='full-width-text'>\n{label}\n{input}\n{hint}\n{error}\n</div>"])->textarea(['rows' => 6, 'tabindex' => 25]) ?>
+    <br/>
     <div class="form-group" style="float: right;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'style' => 'margin-top: 18px;']) ?>
     </div>
@@ -81,7 +118,7 @@ use yii\widgets\ActiveForm;
             color:#0f68a6;
         }
         .nav.nav-tabs+.tab-content {
-            background-color: #cccaca !important;
+            background-color: #b9c7a7 !important;
             padding: 30px;
             margin-bottom: 30px;
         }
@@ -90,7 +127,53 @@ use yii\widgets\ActiveForm;
             font-weight: bold !important;
         }
         .nav.nav-tabs>li.active>a {
-            background-color: #cccaca;
+            background-color: #b9c7a7;
+        }
+        .txtarea{
+            width:1220px !important;
+            margin-left: 28px;
+            height: 150px;
         }
     </style>
 </div>
+<script>
+        $(document).ready(function () {
+            /*
+             * Add more bnutton function
+             */
+            var scntDiv = $('#p_scents');
+            var i = $('#p_scents span').size() + 1;
+
+            $('#addScnt').on('click', function () {
+                var ver = '<span>\n\
+                                <div class="form-group">\n\
+                                <label class="control-label" for=""></label>\n\
+                                <input type="text" id="" class="form-control" name="1[label][]">\n\
+                                </div> \n\
+                                <div class="form-group">\n\
+                                <label class="control-label" for=""></label>\n\
+                                <input type="text" class="form-control" name="1[valuee][]">\n\
+                                </div> \n\
+                                <div class="form-group ">\n\
+                                <label class="control-label"></label>\n\
+                                <input type="text" id="" class="form-control" name="1[comment][]">\n\
+                                </div>\n\
+                                <div class="form-group">\n\
+                                <a id="remScnt" class="btn btn-icon btn-red remScnt" ><i class="fa-remove"></i></a>\n\
+                                 </div><br/>\n\
+                                </span>';
+
+
+                $(ver).appendTo(scntDiv);
+                i++;
+                return false;
+            });
+            $('#p_scents').on('click', '.remScnt', function () {
+                if (i > 2) {
+                    $(this).parents('span').remove();
+                    i--;
+                }
+                return false;
+            });
+        });
+</script>

@@ -129,7 +129,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <td>
                                             <?= Html::a('Edit', ['/appointment/estimated-proforma/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
                                             <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
-                                            <a href="javascript:;" onclick="showAjaxModal(<?= $estimate->id ?>);" class="btn btn-success">Sub</a>
+                                            <?= Html::a('Sub', ['/appointment/estimated-proforma/add-sub', 'id' => $estimate->id], ['class' => 'btn btn-success', 'target'=>'_blank']) ?>
+<!--                                            <a href="javascript:;" onclick="showAjaxModal(<?= $estimate->id ?>);" class="btn btn-success">Sub</a>-->
                                             <?php //Html::a('Sub', [''], ['class' => 'btn btn-success', "onclick" => "showAjaxModal(".$estimate->id.");"]) ?>
                                         </td>
                                         <?php
@@ -302,7 +303,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <style>
         .filter{
-                background-color: #cccaca;
+                background-color: #b9c7a7;
         }
     </style>
 </div>

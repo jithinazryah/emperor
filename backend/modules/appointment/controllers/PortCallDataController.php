@@ -91,7 +91,14 @@ class PortCallDataController extends Controller {
                         $model_rob = PortCallDataRob::findOne(['appointment_id' => $id]);
                         $model_add = new PortCallDataAdditional();
                         $this->Check($id, $model, $model_draft, $model_rob);
-                        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->dateformat($model, $_POST['PortCallData']) && $model->save()) {
+                        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->dateformat($model, $_POST['PortCallData']) /*&& $model->save()*/) {
+                                $arr =[];
+                                $i = 0;
+                                foreach ($_POST['1'] as $val){
+                                       // $arr[$i]['label'] = 
+                                        var_dump($val);
+                                        
+                                }exit;
                                 return $this->redirect(['update',
                                             'id' => $id,
                                 ]);
