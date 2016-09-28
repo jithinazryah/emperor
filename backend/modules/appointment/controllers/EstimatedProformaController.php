@@ -115,28 +115,6 @@ class EstimatedProformaController extends Controller {
         }
     }
 
-    public function actionAddSub($id, $prfrma_id = NULL) {
-        $subcategory = SubServices::findAll(['apponitment_id' => $id]);
-        $appointment = Appointment::findOne($id);
-        if (!isset($prfrma_id)) {
-            $model = new SubServices;
-        } else {
-            $model = SubServices::findOne($prfrma_id);
-        }
-        if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id)) {
-            $model->total = $model->unit * $model->unit_price;
-            if ($model->save()) {
-                return $this->redirect(['add-sub', 'id' => $id]);
-            }
-        }
-        return $this->render('add-sub', [
-                    'model' => $model,
-                    'subcategory' => $subcategory,
-                    'appointment' => $appointment,
-                    'id' => $id,
-        ]);
-    }
-
     public function actionDeletePerforma($id) {
         $this->findModel($id)->delete();
 
@@ -163,29 +141,7 @@ class EstimatedProformaController extends Controller {
         }
     }
 
-//        public function actionEdit($id) {
-//                $model = new SubServices();
-//                $model = SubServices::findOne($id);
-//                var_dump($model);exit;
-//                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model, $id)) {
-//                        $model->save();
-//                        return $this->redirect(['view', 'id' => $model->id]);
-//                } else {
-//                        return $this->render('update', [
-//                                    'model' => $model,
-//                        ]);
-//                }
-//        }
 
-    public function actionDeleteSub($id) {
-        $model = new SubServices();
-        if (($model = SubServices::findOne($id)) !== null) {
-            $model->delete();
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-        return $this->redirect(Yii::$app->request->referrer);
-    }
 
     /**
      * Deletes an existing EstimatedProforma model.
