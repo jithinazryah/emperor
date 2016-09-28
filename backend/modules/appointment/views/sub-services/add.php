@@ -130,20 +130,27 @@ $this->params['breadcrumbs'][] = $this->title;
                             <tr class="filter">
                                 <?php $form = ActiveForm::begin(); ?>
                                 <td></td>
-<!--                                <td><?php // $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false);  ?></td>-->
+<!--                                <td><?php // $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false);   ?></td>-->
                                 <td><?= $form->field($model, 'sub_service')->dropDownList(ArrayHelper::map(MasterSubService::findAll(['status' => 1]), 'id', 'sub_service'), ['prompt' => '- Sub Service-'])->label(false); ?></td>
-<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false);         ?></td>
-                               <td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                      ?></td>-->
+<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false);          ?></td>
+                               <td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                       ?></td>-->
                                 <td><?= $form->field($model, 'rate_to_category')->textInput(['placeholder' => 'Rate To Category'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Unit'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit_price')->textInput(['placeholder' => 'Unit Price'])->label(false) ?></td>
-<!--                                <td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                      ?></td>-->
+<!--                                <td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                       ?></td>-->
                                 <td><?= $form->field($model, 'total')->textInput(['placeholder' => 'Total', 'disabled' => true])->label(false) ?></td>
                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
                                 <td><?= Html::submitButton($model->isNewRecord ? 'Add' : 'Update', ['class' => 'btn btn-success']) ?>
                                 </td>
                                 <?php ActiveForm::end(); ?>
                             </tr>
+                        <tr>
+                            <td>
+                                <?php
+                                echo Html::a('<i class="fa fa-level-up"></i><span>Back to Estmated Proforma</span>', ['/appointment/estimated-proforma/add', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                                ?>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
