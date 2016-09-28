@@ -132,7 +132,7 @@ AppAsset::register($this);
                                     <?= Html::a('Services', ['/masters/services/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
-                                    <?= Html::a(' Master Sub Services', ['/masters/master-sub-services/index'], ['class' => 'title']) ?>
+                                    <?= Html::a(' Master Sub Services', ['/masters/master-sub-service/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
                                     <?= Html::a('Service Categories', ['/masters/service-categorys/index'], ['class' => 'title']) ?>

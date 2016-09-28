@@ -6,6 +6,7 @@ use Yii;
 use common\models\EstimatedProforma;
 use common\models\SubServices;
 use common\models\Appointment;
+use common\models\MasterSubService;
 use common\models\EstimatedProformaSearch;
 use common\models\AppointmentSearch;
 use yii\web\Controller;
@@ -78,7 +79,6 @@ class EstimatedProformaController extends Controller {
                 $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
                 $appointment = Appointment::findOne($id);
                 if(empty($estimates)){
-                        var_dump($appointment->principal);exit;
                     $app = EstimatedProforma::findone(['principal' => $appointment->principal]);
                     if(!empty($app)){
                          $this->SetData($app, $id);
@@ -91,7 +91,6 @@ class EstimatedProformaController extends Controller {
                         $model = $this->findModel($prfrma_id);
                 }
                 if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id)) {
-
                         $model->epda = $model->unit_rate * $model->unit;
                         if ($model->save()) {
                                 return $this->redirect(['add', 'id' => $id]);
@@ -105,17 +104,21 @@ class EstimatedProformaController extends Controller {
                 ]);
         }
 
-        public function actionAddSub($id) {
+        public function actionAddSub($id, $prfrma_id = NULL) {
                 $subcategory = SubServices::findAll(['apponitment_id' => $id]);
                 $appointment = Appointment::findOne($id);
                 if (!isset($prfrma_id)) {
                         $model = new SubServices;
                 } else {
-                        $model = $this->findModel($prfrma_id);
+                        $model = SubServices::findOne($prfrma_id);
                 }
-                if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id) && $model->save()) {
+                if ($model->load(Yii::$app->request->post()) && $this->SetValues($model, $id)) {
+                    $model->total = $model->unit * $model->unit_price;
+                        if ($model->save()) {
+                                return $this->redirect(['add-sub', 'id' => $id]);
+                        }
                 }
-                return $this->render('add', [
+                return $this->render('add-sub', [
                             'model' => $model,
                             'subcategory' => $subcategory,
                             'appointment' => $appointment,
@@ -138,7 +141,6 @@ class EstimatedProformaController extends Controller {
          */
         public function actionUpdate($id) {
                 $model = $this->findModel($id);
-
                 if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model, $id)) {
                         $model->epda = $model->unit_rate * $model->unit;
                         $model->save();
@@ -148,6 +150,30 @@ class EstimatedProformaController extends Controller {
                                     'model' => $model,
                         ]);
                 }
+        }
+        
+//        public function actionEdit($id) {
+//                $model = new SubServices();
+//                $model = SubServices::findOne($id);
+//                var_dump($model);exit;
+//                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model, $id)) {
+//                        $model->save();
+//                        return $this->redirect(['view', 'id' => $model->id]);
+//                } else {
+//                        return $this->render('update', [
+//                                    'model' => $model,
+//                        ]);
+//                }
+//        }
+        
+        public function actionDeleteSub($id) {
+                $model = new SubServices();
+                if (($model = SubServices::findOne($id)) !== null) {
+                        $model->delete();
+                } else {
+                        throw new NotFoundHttpException('The requested page does not exist.');
+                }
+                return $this->redirect(Yii::$app->request->referrer);
         }
 
         /**
@@ -211,6 +237,19 @@ class EstimatedProformaController extends Controller {
                         $service_id = $_POST['service_id'];
                         $services_data = \common\models\Services::find()->where(['id' => $service_id])->one();
                         echo $services_data->supplier_options;
+                }
+        }
+        
+        public function actionSubservice() {
+                if (Yii::$app->request->isAjax) {
+                        $service_id = $_POST['service_id'];
+                        $services_datas = \common\models\MasterSubService::findAll((['service_id' => $service_id, 'status' => 1]));
+                        $options = '<option value="">-Sub Service-</option>';
+                        foreach ($services_datas as $services_data) {
+                                $options .= "<option value='" . $services_data->id . "'>" . $services_data->sub_service . "</option>";
+                        }
+
+                        echo $options;
                 }
         }
 

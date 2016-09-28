@@ -37,7 +37,7 @@ class SubServices extends \yii\db\ActiveRecord {
                     [['service_id', 'sub_service'], 'required'],
                     [['service_id', 'status', 'CB', 'UB'], 'integer'],
                     [['unit', 'unit_price', 'total'], 'number'],
-                    [['comments'], 'string'],
+                    [['comments','rate_to_category'], 'string'],
                     [['DOC', 'DOU'], 'safe'],
                     [['sub_service'], 'string', 'max' => 50],
                 ];
@@ -51,6 +51,7 @@ class SubServices extends \yii\db\ActiveRecord {
                     'id' => 'ID',
                     'service_id' => 'Service ID',
                     'sub_service' => 'Sub Service',
+                    'rate_to_category' => 'Rate to Category',
                     'unit' => 'Unit',
                     'unit_price' => 'Unit Price',
                     'total' => 'Total',
@@ -66,5 +67,10 @@ class SubServices extends \yii\db\ActiveRecord {
         public function getService() {
                 return $this->hasOne(Services::className(), ['id' => 'service_id']);
         }
+        
+        public function getSub() {
+                return $this->hasOne(MasterSubService::className(), ['id' => 'sub_service']);
+        }
+        
 
 }

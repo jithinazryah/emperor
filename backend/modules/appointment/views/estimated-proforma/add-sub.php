@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 use common\models\Services;
+use common\models\MasterSubService;
 use common\models\Currency;
 use common\models\Contacts;
 use common\models\Debtor;
@@ -36,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </a>
                 </div>
             </div>
-            <?php //Pjax::begin();  ?> 
+            <?php //Pjax::begin();    ?> 
             <div class="panel-body">
                 <div class="row appoint">
                     <div class="col-sm-3" style="text-align: right">
@@ -84,11 +85,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <hr class="appoint_history" />
-                <div style="float: left;">
-                    <?php
-                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
-                    ?>
-                </div>
 
                 <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
 
@@ -97,97 +93,80 @@ $this->params['breadcrumbs'][] = $this->title;
                             <tr>
                                 <th data-priority="1">#</th>
                                 <th data-priority="1">SERVICES</th>
-                                <th data-priority="3">SUB SERVICES</th>
-<!--                                                                <th data-priority="3">CURRENCY</th>-->
-                                <th data-priority="1">UNIT</th>
-                                <th data-priority="3">UNIT PRICE</th>
+                                <th data-priority="3">SUB SERVICE</th>
+                                <th data-priority="1">RATE TO CATEGORY</th>
+                                <th data-priority="3">UNIT</th>
 <!--                                                                <th data-priority="6">ROE</th>-->
-                                <th data-priority="6" >TOTAL</th>
-                                <th data-priority="6">RATE TO CATEGORY</th>
+                                <th data-priority="6" >UNIT PRICE</th>
+                                <th data-priority="6">TOTAL</th>
                                 <th data-priority="6">COMMENTS</th>
                                 <th data-priority="1">ACTIONS</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             <?php
                             $i = 0;
-                            foreach ($estimates as $estimate):
+                            foreach ($subcategory as $subcate):
                                     $i++;
                                     ?>
                                     <tr>
                                         <td><?= $i; ?></td>
-                                        <th><span class="co-name"><?= $estimate->service->service ?></span></th>
-                                        <td><?= $estimate->supplier0->name ?></td>
-        <!--                                                                <td><? $estimate->currency0->currency_symbol ?></td>-->
-                                        <td><?= $estimate->unit_rate; ?></td>
-                                        <td><?= $estimate->unit; ?></td>
-        <!--                                                                <td><? $estimate->roe; ?></td>-->
-                                        <td><?= $estimate->epda; ?></td>
-                                        <td><?= $estimate->principal0->principal_name; ?></td>
-                                        <td><?= $estimate->comments; ?></td>
+                                        <td><?= $subcate->service->service ?></td>
+                                        <td><?= $subcate->sub->sub_service; ?></td>
+                                        <td><?= $subcate->rate_to_category; ?></td>
+                                        <td><?= $subcate->unit; ?></td>
+                                        <td><?= $subcate->unit_price; ?></td>
+                                        <td><?= $subcate->total; ?></td>
+                                        <td><?= $subcate->comments; ?></td>
                                         <td>
-                                            <?= Html::a('Edit', ['/appointment/estimated-proforma/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
-                                            <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
-                                            <?= Html::a('Sub', ['/appointment/estimated-proforma/add-sub', 'id' => $estimate->id], ['class' => 'btn btn-success', 'target'=>'_blank']) ?>
-<!--                                            <a href="javascript:;" onclick="showAjaxModal(<?= $estimate->id ?>);" class="btn btn-success">Sub</a>-->
-                                            <?php //Html::a('Sub', [''], ['class' => 'btn btn-success', "onclick" => "showAjaxModal(".$estimate->id.");"]) ?>
+                                            <?= Html::a('Edit', ['/appointment/estimated-proforma/add-sub', 'id' => $id, 'prfrma_id' => $subcate->id], ['class' => 'btn btn-primary']) ?>
+                                            <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-sub', 'id' => $subcate->id], ['class' => 'btn btn-red']) ?>
                                         </td>
                                         <?php
-                                        $epdatotal += $estimate->epda;
+                                        $subtotal += $subcate->total;
                                         ?>
-                                    </tr>	
-
+                                    </tr>
                                     <?php
                             endforeach;
                             ?>
                             <tr>
                                 <td></td>
-                                <td colspan="4"> <b>EPDA TOTAL</b></td>
-                                <td><?php echo $epdatotal; ?></td>
-                                <td colspan="3"></td>
+                                <td colspan="5"> <b>SUB TOTAL</b></td>
+                                <td><?php echo $subtotal; ?></td>
+                                <td colspan="2"></td>
                             </tr>
                             <tr class="filter">
                                 <?php $form = ActiveForm::begin(); ?>
                                 <td></td>
                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
-                                <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 4])->all(), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false);    ?></td>-->
-                               <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                 ?></td>-->
-                                <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
-                                <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                 ?></td>-->
-                                <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA', 'disabled' => true])->label(false) ?></td>
-
-                                <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1, 'id' => explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
+                                <td><?= $form->field($model, 'sub_service')->dropDownList(ArrayHelper::map(MasterSubService::findAll(['status' => 1]), 'id', 'sub_service'), ['prompt' => '- Sub Service-'])->label(false); ?></td>
+<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false);        ?></td>-->
+                               <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                     ?></td>-->
+                                <td><?= $form->field($model, 'rate_to_category')->textInput(['placeholder' => 'Rate To Category'])->label(false) ?></td>
+                                <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Unit'])->label(false) ?></td>
+                                <td><?= $form->field($model, 'unit_price')->textInput(['placeholder' => 'Unit Price'])->label(false) ?></td>
+                                <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                     ?></td>-->
+                                <td><?= $form->field($model, 'total')->textInput(['placeholder' => 'Total', 'disabled' => true])->label(false) ?></td>
                                 <td><?= $form->field($model, 'comments')->textInput(['placeholder' => 'Comments'])->label(false) ?></td>
                                 <td><?= Html::submitButton($model->isNewRecord ? 'Add' : 'Update', ['class' => 'btn btn-success']) ?>
                                 </td>
                                 <?php ActiveForm::end(); ?>
                             </tr>
-                            <tr></tr>
-
-                            <!-- Repeat -->
-
                         </tbody>
-
                     </table>
                 </div>
+
                 <script>
                         $("document").ready(function () {
-                            $('#estimatedproforma-service_id').change(function () {
+                            $('#subservices-service_id').change(function () {
                                 var service_id = $(this).val();
                                 $.ajax({
                                     type: 'POST',
                                     cache: false,
                                     data: {service_id: service_id},
-                                    url: '<?= Yii::$app->homeUrl; ?>/appointment/estimated-proforma/supplier',
+                                    url: '<?= Yii::$app->homeUrl; ?>/appointment/estimated-proforma/subservice',
                                     success: function (data) {
-                                        if (data == 1) {
-                                            $("#estimatedproforma-supplier").prop('disabled', false);
-                                        } else {
-                                            $("#estimatedproforma-supplier").prop('disabled', true);
-                                        }
+                                        $('#subservices-sub_service').html(data);
                                     }
                                 });
                             });
@@ -197,7 +176,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <script type="text/javascript">
                         jQuery(document).ready(function ($)
                         {
-                            $("#estimatedproforma-service_id").select2({
+                            $("#subservices-service_id").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true
                             }).on('select2-open', function ()
@@ -205,7 +184,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // Adding Custom Scrollbar
                                 $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                             });
-                            $("#estimatedproforma-supplier").select2({
+                            $("#subservices-sub_service").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true
                             }).on('select2-open', function ()
@@ -213,22 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // Adding Custom Scrollbar
                                 $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                             });
-                            $("#estimatedproforma-currency").select2({
-                                //placeholder: 'Select your country...',
-                                allowClear: true
-                            }).on('select2-open', function ()
-                            {
-                                // Adding Custom Scrollbar
-                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                            });
-                            $("#estimatedproforma-principal").select2({
-                                //placeholder: 'Select your country...',
-                                allowClear: true
-                            }).on('select2-open', function ()
-                            {
-                                // Adding Custom Scrollbar
-                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                            });
+
                         });</script>
 
 
@@ -238,25 +202,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <script>
                         $(document).ready(function () {
-                            $("#estimatedproforma-unit_rate").keyup(function () {
+                            $("#subservices-unit").keyup(function () {
                                 multiply();
                             });
-                            $("#estimatedproforma-unit").keyup(function () {
+                            $("#subservices-unit_price").keyup(function () {
                                 multiply();
                             });
                         });
                         function multiply() {
-                            var rate = $("#estimatedproforma-unit_rate").val();
-                            var unit = $("#estimatedproforma-unit").val();
+                            var rate = $("#subservices-unit").val();
+                            var unit = $("#subservices-unit_price").val();
                             if (rate != '' && unit != '') {
-                                $("#estimatedproforma-epda").val(rate * unit);
+                                $("#subservices-total").val(rate * unit);
                             }
 
                         }
-                        $("#estimatedproforma-epda").prop("disabled", true);
+                        $("#subservices-total").prop("disabled", true);
                 </script>
             </div>
-            <?php //Pjax::end();  ?> 
+            <?php //Pjax::end();    ?> 
         </div>
     </div>
 </div>
@@ -303,7 +267,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <style>
         .filter{
-                background-color: #b9c7a7;
+            background-color: #b9c7a7;
         }
     </style>
 </div>
