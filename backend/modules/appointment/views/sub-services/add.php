@@ -147,7 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tr>
                             <td>
                                 <?php
-                                echo Html::a('<i class="fa fa-level-up"></i><span>Back to Estmated Proforma</span>', ['/appointment/estimated-proforma/add', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                                echo Html::a('<span>Back to Estmated Proforma</span>', ['/appointment/estimated-proforma/add', 'id' => $appointment->id], ['class' => 'btn btn-blue btn-icon']);
                                 ?>
                             </td>
                         </tr>
