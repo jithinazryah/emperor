@@ -75,16 +75,22 @@ class EstimatedProformaController extends Controller {
                 }
         }
 
-        public function actionAdd($id, $prfrma_id = NULL) {
+    public function actionAdd($id, $prfrma_id = NULL, $check = NULL) {
                 $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
                 $appointment = Appointment::findOne($id);
-                if(empty($estimates)){
-                    $app = EstimatedProforma::findone(['principal' => $appointment->principal]);
-                    if(!empty($app)){
+        if (empty($estimates) && !empty($check)) {
+            //$appointment_anther = Appointment::find()->where('id != :id and principal LIKE :principal', ['id'=>$id, 'principal'=>$appointment->principal])->one();
+            $principal_array = explode(',', $appointment->principal);
+            foreach ($principal_array as $ar) {
+                $app = EstimatedProforma::findone(['principal' => $ar]);
+                if (!empty($app)) {
                          $this->SetData($app, $id);
+                }
+//                            var_dump($app);
+//                            exit;
+            }
                          return $this->redirect(['add', 'id' => $id]);
                     }
-                }
                 if (!isset($prfrma_id)) {
                         $model = new EstimatedProforma;
                 } else {
@@ -214,21 +220,23 @@ class EstimatedProformaController extends Controller {
                 }
         }
         
-        protected function SetData($app, $id) {
+    protected function SetData($value, $id) {
                  $model = new EstimatedProforma;
-                       foreach ($app as $value) {
+
                             $model->apponitment_id = $id;
-                            $model->service_id =$value->service_id;
-                            $model->supplier =$value->supplier;
-                            $model->unit_rate =$value->unit_rate;
-                            $model->unit =$value->unit;
-                            $model->epda =$value->epda;
-                            $model->principal =$value->principal;
-                            $model->invoice_type =$value->invoice_type;
-                            $model->comments =$value->comments;
-                            $model->status =$value->status;
+        $model->service_id = $value->service_id;
+        $model->supplier = $value->supplier;
+        $model->unit_rate = $value->unit_rate;
+        $model->unit = $value->unit;
+        $model->epda = $value->epda;
+        $model->principal = $value->principal;
+        $model->invoice_type = $value->invoice_type;
+        $model->comments = $value->comments;
+        $model->status = $value->status;
+        $model->CB = Yii::$app->user->identity->id;
+        $model->DOC = date('Y-m-d');
                             $model->save();
-                        }
+
                         return true;
         }
 
