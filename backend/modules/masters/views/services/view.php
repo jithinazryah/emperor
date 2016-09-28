@@ -60,7 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                                 [
                                     'attribute' => 'supplier',
-                                    'value' => $model->supplier0->name,
+                                    'value' => call_user_func(function ($data) {
+                                                            $supplier = explode(',', $data->supplier);
+                                                            $result = '';
+                                                            foreach ($supplier as $supplie) {
+                                                                    $result .= $data->getSupplierName($supplie) . ', ';
+                                                            }
+                                                            return rtrim($result, ",");
+                                                    }, $model),
                                 ],
                                 'unit_rate',
                                 [

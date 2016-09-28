@@ -28,7 +28,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'supplier_options')->dropDownList(['1' => 'Yes', '0' => 'No']) ?>
 
-    <?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Choose a Supplier-']) ?>
+    <?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['options' => Yii::$app->SetValues->Selected($model->supplier),'prompt' => '-Choose a Supplier-', 'multiple' => true]) ?>
 
     <?= $form->field($model, 'unit_rate')->textInput() ?>
 
@@ -65,6 +65,23 @@ use yii\helpers\ArrayHelper;
                 }
               
             });
+            /*
+             * Multiple option for supplier
+             */
+             $("#services-supplier").select2({
+                        placeholder: 'Choose Principals',
+                        allowClear: true
+                }).on('select2-open', function ()
+                {
+                        // Adding Custom Scrollbar
+                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                });
 
         });
 </script>
+
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/multiselect/css/multi-select.css">
+<script src="<?= Yii::$app->homeUrl; ?>/js/select2/select2.min.js"></script>
+<script src="<?= Yii::$app->homeUrl; ?>/js/multiselect/js/jquery.multi-select.js"></script>

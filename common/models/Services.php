@@ -40,7 +40,7 @@ class Services extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['category_id', 'service', 'invocie_type'], 'required'],
-            [['category_id', 'invocie_type', 'supplier', 'unit_rate', 'unit', 'currency', 'epda_value', 'cost_allocation', 'status', 'CB', 'UB'], 'integer'],
+            [['category_id', 'invocie_type', 'unit_rate', 'unit', 'currency', 'epda_value', 'cost_allocation', 'status', 'CB', 'UB'], 'integer'],
             [['comments'], 'string'],
             [['DOC', 'DOU'], 'safe'],
             [['service'], 'string', 'max' => 200],
@@ -73,6 +73,10 @@ class Services extends \yii\db\ActiveRecord {
             'DOU' => 'Dou',
         ];
     }
+    
+    public function getSupplierName($supplier_id) {
+                return contacts::findOne(['id' => $supplier_id])->name;
+        }
 
     public function getInvoicetype0() {
         return $this->hasOne(InvoiceType::className(), ['id' => 'invocie_type']);
