@@ -205,14 +205,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 // Adding Custom Scrollbar
                                 $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
                             });
-                            $("#estimatedproforma-supplier").select2({
-                                //placeholder: 'Select your country...',
-                                allowClear: true
-                            }).on('select2-open', function ()
-                            {
-                                // Adding Custom Scrollbar
-                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                            });
+//                            $("#estimatedproforma-supplier").select2({
+//                                //placeholder: 'Select your country...',
+//                                allowClear: true
+//                            }).on('select2-open', function ()
+//                            {
+//                                // Adding Custom Scrollbar
+//                                $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+//                            });
                             $("#estimatedproforma-currency").select2({
                                 //placeholder: 'Select your country...',
                                 allowClear: true

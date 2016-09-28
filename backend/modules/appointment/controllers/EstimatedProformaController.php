@@ -252,6 +252,7 @@ class EstimatedProformaController extends Controller {
             $service_id = $_POST['service_id'];
             $services_data = \common\models\Services::find()->where(['id' => $service_id])->one();
             echo $services_data->supplier_options;
+            exit;
         }
     }
 
