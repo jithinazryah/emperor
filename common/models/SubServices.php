@@ -34,8 +34,8 @@ class SubServices extends \yii\db\ActiveRecord {
          */
         public function rules() {
                 return [
-                    [['service_id', 'sub_service'], 'required'],
-                    [['service_id', 'status', 'CB', 'UB'], 'integer'],
+                    //[['service_id', 'sub_service'], 'required'],
+                   // [['service_id', 'status', 'CB', 'UB'], 'integer'],
                     [['unit', 'unit_price', 'total'], 'number'],
                     [['comments','rate_to_category'], 'string'],
                     [['DOC', 'DOU'], 'safe'],
