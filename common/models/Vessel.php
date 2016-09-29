@@ -47,6 +47,7 @@ class Vessel extends \yii\db\ActiveRecord
     {
         return [
             [['vessel_type', 'vessel_name'], 'required'],
+            [['imo_no', 'vessel_name', 'official'], 'unique'],
             [['vessel_type', 'status', 'CB', 'UB'], 'integer'],
             [['owners_info'], 'string'],
             [['DOC', 'DOU'], 'safe'],

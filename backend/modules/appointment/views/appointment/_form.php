@@ -131,16 +131,16 @@ use yii\db\Expression;
                                 $("#appointment-tug").prop('disabled', false);
                                 $("#appointment-barge").prop('disabled', false);
                         }
-                        else if (vessel_type == 2) {
-                                $("#appointment-vessel").prop('disabled', true);
-                                $("#appointment-tug").prop('disabled', false);
-                                $("#appointment-barge").prop('disabled', true);
-                        }
-                        else if (vessel_type == 3) {
-                                $("#appointment-vessel").prop('disabled', true);
-                                $("#appointment-tug").prop('disabled', true);
-                                $("#appointment-barge").prop('disabled', false);
-                        }
+//                        else if (vessel_type == 2) {
+//                                $("#appointment-vessel").prop('disabled', true);
+//                                $("#appointment-tug").prop('disabled', false);
+//                                $("#appointment-barge").prop('disabled', true);
+//                        }
+//                        else if (vessel_type == 3) {
+//                                $("#appointment-vessel").prop('disabled', true);
+//                                $("#appointment-tug").prop('disabled', true);
+//                                $("#appointment-barge").prop('disabled', false);
+//                        }
                         else {
                                 $.ajax({
                                         type: 'POST',

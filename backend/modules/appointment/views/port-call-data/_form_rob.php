@@ -76,11 +76,11 @@ use common\models\PortCallDataAdditional;
         </button>-->
 
 
-       
 
 
 
-     
+
+
 
 
 
@@ -109,14 +109,16 @@ use common\models\PortCallDataAdditional;
              */
             $('.decimal').blur(function () {
                 var str = $(this).val();
-                if (str.indexOf('.') === -1) {
-                    $(this).val(str + '.000');
+                if (str != '') {
+                    if (str.indexOf('.') === -1) {
+                        $(this).val(str + '.000');
+                    }
                 }
             });
 
-            
 
-            
+
+
 
         });
 </script>
