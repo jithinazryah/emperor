@@ -85,37 +85,53 @@ class PortCallDataController extends Controller {
          */
         public function actionUpdate($id) {
                 $model_appointment = Appointment::findOne(['id' => $id]);
-                if (!empty($model_appointment)) {
-                        $model = PortCallData::findOne(['appointment_id' => $id]);
-                        $model_draft = PortCallDataDraft::findOne(['appointment_id' => $id]);
-                        $model_rob = PortCallDataRob::findOne(['appointment_id' => $id]);
-                        $model_add = new PortCallDataAdditional();
-                        $this->Check($id, $model, $model_draft, $model_rob);
-                        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->dateformat($model, $_POST['PortCallData']) /*&& $model->save()*/) {
-                                $arr =[];
-                                $i = 0;
-                                foreach ($_POST['1'] as $val){
-                                       // $arr[$i]['label'] = 
-                                        var_dump($val);
-                                        
-                                }exit;
-                                return $this->redirect(['update',
-                                            'id' => $id,
-                                ]);
-                        } else {
-                                return $this->render('update', [
-                                            'model' => $model,
-                                            'model_draft' => $model_draft,
-                                            'model_rob' => $model_rob,
-                                            'model_add' => $model_add,
-                                ]);
-                        }
-                } else {
+                $model = PortCallData::findOne(['appointment_id' => $id]);
+                $model_draft = PortCallDataDraft::findOne(['appointment_id' => $id]);
+                $model_rob = PortCallDataRob::findOne(['appointment_id' => $id]);
+                if (empty($model_appointment))
                         throw new \yii\web\HttpException(404, 'This Appointment could not be found.Eroor Code:1001');
+                $model_add = new PortCallDataAdditional();
+                $this->Check($id, $model, $model_draft, $model_rob);
+                if ($model->load(Yii::$app->request->post())) {
+                        $this->saveportcalldata($model);
+                } else if ($model_rob->load(Yii::$app->request->post()) && $model_draft->load(Yii::$app->request->post())) {
+                        $this->saveportcalldraftrob($model_rob,$model_draft);
+                }
+                return $this->render('update', [
+                            'model' => $model,
+                            'model_draft' => $model_draft,
+                            'model_rob' => $model_rob,
+                            'model_add' => $model_add,
+                ]);
+        }
+
+        public function SavePortcallData($model) {
+                Yii::$app->SetValues->Attributes($model);
+                $this->dateformat($model, $_POST['PortCallData']);
+                $model->save();
+                /* $arr = [];
+                  $i = 0;
+                  foreach ($_POST['1'] as $val) {
+                  // $arr[$i]['label'] =
+                  //var_dump($val);
+                  }exit; */
+                /* return $this->redirect(['update',
+                  'id' => $id,
+                  ]); */
+        }
+
+        public function SavePortcallDraftRob($model_rob,$model_draft) {
+                Yii::$app->SetValues->Attributes($model_draft);
+                Yii::$app->SetValues->Attributes($model_rob);
+                if ($model_draft->validate() && $model_rob->validate()) {
+                        $model_draft->save();
+                        $model_rob->save();
                 }
         }
 
+
         public function Check($id, $model, $model_draft, $model_rob) {
+                //echo 'hai';exit;
                 if ($model != null && $model_draft != null && $model_rob != null) {
                         return true;
                 } else {
@@ -190,28 +206,4 @@ class PortCallDataController extends Controller {
 //        exit;
                 return $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min . ':00';
         }
-        public function actionUpdateRob($id) {
-        $model = PortCallDataRob::findOne(['appointment_id' => $id]);
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
-            return Yii::$app->response->redirect(Yii::$app->urlManager->createAbsoluteUrl('/appointment/port-call-data/update?id=' . $model->appointment_id));
-        } else {
-            return $this->render('update', [
-                        'model' => $model,
-            ]);
-        }
-    }
-     public function actionUpdateDraft($id)
-    {
-        $model = PortCallDataDraft::findOne(['appointment_id' => $id]);
-
-        if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $model->save()) {
-           //return $this->redirect('/port-call-data/update');
-          return Yii::$app->response->redirect(Yii::$app->urlManager->createAbsoluteUrl('/appointment/port-call-data/update?id='.$model->appointment_id));
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
 }

@@ -42,7 +42,7 @@ class Services extends \yii\db\ActiveRecord {
             [['category_id', 'service', 'invocie_type'], 'required'],
             [['category_id', 'invocie_type', 'unit_rate', 'unit', 'currency', 'epda_value', 'cost_allocation', 'status', 'CB', 'UB'], 'integer'],
             [['comments'], 'string'],
-            [['DOC', 'DOU'], 'safe'],
+            [['DOC', 'DOU','supplier_options','supplier'], 'safe'],
             [['service'], 'string', 'max' => 200],
             [['roe'], 'string', 'max' => 100],
         ];

@@ -39,15 +39,15 @@ $this->params['breadcrumbs'][] = 'Update';
                     <li class="<?= $stat == 2 ? 'active': ''?>">
                         <a href="#port-draft" data-toggle="tab">
                             <span class="visible-xs"><i class="fa-user"></i></span>
-                            <span class="hidden-xs">Port Call Data Draft</span>
+                            <span class="hidden-xs">Port Call Data Draft-Rob</span>
                         </a>
                     </li>
-                    <li class="<?= $stat == 3 ? 'active': ''?>">
+<!--                    <li class="<?php// $stat == 3 ? 'active': ''?>">
                         <a href="#port-rob" data-toggle="tab">
                             <span class="visible-xs"><i class="fa-user"></i></span>
                             <span class="hidden-xs">Port Call Data ROB</span>
                         </a>
-                    </li>
+                    </li>-->
                 </ul>    
                 <div class="tab-content">
                     <div class="tab-pane <?= $stat == 1 || $stat == NULL ? 'active': ''?>" id="port-data">
@@ -66,26 +66,27 @@ $this->params['breadcrumbs'][] = 'Update';
                         <div class="panel-body">
                             <div class="port-call-data-draft-create">
                                 <?=
-                                $this->render('_form_draft', [
-                                    'model' => $model_draft,
+                                $this->render('_form_draft_rob', [
+                                    'model_draft' => $model_draft,
+                                    'model_rob' => $model_rob,
                                 ])
                                 ?>
                             </div>
                         </div>
 
                     </div>
-                    <div class="tab-pane <?= $stat == 3 ? 'active': ''?>" id="port-rob">
+<!--                    <div class="tab-pane <?php// $stat == 3 ? 'active': ''?>" id="port-rob">
                         <div class="panel-body">
                             <div class="port-call-data-draft-create">
-                                <?=
-                                $this->render('_form_rob', [
-                                    'model' => $model_rob,
-                                ])
+                                <?php
+                               // $this->render('_form_rob', [
+                               //     'model' => $model_rob,
+                               // ])
                                 ?>
                             </div>
                         </div>
 
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

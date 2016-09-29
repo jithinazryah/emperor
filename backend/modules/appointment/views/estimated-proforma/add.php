@@ -151,8 +151,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?php $form = ActiveForm::begin(); ?>
                                 <td></td>
                                 <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
-                                <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 4])->all(), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-<!--                                <td><?php // $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false);    ?></td>-->
+                                <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false);    ?></td>
                                <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                 ?></td>-->
                                 <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                 <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
@@ -183,8 +182,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     data: {service_id: service_id},
                                     url: '<?= Yii::$app->homeUrl; ?>/appointment/estimated-proforma/supplier',
                                     success: function (data) {
-                                        if (data == 1) {
-                                            $("#estimatedproforma-supplier").prop('disabled', false);
+                                        if (data != '') {
+                                             $("#estimatedproforma-supplier").html(data);
                                         } else {
                                             $("#estimatedproforma-supplier").prop('disabled', true);
                                         }
