@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             'id',
             'service_id',
             'sub_service',
+            'rate_to_category',                                        
             'unit',
             'unit_price',
             'total',

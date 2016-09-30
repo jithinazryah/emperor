@@ -19,7 +19,7 @@ class MasterSubServiceSearch extends MasterSubService
     {
         return [
             [['id', 'service_id', 'status', 'CB', 'UB'], 'integer'],
-            [['sub_service', 'comments','rate_to_category ','DOC', 'DOU'], 'safe'],
+            [['sub_service', 'comments','DOC', 'DOU'], 'safe'],
             [['unit', 'unit_price', 'total'], 'number'],
         ];
     }
@@ -62,7 +62,7 @@ class MasterSubServiceSearch extends MasterSubService
         $query->andFilterWhere([
             'id' => $this->id,
             'service_id' => $this->service_id,
-            'rate_to_category' => $this->rate_to_category,
+            //'rate_to_category' => $this->rate_to_category,
             'unit' => $this->unit,
             'unit_price' => $this->unit_price,
             'total' => $this->total,

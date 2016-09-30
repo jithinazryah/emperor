@@ -66,4 +66,7 @@ class MasterSubService extends \yii\db\ActiveRecord
             'DOU' => 'Dou',
         ];
     }
+    public function getService0() {
+        return $this->hasOne(Services::className(), ['id' => 'service_id']);
+    }
 }
