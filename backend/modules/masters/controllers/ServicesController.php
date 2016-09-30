@@ -68,7 +68,7 @@ class ServicesController extends Controller {
          */
         public function actionCreate() {
                 $model = new Services();
-                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Supplier($model, $_POST['Services']['supplier']) && $model->save()) {
+                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Supplier($model, $_POST['Services']['supplier']) && $model->save(false)) {
                         return $this->redirect(['view', 'id' => $model->id]);
                 } else {
                         return $this->render('create', [

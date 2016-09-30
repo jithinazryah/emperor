@@ -18,6 +18,7 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
     <?php
+    echo $form->errorSummary($model);
     $dataList = ArrayHelper::map(ServiceCategorys::find()->asArray()->all(), 'id', 'category_name');
     ?>
     <?= $form->field($model, 'category_id')->dropDownList($dataList, ['prompt' => '-Choose a Category-']) ?>

@@ -40,7 +40,7 @@ class MasterSubService extends \yii\db\ActiveRecord
             [['service_id', 'status', 'CB', 'UB'], 'integer'],
             [['unit', 'unit_price', 'total'], 'number'],
             [['comments'], 'string'],
-            [['DOC', 'DOU'], 'safe'],
+            [['DOC', 'DOU','rate_to_category'], 'safe'],
             [['sub_service'], 'string', 'max' => 50],
         ];
     }
@@ -54,6 +54,7 @@ class MasterSubService extends \yii\db\ActiveRecord
             'id' => 'ID',
             'service_id' => 'Service ID',
             'sub_service' => 'Sub Service',
+            'rate_to_category' => 'Rate to Category',
             'unit' => 'Unit',
             'unit_price' => 'Unit Price',
             'total' => 'Total',

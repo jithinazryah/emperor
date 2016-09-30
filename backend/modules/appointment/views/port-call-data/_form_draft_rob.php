@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="port-call-data-draft-form form-inline">
 
-    <?php $form = ActiveForm::begin(/*['action' => '/emperor/backend/web/appointment/port-call-data/update-draft-rob/?id=' . $model_draft->appointment_id]*/); ?>
+    <?php $form = ActiveForm::begin(/* ['action' => '/emperor/backend/web/appointment/port-call-data/update-draft-rob/?id=' . $model_draft->appointment_id] */); ?>
 
     <?php //$form->field($model, 'appointment_id')->textInput(['readonly' => true, 'value' => $model->appointment->appointment_no]) ?>
 
@@ -25,28 +25,28 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model_draft, 'finial_survey_commenced')->textInput(['tabindex' => 3]) ?>
     <div class="form-group "></div>
 
-    <?= $form->field($model_draft, 'fwd_arrival_quantity')->textInput(['tabindex' => 5]) ?>
+    <?= $form->field($model_draft, 'fwd_arrival_quantity')->textInput(['tabindex' => 5, 'class' => 'decimaldraft form-control']) ?>
 
-    <?= $form->field($model_draft, 'fwd_sailing_quantity')->textInput(['tabindex' => 8]) ?>
+    <?= $form->field($model_draft, 'fwd_sailing_quantity')->textInput(['tabindex' => 8, 'class' => 'decimaldraft form-control']) ?>
 
     <?= $form->field($model_draft, 'intial_survey_completed')->textInput(['tabindex' => 2]) ?>
 
     <?= $form->field($model_draft, 'finial_survey_completed')->textInput(['tabindex' => 4]) ?>
     <div class="form-group "></div>
 
-    <?= $form->field($model_draft, 'aft_arrival_quantity')->textInput(['tabindex' => 6]) ?>
+    <?= $form->field($model_draft, 'aft_arrival_quantity')->textInput(['tabindex' => 6, 'class' => 'decimaldraft form-control']) ?>
 
-    <?= $form->field($model_draft, 'aft_sailing_quantity')->textInput(['tabindex' => 9]) ?>
+    <?= $form->field($model_draft, 'aft_sailing_quantity')->textInput(['tabindex' => 9, 'class' => 'decimaldraft form-control']) ?>
     <div class="form-group "></div>
     <div class="form-group "></div>
     <div class="form-group "></div>
 
-    <?= $form->field($model_draft, 'mean_arrival_quantity')->textInput(['tabindex' => 7]) ?>
+    <?= $form->field($model_draft, 'mean_arrival_quantity')->textInput(['tabindex' => 7, 'class' => 'decimaldraft form-control']) ?>
 
-    <?= $form->field($model_draft, 'mean_sailing_quantity')->textInput(['tabindex' => 10]) ?>
-    
-    
-    
+    <?= $form->field($model_draft, 'mean_sailing_quantity')->textInput(['tabindex' => 10, 'class' => 'decimaldraft form-control']) ?>
+
+
+
     <div class="form-group "><h4 class="portcall"><b><u>ROB- ARRIVAL</u></b></h4></div>
     <div class="form-group "></div>
     <div class="form-group "></div>
@@ -94,7 +94,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model_rob, 'lo_sailing_unit')->dropDownList($arr, ['prompt' => '-choose sailing unit-', 'tabindex' => 27]) ?>
 
-    <?= $form->field($model_rob, 'lo_sailing_quantity')->textInput(['tabindex' =>28, 'class' => 'decimal form-control']) ?>
+    <?= $form->field($model_rob, 'lo_sailing_quantity')->textInput(['tabindex' => 28, 'class' => 'decimal form-control']) ?>
 
     <?= $form->field($model_rob, 'fresh_water_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-', 'tabindex' => 19]) ?>
 
@@ -113,6 +113,36 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
     <style>
-
+        .btstyle{
+            margin-left: 431px;
+        }
     </style>
+    <script>
+            $(document).ready(function () {
+                /*
+                 * To add decimal(.000) to the desired text fields
+                 */
+                $('.decimal').blur(function () {
+                    var str = $(this).val();
+                    if (str != '') {
+                        if (str.indexOf('.') === -1) {
+                            $(this).val(str + '.000');
+                        }
+                    }
+                });
+                    
+
+                $('.decimaldraft').blur(function () {
+                    var str = $(this).val();
+                    if (str != '') {
+                        if (str.indexOf('.') === -1) {
+                            $(this).val(str + '.00');
+                        }
+                    }
+                });
+
+
+
+            });
+    </script>
 </div>
