@@ -29,7 +29,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'supplier_options')->dropDownList(['1' => 'Yes', '0' => 'No']) ?>
 
-    <?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['options' => Yii::$app->SetValues->Selected($model->supplier),'prompt' => '-Choose a Supplier-', 'multiple' => true]) ?>
+    <?= $form->field($model, 'supplier',['template' => "<div class='overly'></div>\n{label}\n{input}\n{hint}\n{error}"])->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['options' => Yii::$app->SetValues->Selected($model->supplier),'prompt' => '-Choose a Supplier-', 'multiple' => true]) ?>
 
     <?= $form->field($model, 'unit_rate')->textInput() ?>
 
@@ -60,9 +60,11 @@ use yii\helpers\ArrayHelper;
                 var supplier_options = $(this).val();
                 if(supplier_options == 1){
                         $("#services-supplier").prop('disabled', false);
+                        $('.overly').removeClass('over-active');
                 }
                 else{
                        $("#services-supplier").prop('disabled', true); 
+                       $('.overly').addClass('over-active');
                 }
               
             });
@@ -80,6 +82,16 @@ use yii\helpers\ArrayHelper;
 
         });
 </script>
+<style>
+        .over-active{
+                background-color: rgba(23, 20, 20, 0.11);
+                width: 24%;
+                height: 9%;
+                position: absolute;
+                z-index: 100;
+        }
+
+</style>
 
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2.css">
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl; ?>/js/select2/select2-bootstrap.css">

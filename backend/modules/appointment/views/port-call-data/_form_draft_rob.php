@@ -118,31 +118,60 @@ use yii\widgets\ActiveForm;
         }
     </style>
     <script>
-            $(document).ready(function () {
-                /*
-                 * To add decimal(.000) to the desired text fields
-                 */
-                $('.decimal').blur(function () {
-                    var str = $(this).val();
-                    if (str != '') {
-                        if (str.indexOf('.') === -1) {
-                            $(this).val(str + '.000');
-                        }
+        $(document).ready(function () {
+            /*
+             * To add decimal(.000) to the desired text fields
+             */
+            $('.decimal').blur(function () {
+                var str = $(this).val();
+                if (str != '') {
+                    if (str.indexOf('.') === -1) {
+                        $(this).val(str + '.000');
+                        
                     }
-                });
-                    
-
-                $('.decimaldraft').blur(function () {
-                    var str = $(this).val();
-                    if (str != '') {
-                        if (str.indexOf('.') === -1) {
-                            $(this).val(str + '.00');
+                    else{
+                        var substr = str.split('.');
+                        var len = substr[1].length;
+                        if(len == 1){
+                            $(this).val(str + '00');
                         }
+                        else if(len == 2){
+                            $(this).val(str + '0');
+                        }else if(len == 0){
+                            $(this).val(str + '000');
+                        }
+                        
+                            
                     }
-                });
-
-
+                }
 
             });
+
+
+            $('.decimaldraft').blur(function () {
+                var str = $(this).val();
+                if (str != '') {
+                    if (str.indexOf('.') === -1) {
+                        $(this).val(str + '.00');
+                        
+                    }
+                    else{
+                        var substr = str.split('.');
+                        var len = substr[1].length;
+                        if(len == 1){
+                            $(this).val(str + '0');
+                        }
+                        else if(len == 0){
+                            $(this).val(str + '00');
+                        }
+                        
+                            
+                    }
+                }
+            });
+
+
+
+        });
     </script>
 </div>
