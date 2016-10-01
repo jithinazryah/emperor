@@ -72,7 +72,8 @@ class AppointmentController extends Controller {
                 $closeestimates = CloseEstimate::findAll(['apponitment_id' => $id]);
                 $drafts = PortCallDataDraft::findOne(['appointment_id' => $id]);
                 $rob = PortCallDataRob::findOne(['appointment_id' => $id]);
-                $appointment = Appointment::find($id)->one();
+                $appointment = Appointment::findOne($id);
+                $imigration = ImigrationClearance::findOne(['appointment_id' => $id]);
                 return $this->render('view', [
                             'model' => $this->findModel($id),
                             'estimates' => $estimates,
@@ -81,6 +82,7 @@ class AppointmentController extends Controller {
                             'drafts' => $drafts,
                             'rob' => $rob,
                             'closeestimates' => $closeestimates,
+                            'imigration' => $imigration,
                 ]);
         }
 
