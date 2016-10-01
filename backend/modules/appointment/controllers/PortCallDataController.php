@@ -13,6 +13,7 @@ use common\models\PortCallDataSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\ImigrationClearance;
 
 /**
  * PortCallDataController implements the CRUD actions for PortCallData model.
@@ -88,6 +89,7 @@ class PortCallDataController extends Controller {
                 $model = PortCallData::findOne(['appointment_id' => $id]);
                 $model_draft = PortCallDataDraft::findOne(['appointment_id' => $id]);
                 $model_rob = PortCallDataRob::findOne(['appointment_id' => $id]);
+                $model_imigration = ImigrationClearance::findOne(['appointment_id' => $id]);
                 if (empty($model_appointment))
                         throw new \yii\web\HttpException(404, 'This Appointment could not be found.Eroor Code:1001');
                 $model_add = new PortCallDataAdditional();
@@ -97,11 +99,14 @@ class PortCallDataController extends Controller {
                 } else if ($model_rob->load(Yii::$app->request->post()) && $model_draft->load(Yii::$app->request->post())) {
                         $this->saveportcalldraftrob($model_rob,$model_draft);
                 }
+                //$model_immigration = new ImigrationClearance();
                 return $this->render('update', [
                             'model' => $model,
                             'model_draft' => $model_draft,
                             'model_rob' => $model_rob,
                             'model_add' => $model_add,
+                            'model_imigration' => $model_imigration,
+                            'model_appointment' => $model_appointment,
                 ]);
         }
 

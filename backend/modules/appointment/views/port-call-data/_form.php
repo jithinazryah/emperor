@@ -13,55 +13,86 @@ use yii\widgets\ActiveForm;
 
     <?php //$form->field($model, 'appointment_id')->textInput(['readonly' => true, 'value' => $model->appointment->appointment_no]) ?>
 
-    <?= $form->field($model, 'eta')->textInput(['tabindex' => 1]) ?>
-
-    <?= $form->field($model, 'dropped_anchor')->textInput(['tabindex' => 6]) ?>
-
-    <?= $form->field($model, 'all_fast')->textInput(['tabindex' => 11]) ?>
-
-    <?= $form->field($model, 'cargo_commenced')->textInput(['tabindex' => 16]) ?>
-
-    <?= $form->field($model, 'cleared_channel')->textInput(['tabindex' => 20]) ?>
-
-    <?= $form->field($model, 'ets')->textInput(['tabindex' => 2]) ?>
-
-    <?= $form->field($model, 'anchor_aweigh')->textInput(['tabindex' => 7]) ?>
-
-    <?= $form->field($model, 'gangway_down')->textInput(['tabindex' => 12]) ?>
-
-    <?= $form->field($model, 'cargo_completed')->textInput(['tabindex' => 17]) ?>
-
-    <?= $form->field($model, 'cosp')->textInput(['tabindex' => 21]) ?>
-
-    <?= $form->field($model, 'eosp')->textInput(['tabindex' => 3]) ?>
-
-    <?= $form->field($model, 'arrived_pilot_station')->textInput(['tabindex' => 8]) ?>
-
-    <?= $form->field($model, 'agent_on_board')->textInput(['tabindex' => 13]) ?>
-
-    <?= $form->field($model, 'pob_outbound')->textInput(['tabindex' => 18]) ?>
-
-    <?= $form->field($model, 'fasop')->textInput(['tabindex' => 22]) ?>
-
-    <?= $form->field($model, 'arrived_anchorage')->textInput(['tabindex' => 4]) ?>
-
-    <?= $form->field($model, 'pob_inbound')->textInput(['tabindex' => 9]) ?>
-
-    <?= $form->field($model, 'immigration_commenced')->textInput(['tabindex' => 14]) ?>
-
+    <div class="form-group "><h4 class="portcall"><b><u>IF immigration clearance applicable</u></b></h4></div>
     <div class="form-group "></div>
-    <?= $form->field($model, 'eta_next_port')->textInput(['tabindex' => 23]) ?>
-
-    <?= $form->field($model, 'nor_tendered')->textInput(['tabindex' => 5]) ?>
-
-    <?= $form->field($model, 'first_line_ashore')->textInput(['tabindex' => 10]) ?>
-
-    <?= $form->field($model, 'immigartion_completed')->textInput(['tabindex' => 15]) ?>
-
-    <?= $form->field($model, 'lastline_away')->textInput(['tabindex' => 19]) ?>
-
     <div class="form-group "></div>
-    <hr class="appoint_history" />
+    <div class="form-group "></div>
+    <div class="form-group "></div>
+    <?php
+    //var_dump($model->appointment_id);exit;
+    ?>
+
+    <?= $form->field($model_imigration, 'arrived_ps')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'pob_inbound')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'first_line_ashore')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'all_fast')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'agent_on_board')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'imi_clearence_commenced')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'imi_clearence_completed')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'pob_outbound')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'cast_off')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'last_line_away')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'cleared_break_water')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'drop_anchor')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'heave_up_anchor')->textInput() ?>
+
+    <?= $form->field($model_imigration, 'pilot_boarded')->textInput() ?>
+    <div class="row">
+        <div class="col-md-2 eosp">
+            <?= $form->field($model, 'eta')->textInput(['tabindex' => 1]) ?>
+            <br/>
+            <?= $form->field($model, 'ets')->textInput(['tabindex' => 2]) ?>
+            <br/>
+            <?= $form->field($model, 'eosp')->textInput(['tabindex' => 3]) ?>
+            <br/>
+            <?= $form->field($model, 'arrived_anchorage')->textInput(['tabindex' => 4]) ?>
+            <br/>
+            <?= $form->field($model, 'nor_tendered')->textInput(['tabindex' => 5]) ?>  
+        </div>
+        <div class="col-md-10">
+            <?php
+            if ($model_appointment->port_of_call == 2 || $model_appointment->port_of_call == 3) {
+                if ($model_appointment->purpose == 2 && $model_appointment->port_of_call == 2) {
+                    //$var = "_form_rmc_tanker";
+                    echo $this->render('_form_rmc_tanker', [
+                        'model' => $model,
+                        'form' => $form,
+                    ]);
+                } else {
+                    //$var = "_form_stevin_rocks";
+                    echo $this->render('_form_stevin_rocks', [
+                        'model' => $model,
+                        'form' => $form,
+                    ]);
+                }
+            } else {
+                //$var = "_form_common";
+                echo $this->render('_form_common', [
+                    'model' => $model,
+                    'form' => $form,
+                ]);
+            }
+            ?>
+        </div>
+    </div>
+
+
+
+
+
+
 
     <div id="p_scents">
         <span>
@@ -110,9 +141,12 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
     <style>
         .form-inline .form-group {
-            width: 16% !important;
+            width: 16%;
             margin-left: 30px;
             margin-bottom: 22px;
+        }
+        .form-inline .eosp .form-group {
+            width: 100%;
         }
         .portcall{
             color:#0f68a6;
@@ -137,15 +171,15 @@ use yii\widgets\ActiveForm;
     </style>
 </div>
 <script>
-        $(document).ready(function () {
-            /*
-             * Add more bnutton function
-             */
-            var scntDiv = $('#p_scents');
-            var i = $('#p_scents span').size() + 1;
+    $(document).ready(function () {
+        /*
+         * Add more bnutton function
+         */
+        var scntDiv = $('#p_scents');
+        var i = $('#p_scents span').size() + 1;
 
-            $('#addScnt').on('click', function () {
-                var ver = '<span>\n\
+        $('#addScnt').on('click', function () {
+            var ver = '<span>\n\
                                 <div class="form-group">\n\
                                 <label class="control-label" for=""></label>\n\
                                 <input type="text" id="" class="form-control" name="1[label][]">\n\
@@ -164,16 +198,16 @@ use yii\widgets\ActiveForm;
                                 </span>';
 
 
-                $(ver).appendTo(scntDiv);
-                i++;
-                return false;
-            });
-            $('#p_scents').on('click', '.remScnt', function () {
-                if (i > 2) {
-                    $(this).parents('span').remove();
-                    i--;
-                }
-                return false;
-            });
+            $(ver).appendTo(scntDiv);
+            i++;
+            return false;
         });
+        $('#p_scents').on('click', '.remScnt', function () {
+            if (i > 2) {
+                $(this).parents('span').remove();
+                i--;
+            }
+            return false;
+        });
+    });
 </script>

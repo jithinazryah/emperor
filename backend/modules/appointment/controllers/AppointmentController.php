@@ -15,6 +15,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\ImigrationClearance;
 
 /**
  * AppointmentController implements the CRUD actions for Appointment model.
@@ -134,11 +135,13 @@ class AppointmentController extends Controller {
                 $port_data = new PortCallData();
                 $port_draft = new PortCallDataDraft();
                 $port_rob = new PortCallDataRob();
+                $port_imigration =new ImigrationClearance();
                 $port_data->appointment_id = $id;
                 $port_draft->appointment_id = $id;
                 $port_rob->appointment_id = $id;
-
-                if ($port_data->save() && $port_draft->save() && $port_rob->save()) {
+                $port_imigration->appointment_id = $id;
+                
+                if ($port_imigration->save() && $port_data->save() && $port_draft->save() && $port_rob->save()) {
                         return TRUE;
                 } else {
                         return FALSE;

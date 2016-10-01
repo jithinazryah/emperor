@@ -40,25 +40,23 @@ use Yii;
  * @property string $DOC
  * @property string $DOU
  */
-class PortCallData extends \yii\db\ActiveRecord
-{
+class PortCallData extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'port_call_data';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             //[['appointment_id'], 'required'],
             [['appointment_id', 'additional_info', 'status', 'CB', 'UB'], 'integer'],
-            [['eta', 'ets', 'eosp', 'arrived_anchorage', 'nor_tendered', 'dropped_anchor', 'anchor_aweigh', 'arrived_pilot_station', 'pob_inbound', 'first_line_ashore', 'all_fast', 'gangway_down', 'agent_on_board', 'immigration_commenced', 'immigartion_completed', 'cargo_commenced', 'cargo_completed', 'pob_outbound', 'lastline_away', 'cleared_channel', 'cosp', 'fasop', 'eta_next_port', 'DOC', 'DOU'], 'safe'],
+            [['eta', 'ets', 'eosp', 'arrived_anchorage', 'nor_tendered', 'dropped_anchor', 'anchor_aweigh', 'arrived_pilot_station', 'pob_inbound', 'first_line_ashore', 'all_fast', 'gangway_down', 'agent_on_board', 'immigration_commenced', 'immigartion_completed', 'cargo_commenced', 'cargo_completed', 'pob_outbound', 'lastline_away', 'cleared_channel', 'cosp', 'fasop', 'eta_next_port', 'DOC', 'DOU', 'cast_off', 'pilot_away', 'customs_clearance_obtained', 'hoses_connected', 'pre_discharge_safety', 'surveyor_on_board', 'sampling', 'tank_inspection_completed', 'hoses_disconnected', 'sbe'], 'safe'],
             [['comments'], 'string'],
         ];
     }
@@ -66,8 +64,7 @@ class PortCallData extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'appointment_id' => 'Appointment ID',
@@ -94,6 +91,16 @@ class PortCallData extends \yii\db\ActiveRecord
             'cosp' => 'COSP',
             'fasop' => 'FASOP',
             'eta_next_port' => 'ETA Next Port',
+            'pilot_away' => 'Pilot Away',
+            'customs_clearance_obtained' => 'Customs Clearance',
+            'hoses_connected' => 'Hoses Connected',
+            'pre_discharge_safety' => 'Pre Discharge Saftey',
+            'surveyor_on_board' => 'Surveyor On Board',
+            'sampling' => 'Sampling',
+            'tank_inspection_completed' => 'Tank Inspection Completed',
+            'hoses_disconnected' => 'Hoses Disconnected',
+            'sbe' => 'SBE',
+            'cast_off' => 'CAST OFF',
             'additional_info' => 'Additional Info',
             'comments' => 'Comments',
             'status' => 'Status',
@@ -103,8 +110,9 @@ class PortCallData extends \yii\db\ActiveRecord
             'DOU' => 'Dou',
         ];
     }
-    
-     public function getAppointment() {
-                return $this->hasOne(Appointment::className(), ['id' => 'appointment_id']);
-        }
+
+    public function getAppointment() {
+        return $this->hasOne(Appointment::className(), ['id' => 'appointment_id']);
+    }
+
 }
