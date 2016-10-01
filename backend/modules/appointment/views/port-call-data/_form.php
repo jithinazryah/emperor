@@ -13,42 +13,46 @@ use yii\widgets\ActiveForm;
 
     <?php //$form->field($model, 'appointment_id')->textInput(['readonly' => true, 'value' => $model->appointment->appointment_no]) ?>
 
-    <div class="form-group "><h4 class="portcall"><b><u>IF immigration clearance applicable</u></b></h4></div>
-    <div class="form-group "></div>
-    <div class="form-group "></div>
-    <div class="form-group "></div>
-    <div class="form-group "></div>
+    <div><a class="portcall">If Immigration Clearance Applicable</a></div>
+    <!--    <div class="form-group "></div>
+        <div class="form-group "></div>
+        <div class="form-group "></div>
+        <div class="form-group "></div>-->
     <?php
     //var_dump($model->appointment_id);exit;
     ?>
+    <div class="row hidediv">
+        <div class="col-md-12">
+            <?= $form->field($model_imigration, 'arrived_ps')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'arrived_ps')->textInput() ?>
+            <?= $form->field($model_imigration, 'pob_inbound')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'pob_inbound')->textInput() ?>
+            <?= $form->field($model_imigration, 'first_line_ashore')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'first_line_ashore')->textInput() ?>
+            <?= $form->field($model_imigration, 'all_fast')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'all_fast')->textInput() ?>
+            <?= $form->field($model_imigration, 'agent_on_board')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'agent_on_board')->textInput() ?>
+            <?= $form->field($model_imigration, 'imi_clearence_commenced')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'imi_clearence_commenced')->textInput() ?>
+            <?= $form->field($model_imigration, 'imi_clearence_completed')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'imi_clearence_completed')->textInput() ?>
+            <?= $form->field($model_imigration, 'pob_outbound')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'pob_outbound')->textInput() ?>
+            <?= $form->field($model_imigration, 'cast_off')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'cast_off')->textInput() ?>
+            <?= $form->field($model_imigration, 'last_line_away')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'last_line_away')->textInput() ?>
+            <?= $form->field($model_imigration, 'cleared_break_water')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'cleared_break_water')->textInput() ?>
+            <?= $form->field($model_imigration, 'drop_anchor')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'drop_anchor')->textInput() ?>
+            <?= $form->field($model_imigration, 'heave_up_anchor')->textInput() ?>
 
-    <?= $form->field($model_imigration, 'heave_up_anchor')->textInput() ?>
-
-    <?= $form->field($model_imigration, 'pilot_boarded')->textInput() ?>
+            <?= $form->field($model_imigration, 'pilot_boarded')->textInput() ?>
+        </div>
+    </div>
+    <hr class="appoint_history" />
     <div class="row">
         <div class="col-md-2 eosp">
             <?= $form->field($model, 'eta')->textInput(['tabindex' => 1]) ?>
@@ -88,12 +92,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-
-
-
-
-
-
+    <hr class="appoint_history" />
     <div id="p_scents">
         <span>
             <div class="form-group">
@@ -149,7 +148,11 @@ use yii\widgets\ActiveForm;
             width: 100%;
         }
         .portcall{
-            color:#0f68a6;
+            color:#92082d;
+            font-size: 20px;
+            margin-left: 31px;
+            margin-bottom: 12px;
+
         }
         .nav.nav-tabs+.tab-content {
             background-color: #b9c7a7 !important;
@@ -167,6 +170,9 @@ use yii\widgets\ActiveForm;
             width:1220px !important;
             margin-left: 28px;
             height: 150px;
+        }
+        .hidediv{
+            display:none;
         }
     </style>
 </div>
@@ -208,6 +214,9 @@ use yii\widgets\ActiveForm;
                 i--;
             }
             return false;
+        });
+        $('.portcall').click(function () {
+            $('.hidediv').slideToggle();
         });
     });
 </script>
