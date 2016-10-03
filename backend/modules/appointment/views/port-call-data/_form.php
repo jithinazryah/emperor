@@ -148,11 +148,12 @@ use yii\widgets\ActiveForm;
             width: 100%;
         }
         .portcall{
-            color:#92082d;
+            color:#09a2dc;
             font-size: 20px;
             margin-left: 31px;
             margin-bottom: 12px;
-
+            cursor: pointer;
+            text-decoration: underline;
         }
         .nav.nav-tabs+.tab-content {
             background-color: #b9c7a7 !important;

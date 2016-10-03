@@ -212,7 +212,6 @@ class EstimatedProformaController extends Controller {
                                 }
                                 echo $options;
                         }
-                        
                 }
         }
 
@@ -231,7 +230,12 @@ class EstimatedProformaController extends Controller {
         public function actionReport($id) {
                 $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
                 // get your HTML raw content without any layouts or scripts
-                $content = $this->renderPartial('pdf');
+                $appointment = Appointment::findOne($id);
+                //var_dump($appointment);exit;
+                 echo $content = $this->renderPartial('report1', [
+                    'appointment' => $appointment,
+                   'estimates' => $estimates,
+                ]); exit;
 
                 // setup kartik\mpdf\Pdf component
                 $pdf = new Pdf([
@@ -240,23 +244,23 @@ class EstimatedProformaController extends Controller {
                     // A4 paper format
                     'format' => Pdf::FORMAT_A4,
                     // portrait orientation
-                    'orientation' => Pdf::ORIENT_PORTRAIT,
+//                    'orientation' => Pdf::ORIENT_PORTRAIT,
                     // stream to browser inline
-                    'destination' => Pdf::DEST_BROWSER,
+//                    'destination' => Pdf::DEST_BROWSER,
                     // your html content input
                     'content' => $content,
                     // format content from your own css file if needed or use the
                     // enhanced bootstrap css built by Krajee for mPDF formatting 
                     'cssFile' => '@backend/web/css/pdf.css',
-                    // any css to be embedded if required
-                    //'cssInline' => '.kv-heading-1{font-size:18px}',
-                    // set mPDF properties on the fly
-                    //'options' => ['title' => 'Krajee Report Title'],
-                    // call mPDF methods on the fly
-                    'methods' => [
-                        'SetHeader' => ['Estimated proforma generated on ' . date("d/m/Y h:m:s")],
-                        'SetFooter' => ['|page {PAGENO}'],
-                    ]
+                        // any css to be embedded if required
+                        //'cssInline' => '.kv-heading-1{font-size:18px}',
+                        // set mPDF properties on the fly
+                        //'options' => ['title' => 'Krajee Report Title'],
+                        // call mPDF methods on the fly
+                        /*                    'methods' => [
+                          'SetHeader' => ['Estimated proforma generated on ' . date("d/m/Y h:m:s")],
+                          'SetFooter' => ['|page {PAGENO}'],
+                          ] */
                 ]);
 
                 // return the pdf output as per the destination setting

@@ -71,6 +71,9 @@ class SubServices extends \yii\db\ActiveRecord {
         public function getSub() {
                 return $this->hasOne(MasterSubService::className(), ['id' => 'sub_service']);
         }
+        public function getSubService() {
+                return $this->hasOne(MasterSubService::className(), ['id' => 'sub_service']);
+        }
         
 
 }

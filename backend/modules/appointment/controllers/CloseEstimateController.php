@@ -110,6 +110,7 @@ class CloseEstimateController extends Controller {
                 foreach ($estimates as $estimate) {
                         $closeestimate = new CloseEstimate;
                         $closeestimate->attributes = $estimate->attributes;
+                        $closeestimate->fda = $closeestimate->epda;
                         $closeestimate->DOC = date('y-m-d');
                         $closeestimate->save();
                 }

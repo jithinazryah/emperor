@@ -93,9 +93,19 @@ class PortCallDataController extends Controller {
         if (empty($model_appointment))
             throw new \yii\web\HttpException(404, 'This Appointment could not be found.Eroor Code:1001');
         $model_add = new PortCallDataAdditional();
-        $this->Check($id, $model, $model_draft, $model_rob, $model_imigration);
+
+        if ($this->Check($id, $model, $model_draft, $model_rob, $model_imigration)) {
+            $model = PortCallData::findOne(['appointment_id' => $id]);
+            $model_draft = PortCallDataDraft::findOne(['appointment_id' => $id]);
+            $model_rob = PortCallDataRob::findOne(['appointment_id' => $id]);
+            $model_imigration = ImigrationClearance::findOne(['appointment_id' => $id]);
+        } else {
+
+            throw new \yii\web\HttpException(404, 'This Appointment could not be found.Eroor Code:1002');
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model_imigration->load(Yii::$app->request->post())) {
-            $this->saveportcalldata($model,$model_imigration);
+            $this->saveportcalldata($model, $model_imigration);
         } else if ($model_rob->load(Yii::$app->request->post()) && $model_draft->load(Yii::$app->request->post())) {
             $this->saveportcalldraftrob($model_rob, $model_draft);
         }
@@ -110,7 +120,7 @@ class PortCallDataController extends Controller {
         ]);
     }
 
-    public function SavePortcallData($model,$model_imigration) {
+    public function SavePortcallData($model, $model_imigration) {
         //var_dump($model_imigration);exit;
         Yii::$app->SetValues->Attributes($model);
         Yii::$app->SetValues->Attributes($model_imigration);
@@ -140,7 +150,7 @@ class PortCallDataController extends Controller {
 
     public function Check($id, $model, $model_draft, $model_rob, $model_imigration) {
         //echo 'hai';exit;
-        if ($model != null && $model_draft != null && $model_rob != null) {
+        if ($model != null && $model_draft != null && $model_rob != null && $model_imigration != null) {
             return true;
         } else {
             if ($model == null) {

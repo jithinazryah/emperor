@@ -7,9 +7,57 @@ and open the template in the editor.
     Created on : Aug 22, 2016, 4:55:21 PM
     Author     : user
 */
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
+body,p,tr,td,table,div,span{
+    font-family: 'Roboto', sans-serif; 
+}
+table.table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width:100%;
+}
+.table th {
+    border: 1px solid black;
+}
+.table td {
+    border: 1px solid black;
+    font-size: 10px;
+}
+
+.main{
+    width:1000px;
+    margin: auto;
+    font-family: 'Roboto', sans-serif; 
+}
+.main-left{
+    float: left;
+}
+.main-right{
+    float: right;
+}
+.header{
+    font-size: 12.5px;
+    display: inline-block;
+    width: 100%;
+}
+.header table{
+    margin-top: 12px;
+}
+.heading{
+    width: 98%;
+    padding: 25px 12px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 17px;
+}
+.topcontent-left{
+    float: left;
+}
+
+/*
 .ptittle{
     color: red;
-    font-size: 15px;
+    font-size: 12px;
 }
 .pcontent{
     font-size: 10px;
@@ -19,11 +67,11 @@ and open the template in the editor.
     width:300px;
     height:100px;
     float:left;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size:14px;
 }
 .dt1 table td{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size:12px;
 }
 .dt2
@@ -31,7 +79,7 @@ and open the template in the editor.
     width:250px;
     height:100px;
     float:right !important;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size:14px;
 }
 .container
@@ -47,7 +95,7 @@ and open the template in the editor.
 }
 .footer p{
     text-align: center;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size:12px;
 }
 .header{
@@ -63,4 +111,4 @@ and open the template in the editor.
     width:250px;
     height:100px;
     float:right !important;
-}
+}*/

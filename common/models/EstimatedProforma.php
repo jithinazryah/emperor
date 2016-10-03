@@ -25,81 +25,78 @@ use Yii;
  * @property string $DOC
  * @property string $DOU
  */
-class EstimatedProforma extends \yii\db\ActiveRecord
-{
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'estimated_proforma';
-    }
+class EstimatedProforma extends \yii\db\ActiveRecord {
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['apponitment_id', 'service_id'], 'required'],
-            [['apponitment_id', 'service_id', 'supplier', 'currency', 'epda', 'invoice_type', 'status', 'CB', 'UB'], 'integer'],
-            [['comments','principal'], 'string'],
-            [['DOC', 'DOU'], 'safe'],
-            [['unit_rate', 'unit'], 'string', 'max' => 50],
-            [['roe'], 'string', 'max' => 15],
-        ];
-    }
+        /**
+         * @inheritdoc
+         */
+        public static function tableName() {
+                return 'estimated_proforma';
+        }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'apponitment_id' => 'Apponitment ID',
-            'service_id' => 'Service ID',
-            'supplier' => 'Supplier',
-            'currency' => 'Currency',
-            'unit_rate' => 'Unit Rate',
-            'unit' => 'Unit',
-            'roe' => 'Roe',
-            'epda' => 'Epda',
-            'principal' => 'Principal',
-            'invoice_type' => 'Invoice Type',
-            'comments' => 'Comments',
-            'status' => 'Status',
-            'CB' => 'Cb',
-            'UB' => 'Ub',
-            'DOC' => 'Doc',
-            'DOU' => 'Dou',
-        ];
-    }
-    
+        /**
+         * @inheritdoc
+         */
+        public function rules() {
+                return [
+                    [['apponitment_id', 'service_id'], 'required'],
+                    [['apponitment_id', 'service_id', 'supplier', 'currency', 'epda', 'invoice_type', 'status', 'CB', 'UB'], 'integer'],
+                    [['comments', 'principal'], 'string'],
+                    [['DOC', 'DOU'], 'safe'],
+                    [['unit_rate', 'unit'], 'string', 'max' => 50],
+                    [['roe'], 'string', 'max' => 15],
+                ];
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function attributeLabels() {
+                return [
+                    'id' => 'ID',
+                    'apponitment_id' => 'Apponitment ID',
+                    'service_id' => 'Service ID',
+                    'supplier' => 'Supplier',
+                    'currency' => 'Currency',
+                    'unit_rate' => 'Unit Rate',
+                    'unit' => 'Unit',
+                    'roe' => 'Roe',
+                    'epda' => 'Epda',
+                    'principal' => 'Principal',
+                    'invoice_type' => 'Invoice Type',
+                    'comments' => 'Comments',
+                    'status' => 'Status',
+                    'CB' => 'Cb',
+                    'UB' => 'Ub',
+                    'DOC' => 'Doc',
+                    'DOU' => 'Dou',
+                ];
+        }
+
         /**
          * @return \yii\db\ActiveQuery 
          */
         public function getService() {
                 return $this->hasOne(Services::className(), ['id' => 'service_id']);
         }
-        
+
         /**
          * @return \yii\db\ActiveQuery 
          */
         public function getSupplier0() {
                 return $this->hasOne(Contacts::className(), ['id' => 'supplier']);
         }
+
         /**
          * @return \yii\db\ActiveQuery 
          */
         public function getPrincipal0() {
                 return $this->hasOne(Debtor::className(), ['id' => 'principal']);
         }
-        
+
         public function getCurrency0() {
                 return $this->hasOne(Currency::className(), ['id' => 'currency']);
         }
-        
-       
+
 
 }

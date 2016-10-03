@@ -161,6 +161,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     }, $model),
                                         ],
                                         'cargo',
+                                        'cargo_details',
                                         'quantity',
                                         'last_port',
                                         'next_port',
@@ -321,7 +322,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <p style="margin-left: 35px;margin-bottom: 10px;font-size: 23px;color: black;"><b>PortCallData</b></p>
                                     <?php
                                     if (!empty($imigration)) {
-                                        echo '<p style="margin-left: 35px;margin-bottom: 10px;font-size: 18px;color: #92082d;"><b>Imigration Clearence Details</b></p>';
+                                        echo '<p style="margin-left: 35px;margin-bottom: 10px;font-size: 18px;color:#09a2dc;"><b>Imigration Clearence Details</b></p>';
                                         echo '<hr class="appoint_history" />';
                                         echo $this->render('_imigration', [
                                             'model' => $imigration,
@@ -331,7 +332,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ?>
 
                                     <hr class="appoint_history" />
-                                    <p style="margin-left: 35px;margin-bottom: 10px;font-size: 18px;color: #92082d;"><b>Port Call Details</b></p>
+                                    <p style="margin-left: 35px;margin-bottom: 10px;font-size: 18px;color:#09a2dc;"><b>Port Call Details</b></p>
                                     <hr class="appoint_history" />
                                     <div class="form-group field-portcalldata-eta">
                                         <label class="control-label" for="portcalldata-eta">ETA  :</label>

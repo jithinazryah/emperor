@@ -48,7 +48,7 @@ class Appointment extends \yii\db\ActiveRecord {
                 return [
                     [['vessel_type', 'port_of_call'], 'required'],
                     [['vessel_type', 'vessel', 'port_of_call', 'tug', 'barge', 'nominator', 'terminal', 'charterer', 'shipper', 'stage', 'status', 'CB', 'UB'], 'integer'],
-                    [['eta', 'DOC', 'DOU'], 'safe'],
+                    [['eta', 'DOC', 'DOU','cargo_details'], 'safe'],
                     [['birth_no', 'appointment_no'], 'string', 'max' => 50],
                     [['no_of_principal', 'quantity'], 'string', 'max' => 15],
                     [['purpose', 'last_port', 'next_port'], 'string', 'max' => 200],
@@ -77,6 +77,7 @@ class Appointment extends \yii\db\ActiveRecord {
                     'shipper' => 'Shipper',
                     'purpose' => 'Purpose',
                     'cargo' => 'Cargo',
+                    'cargo_details' => 'Cargo Details',
                     'quantity' => 'Quantity',
                     'last_port' => 'Last Port',
                     'next_port' => 'Next Port',

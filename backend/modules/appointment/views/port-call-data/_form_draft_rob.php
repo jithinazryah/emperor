@@ -15,11 +15,11 @@ use yii\widgets\ActiveForm;
     <?php //$form->field($model, 'appointment_id')->textInput(['readonly' => true, 'value' => $model->appointment->appointment_no]) ?>
 
     <?php //$form->field($model, 'data_id')->textInput() ?>
-    <div class="form-group "><h4 class="portcall"><b><u>SURVEY TIMINGS</u></b></h4></div>
+    <div class="form-group "><h4 class="portcall-rob"><b><u>SURVEY TIMINGS</u></b></h4></div>
     <div class="form-group "></div>
     <div class="form-group "></div>
-    <div class="form-group "><h4 class="portcall"><b><u>DRAFT- ARRIVAL</u></b></h4></div>
-    <div class="form-group "><h4 class="portcall"><b><u>DRAFT- SAILING</u></b></h4></div>
+    <div class="form-group "><h4 class="portcall-rob">DRAFT- ARRIVAL</h4></div>
+    <div class="form-group "><h4 class="portcall-rob">DRAFT- SAILING</h4></div>
     <?= $form->field($model_draft, 'intial_survey_commenced')->textInput(['tabindex' => 1]) ?>
 
     <?= $form->field($model_draft, 'finial_survey_commenced')->textInput(['tabindex' => 3]) ?>
@@ -47,10 +47,10 @@ use yii\widgets\ActiveForm;
 
 
 
-    <div class="form-group "><h4 class="portcall"><b><u>ROB- ARRIVAL</u></b></h4></div>
+    <div class="form-group "><h4 class="portcall-rob">ROB- ARRIVAL</h4></div>
     <div class="form-group "></div>
     <div class="form-group "></div>
-    <div class="form-group "><h4 class="portcall"><b><u>ROB- SAILING</u></b></h4></div>
+    <div class="form-group "><h4 class="portcall-rob">ROB- SAILING</h4></div>
     <div class="form-group "></div>
 
     <?php $arr = array('1' => 'Metric Ton', '2' => 'Litter'); ?>
@@ -115,6 +115,14 @@ use yii\widgets\ActiveForm;
     <style>
         .btstyle{
             margin-left: 431px;
+        }
+        .portcall-rob{
+            color:#09a2dc;
+            font-size: 15px;
+            margin-left: 31px;
+            margin-bottom: 12px;
+            text-decoration: underline;
+            font-weight: bold;
         }
     </style>
     <script>
