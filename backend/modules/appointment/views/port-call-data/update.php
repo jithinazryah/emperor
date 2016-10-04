@@ -125,7 +125,7 @@ $this->params['breadcrumbs'][] = 'Update';
                                 <span class="hidden-xs">Port Call Data Draft-Rob</span>
                             </a>
                         </li>
-    <!--                    <li class="<?php // $stat == 3 ? 'active': ''  ?>">
+    <!--                    <li class="<?php // $stat == 3 ? 'active': ''    ?>">
                             <a href="#port-rob" data-toggle="tab">
                                 <span class="visible-xs"><i class="fa-user"></i></span>
                                 <span class="hidden-xs">Port Call Data ROB</span>
@@ -160,7 +160,7 @@ $this->params['breadcrumbs'][] = 'Update';
                             </div>
 
                         </div>
-    <!--                    <div class="tab-pane <?php // $stat == 3 ? 'active': ''  ?>" id="port-rob">
+    <!--                    <div class="tab-pane <?php // $stat == 3 ? 'active': ''    ?>" id="port-rob">
                             <div class="panel-body">
                                 <div class="port-call-data-draft-create">
                         <?php
@@ -177,8 +177,12 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
         </div>
         <style>
-            .draftstyle {
-
+            .nav.nav-tabs>li.active>a {
+                background-color: #fff;
+            }
+            .nav.nav-tabs>li>a:hover {
+                border: none;
+                background-color: #e4e4e4;
             }
         </style>
     </div>
