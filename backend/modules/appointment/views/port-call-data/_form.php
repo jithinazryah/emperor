@@ -147,9 +147,9 @@ use yii\widgets\ActiveForm;
         .form-inline .eosp .form-group {
             width: 100%;
         }
-        .portcall{
-            color:#09a2dc;
-            font-size: 20px;
+                .portcall {
+                        color: #0049a0;
+                        font-size: 16px;
             margin-left: 31px;
             margin-bottom: 12px;
             cursor: pointer;
@@ -165,10 +165,10 @@ use yii\widgets\ActiveForm;
             font-weight: bold !important;
         }
         .nav.nav-tabs>li.active>a {
-            background-color: #b9c7a7;
+                        background-color: #cccccc;
         }
         .txtarea{
-            width:1220px !important;
+                        width:97% !important;
             margin-left: 28px;
             height: 150px;
         }

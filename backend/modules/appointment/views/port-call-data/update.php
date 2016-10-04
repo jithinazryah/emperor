@@ -10,6 +10,7 @@ use common\models\Debtor;
 use common\models\Appointment;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
+use common\components\AppointmentWidget;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PortCallData */
@@ -38,50 +39,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
             </div>
             <div class="panel-body">
-                <div class="row appoint">
-                    <div class="col-sm-3" style="text-align: right">
-                        <label>VESSEL-TYPE</label>
-                        <b>: <?= $appointment->vesselType->vessel_type; ?></b>
-                    </div>
-                    <div class="col-sm-2" style="text-align: right">
-                        <label>VESSEL-NAME</label>      
-                        <b>: <?= $appointment->vessel0->vessel_name; ?></b>
-                    </div>
-                    <div class="col-sm-2" style="text-align: right">
-                        <label>LAST-PORT</label>      
-                        <b>: <?= $appointment->last_port; ?></b>
-                    </div>
-                    <div class="col-sm-2" style="text-align: right">
-                        <label>NEXT-PORT</label>      
-                        <b>: <?= $appointment->next_port; ?></b>
-                    </div>
-                    <div class="col-sm-2" style="text-align: right">
-                        <label>PORT OF CALL</label>      
-                        <b>: <?= $appointment->portOfCall->port_name; ?></b>
-                    </div>
-                </div>
-                <div class="row appoint">
-                    <div class="col-sm-3" style="text-align: right">
-                        <label>PURPOSE</label>      
-                        <b>: <?= $appointment->purpose0->purpose; ?></b>
-                    </div>
-                    <div class="col-sm-2" style="text-align: right">
-                        <label>CARGO</label>      
-                        <b>: <?= $appointment->cargo; ?></b>
-                    </div>
-                    <div class="col-sm-2" style="text-align: right">
-                        <label>QUANTITY</label>      
-                        <b>: <?= $appointment->quantity; ?></b>
-                    </div>
-                    <div class="col-sm-2" style="text-align: right">
-                        <label>TERMINAL</label>      
-                        <b>: <?= $appointment->terminal0->terminal; ?></b>
-                    </div>
-                    <div class="col-sm-2" style="text-align: right">
-                        <label>BERTH NO:</label>      
-                        <b>: <?= $appointment->birth_no; ?></b>
-                    </div>
-                </div>
+                <?= AppointmentWidget::widget(['id' => $model_appointment->id]) ?>
 
                 <hr class="appoint_history" />
                 <div style="float: left;">
@@ -112,9 +70,9 @@ $this->params['breadcrumbs'][] = 'Update';
                         </li>
                     </ul>
                     <?php //Html::a('<i class="fa-th-list"></i><span> Manage Port Call Data</span>', ['index'], ['class' => 'btn btn-warning  btn-icon btn-icon-standalone'])  ?>
-                    <ul class="nav nav-tabs nav-tabs-justified" style="background-color:#CCCCCC;padding-top: 5px;">
+                    <ul class="nav nav-tabs nav-tabs-justified colo" style="background-color:#CCCCCC;padding-top: 5px;">
                         <li class="<?= $stat == 1 || $stat == NULL ? 'active' : '' ?>">
-                            <a href="#port-data" data-toggle="tab">
+                            <a  href="#port-data" data-toggle="tab">
                                 <span class="visible-xs"><i class="fa-home"></i></span>
                                 <span class="hidden-xs">Port Call Data</span>
                             </a>
@@ -177,12 +135,16 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
         </div>
         <style>
-            .nav.nav-tabs>li.active>a {
-                background-color: #fff;
+            .colo.nav.nav-tabs>li.active>a {
+                    background-color: #b9c7a7;
             }
-            .nav.nav-tabs>li>a:hover {
+            .colo.nav.nav-tabs>li>a:hover {
                 border: none;
-                background-color: #e4e4e4;
+                background-color: #c3d2b0;
             }
+            .form-control{
+                        border: 1px solid #8a8a8a;
+            }
+           
         </style>
     </div>
