@@ -75,11 +75,11 @@ class CloseEstimateController extends Controller {
 
         public function actionAdd($id, $prfrma_id = NULL) {
                 $estimates = CloseEstimate::findAll(['apponitment_id' => $id]);
+                 $appointment = Appointment::findOne($id);
                 if (empty($estimates)) {
                         $this->InsertCloseEstimate($id);
                         $estimates = CloseEstimate::findAll(['apponitment_id' => $id]);
                 }
-                $appointment = Appointment::find($id)->one();
                 if (!isset($prfrma_id)) {
                         $model = new CloseEstimate;
                 } else {

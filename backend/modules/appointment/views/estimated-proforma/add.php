@@ -89,6 +89,32 @@ $this->params['breadcrumbs'][] = $this->title;
                     echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
                     ?>
                 </div>
+                <ul class="nav nav-tabs nav-tabs-justified">
+                    <li>
+                        <?php
+                        echo Html::a('<span class="visible-xs"><i class="fa-home"></i></span><span class="hidden-xs">Appointment</span>', ['appointment/update', 'id' => $appointment->id]);
+                        ?>
+                        
+                    </li>
+                    <li class="active">
+                        <?php
+                        echo Html::a('<span class="visible-xs"><i class="fa-home"></i></span><span class="hidden-xs">Estimated Proforma</span>', ['estimated-proforma/add', 'id' => $appointment->id]);
+                        ?>
+                        
+                    </li>
+                    <li>
+                        <?php
+                        echo Html::a('<span class="visible-xs"><i class="fa-home"></i></span><span class="hidden-xs">Port call Data</span>', ['port-call-data/update', 'id' => $appointment->id]);
+                        ?>
+                       
+                    </li>
+                    <li>
+                        <?php
+                        echo Html::a('<span class="visible-xs"><i class="fa-home"></i></span><span class="hidden-xs">Close Estimate</span>', ['close-estimate/add', 'id' => $appointment->id]);
+                        ?>
+                        
+                    </li>
+                </ul>
 
                 <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
 

@@ -75,7 +75,7 @@ class Services extends \yii\db\ActiveRecord {
     }
     
     public function getSupplierName($supplier_id) {
-                return contacts::findOne(['id' => $supplier_id])->name;
+                return Contacts::findOne(['id' => $supplier_id])->name;
         }
 
     public function getInvoicetype0() {
