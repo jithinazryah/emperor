@@ -54,20 +54,31 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'value' => $model->category->category_name,
                                 ],
                                 'service',
+//                                [
+//                                    'attribute' => 'invocie_type',
+//                                    'value' => $model->invoicetype0->invoice_type,
+//                                ],
                                 [
                                     'attribute' => 'invocie_type',
-                                    'value' => $model->invoicetype0->invoice_type,
+                                    'value' => call_user_func(function ($data) {
+                                                    $invocie_type = explode(',', $data->invocie_type);
+                                                    $result = '';
+                                                    foreach ($invocie_type as $invoice) {
+                                                            $result .= $data->getInvoiceName($invoice) . ', ';
+                                                    }
+                                                    return rtrim($result, ",");
+                                            }, $model),
                                 ],
                                 [
                                     'attribute' => 'supplier',
                                     'value' => call_user_func(function ($data) {
-                                                            $supplier = explode(',', $data->supplier);
-                                                            $result = '';
-                                                            foreach ($supplier as $supplie) {
-                                                                    $result .= $data->getSupplierName($supplie) . ', ';
-                                                            }
-                                                            return rtrim($result, ",");
-                                                    }, $model),
+                                                    $supplier = explode(',', $data->supplier);
+                                                    $result = '';
+                                                    foreach ($supplier as $supplie) {
+                                                            $result .= $data->getSupplierName($supplie) . ', ';
+                                                    }
+                                                    return rtrim($result, ",");
+                                            }, $model),
                                 ],
                                 'unit_rate',
                                 [

@@ -153,8 +153,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <td><?= $estimate->principal0->principal_name; ?></td>
                                         <td><?= $estimate->comments; ?></td>
                                         <td>
-                                            <?= Html::a('Edit', ['/appointment/estimated-proforma/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
-                                            <?= Html::a('Delete', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
+                                            <?= Html::a('<i class="fa fa-pencil"></i>', ['/appointment/estimated-proforma/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-icon btn-primary', 'tittle' => 'Edit']) ?>
+                                            <?= Html::a('<i class="fa-remove"></i>', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-icon btn-red']) ?>
                                             <?= Html::a('Sub', ['/appointment/sub-services/add', 'id' => $estimate->id], ['class' => 'btn btn-success', 'target'=>'_blank']) ?>
 <!--                                            <a href="javascript:;" onclick="showAjaxModal(<?= $estimate->id ?>);" class="btn btn-success">Sub</a>-->
                                             <?php //Html::a('Sub', [''], ['class' => 'btn btn-success', "onclick" => "showAjaxModal(".$estimate->id.");"]) ?>

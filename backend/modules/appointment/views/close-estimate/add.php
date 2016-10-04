@@ -173,8 +173,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td><?= $estimate->principal0->principal_name; ?></td>
                                     <td><?= $estimate->comments; ?></td>
                                     <td>
-                                        <?= Html::a('Edit', ['/appointment/close-estimate/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-primary']) ?>
-                                        <?= Html::a('Delete', ['/appointment/close-estimate/delete-close-estimate', 'id' => $estimate->id], ['class' => 'btn btn-red']) ?>
+                                        <?= Html::a('<i class="fa fa-pencil"></i>', ['/appointment/close-estimate/add', 'id' => $id, 'prfrma_id' => $estimate->id], ['class' => 'btn btn-icon btn-primary']) ?>
+                                        <?= Html::a('<i class="fa-remove"></i>', ['/appointment/close-estimate/delete-close-estimate', 'id' => $estimate->id], ['class' => 'btn btn-icon btn-red']) ?>
                                     </td>
                                     <?php
                                     $epdatotal += $estimate->epda;

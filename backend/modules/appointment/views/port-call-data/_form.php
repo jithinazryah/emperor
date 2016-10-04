@@ -130,7 +130,7 @@ use yii\widgets\ActiveForm;
     <div class="form-group "></div>
     <div class="form-group "></div>
     <br/>
-    <?= Html::activeTextarea($model, 'comments', ['class' => 'newsletter-cta-mail txtarea']); ?>
+    <?= Html::activeTextarea($model, 'comments', ['class' => 'newsletter-cta-mail txtarea', 'tabindex' => 25]); ?>
     <?php // $form->field($model, 'comments', ['template' => "<div class='full-width-text'>\n{label}\n{input}\n{hint}\n{error}\n</div>"])->textarea(['rows' => 6, 'tabindex' => 25]) ?>
     <br/>
     <div class="form-group" style="float: right;">

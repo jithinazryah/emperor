@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
 /* @var $searchModel common\models\AppointmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Cost Estimate';
+$this->title = 'Close Estimate';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="appointment-index">

@@ -25,7 +25,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'service')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'invocie_type')->dropDownList(ArrayHelper::map(InvoiceType::findAll(['status' => 1]), 'id', 'invoice_type'), ['prompt' => '-Choose a Invoice Type-']) ?>
+    <?= $form->field($model, 'invocie_type')->dropDownList(ArrayHelper::map(InvoiceType::findAll(['status' => 1]), 'id', 'invoice_type'), ['prompt' => '-Choose a Invoice Type-', 'multiple' => true]) ?>
 
     <?= $form->field($model, 'supplier_options')->dropDownList(['1' => 'Yes', '0' => 'No']) ?>
 

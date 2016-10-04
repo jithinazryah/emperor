@@ -68,7 +68,7 @@ class ServicesController extends Controller {
          */
         public function actionCreate() {
                 $model = new Services();
-                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Supplier($model, $_POST['Services']['supplier']) && $model->save(false)) {
+                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Supplier($model, $_POST['Services']['supplier']) && $this->Invoice($model, $_POST['Services']['invocie_type']) && $model->save(false)) {
                         return $this->redirect(['view', 'id' => $model->id]);
                 } else {
                         return $this->render('create', [
@@ -86,7 +86,7 @@ class ServicesController extends Controller {
         public function actionUpdate($id) {
                 $model = $this->findModel($id);
 
-                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Supplier($model, $_POST['Services']['supplier'])  && $model->save()) {
+                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Supplier($model, $_POST['Services']['supplier']) && $this->Invoice($model, $_POST['Services']['invocie_type']) && $model->save()) {
                         return $this->redirect(['view', 'id' => $model->id]);
                 } else {
                         return $this->render('update', [
@@ -110,6 +110,16 @@ class ServicesController extends Controller {
         public function Supplier($model, $supplier) {
                 if ($model != null && $supplier != '') {
                         $model->supplier = implode(",", $supplier);
+                        Yii::$app->SetValues->Attributes($model);
+                        return TRUE;
+                } else {
+                        return FALSE;
+                }
+        }
+        
+        public function Invoice($model, $invocie_type) {
+                if ($model != null && $invocie_type != '') {
+                        $model->invocie_type = implode(",", $invocie_type);
                         Yii::$app->SetValues->Attributes($model);
                         return TRUE;
                 } else {
