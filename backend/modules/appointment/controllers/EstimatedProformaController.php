@@ -232,7 +232,7 @@ class EstimatedProformaController extends Controller {
                 // get your HTML raw content without any layouts or scripts
                 $appointment = Appointment::findOne($id);
                 //var_dump($appointment);exit;
-                 echo $content = $this->renderPartial('report1', [
+                 echo $content = $this->renderPartial('report', [
                     'appointment' => $appointment,
                    'estimates' => $estimates,
                 ]); exit;

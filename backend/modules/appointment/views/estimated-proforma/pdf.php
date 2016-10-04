@@ -95,11 +95,11 @@ and open the template in the editor.
 
             <table width="1000" border="1">
                 <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>

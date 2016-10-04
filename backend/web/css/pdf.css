@@ -21,7 +21,12 @@ table.table{
 }
 .table td {
     border: 1px solid black;
-    font-size: 10px;
+    font-size: 14px;
+    text-align: center;
+    padding: 7px;
+}
+.tbl{
+    border: 2px solid black ! important;
 }
 
 .main{
@@ -50,8 +55,60 @@ table.table{
     font-weight: bold;
     font-size: 17px;
 }
+.topcontent{
+    width:100%;
+    display:inline-block;
+    padding-bottom: 12px;
+}
+.topcontent td{
+    font-size: 13px;
+}
 .topcontent-left{
+    float:left;
+    padding-right: 118px;
+}
+.topcontent-center{
+    float:left;
+}
+.topcontent-right{
+    float:right;
+}
+.content{
+    width:100%;
+}
+.para-heading{
+    color: red;
+    font-style: italic;
+}
+.para-content{
+    font-weight: bold;
+    font-size: 14px;
+}
+.para-content1{
+    font-size: 14px;
+}
+.bankdetails{
+    width: 100%;
+    display: inline-block;
+}
+.bankdetails h6{
+    color:red;
+}
+.bankdetails-left{
+    width: 40%;
     float: left;
+}
+.bankdetails-right{
+    width: 40%;
+    float: right;
+    padding-top: 24px;
+}
+.footer{
+    width: 100%;
+}
+.footer p{
+    text-align: center;
+    font-size: 14px;
 }
 
 /*
