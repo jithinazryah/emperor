@@ -186,6 +186,7 @@ class CloseEstimateController extends Controller {
         }
         
         public function actionReport($id) {
+                //$close_estimates = CloseEstimate::findAll(['apponitment_id' => $id]);
                 // get your HTML raw content without any layouts or scripts
                 $content = $this->renderPartial('pdf');
 

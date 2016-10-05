@@ -113,7 +113,7 @@ class ServicesController extends Controller {
                         Yii::$app->SetValues->Attributes($model);
                         return TRUE;
                 } else {
-                        return FALSE;
+                        return TRUE;
                 }
         }
         
@@ -123,7 +123,7 @@ class ServicesController extends Controller {
                         Yii::$app->SetValues->Attributes($model);
                         return TRUE;
                 } else {
-                        return FALSE;
+                        return TRUE;
                 }
         }
 
