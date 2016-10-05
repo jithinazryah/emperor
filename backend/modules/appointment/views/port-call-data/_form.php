@@ -68,44 +68,70 @@ use yii\widgets\ActiveForm;
         <div class="col-md-10">
             <?php
             if ($model_appointment->port_of_call == 2 || $model_appointment->port_of_call == 3) {
-                if ($model_appointment->purpose == 2 && $model_appointment->port_of_call == 2) {
-                    //$var = "_form_rmc_tanker";
-                    echo $this->render('_form_rmc_tanker', [
-                        'model' => $model,
-                        'form' => $form,
-                    ]);
-                } else {
-                    //$var = "_form_stevin_rocks";
-                    echo $this->render('_form_stevin_rocks', [
-                        'model' => $model,
-                        'form' => $form,
-                    ]);
-                }
+                    if ($model_appointment->purpose == 2 && $model_appointment->port_of_call == 2) {
+                            //$var = "_form_rmc_tanker";
+                            echo $this->render('_form_rmc_tanker', [
+                                'model' => $model,
+                                'form' => $form,
+                            ]);
+                    } else {
+                            //$var = "_form_stevin_rocks";
+                            echo $this->render('_form_stevin_rocks', [
+                                'model' => $model,
+                                'form' => $form,
+                            ]);
+                    }
             } else {
-                //$var = "_form_common";
-                echo $this->render('_form_common', [
-                    'model' => $model,
-                    'form' => $form,
-                ]);
+                    //$var = "_form_common";
+                    echo $this->render('_form_common', [
+                        'model' => $model,
+                        'form' => $form,
+                    ]);
             }
             ?>
         </div>
     </div>
 
     <hr class="appoint_history" />
-    <div id="p_scents">
+    <div id="p_scents"> 
+        <input type="hidden" id="delete_vals"  name="delete_vals" value="">
+        <?php
+        if (!empty($model_additional)) {
+               
+                foreach ($model_additional as $data) {
+                        ?>
+                        <span>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="updatee[<?= $data->id; ?>][label][]" value="<?= $data->label; ?>" required>
+                            </div>
+                            <div class="form-group ">
+                                <input type="text" class="form-control" name="updatee[<?= $data->id; ?>][valuee][]" value="<?= $data->value; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="updatee[<?= $data->id; ?>][comment][]" value="<?= $data->comment; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <a id="remScnt" val="<?= $data->id; ?>" class="btn btn-icon btn-red remScnt" ><i class="fa-remove"></i></a>
+                            </div>
+                        </span>
+                        <br>
+                        <?php
+                }
+        }
+        ?>
+        <br>
         <span>
             <div class="form-group">
                 <label class="control-label">Label</label>
-                <input type="text" class="form-control" name="1[label][]">
+                <input type="text" class="form-control" name="create[label][]">
             </div>
             <div class="form-group ">
                 <label class="control-label" for="">Value</label>
-                <input type="text" class="form-control" name="1[valuee][]">
+                <input type="text" class="form-control" name="create[valuee][]">
             </div>
             <div class="form-group">
                 <label class="control-label" >Comment</label>
-                <input type="text" class="form-control" name="1[comment][]">
+                <input type="text" class="form-control" name="create[comment][]">
             </div>
         </span>
         <br/>
@@ -147,9 +173,9 @@ use yii\widgets\ActiveForm;
         .form-inline .eosp .form-group {
             width: 100%;
         }
-                .portcall {
-                        color: #0049a0;
-                        font-size: 16px;
+        .portcall {
+            color: #0049a0;
+            font-size: 16px;
             margin-left: 31px;
             margin-bottom: 12px;
             cursor: pointer;
@@ -165,10 +191,10 @@ use yii\widgets\ActiveForm;
             font-weight: bold !important;
         }
         .nav.nav-tabs>li.active>a {
-                        background-color: #cccccc;
+            background-color: #cccccc;
         }
         .txtarea{
-                        width:97% !important;
+            width:97% !important;
             margin-left: 28px;
             height: 150px;
         }
@@ -178,26 +204,26 @@ use yii\widgets\ActiveForm;
     </style>
 </div>
 <script>
-    $(document).ready(function () {
-        /*
-         * Add more bnutton function
-         */
-        var scntDiv = $('#p_scents');
-        var i = $('#p_scents span').size() + 1;
+        $(document).ready(function () {
+            /*
+             * Add more bnutton function
+             */
+            var scntDiv = $('#p_scents');
+            var i = $('#p_scents span').size() + 1;
 
-        $('#addScnt').on('click', function () {
-            var ver = '<span>\n\
+            $('#addScnt').on('click', function () {
+                var ver = '<span>\n\
                                 <div class="form-group">\n\
                                 <label class="control-label" for=""></label>\n\
-                                <input type="text" id="" class="form-control" name="1[label][]">\n\
+                                <input type="text" id="" class="form-control" name="create[label][]" required>\n\
                                 </div> \n\
                                 <div class="form-group">\n\
                                 <label class="control-label" for=""></label>\n\
-                                <input type="text" class="form-control" name="1[valuee][]">\n\
+                                <input type="text" class="form-control" name="create[valuee][]" required>\n\
                                 </div> \n\
                                 <div class="form-group ">\n\
                                 <label class="control-label"></label>\n\
-                                <input type="text" id="" class="form-control" name="1[comment][]">\n\
+                                <input type="text" id="" class="form-control" name="create[comment][]" required>\n\
                                 </div>\n\
                                 <div class="form-group">\n\
                                 <a id="remScnt" class="btn btn-icon btn-red remScnt" ><i class="fa-remove"></i></a>\n\
@@ -205,19 +231,24 @@ use yii\widgets\ActiveForm;
                                 </span>';
 
 
-            $(ver).appendTo(scntDiv);
-            i++;
-            return false;
+                $(ver).appendTo(scntDiv);
+                i++;
+                return false;
+            });
+            $('#p_scents').on('click', '.remScnt', function () {
+                if (i > 2) {
+                    $(this).parents('span').remove();
+                    i--;
+                }
+                if (this.hasAttribute("val")) {
+                    var valu = $(this).attr('val');
+                    $('#delete_vals').val($('#delete_vals').val() + valu + ',')
+                }
+                return false;
+            });
+
+            $('.portcall').click(function () {
+                $('.hidediv').slideToggle();
+            });
         });
-        $('#p_scents').on('click', '.remScnt', function () {
-            if (i > 2) {
-                $(this).parents('span').remove();
-                i--;
-            }
-            return false;
-        });
-        $('.portcall').click(function () {
-            $('.hidediv').slideToggle();
-        });
-    });
 </script>

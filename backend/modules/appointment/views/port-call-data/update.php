@@ -100,6 +100,7 @@ $this->params['breadcrumbs'][] = 'Update';
                                         'model_add' => $model_add,
                                         'model_imigration' => $model_imigration,
                                         'model_appointment' => $model_appointment,
+                                        'model_additional' => $model_additional,
                                     ])
                                     ?>
                                 </div>
