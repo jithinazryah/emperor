@@ -168,6 +168,14 @@ class EstimatedProformaController extends Controller {
                 }
         }
 
+        public function actionEstimateConfirm($id) {
+                $appointment = Appointment::findOne($id);
+                $appointment->stage = 2;
+                $appointment->sub_stages = 2;
+                $appointment->save();
+                return $this->redirect(['/appointment/port-call-data/update', 'id' => $appointment->id]);
+        }
+
         protected function SetValues($model, $id) {
 
                 if (Yii::$app->SetValues->Attributes($model)) {
@@ -232,10 +240,11 @@ class EstimatedProformaController extends Controller {
                 // get your HTML raw content without any layouts or scripts
                 $appointment = Appointment::findOne($id);
                 //var_dump($appointment);exit;
-                 echo $content = $this->renderPartial('report', [
-                    'appointment' => $appointment,
-                   'estimates' => $estimates,
-                ]); exit;
+                echo $content = $this->renderPartial('report', [
+            'appointment' => $appointment,
+            'estimates' => $estimates,
+                ]);
+                exit;
 
                 // setup kartik\mpdf\Pdf component
                 $pdf = new Pdf([

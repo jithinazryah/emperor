@@ -53,7 +53,7 @@ use yii\widgets\ActiveForm;
         <div class="form-group "><h4 class="portcall-rob">ROB- SAILING</h4></div>
         <div class="form-group "></div>
 
-        <?php $arr = array('1' => 'Metric Ton', '2' => 'Litter'); ?>
+        <?php $arr = array('1' => 'Metric Ton', '2' => 'Liter'); ?>
 
         <?= $form->field($model_rob, 'fo_arrival_unit')->dropDownList($arr, ['prompt' => '-choose arrival unit-', 'tabindex' => 11]) ?>
 

@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'attribute' => 'vessel',
                                                     'value' => function($data) {
                                                             if ($data->vessel_type == 1) {
-                                                                    return Vessel::findOne($data->tug)->vessel_name . ',' . Vessel::findOne($data->barge)->vessel_name;
+                                                                    return 'T:'.Vessel::findOne($data->tug)->vessel_name . ',B:' . Vessel::findOne($data->barge)->vessel_name;
                                                             } else {
                                                                     return Vessel::findOne($data->vessel)->vessel_name;
                                                             }

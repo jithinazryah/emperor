@@ -40,9 +40,9 @@ class EstimatedProforma extends \yii\db\ActiveRecord {
         public function rules() {
                 return [
                     [['apponitment_id', 'service_id'], 'required'],
-                    [['apponitment_id', 'service_id', 'supplier', 'currency', 'epda', 'invoice_type', 'status', 'CB', 'UB'], 'integer'],
+                    [['apponitment_id', 'service_id', 'supplier', 'currency', 'invoice_type', 'status', 'CB', 'UB'], 'integer'],
                     [['comments', 'principal'], 'string'],
-                    [['DOC', 'DOU'], 'safe'],
+                    [['DOC', 'DOU', 'epda'], 'safe'],
                     [['unit_rate', 'unit'], 'string', 'max' => 50],
                     [['roe'], 'string', 'max' => 15],
                 ];

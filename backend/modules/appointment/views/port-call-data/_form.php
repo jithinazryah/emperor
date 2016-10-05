@@ -23,49 +23,52 @@ use yii\widgets\ActiveForm;
     ?>
     <div class="row hidediv">
         <div class="col-md-12">
-            <?= $form->field($model_imigration, 'arrived_ps')->textInput() ?>
+            <?= $form->field($model_imigration, 'arrived_ps')->textInput(['tabindex' => 1]) ?>
 
-            <?= $form->field($model_imigration, 'pob_inbound')->textInput() ?>
+            <?= $form->field($model_imigration, 'pob_inbound')->textInput(['tabindex' => 2]) ?>
 
-            <?= $form->field($model_imigration, 'first_line_ashore')->textInput() ?>
+            <?= $form->field($model_imigration, 'first_line_ashore')->textInput(['tabindex' => 3]) ?>
 
-            <?= $form->field($model_imigration, 'all_fast')->textInput() ?>
+            <?= $form->field($model_imigration, 'all_fast')->textInput(['tabindex' => 4]) ?>
 
-            <?= $form->field($model_imigration, 'agent_on_board')->textInput() ?>
+            <?= $form->field($model_imigration, 'agent_on_board')->textInput(['tabindex' => 5]) ?>
 
-            <?= $form->field($model_imigration, 'imi_clearence_commenced')->textInput() ?>
+            <?= $form->field($model_imigration, 'imi_clearence_commenced')->textInput(['tabindex' => 6]) ?>
 
-            <?= $form->field($model_imigration, 'imi_clearence_completed')->textInput() ?>
+            <?= $form->field($model_imigration, 'imi_clearence_completed')->textInput(['tabindex' => 7]) ?>
+            
+            <?= $form->field($model_imigration, 'pob_inbound')->textInput(['tabindex' => 8]) ?>
 
-            <?= $form->field($model_imigration, 'pob_outbound')->textInput() ?>
+            <?= $form->field($model_imigration, 'pob_outbound')->textInput(['tabindex' => 9]) ?>
 
-            <?= $form->field($model_imigration, 'cast_off')->textInput() ?>
+            <?= $form->field($model_imigration, 'cast_off')->textInput(['tabindex' => 10]) ?>
 
-            <?= $form->field($model_imigration, 'last_line_away')->textInput() ?>
+            <?= $form->field($model_imigration, 'cleared_break_water')->textInput(['tabindex' => 11]) ?>
 
-            <?= $form->field($model_imigration, 'cleared_break_water')->textInput() ?>
+            <?= $form->field($model_imigration, 'drop_anchor')->textInput(['tabindex' => 12]) ?>
 
-            <?= $form->field($model_imigration, 'drop_anchor')->textInput() ?>
+            <?= $form->field($model_imigration, 'heave_up_anchor')->textInput(['tabindex' => 13]) ?>
 
-            <?= $form->field($model_imigration, 'heave_up_anchor')->textInput() ?>
-
-            <?= $form->field($model_imigration, 'pilot_boarded')->textInput() ?>
+            <?= $form->field($model_imigration, 'pilot_boarded')->textInput(['tabindex' => 14]) ?>
         </div>
     </div>
     <hr class="appoint_history" />
     <div class="row">
-        <div class="col-md-2 eosp">
-            <?= $form->field($model, 'eta')->textInput(['tabindex' => 1]) ?>
-            <br/>
-            <?= $form->field($model, 'ets')->textInput(['tabindex' => 2]) ?>
-            <br/>
-            <?= $form->field($model, 'eosp')->textInput(['tabindex' => 3]) ?>
-            <br/>
-            <?= $form->field($model, 'arrived_anchorage')->textInput(['tabindex' => 4]) ?>
-            <br/>
-            <?= $form->field($model, 'nor_tendered')->textInput(['tabindex' => 5]) ?>  
+        <div class="col-md-12">
+            <?= $form->field($model, 'eta')->textInput(['tabindex' => 15]) ?>
+            
+            <?= $form->field($model, 'ets')->textInput(['tabindex' => 16]) ?>
+            
+            <?= $form->field($model, 'eosp')->textInput(['tabindex' => 17]) ?>
+            
+            <?= $form->field($model, 'arrived_anchorage')->textInput(['tabindex' => 18]) ?>
+            
+            <?= $form->field($model, 'nor_tendered')->textInput(['tabindex' => 19]) ?>  
         </div>
-        <div class="col-md-10">
+    </div>
+     <hr class="appoint_history" />
+     <div class="row">
+        <div class="col-md-12">
             <?php
             if ($model_appointment->port_of_call == 2 || $model_appointment->port_of_call == 3) {
                     if ($model_appointment->purpose == 2 && $model_appointment->port_of_call == 2) {
@@ -151,12 +154,12 @@ use yii\widgets\ActiveForm;
     </div><br/>
     <hr class="appoint_history" />
 
-    <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled', 'tabindex' => 24]) ?>
+    <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
     <div class="form-group "></div>
     <div class="form-group "></div>
     <div class="form-group "></div>
     <br/>
-    <?= Html::activeTextarea($model, 'comments', ['class' => 'newsletter-cta-mail txtarea', 'tabindex' => 25]); ?>
+    <?= Html::activeTextarea($model, 'comments', ['class' => 'newsletter-cta-mail txtarea']); ?>
     <?php // $form->field($model, 'comments', ['template' => "<div class='full-width-text'>\n{label}\n{input}\n{hint}\n{error}\n</div>"])->textarea(['rows' => 6, 'tabindex' => 25]) ?>
     <br/>
     <div class="form-group" style="float: right;">

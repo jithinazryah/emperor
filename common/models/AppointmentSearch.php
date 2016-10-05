@@ -18,7 +18,7 @@ class AppointmentSearch extends Appointment
     public function rules()
     {
         return [
-            [['id', 'vessel_type', 'vessel', 'port_of_call', 'terminal', 'principal', 'nominator', 'charterer', 'shipper', 'stage', 'status', 'CB', 'UB'], 'integer'],
+            [['id', 'vessel_type', 'vessel', 'port_of_call', 'terminal', 'principal', 'nominator', 'charterer', 'shipper','sub_stages','stage', 'status', 'CB', 'UB'], 'integer'],
             [['birth_no', 'appointment_no', 'no_of_principal', 'purpose', 'cargo', 'quantity', 'last_port', 'next_port', 'eta', 'DOC', 'DOU'], 'safe'],
         ];
     }

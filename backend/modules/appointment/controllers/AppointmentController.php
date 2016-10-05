@@ -93,14 +93,16 @@ class AppointmentController extends Controller {
          */
         public function actionCreate() {
                 $model = new Appointment();
-                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $this->ChangeFormat($model) && $model->save() && $this->PortCall($model->id)) {
-                  if(!empty(Yii::$app->request->post(check))){
-                     return $this->redirect(['/appointment/estimated-proforma/add', 'id' => $model->id,'check'=>true]);
-                  }
-                  else{
-                      return $this->redirect(['/appointment/estimated-proforma/add', 'id' => $model->id]);
-                  }
-                    
+                if ($model->load(Yii::$app->request->post()) && Yii::$app->SetValues->Attributes($model) && $this->Principal($model, $_POST['Appointment']['principal']) && $this->ChangeFormat($model)) {
+                        $model->stage = 1;
+                        $model->sub_stages = 1;
+                        $model->save();
+                        $this->PortCall($model->id);
+                        if (!empty(Yii::$app->request->post(check))) {
+                                return $this->redirect(['/appointment/estimated-proforma/add', 'id' => $model->id, 'check' => true]);
+                        } else {
+                                return $this->redirect(['/appointment/estimated-proforma/add', 'id' => $model->id]);
+                        }
                 } else {
                         return $this->render('create', [
                                     'model' => $model,
@@ -137,12 +139,12 @@ class AppointmentController extends Controller {
                 $port_data = new PortCallData();
                 $port_draft = new PortCallDataDraft();
                 $port_rob = new PortCallDataRob();
-                $port_imigration =new ImigrationClearance();
+                $port_imigration = new ImigrationClearance();
                 $port_data->appointment_id = $id;
                 $port_draft->appointment_id = $id;
                 $port_rob->appointment_id = $id;
                 $port_imigration->appointment_id = $id;
-                
+
                 if ($port_imigration->save() && $port_data->save() && $port_draft->save() && $port_rob->save()) {
                         return TRUE;
                 } else {
@@ -193,9 +195,12 @@ class AppointmentController extends Controller {
                         $port_data = Ports::find()->where(['id' => $port_id])->one();
                         $last_appointment = Appointment::find()->orderBy(['id' => SORT_DESC])->where(['port_of_call' => $port_id])->one();
                         if (empty($last_appointment))
-                                return $port_data->code . '0001';
+                                echo $port_data->code . '0001';
                         else {
-                                return $port_data->code . (sprintf('%04d', ++$last_appointment->id));
+                                $last = substr($last_appointment->appointment_no, -4);
+                                $last = ltrim($last, '0');
+
+                                echo $port_data->code . (sprintf('%04d', ++$last));
                         }
                 } else {
                         return '';

@@ -19,7 +19,7 @@ class PortCallDataSearch extends PortCallData
     {
         return [
             [['id', 'appointment_id', 'additional_info', 'status', 'CB', 'UB'], 'integer'],
-            [['eta', 'ets', 'eosp', 'arrived_anchorage', 'nor_tendered', 'dropped_anchor', 'anchor_aweigh', 'arrived_pilot_station', 'pob_inbound', 'first_line_ashore', 'all_fast', 'gangway_down', 'agent_on_board', 'immigration_commenced', 'immigartion_completed', 'cargo_commenced', 'cargo_completed', 'pob_outbound', 'lastline_away', 'cleared_channel', 'cosp', 'fasop', 'eta_next_port', 'comments', 'DOC', 'DOU'], 'safe'],
+            [['eta', 'ets', 'eosp', 'arrived_anchorage', 'nor_tendered', 'dropped_anchor', 'anchor_aweigh', 'arrived_pilot_station', 'pob_inbound', 'first_line_ashore', 'all_fast', 'gangway_down', 'agent_on_board', 'immigration_commenced', 'immigartion_completed', 'cargo_commenced', 'cargo_completed', 'pob_outbound', 'lastline_away', 'cleared_channel', 'cosp', 'fasop', 'eta_next_port', 'comments', 'DOC', 'DOU','documentation_completed'], 'safe'],
         ];
     }
 
