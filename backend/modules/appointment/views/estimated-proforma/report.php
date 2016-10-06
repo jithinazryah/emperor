@@ -112,9 +112,11 @@ and open the template in the editor.
                 </tr>
             </table>
         </div>
+        
 
         <div class="content">
             <?php
+            $subepdatotal = 0;
             foreach ($estimates as $estimate) {
                     $subcategories = SubServices::findAll(['estid' => $estimate->id]);
                     if (!empty($subcategories)) {
@@ -145,6 +147,7 @@ and open the template in the editor.
                                     <td>AED <?= $subtotal ?></td>
                                 </tr>
                             </table>
+                            <br/>
                     <?php } else {
                             ?>
                             <br/>
@@ -160,6 +163,7 @@ and open the template in the editor.
                             </table>
 
                             <?php
+                            $subepdatotal += $estimate->epda;
                     }
             }
             ?>
@@ -204,7 +208,7 @@ and open the template in the editor.
                 <tr>
                     <td style="width: 84%; text-align: center;"><b>Grand Total Estimate</b></td>
                     <td style="width: 8%;">USD 123456</td>
-                    <td style="width: 8%;">AED <?= $grandtotal; ?></td>
+                    <td style="width: 8%;">AED <?= $grandtotal + $subepdatotal; ?></td>
                 </tr>
             </table>
         </div>

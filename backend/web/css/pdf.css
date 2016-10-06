@@ -21,7 +21,7 @@ table.table{
 }
 .table td {
     border: 1px solid black;
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
     padding: 7px;
 }
@@ -34,6 +34,7 @@ table.table{
     margin: auto;
     font-family: 'Roboto', sans-serif; 
 }
+
 .main-left{
     float: left;
 }
@@ -50,7 +51,7 @@ table.table{
 }
 .heading{
     width: 98%;
-    padding: 25px 12px;
+    padding: 13px 12px;
     text-align: center;
     font-weight: bold;
     font-size: 17px;
@@ -108,7 +109,7 @@ table.table{
 }
 .footer p{
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 /*
