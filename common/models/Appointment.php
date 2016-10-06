@@ -125,5 +125,13 @@ class Appointment extends \yii\db\ActiveRecord {
                 $data = Debtor::findOne(['id' => $debtor_id]);
                 return $data->principal_name;
         }
+         public function getInvoiceAddress($principal) {
+                $data = Debtor::findOne(['id' => $principal]);
+                return $data->invoicing_address;
+        }
+        public function getClintCode($principal) {
+                $data = Debtor::findOne(['id' => $principal]);
+                return $data->principal_id;
+        }
 
 }

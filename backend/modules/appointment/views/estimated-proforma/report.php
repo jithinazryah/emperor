@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\SubServices;
+use common\models\Appointment;
+use common\models\EstimatedProforma;
+use common\models\Debtor;
 ?>
 <!DOCTYPE html>
 <!--
@@ -28,7 +31,7 @@ and open the template in the editor.
                 <table class="">
                     <tr>
                         <td>TO </td> <td style="width: 50px;text-align: center">:</td>
-                        <td style="max-width: 200px">jithin wails Plaiickal, pullopram</td>
+                        <td style="max-width: 200px"><?= $appointment->getInvoiceAddress($appointment->principal); ?></td>
                     </tr>
                 </table>
             </div>
@@ -41,7 +44,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>Client Code </td> <td style="width: 50px;text-align: center">:</td>
-                        <td style="max-width: 200px">IPC</td>
+                        <td style="max-width: 200px"><?= $appointment->getClintCode($appointment->principal); ?></td>
                     </tr>
                 </table>
             </div>
@@ -52,40 +55,40 @@ and open the template in the editor.
             <div class="topcontent-left">
                 <table class="">
                     <tr>
-                        <td>Port </td> <td>:<?= $appointment->portOfCall->port_name ?></td>
-                        <td></td>
+                        <td>Port </td> <td>:</td>
+                        <td><?= $appointment->portOfCall->port_name ?></td>
                     </tr>
                     <tr>
-                        <td>ETA </td> <td>:<?= $appointment->eta ?></td>
-                        <td></td>
+                        <td>ETA </td> <td>:</td>
+                        <td><?= $appointment->eta ?></td>
                     </tr>
                     <tr>
-                        <td>Details </td> <td>:Loading Clinker - Free In Basis</td>
-                        <td></td>
+                        <td>Details </td> <td>:</td>
+                        <td>Loading Clinker - Free In Basis</td>
                     </tr>
                 </table>
             </div>
             <div class="topcontent-center">
                 <table class="">
                     <tr>
-                        <td>Vessel </td> <td>:<?= $appointment->vessel0->vessel_name ?></td>
-                        <td></td>
+                        <td>Vessel </td> <td>:</td>
+                        <td><?= $appointment->vessel0->vessel_name ?></td>
                     </tr>
                     <tr>
-                        <td>Purpose </td> <td>:<?= $appointment->purpose0->purpose ?></td>
-                        <td></td>
+                        <td>Purpose </td> <td>:</td>
+                        <td><?= $appointment->purpose0->purpose ?></td>
                     </tr>
                 </table>
             </div>
             <div class="topcontent-right">
                 <table class="">
                     <tr>
-                        <td>Ref No </td> <td>:<?= $appointment->appointment_no ?></td>
-                        <td></td>
+                        <td>Ref No </td> <td>:</td>
+                        <td><?= $appointment->appointment_no ?></td>
                     </tr>
                     <tr>
-                        <td>Ops no </td> <td>:TBC</td>
-                        <td></td>
+                        <td>Ops no </td> <td>:</td>
+                        <td>TBC</td>
                     </tr>
                 </table>
             </div>
