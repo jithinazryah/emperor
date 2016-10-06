@@ -177,7 +177,8 @@ class EstimatedProformaController extends Controller {
                         $appointment->save();
                         return $this->redirect(['/appointment/port-call-data/update', 'id' => $appointment->id]);
                 } else {
-                        
+                        Yii::$app->getSession()->setFlash('error', 'Cannot Procced to the next Stage..');
+                        return $this->redirect(['add', 'id' => $id]);
                 }
         }
 

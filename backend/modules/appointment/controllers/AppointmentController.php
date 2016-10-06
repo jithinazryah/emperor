@@ -97,7 +97,7 @@ class AppointmentController extends Controller {
                         $model->stage = 1;
                         $model->sub_stages = 1;
                         $model->save();
-                        $this->PortCall($model->id);
+                        $this->PortCall($model);
                         if (!empty(Yii::$app->request->post(check))) {
                                 return $this->redirect(['/appointment/estimated-proforma/add', 'id' => $model->id, 'check' => true]);
                         } else {
@@ -135,15 +135,16 @@ class AppointmentController extends Controller {
                 return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        public function PortCall($id) {
+        public function PortCall($model) {
                 $port_data = new PortCallData();
                 $port_draft = new PortCallDataDraft();
                 $port_rob = new PortCallDataRob();
                 $port_imigration = new ImigrationClearance();
-                $port_data->appointment_id = $id;
-                $port_draft->appointment_id = $id;
-                $port_rob->appointment_id = $id;
-                $port_imigration->appointment_id = $id;
+                $port_data->appointment_id = $model->id;
+                $port_data->eta = $model->eta;
+                $port_draft->appointment_id = $model->id;
+                $port_rob->appointment_id = $model->id;
+                $port_imigration->appointment_id = $model->id;
 
                 if ($port_imigration->save() && $port_data->save() && $port_draft->save() && $port_rob->save()) {
                         return TRUE;
