@@ -28,6 +28,7 @@ class EstimatedProformaController extends Controller {
                         'class' => VerbFilter::className(),
                         'actions' => [
                             'delete' => ['POST'],
+                            'reports' => ['POST'],
                         ],
                     ],
                 ];
@@ -241,14 +242,17 @@ class EstimatedProformaController extends Controller {
                 }
         }
 
-        public function actionReport($id) {
-                $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
+        public function actionReports() {
+                $princip = $_POST['principal'];
+                $app = $_POST['app_id'];
+                $estimates = EstimatedProforma::findAll(['apponitment_id' => $app, 'principal' => $princip]);
                 // get your HTML raw content without any layouts or scripts
-                $appointment = Appointment::findOne($id);
+                $appointment = Appointment::findOne($app);
                 //var_dump($appointment);exit;
                 echo $content = $this->renderPartial('report', [
             'appointment' => $appointment,
             'estimates' => $estimates,
+                    'princip' => $princip,
                 ]);
                 exit;
 

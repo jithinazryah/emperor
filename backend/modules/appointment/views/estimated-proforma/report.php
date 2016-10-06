@@ -24,14 +24,13 @@ and open the template in the editor.
 <body>
     <button onclick="window.print()">Print</button>
     <div class="main">
-
         <div class="header">
             <div class="main-left">
                 <img src="<?= Yii::$app->homeUrl ?>/images/logoleft.jpg"/>
                 <table class="">
                     <tr>
                         <td>TO </td> <td style="width: 50px;text-align: center">:</td>
-                        <td style="max-width: 200px"><?= $appointment->getInvoiceAddress($appointment->principal); ?></td>
+                        <td style="max-width: 200px"><?= $appointment->getInvoiceAddress($princip); ?></td>
                     </tr>
                 </table>
             </div>

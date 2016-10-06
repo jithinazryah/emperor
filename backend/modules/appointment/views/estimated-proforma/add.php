@@ -44,14 +44,50 @@ $this->params['breadcrumbs'][] = $this->title;
                 <hr class="appoint_history" />
                 <div class="error">
                     <?php //if (Yii::$app->session->hasFlash('error')): ?>
-                            <?= Yii::$app->session->getFlash('error'); ?>
-                    <?php// endif; ?>
+                    <?= Yii::$app->session->getFlash('error'); ?>
+                    <?php // endif; ?>
                 </div>
                 <div style="float: left;">
+                    <?= Html::beginForm(['estimated-proforma/reports'], 'post', ['target' => '_blank']) ?>
+                    <!--<form name="estimate" action="<?= Yii::$app->homeUrl ?>appointment/estimated-proforma/reports" method="post">-->
                     <?php
-                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                    $arr = explode(',', $appointment->principal);
+                    if (count($arr) == 1) {
+                            ?>
+                     <div class="row">
+                         <div class="col-md-2" style="float:left;"> 
+                            <input type="hidden" name="app_id" value="<?= $appointment->id ?>">
+                            <input type="hidden" name="principal" value="<?= $arr[0]; ?>">  
+                            <?php
+                    } else {
+                            ?>
+                           
+                            <input type="hidden" name="app_id" value="<?= $appointment->id ?>">
+                           
+                                <select name = "principal" id = "" class="form-control">
+                                    <option selected = "selected">Select Principal</option>
+                                    <?php
+                                    foreach ($arr as $key => $value) {
+                                            ?>
+                                            <option value="<?= $value ?>"><?= $value ?></option>
+                                    <?php }
+                                    ?>
+                                </select> 
+                            </div>
+                          
+                            <?php
+                    }
                     ?>
-                </div>
+                         <div class="col-md-10" style="float:left;">
+                        <?= Html::submitButton('<i class="fa-print"></i><span>Generate Report</span>', ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']) ?>
+    <!--<input type="submit" name="b1" value="Submit">-->
+                        <?= Html::endForm() ?>
+                        <?php
+//                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                        ?> 
+                    </div>   
+                              </div>
+                            </div>
 
                 <ul class="estimat nav nav-tabs nav-tabs-justified">
                     <li>
@@ -122,7 +158,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <?= Html::a('<i class="fa fa-remove"></i>', ['/appointment/estimated-proforma/delete-performa', 'id' => $estimate->id], ['class' => 'btn btn-icon btn-red', 'tittle' => 'Edit']) ?>
                                                 <?= Html::a('<i class="fa fa-database"></i>', ['/appointment/sub-services/add', 'id' => $estimate->id], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
         <!--                                            <a href="javascript:;" onclick="showAjaxModal(<?= $estimate->id ?>);" class="btn btn-success">Sub</a>-->
-                                                <?php //Html::a('Sub', [''], ['class' => 'btn btn-success', "onclick" => "showAjaxModal(".$estimate->id.");"]) ?>
+                                                <?php //Html::a('Sub', [''], ['class' => 'btn btn-success', "onclick" => "showAjaxModal(".$estimate->id.");"])   ?>
                                             </td>
                                             <?php
                                             $epdatotal += $estimate->epda;
@@ -145,10 +181,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td></td>
                                     <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
                                     <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-                                   <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                         ?></td>-->
+                                   <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                                 ?></td>-->
                                     <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                     <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                    <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                         ?></td>-->
+                                    <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                                 ?></td>-->
                                     <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA', 'disabled' => true])->label(false) ?></td>
 
                                     <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1, 'id' => explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>
@@ -251,11 +287,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div style="float:right;padding-top: 5px;">
                     <?php
                     echo Html::a('<span> Estimated Proforma Completed & Proceed to Portcall</span>', ['estimated-proforma/estimate-confirm', 'id' => $appointment->id], ['class' => 'btn btn-secondary']);
-                    ?>
+                    ?>      
+
                 </div>
 
             </div>
-            <?php //Pjax::end();  ?> 
+            <?php //Pjax::end();     ?> 
         </div>
 
     </div>

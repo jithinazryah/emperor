@@ -22,40 +22,40 @@ use yii\db\Expression;
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->errorSummary($model) ?>
 
-    <?= $form->field($model, 'vessel_type')->dropDownList(ArrayHelper::map(VesselType::findAll(['status' => 1]), 'id', 'vessel_type'), ['prompt' => '-Choose a Vessel Type-', 'class' => 'form-control vessels', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'vessel_type')->dropDownList(ArrayHelper::map(VesselType::findAll(['status' => 1]), 'id', 'vessel_type'), ['prompt' => '-Choose a Vessel Type-', 'class' => 'form-control vessels']) ?>
 
     <?php
-    $flag_vessel = true;
-    $flag_tug = true;
-    $flag_barge = true;
-    if (!$model->isNewRecord) {
-        if ($model->vessel_type != '') {
-            if ($model->vessel_type == 1) {
-                $flag_vessel = true;
-                $flag_tug = false;
-                $flag_barge = false;
-            } else {
-                $flag_vessel = FALSE;
-                $flag_tug = TRUE;
-                $flag_barge = false;
-            }
-        }
-    }
+//    $flag_vessel = true;
+//    $flag_tug = true;
+//    $flag_barge = true;
+//    if (!$model->isNewRecord) {
+//        if ($model->vessel_type != '') {
+//            if ($model->vessel_type == 1) {
+//                $flag_vessel = true;
+//                $flag_tug = false;
+//                $flag_barge = false;
+//            } else {
+//                $flag_vessel = FALSE;
+//                $flag_tug = TRUE;
+//                $flag_barge = false;
+//            }
+//        }
+//    }
     ?>
-    <?= $form->field($model, 'vessel')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1]), 'id', 'vessel_name'), ['prompt' => '-Choose a Vessel-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : $flag_vessel]) ?>
+    <?= $form->field($model, 'vessel')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1]), 'id', 'vessel_name'), ['prompt' => '-Choose a Vessel-', 'disabled' => $model->vessel_type ==1 ? TRUE : FALSE]) ?>
 
 
-    <?= $form->field($model, 'tug')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' => 4]), 'id', 'vessel_name'), ['prompt' => '-Choose a Tug-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : $flag_tug]) ?>
+    <?= $form->field($model, 'tug')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' => 4]), 'id', 'vessel_name'), ['prompt' => '-Choose a Tug-', 'disabled' => $model->vessel_type !=1 ? TRUE : FALSE]) ?>
 
-    <?= $form->field($model, 'barge')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' => 6]), 'id', 'vessel_name'), ['prompt' => '-Choose a Barge-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : $flag_barge]) ?>
+    <?= $form->field($model, 'barge')->dropDownList(ArrayHelper::map(Vessel::findAll(['status' => 1, 'vessel_type' => 6]), 'id', 'vessel_name'), ['prompt' => '-Choose a Barge-', 'disabled' => $model->vessel_type !=1 ? TRUE : FALSE]) ?>
 
-    <?= $form->field($model, 'port_of_call')->dropDownList(ArrayHelper::map(Ports::findAll(['status' => 1]), 'id', 'port_name'), ['prompt' => '-Choose a Port-', 'class' => 'form-control ports', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'port_of_call')->dropDownList(ArrayHelper::map(Ports::findAll(['status' => 1]), 'id', 'port_name'), ['prompt' => '-Choose a Port-', 'class' => 'form-control ports']) ?>
 
-    <?= $form->field($model, 'terminal')->dropDownList(ArrayHelper::map(Terminal::findAll(['status' => 1]), 'id', 'terminal'), ['prompt' => '-Choose a Terminal-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'terminal')->dropDownList(ArrayHelper::map(Terminal::findAll(['status' => 1]), 'id', 'terminal'), ['prompt' => '-Choose a Terminal-']) ?>
 
     <?php // $form->field($model, 'terminal')->textInput(['maxlength' => true])  ?>
 
-    <?= $form->field($model, 'birth_no')->textInput(['maxlength' => true, 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'birth_no')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'appointment_no')->textInput(['maxlength' => true, 'readonly' => true]) ?>
 
@@ -66,37 +66,37 @@ use yii\db\Expression;
     }
     ?>
     <?php $arr = array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'); ?>
-    <?= $form->field($model, 'no_of_principal')->dropDownList($arr, ['prompt' => '-choose no of principal-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'no_of_principal')->dropDownList($arr, ['prompt' => '-choose no of principal-']) ?>
 
     <?=
     $form->field($model, 'principal', ['template' => "<div class='overly'></div>\n{label}\n{input}\n{hint}\n{error}"]
-    )->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal), 'prompt' => '-Choose a Principal-', 'multiple' => true, 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE])
+    )->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1]), 'id', 'principal_name'), ['options' => Yii::$app->SetValues->Selected($model->principal), 'prompt' => '-Choose a Principal-', 'multiple' => true])
     ?>
 
-    <?= $form->field($model, 'nominator')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 1])->all(), 'id', 'name'), ['prompt' => '-Choose a Nominator-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'nominator')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 1])->all(), 'id', 'name'), ['prompt' => '-Choose a Nominator-']) ?>
 
-    <?= $form->field($model, 'charterer')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 2])->all(), 'id', 'name'), ['prompt' => '-Choose a Charterer-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'charterer')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 2])->all(), 'id', 'name'), ['prompt' => '-Choose a Charterer-']) ?>
 
-    <?= $form->field($model, 'shipper')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 3])->all(), 'id', 'name'), ['prompt' => '-Choose a Shipper-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'shipper')->dropDownList(ArrayHelper::map(Contacts::find()->where(new Expression('FIND_IN_SET(:contact_type, contact_type)'))->addParams([':contact_type' => 3])->all(), 'id', 'name'), ['prompt' => '-Choose a Shipper-']) ?>
 
-    <?= $form->field($model, 'purpose')->dropDownList(ArrayHelper::map(Purpose::findAll(['status' => 1]), 'id', 'purpose'), ['prompt' => '-Choose a Purpose-', 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'purpose')->dropDownList(ArrayHelper::map(Purpose::findAll(['status' => 1]), 'id', 'purpose'), ['prompt' => '-Choose a Purpose-']) ?>
 
     <?= $form->field($model, 'cargo')->textInput(['maxlength' => true, 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
 
 
     <?= $form->field($model, 'cargo_details')->textarea(['rows' => 6]) ?>        
 
-    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true, 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'last_port')->textInput(['maxlength' => true, 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'last_port')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'next_port')->textInput(['maxlength' => true, 'disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'next_port')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'eta')->textInput(['disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'eta')->textInput() ?>
 
     <?php //$form->field($model, 'stage')->textInput()    ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled'], ['disabled' => $model->isNewRecord ? FALSE : $model->status == 0 ? TRUE : FALSE]) ?>
+    <?= $form->field($model, 'status')->dropDownList(['1' => 'Enabled', '0' => 'Disabled']) ?>
     <div class="form-group"> 
         <input type="checkbox" id="queue-order" name="check" value="1" checked="checked" uncheckValue="0"><label>Load Previous Proforma</label>
     </div>
