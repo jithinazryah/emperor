@@ -112,7 +112,7 @@ and open the template in the editor.
                 </tr>
             </table>
         </div>
-        
+         <br/>
 
         <div class="content">
             <?php
@@ -150,7 +150,7 @@ and open the template in the editor.
                             <br/>
                     <?php } else {
                             ?>
-                            <br/>
+                           
                             <table class="table">
                                 <tr>
                                     <td style="width: 30%;"><?= $estimate->service->service ?></td>

@@ -94,15 +94,15 @@ AppAsset::register($this);
                                 <li>
                                     <?= Html::a('Appointmets', ['/appointment/appointment/index'], ['class' => 'title']) ?>
                                 </li>
-                                <li>
-                                    <?= Html::a('Estimated Proforma', ['/appointment/estimated-proforma/index'], ['class' => 'title']) ?>
+<!--                                <li>
+                                    <?php// Html::a('Estimated Proforma', ['/appointment/estimated-proforma/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
-                                    <?= Html::a('Port Call Data', ['/appointment/port-call-data/index'], ['class' => 'title']) ?>
+                                    <?php// Html::a('Port Call Data', ['/appointment/port-call-data/index'], ['class' => 'title']) ?>
                                 </li>
                                 <li>
-                                    <?= Html::a('Close estimate', ['/appointment/close-estimate/index'], ['class' => 'title']) ?>
-                                </li>
+                                    <?php// Html::a('Close estimate', ['/appointment/close-estimate/index'], ['class' => 'title']) ?>
+                                </li>-->
                             </ul>
                         </li>
 
