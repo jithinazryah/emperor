@@ -127,6 +127,7 @@ class PortCallDataController extends Controller {
         public function SavePortcallData($model) {
                 Yii::$app->SetValues->Attributes($model);
                 $this->dateformat($model, $_POST['PortCallData']);
+                //var_dump($model->nor_tendered);exit;
                 $model->save();
                 if (isset($_POST['create']) && $_POST['create'] != '') {
                         $arr = [];
@@ -240,6 +241,19 @@ class PortCallDataController extends Controller {
                 $this->findModel($id)->delete();
 
                 return $this->redirect(['index']);
+        }
+        
+        public function actionPortcallConmplete($id) {
+                $appointment = Appointment::findOne($id);
+//                $ports = PortCallData::findAll(['apponitment_id' => $id]);
+//                if (!empty($ports)) {
+//                        $appointment->stage = 2;
+//                        $appointment->sub_stages = 2;
+//                        $appointment->save();
+//                        return $this->redirect(['/appointment/close-estimate/add', 'id' => $appointment->id]);
+//                } else {
+//                        
+//                }
         }
 
         /**

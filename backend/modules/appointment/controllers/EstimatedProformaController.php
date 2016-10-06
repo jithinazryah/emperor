@@ -170,10 +170,15 @@ class EstimatedProformaController extends Controller {
 
         public function actionEstimateConfirm($id) {
                 $appointment = Appointment::findOne($id);
-                $appointment->stage = 2;
-                $appointment->sub_stages = 2;
-                $appointment->save();
-                return $this->redirect(['/appointment/port-call-data/update', 'id' => $appointment->id]);
+                $estimates = EstimatedProforma::findAll(['apponitment_id' => $id]);
+                if (!empty($estimates)) {
+                        $appointment->stage = 2;
+                        $appointment->sub_stages = 2;
+                        $appointment->save();
+                        return $this->redirect(['/appointment/port-call-data/update', 'id' => $appointment->id]);
+                } else {
+                        
+                }
         }
 
         protected function SetValues($model, $id) {

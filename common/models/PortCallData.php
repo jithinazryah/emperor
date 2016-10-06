@@ -72,7 +72,7 @@ class PortCallData extends \yii\db\ActiveRecord {
             'ets' => 'ETS',
             'eosp' => 'EOSP',
             'arrived_anchorage' => 'Arrived Anchorage',
-            'nor_tendered' => 'Nor Tendered',
+            'nor_tendered' => 'NOR Tendered',
             'dropped_anchor' => 'Dropped Anchor',
             'anchor_aweigh' => 'Anchor Aweigh',
             'arrived_pilot_station' => 'Arrived Pilot Station',

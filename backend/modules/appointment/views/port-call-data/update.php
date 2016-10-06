@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = 'Update';
                                 <span class="hidden-xs">Port Call Data Draft-Rob</span>
                             </a>
                         </li>
-    <!--                    <li class="<?php // $stat == 3 ? 'active': ''    ?>">
+    <!--                    <li class="<?php // $stat == 3 ? 'active': ''        ?>">
                             <a href="#port-rob" data-toggle="tab">
                                 <span class="visible-xs"><i class="fa-user"></i></span>
                                 <span class="hidden-xs">Port Call Data ROB</span>
@@ -119,7 +119,7 @@ $this->params['breadcrumbs'][] = 'Update';
                             </div>
 
                         </div>
-    <!--                    <div class="tab-pane <?php // $stat == 3 ? 'active': ''    ?>" id="port-rob">
+    <!--                    <div class="tab-pane <?php // $stat == 3 ? 'active': ''        ?>" id="port-rob">
                             <div class="panel-body">
                                 <div class="port-call-data-draft-create">
                         <?php
@@ -131,21 +131,27 @@ $this->params['breadcrumbs'][] = 'Update';
                             </div>
     
                         </div>-->
+
                     </div>
                 </div>
+                <div style="float:right;padding-top: 5px;">
+                    <?php
+                    echo Html::a('<span> Portcall Data Completed & Proceed to Close Estimate</span>', ['port-call-data/portcall-conmplete', 'id' => $model_appointment->id], ['class' => 'btn btn-secondary']);
+                    ?>
+                </div>          
             </div>
         </div>
         <style>
             .colo.nav.nav-tabs>li.active>a {
-                    background-color: #b9c7a7;
+                background-color: #b9c7a7;
             }
             .colo.nav.nav-tabs>li>a:hover {
                 border: none;
                 background-color: #c3d2b0;
             }
             .form-control{
-                        border: 1px solid #8a8a8a;
+                border: 1px solid #8a8a8a;
             }
-           
+
         </style>
     </div>
