@@ -54,40 +54,41 @@ $this->params['breadcrumbs'][] = $this->title;
                     $arr = explode(',', $appointment->principal);
                     if (count($arr) == 1) {
                             ?>
-                     <div class="row">
-                         <div class="col-md-2" style="float:left;"> 
-                            <input type="hidden" name="app_id" value="<?= $appointment->id ?>">
-                            <input type="hidden" name="principal" value="<?= $arr[0]; ?>">  
-                            <?php
-                    } else {
-                            ?>
-                           
-                            <input type="hidden" name="app_id" value="<?= $appointment->id ?>">
-                           
-                                <select name = "principal" id = "" class="form-control">
-                                    <option selected = "selected">Select Principal</option>
+                            <div class="row">
+                                <div class="col-md-8" style="float:left;"> 
+                                    <input type="hidden" name="app_id" value="<?= $appointment->id ?>">
+                                    <input type="hidden" name="principal" value="<?= $arr[0]; ?>">  
                                     <?php
-                                    foreach ($arr as $key => $value) {
-                                            ?>
-                                            <option value="<?= $value ?>"><?= $value ?></option>
-                                    <?php }
+                            } else {
                                     ?>
-                                </select> 
-                            </div>
-                          
+
+                                    <input type="hidden" name="app_id" value="<?= $appointment->id ?>">
+
+                                    <select name = "principal" id = "" class="form-control">
+                                        <option selected = "selected">Select Principal</option>
+                                        <?php
+                                        foreach ($arr as $key => $value) {
+                                                $data = Debtor::findOne(['id' => $value]);
+                                                ?>
+                                                <option value="<?= $value ?>"><?= $data->principal_name ?></option>
+                                        <?php }
+                                        ?>
+                                    </select> 
+                                </div>
+
+                                <?php
+                        }
+                        ?>
+                        <div class="col-md-4" style="float:left;">
+                            <?= Html::submitButton('<i class="fa-print"></i><span>Generate Report</span>', ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']) ?>
+   <!--<input type="submit" name="b1" value="Submit">-->
+                            <?= Html::endForm() ?>
                             <?php
-                    }
-                    ?>
-                         <div class="col-md-10" style="float:left;">
-                        <?= Html::submitButton('<i class="fa-print"></i><span>Generate Report</span>', ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']) ?>
-    <!--<input type="submit" name="b1" value="Submit">-->
-                        <?= Html::endForm() ?>
-                        <?php
 //                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
-                        ?> 
-                    </div>   
-                              </div>
-                            </div>
+                            ?> 
+                        </div>   
+                    </div>
+                </div>
 
                 <ul class="estimat nav nav-tabs nav-tabs-justified">
                     <li>
@@ -181,10 +182,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td></td>
                                     <td><?= $form->field($model, 'service_id')->dropDownList(ArrayHelper::map(Services::findAll(['status' => 1]), 'id', 'service'), ['prompt' => '-Service-'])->label(false); ?></td>
                                     <td><?= $form->field($model, 'supplier')->dropDownList(ArrayHelper::map(Contacts::findAll(['status' => 1]), 'id', 'name'), ['prompt' => '-Supplier-'])->label(false); ?></td>
-                                   <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                                 ?></td>-->
+                                   <!--<td><?php //$form->field($model, 'currency')->dropDownList(ArrayHelper::map(Currency::findAll(['status' => 1]), 'id', 'currency_name'), ['prompt' => '-Currency-'])->label(false);                                  ?></td>-->
                                     <td><?= $form->field($model, 'unit_rate')->textInput(['placeholder' => 'Unit Rate'])->label(false) ?></td>
                                     <td><?= $form->field($model, 'unit')->textInput(['placeholder' => 'Quantity'])->label(false) ?></td>
-                                    <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                                 ?></td>-->
+                                    <!--<td><?php //$form->field($model, 'roe')->textInput(['placeholder' => 'ROE'])->label(false)                                  ?></td>-->
                                     <td><?= $form->field($model, 'epda')->textInput(['placeholder' => 'EPDA', 'disabled' => true])->label(false) ?></td>
 
                                     <td><?= $form->field($model, 'principal')->dropDownList(ArrayHelper::map(Debtor::findAll(['status' => 1, 'id' => explode(',', $appointment->principal)]), 'id', 'principal_name'), ['prompt' => '-Principal-'])->label(false); ?></td>

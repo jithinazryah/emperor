@@ -10,6 +10,7 @@ use common\models\Appointment;
 use common\models\PortCallDataAdditional;
 use common\models\AppointmentSearch;
 use common\models\PortCallDataSearch;
+use common\models\PortBreakTimings;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -92,6 +93,7 @@ class PortCallDataController extends Controller {
                 $model_additional = PortCallDataAdditional::findAll(['appointment_id' => $id]);
 
                 $model_imigration = ImigrationClearance::findOne(['appointment_id' => $id]);
+                $model_port_break = PortBreakTimings::findAll(['appointment_id' => $id]);
                 if (empty($model_appointment))
                         throw new \yii\web\HttpException(404, 'This Appointment could not be found.Eroor Code:1001');
                 $model_add = new PortCallDataAdditional();
@@ -101,6 +103,7 @@ class PortCallDataController extends Controller {
                         $model_draft = PortCallDataDraft::findOne(['appointment_id' => $id]);
                         $model_rob = PortCallDataRob::findOne(['appointment_id' => $id]);
                         $model_imigration = ImigrationClearance::findOne(['appointment_id' => $id]);
+                        $model_port_break = PortBreakTimings::findAll(['appointment_id' => $id]);
                 } else {
 
                         throw new \yii\web\HttpException(404, 'This Appointment could not be found.Eroor Code:1002');
@@ -112,6 +115,7 @@ class PortCallDataController extends Controller {
                 } else if ($model_rob->load(Yii::$app->request->post()) && $model_draft->load(Yii::$app->request->post())) {
                         $this->saveportcalldraftrob($model_rob, $model_draft);
                 }
+
                 //$model_immigration = new ImigrationClearance();
                 return $this->render('update', [
                             'model' => $model,
@@ -121,15 +125,16 @@ class PortCallDataController extends Controller {
                             'model_imigration' => $model_imigration,
                             'model_appointment' => $model_appointment,
                             'model_additional' => $model_additional,
+                            'model_port_break' => $model_port_break,
                 ]);
         }
 
         public function SavePortcallData($model) {
                 Yii::$app->SetValues->Attributes($model);
                 $this->dateformat($model, $_POST['PortCallData']);
-                //var_dump($model->nor_tendered);exit;
                 $model->save();
                 if (isset($_POST['create']) && $_POST['create'] != '') {
+                        //echo 'create';exit;
                         $arr = [];
                         $i = 0;
 
@@ -157,6 +162,7 @@ class PortCallDataController extends Controller {
                                 $aditional->CB = Yii::$app->user->identity->id;
                                 $aditional->UB = Yii::$app->user->identity->id;
                                 $aditional->DOC = date('Y-m-d');
+                                $aditional->value = $this->changeformat($aditional->value);
                                 if (!empty($aditional->label))
                                         $aditional->save();
                         }
@@ -175,16 +181,22 @@ class PortCallDataController extends Controller {
                                 $i++;
                         }
                         foreach ($arr as $key => $value) {
-
                                 $aditional = PortCallDataAdditional::findOne($key);
                                 $aditional->label = $value['label'];
-                                $aditional->value = $value['valuee'];
+                                $aditional->value = $value['value'];
                                 $aditional->comment = $value['comment'];
+                                if ($aditional->value != '') {
+                                        if (strpos($aditional->value, '-') == false) {
+                                               $aditional->value = $this->changeformat($aditional->value);
+                                        }
+                                }
+                                
                                 $aditional->save();
                         }
                 }
-                if (isset($_POST['delete_vals']) && $_POST['delete_vals'] != '') {
-                        $vals = rtrim($_POST['delete_vals'], ',');
+                if (isset($_POST['delete_port_vals']) && $_POST['delete_port_vals'] != '') {
+                        //echo 'delete';exit;
+                        $vals = rtrim($_POST['delete_port_vals'], ',');
                         $vals = explode(',', $vals);
                         foreach ($vals as $val) {
                                 PortCallDataAdditional::findOne($val)->delete();
@@ -242,7 +254,7 @@ class PortCallDataController extends Controller {
 
                 return $this->redirect(['index']);
         }
-        
+
         public function actionPortcallConmplete($id) {
                 $appointment = Appointment::findOne($id);
 //                $ports = PortCallData::findAll(['apponitment_id' => $id]);
@@ -295,6 +307,59 @@ class PortCallDataController extends Controller {
 //        echo '2016-08-17 00:00:00';
 //        exit;
                 return $year . '-' . $month . '-' . $day . ' ' . $hour . ':' . $min . ':00';
+        }
+
+        public function actionPortBreak() {
+                $id = $_POST['app_id'];
+                if (isset($_POST['create']) && $_POST['create'] != '') {
+                        $arr = [];
+                        $i = 0;
+                        foreach ($_POST['create']['label'] as $val) {
+                                $arr[$i]['label'] = $val;
+                                $i++;
+                        }
+                        $i = 0;
+                        foreach ($_POST['create']['valuee'] as $val) {
+                                $arr[$i]['valuee'] = $val;
+                                $i++;
+                        }
+                        foreach ($arr as $val) {
+                                $port_break = new PortBreakTimings;
+                                $port_break->appointment_id = $id;
+                                $port_break->label = $val['label'];
+                                $port_break->value = $val['valuee'];
+                                $port_break->status = 1;
+                                $port_break->CB = Yii::$app->user->identity->id;
+                                $port_break->UB = Yii::$app->user->identity->id;
+                                $port_break->DOC = date('Y-m-d');
+                                if (!empty($port_break->label))
+                                        $port_break->save();
+                        }
+                }
+                if (isset($_POST['updatee']) && $_POST['updatee'] != '') {
+                        $arr = [];
+                        $i = 0;
+                        foreach ($_POST['updatee'] as $key => $val) {
+                                $arr[$key]['label'] = $val['label'][0];
+                                $arr[$key]['value'] = $val['value'][0];
+                                $i++;
+                        }
+                        foreach ($arr as $key => $value) {
+
+                                $port_break = PortCallDataAdditional::findOne($key);
+                                $port_break->label = $value['label'];
+                                $port_break->value = $value['valuee'];
+                                $port_break->save();
+                        }
+                }
+                if (isset($_POST['delete_port_break']) && $_POST['delete_port_break'] != '') {
+                        $vals = rtrim($_POST['delete_port_break'], ',');
+                        $vals = explode(',', $vals);
+                        foreach ($vals as $val) {
+                                PortBreakTimings::findOne($val)->delete();
+                        }
+                }
+                return $this->redirect(['update', 'id' => $id]);
         }
 
 }

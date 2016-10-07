@@ -8,6 +8,7 @@ use common\models\Currency;
 use common\models\Contacts;
 use common\models\Debtor;
 use common\models\Appointment;
+use common\models\PortBreakTimings;
 use yii\helpers\ArrayHelper;
 use yii\db\Expression;
 use common\components\AppointmentWidget;
@@ -83,12 +84,12 @@ $this->params['breadcrumbs'][] = 'Update';
                                 <span class="hidden-xs">Port Call Data Draft-Rob</span>
                             </a>
                         </li>
-    <!--                    <li class="<?php // $stat == 3 ? 'active': ''        ?>">
+                        <li class="<?= $stat == 3 ? 'active' : '' ?>">
                             <a href="#port-rob" data-toggle="tab">
                                 <span class="visible-xs"><i class="fa-user"></i></span>
-                                <span class="hidden-xs">Port Call Data ROB</span>
+                                <span class="hidden-xs">Port Break Timings</span>
                             </a>
-                        </li>-->
+                        </li>
                     </ul>    
                     <div class="tab-content">
                         <div class="tab-pane <?= $stat == 1 || $stat == NULL ? 'active' : '' ?>" id="port-data">
@@ -119,18 +120,19 @@ $this->params['breadcrumbs'][] = 'Update';
                             </div>
 
                         </div>
-    <!--                    <div class="tab-pane <?php // $stat == 3 ? 'active': ''        ?>" id="port-rob">
+                        <div class="tab-pane <?= $stat == 3 ? 'active' : '' ?>" id="port-rob">
                             <div class="panel-body">
-                                <div class="port-call-data-draft-create">
-                        <?php
-                        // $this->render('_form_rob', [
-                        //     'model' => $model_rob,
-                        // ])
-                        ?>
+                                <div class="port-call-data-port-break-create">
+                                    <?=
+                                    $this->render('_form_port_break', [
+                                        'model_appointment' => $model_appointment,
+                                        'model_port_break' => $model_port_break,
+                                    ])
+                                    ?>
                                 </div>
                             </div>
-    
-                        </div>-->
+
+                        </div>
 
                     </div>
                 </div>

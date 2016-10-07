@@ -97,7 +97,7 @@ use yii\widgets\ActiveForm;
 
     <hr class="appoint_history" />
     <div id="p_scents"> 
-        <input type="hidden" id="delete_vals"  name="delete_vals" value="">
+        <input type="hidden" id="delete_port_vals"  name="delete_port_vals" value="">
         <?php
         if (!empty($model_additional)) {
                
@@ -108,7 +108,7 @@ use yii\widgets\ActiveForm;
                                 <input type="text" class="form-control" name="updatee[<?= $data->id; ?>][label][]" value="<?= $data->label; ?>" required>
                             </div>
                             <div class="form-group ">
-                                <input type="text" class="form-control" name="updatee[<?= $data->id; ?>][valuee][]" value="<?= $data->value; ?>" required>
+                                <input type="text" class="form-control" name="updatee[<?= $data->id; ?>][value][]" value="<?= $data->value; ?>" required>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="updatee[<?= $data->id; ?>][comment][]" value="<?= $data->comment; ?>" required>
@@ -245,13 +245,10 @@ use yii\widgets\ActiveForm;
                 }
                 if (this.hasAttribute("val")) {
                     var valu = $(this).attr('val');
-                    $('#delete_vals').val($('#delete_vals').val() + valu + ',')
+                   $('#delete_port_vals').val($('#delete_port_vals').val() + valu + ',');
+                   var value =  $('#delete_port_vals').val();
                 }
                 return false;
-            });
-
-            $('.portcall').click(function () {
-                $('.hidediv').slideToggle();
             });
         });
 </script>

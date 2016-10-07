@@ -88,34 +88,34 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'attribute' => 'vessel_type',
                                             'value' => call_user_func(function($model) {
 
-                                                        return VesselType::findOne($model->vessel_type)->vessel_type;
+                                                            return VesselType::findOne($model->vessel_type)->vessel_type;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'vessel',
                                             'label' => call_user_func(function($model) {
-                                                        return VesselType::findOne($model->vessel_type)->vessel_type;
+                                                            return VesselType::findOne($model->vessel_type)->vessel_type;
                                                     }, $model),
                                             'value' => call_user_func(function($model) {
-                                                        if ($model->vessel_type == 1) {
-                                                            return 'T:'.Vessel::findOne($model->tug)->vessel_name . ',B:' . Vessel::findOne($model->barge)->vessel_name;
-                                                        } else {
-                                                            return Vessel::findOne($model->vessel)->vessel_name;
-                                                        }
+                                                            if ($model->vessel_type == 1) {
+                                                                    return 'T:' . Vessel::findOne($model->tug)->vessel_name . ',B:' . Vessel::findOne($model->barge)->vessel_name;
+                                                            } else {
+                                                                    return Vessel::findOne($model->vessel)->vessel_name;
+                                                            }
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'port_of_call',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Ports::findOne($model->port_of_call)->port_name;
+                                                            return Ports::findOne($model->port_of_call)->port_name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'terminal',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Terminal::findOne($model->terminal)->terminal;
+                                                            return Terminal::findOne($model->terminal)->terminal;
                                                     }, $model),
                                         ],
                                         'birth_no',
@@ -124,40 +124,40 @@ $this->params['breadcrumbs'][] = $this->title;
                                         [
                                             'attribute' => 'principal',
                                             'value' => call_user_func(function ($data) {
-                                                        $principle = explode(',', $data->principal);
-                                                        $result = '';
-                                                        foreach ($principle as $prncple) {
-                                                            $result .= $data->getDebtorName($prncple) . ', ';
-                                                        }
-                                                        return rtrim($result, ",");
+                                                            $principle = explode(',', $data->principal);
+                                                            $result = '';
+                                                            foreach ($principle as $prncple) {
+                                                                    $result .= $data->getDebtorName($prncple) . ', ';
+                                                            }
+                                                            return rtrim($result, ",");
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'nominator',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Contacts::findOne($model->nominator)->name;
+                                                            return Contacts::findOne($model->nominator)->name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'charterer',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Contacts::findOne($model->charterer)->name;
+                                                            return Contacts::findOne($model->charterer)->name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'shipper',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Contacts::findOne($model->shipper)->name;
+                                                            return Contacts::findOne($model->shipper)->name;
                                                     }, $model),
                                         ],
                                         [
                                             'attribute' => 'purpose',
                                             'value' => call_user_func(function($model) {
 
-                                                        return Purpose::findOne($model->purpose)->purpose;
+                                                            return Purpose::findOne($model->purpose)->purpose;
                                                     }, $model),
                                         ],
                                         'cargo',
@@ -183,22 +183,56 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="tab-pane" id="profile-3">
 
                         <div class="panel-body">
-                            <div class="row">
+                            <div class="row" style="display: inline-block">
                                 <div style="float: left;margin-left: 10px;">
                                     <?php
                                     if (empty($estimates)) {
-                                        echo Html::a('<i class="fa fa-plus"></i><span> Add EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                            echo Html::a('<i class="fa fa-plus"></i><span> Add EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                                     } else {
-                                        echo Html::a('<i class="fa fa-pencil"></i><span> Update EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                            echo Html::a('<i class="fa fa-pencil"></i><span> Update EstimatedProforma</span>', ['estimated-proforma/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                                     }
                                     ?>
                                 </div>
-                                <div style="float: left;margin-left: 10px;">
+                                <div style="float: left;margin-left: 8px;margin-right: 8px;">
+                                    <?= Html::beginForm(['estimated-proforma/reports'], 'post', ['target' => '_blank']) ?>
+                        <!--<form name="estimate" action="<?= Yii::$app->homeUrl ?>appointment/estimated-proforma/reports" method="post">-->
                                     <?php
-                                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                                    $arr = explode(',', $appointment->principal);
+                                    if (count($arr) == 1) {
+                                            ?>
+                                            <input type="hidden" name="app_id" value="<?= $appointment->id ?>">
+                                            <input type="hidden" name="principal" value="<?= $arr[0]; ?>">  
+                                            <?php
+                                    } else {
+                                            ?>
+
+                                            <input type="hidden" name="app_id" value="<?= $appointment->id ?>">
+
+                                            <select name = "principal" id = "" class="form-control">
+                                                <option selected = "selected">Select Principal</option>
+                                                <?php
+                                                foreach ($arr as $key => $value) {
+                                                        $data = Debtor::findOne(['id' => $value]);
+                                                        ?>
+                                                        <option value="<?= $value ?>"><?= $data->principal_name ?></option>
+                                                <?php }
+                                                ?>
+                                            </select> 
+
+                                            <?php
+                                    }
                                     ?>
                                 </div>
+                                <div style="float: left;">
+                                    <?= Html::submitButton('<i class="fa-print"></i><span>Generate Report</span>', ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']) ?>
+<!--<input type="submit" name="b1" value="Submit">-->
+                                    <?= Html::endForm() ?>
+                                    <?php
+//                    echo Html::a('<i class="fa-print"></i><span>Generate Report</span>', ['estimated-proforma/report', 'id' => $appointment->id], ['class' => 'btn btn-secondary btn-icon btn-icon-standalone']);
+                                    ?> 
+                                </div>
                             </div>
+
 
                             <!--                            <hr class="appoint_history" />-->
 
@@ -224,22 +258,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php
                                         $i = 0;
                                         foreach ($estimates as $estimate):
-                                            $i++;
-                                            ?>
-                                            <tr>
-                                                <td><?= $i; ?></td>
-                                                <th><span class="co-name"><?= $estimate->service->service ?></span></th>
-                                                <td><?= $estimate->supplier0->name ?></td>
-    <!--                                                <td><?php // $estimate->currency0->currency_symbol                                ?></td>-->
-                                                <td><?= $estimate->unit_rate; ?></td>
-                                                <td><?= $estimate->unit; ?></td>
-                                                <td><?= $estimate->roe; ?></td>
-                                                <td><?= $estimate->epda; ?></td>
-                                                <td><?= $estimate->principal0->principal_name; ?></td>
-                                                <td><?= $estimate->comments; ?></td>
-                                            </tr>	
+                                                $i++;
+                                                ?>
+                                                <tr>
+                                                    <td><?= $i; ?></td>
+                                                    <th><span class="co-name"><?= $estimate->service->service ?></span></th>
+                                                    <td><?= $estimate->supplier0->name ?></td>
+        <!--                                                <td><?php // $estimate->currency0->currency_symbol                                     ?></td>-->
+                                                    <td><?= $estimate->unit_rate; ?></td>
+                                                    <td><?= $estimate->unit; ?></td>
+                                                    <td><?= $estimate->roe; ?></td>
+                                                    <td><?= $estimate->epda; ?></td>
+                                                    <td><?= $estimate->principal0->principal_name; ?></td>
+                                                    <td><?= $estimate->comments; ?></td>
+                                                </tr>	
 
-                                            <?php
+                                                <?php
                                         endforeach;
                                         ?>
                                         <!-- Repeat -->
@@ -250,50 +284,50 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             </div>
                             <script type="text/javascript">
-                                jQuery(document).ready(function ($)
-                                {
-                                    $("#estimatedproforma-service_id").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
+                                    jQuery(document).ready(function ($)
                                     {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        $("#estimatedproforma-service_id").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+
+                                        $("#estimatedproforma-supplier").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+                                        $("#estimatedproforma-currency").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+                                        $("#estimatedproforma-principal").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+
                                     });
-
-
-
-                                    $("#estimatedproforma-supplier").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-                                    $("#estimatedproforma-currency").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-
-                                    $("#estimatedproforma-principal").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-
-
-                                });
                             </script>
 
 
@@ -310,9 +344,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="panel-body">
                             <?php
                             if (empty($ports)) {
-                                echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             } else {
-                                echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallData</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             }
                             ?>
 
@@ -322,12 +356,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <p style="margin-left: 35px;margin-bottom: 10px;font-size: 23px;color: black;"><b>PortCallData</b></p>
                                     <?php
                                     if (!empty($imigration)) {
-                                        echo '<p style="margin-left: 35px;margin-bottom: 10px;font-size: 18px;color:#09a2dc;"><b>Imigration Clearence Details</b></p>';
-                                        echo '<hr class="appoint_history" />';
-                                        echo $this->render('_imigration', [
-                                            'model' => $imigration,
-                                            'form' => $form,
-                                        ]);
+                                            echo '<p style="margin-left: 35px;margin-bottom: 10px;font-size: 18px;color:#09a2dc;"><b>Imigration Clearence Details</b></p>';
+                                            echo '<hr class="appoint_history" />';
+                                            echo $this->render('_imigration', [
+                                                'model' => $imigration,
+                                                'form' => $form,
+                                            ]);
                                     }
                                     ?>
 
@@ -372,25 +406,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                     <?php
                                     if ($appointment->port_of_call == 2 || $appointment->port_of_call == 3) {
-                                        if ($appointment->purpose == 2 && $appointment->port_of_call == 2) {
-                                            //$var = "_form_rmc_tanker";
-                                            echo $this->render('_rmc_tanker', [
-                                                'model' => $ports,
-                                                'form' => $form,
-                                            ]);
-                                        } else {
-                                            //$var = "_form_stevin_rocks";
-                                            echo $this->render('_stevin_rocks', [
-                                                'model' => $ports,
-                                                'form' => $form,
-                                            ]);
-                                        }
+                                            if ($appointment->purpose == 2 && $appointment->port_of_call == 2) {
+                                                    //$var = "_form_rmc_tanker";
+                                                    echo $this->render('_rmc_tanker', [
+                                                        'model' => $ports,
+                                                        'form' => $form,
+                                                    ]);
+                                            } else {
+                                                    //$var = "_form_stevin_rocks";
+                                                    echo $this->render('_stevin_rocks', [
+                                                        'model' => $ports,
+                                                        'form' => $form,
+                                                    ]);
+                                            }
                                     } else {
-                                        //$var = "_form_common";
-                                        echo $this->render('_common', [
-                                            'model' => $ports,
-                                            'form' => $form,
-                                        ]);
+                                            //$var = "_form_common";
+                                            echo $this->render('_common', [
+                                                'model' => $ports,
+                                                'form' => $form,
+                                            ]);
                                     }
                                     ?>
 
@@ -415,9 +449,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="panel-body">
                             <?php
                             if (empty($drafts)) {
-                                echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallDataDraft</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallDataDraft</span>', ['port-call-data/update', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             } else {
-                                echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallDataDraft</span>', ['port-call-data/update', 'id' => $drafts->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallDataDraft</span>', ['port-call-data/update', 'id' => $drafts->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             }
                             ?>
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
@@ -551,9 +585,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="panel-body">
                             <?php
                             if (empty($rob)) {
-                                echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallDataRob</span>', ['port-call-data/update', 'id' => $model->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-plus"></i><span> Add PortCallDataRob</span>', ['port-call-data/update', 'id' => $model->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             } else {
-                                echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallDataRob</span>', ['port-call-data/update', 'id' => $rob->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                    echo Html::a('<i class="fa fa-pencil"></i><span> Update PortCallDataRob</span>', ['port-call-data/update', 'id' => $rob->appointment_id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                             }
                             ?>
                             <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
@@ -565,9 +599,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">FO ARRIVAL  :</label>
                                         <?= $rob->fo_arrival_quantity; ?> <?php
                                         if ($rob->fo_arrival_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->fo_arrival_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -578,9 +612,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">DO ARRIVAL  :</label>
                                         <?= $rob->do_arrival_quantity; ?> <?php
                                         if ($rob->do_arrival_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->do_arrival_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -591,9 +625,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">GO ARRIVAL :</label>
                                         <?= $rob->go_arrival_quantity; ?> <?php
                                         if ($rob->go_arrival_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->go_arrival_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -604,9 +638,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">LO ARRIVAL :</label>
                                         <?= $rob->lo_arrival_quantity; ?> <?php
                                         if ($rob->lo_arrival_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->lo_arrival_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -617,9 +651,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">FRESH WATER ARRIVAL :</label>
                                         <?= $rob->fresh_water_arrival_quantity; ?> <?php
                                         if ($rob->fresh_water_arrival_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->fresh_water_arrival_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -630,9 +664,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">FO SAILING :</label>
                                         <?= $rob->do_sailing_quantity; ?> <?php
                                         if ($rob->fo_sailing_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->fo_sailing_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -643,9 +677,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">DO SAILING :</label>
                                         <?= $rob->do_sailing_quantity; ?> <?php
                                         if ($rob->do_sailing_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->do_sailing_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -656,9 +690,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">GO SAILING :</label>
                                         <?= $rob->go_sailing_quantity; ?> <?php
                                         if ($rob->go_sailing_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->go_sailing_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -669,9 +703,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">LO SAILING :</label>
                                         <?= $rob->lo_sailing_quantity; ?> <?php
                                         if ($rob->lo_sailing_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->lo_sailing_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -682,9 +716,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <label class="control-label" for="portcalldata-ets">FRESH WATER SAILING  :</label>
                                         <?= $rob->fresh_water_sailing_quantity; ?> <?php
                                         if ($rob->fresh_water_sailing_unit == 1) {
-                                            echo 'Metric Ton';
+                                                echo 'Metric Ton';
                                         } elseif ($rob->fresh_water_sailing_unit == 2) {
-                                            echo 'Litter';
+                                                echo 'Litter';
                                         }
                                         ?>
 
@@ -717,9 +751,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div style="float: left;margin-left: 10px;">
                                     <?php
                                     if (empty($closeestimates)) {
-                                        echo Html::a('<i class="fa fa-plus"></i><span> Add CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                            echo Html::a('<i class="fa fa-plus"></i><span> Add CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                                     } else {
-                                        echo Html::a('<i class="fa fa-pencil"></i><span> Update CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
+                                            echo Html::a('<i class="fa fa-pencil"></i><span> Update CloseEstimate</span>', ['close-estimate/add', 'id' => $model->id], ['class' => 'btn btn-blue btn-icon btn-icon-standalone btn-icon-standalone-right']);
                                     }
                                     ?>
                                 </div>
@@ -753,24 +787,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php
                                         $i = 0;
                                         foreach ($closeestimates as $closeestimate):
-                                            $i++;
-                                            ?>
-                                            <tr>
-                                                <td><?= $i; ?></td>
-                                                <th><span class="co-name"><?= $closeestimate->service->service ?></span></th>
-                                                <td><?= $closeestimate->supplier0->name ?></td>
-                                                <td><?= $closeestimate->unit_rate; ?></td>
-                                                <td><?= $closeestimate->unit; ?></td>
-                                                <td><?= $closeestimate->roe; ?></td>
-                                                <td><?= $closeestimate->epda; ?></td>
-                                                <td><?= $closeestimate->fda; ?></td>
-                                                <td><?= $closeestimate->payment_type; ?></td>
-                                                <td><?= $closeestimate->total; ?></td>
-                                                <td><?= $closeestimate->principal0->principal_name; ?></td>
-                                                <td><?= $closeestimate->comments; ?></td>
-                                            </tr>	
+                                                $i++;
+                                                ?>
+                                                <tr>
+                                                    <td><?= $i; ?></td>
+                                                    <th><span class="co-name"><?= $closeestimate->service->service ?></span></th>
+                                                    <td><?= $closeestimate->supplier0->name ?></td>
+                                                    <td><?= $closeestimate->unit_rate; ?></td>
+                                                    <td><?= $closeestimate->unit; ?></td>
+                                                    <td><?= $closeestimate->roe; ?></td>
+                                                    <td><?= $closeestimate->epda; ?></td>
+                                                    <td><?= $closeestimate->fda; ?></td>
+                                                    <td><?= $closeestimate->payment_type; ?></td>
+                                                    <td><?= $closeestimate->total; ?></td>
+                                                    <td><?= $closeestimate->principal0->principal_name; ?></td>
+                                                    <td><?= $closeestimate->comments; ?></td>
+                                                </tr>	
 
-                                            <?php
+                                                <?php
                                         endforeach;
                                         ?>
                                         <!-- Repeat -->
@@ -781,50 +815,50 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             </div>
                             <script type="text/javascript">
-                                jQuery(document).ready(function ($)
-                                {
-                                    $("#estimatedproforma-service_id").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
+                                    jQuery(document).ready(function ($)
                                     {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        $("#estimatedproforma-service_id").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+
+                                        $("#estimatedproforma-supplier").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+                                        $("#estimatedproforma-currency").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+                                        $("#estimatedproforma-principal").select2({
+                                            //placeholder: 'Select your country...',
+                                            allowClear: true
+                                        }).on('select2-open', function ()
+                                        {
+                                            // Adding Custom Scrollbar
+                                            $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                                        });
+
+
+
                                     });
-
-
-
-                                    $("#estimatedproforma-supplier").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-                                    $("#estimatedproforma-currency").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-
-                                    $("#estimatedproforma-principal").select2({
-                                        //placeholder: 'Select your country...',
-                                        allowClear: true
-                                    }).on('select2-open', function ()
-                                    {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
-                                    });
-
-
-
-                                });
                             </script>
 
 
